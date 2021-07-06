@@ -1,0 +1,192 @@
+.screen-picker {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  .screen-picker-current {
+    display: flex;
+    flex: 1;
+    padding: 5px;
+    background-color: rgb(242, 242, 242);
+    border-color: rgb(232, 232, 232);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 2px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  &-item {
+    display: flex;
+    flex: 1;
+    height: 35px;
+    .screen-picker-icon {
+      width: 20px;
+    }
+    .screen-picker-device {
+      flex: 1;
+      text-align: left;
+      .screen-picker-device-name {
+        font-weight: 400;
+        font-size: 12px;
+      }
+      .screen-picker-device-size {
+        font-size: 10px;
+      }
+    }
+  }
+
+  .screen-picker-more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    font-size: 10px;
+  }
+
+  .screen-size {
+    display: flex;
+    flex-direction: row;
+    margin-top: 8px;
+
+    label {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 80px;
+      height: 28px;
+      margin: 0;
+      padding-right: 1px;
+      overflow: hidden;
+      font-size: 12px;
+      border-color: transparent;
+      border-style: solid;
+      border-width: 1px;
+      border-radius: 2px;
+      border-image: initial;
+      transition: border 0.2s ease-out 0s, outline 0s ease 0s, opacity 0s ease 0s;
+
+      &:hover {
+        border-color: rgb(235, 235, 235);
+        border-style: solid;
+        border-width: 1px;
+        border-image: initial;
+      }
+
+      &.is-active {
+        border-color: rgb(41, 141, 248);
+        border-style: solid;
+        border-width: 1px;
+        border-image: initial;
+        outline: rgb(41, 141, 248) solid 1px;
+        outline-offset: -2px;
+
+        .title {
+          color: rgb(41, 141, 248);
+        }
+      }
+
+      &:first-child {
+        margin-right: 9px;
+      }
+
+      .title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: max-content;
+        height: 100%;
+        padding: 0 5px 0 5px;
+        color: rgb(141, 158, 167);
+        user-select: none;
+      }
+
+      .ant-input-number {
+        width: 100px;
+        font-size: 12px;
+        border: 0;
+        box-shadow: none;
+        &.ant-input-number-sm {
+          height: 24px;
+          .ant-input-number-input-wrap {
+            height: 24px;
+          }
+        }
+      }
+
+      input {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        outline: 0;
+        cursor: default;
+        transition: all 0.2s ease-out 0s;
+      }
+    }
+  }
+}
+.screen-picker-popover-devices {
+  .ant-popover-content {
+    .ant-popover-arrow {
+      border-top-color: #f2f2f2;
+      border-left-color: #f2f2f2;
+    }
+  }
+  .ant-popover-inner-content {
+    width: 250px;
+    padding: 0;
+    background: #fff;
+
+    .screen-picker-device-type {
+      display: flex;
+      flex-direction: column;
+      .screen-picker-device-header {
+        flex: 1;
+        height: 28px;
+        padding: 0 10px;
+        color: #7a7a7a;
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 28px;
+        background-color: #f2f2f2;
+      }
+      ul {
+        margin: 0;
+        padding: 4px 0 4px 0;
+        li {
+          display: flex;
+          height: 26px;
+          padding: 0 16px 0 26px;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #f2f2f2;
+          }
+
+          .anticon-check {
+            position: absolute;
+            left: 0;
+            width: 26px;
+            color: #7f7f7f;
+            font-size: 12px;
+            line-height: 26px;
+          }
+          .device-name {
+            flex: 1;
+            color: var(--gray-light);
+            font-size: 13px;
+          }
+          .device-size {
+            width: 60px;
+            color: #8b8b8b;
+            font-size: 11px;
+            line-height: 26px;
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+}

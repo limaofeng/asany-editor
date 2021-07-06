@@ -1,0 +1,78 @@
+.resizer {
+  position: relative;
+  z-index: 1;
+
+  &.disabled {
+    width: auto;
+    .handle {
+      display: none;
+    }
+  }
+
+  &.active {
+    &::before {
+      position: absolute;
+      z-index: 11;
+      background: transparent;
+      content: '';
+    }
+    & > .handle {
+      &::before {
+        background: #007fd4;
+      }
+    }
+  }
+
+  &.direction-x {
+    height: 100%;
+    &.active {
+      cursor: col-resize;
+    }
+    & > .handle {
+      right: -5px;
+      width: 13px;
+      height: 100%;
+      cursor: col-resize;
+      &::before {
+        left: 5px;
+        width: 3px;
+      }
+    }
+  }
+
+  &.direction-y {
+    width: 100%;
+    &.active {
+      cursor: row-resize;
+    }
+    & > .handle {
+      top: -5px;
+      width: 100%;
+      height: 13px;
+      cursor: row-resize;
+      &::before {
+        top: 5px;
+        height: 3px;
+      }
+    }
+  }
+
+  .handle {
+    position: absolute;
+    z-index: 15;
+    &:hover {
+      &::before {
+        background: #007fd4;
+      }
+    }
+    &::before {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      transition: background-color 0.1s ease-in-out;
+      content: '';
+      pointer-events: none;
+    }
+  }
+}

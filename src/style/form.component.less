@@ -1,0 +1,206 @@
+:root {
+  --shallow-color: #e5e5e5;
+  --disable-color: #b3b3b3;
+  --primary-color: #333;
+}
+
+.smart-sidebar-fieldset {
+  padding: 8px 0 8px 0;
+  font-size: 12px;
+  border-bottom: 1px solid var(--shallow-color);
+
+  .ant-checkbox-wrapper,
+  .ant-btn {
+    font-size: 12px;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 32px;
+    padding: 0 8px 0 8px;
+
+    &-title {
+      flex: 1;
+      padding-left: 8px;
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    &-expand-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      color: var(--disable-color);
+      font-size: 12px;
+
+      &:hover {
+        color: var(--primary-color);
+      }
+    }
+  }
+
+  &-content {
+    .smart-form-field {
+      display: flex;
+      align-items: center;
+      min-height: 32px;
+
+      &-layout-stacked,
+      &-layout-inline {
+        .basic-input {
+          padding-left: 4px;
+        }
+        &.form-component-input:not(.inline-show-label) {
+          .smart-form-field-value {
+            padding-left: 10px;
+          }
+        }
+        &.form-component-select:not(.inline-show-label) {
+          .smart-form-field-value {
+            padding-left: 8px;
+          }
+        }
+        &.inline-show-label {
+          .smart-form-field-label {
+            padding-left: 16px;
+          }
+          .smart-form-field-value {
+            padding-left: 0;
+            // TODO: 后续需要删除的样式
+            .ant-btn {
+              height: 24px;
+            }
+          }
+        }
+      }
+
+      &-layout-inline {
+        .smart-form-field-value {
+          min-height: 32px;
+          padding: 0 8px 0 16px;
+        }
+      }
+
+      .smart-form-field-value {
+        width: 100%;
+        min-height: 32px;
+      }
+
+      &-layout-stacked {
+        flex-direction: column;
+        align-items: start;
+        padding-top: 8px;
+
+        &:first-child {
+          padding-top: 0;
+        }
+
+        &:last-child {
+          .smart-form-field-value {
+            min-height: 32px;
+            padding-bottom: 0;
+            border-bottom: none;
+          }
+        }
+
+        .smart-form-field-label {
+          padding: 0 8px 0 16px;
+          color: var(--primary-color);
+          font-weight: 600;
+          line-height: 32px;
+        }
+
+        .smart-form-field-value {
+          padding: 0 8px 8px 16px;
+          border-bottom: 1px solid var(--shallow-color);
+          .design-input {
+            margin: 0;
+          }
+        }
+      }
+
+      &-label {
+        width: 120px;
+        margin-bottom: 0;
+        font-size: 12px;
+      }
+    }
+  }
+}
+.ant-input.ant-input-rimless {
+  border: none;
+  border-bottom: 1px solid transparent;
+  outline: none;
+  &:hover {
+    border: none;
+    border-bottom: 1px solid transparent;
+  }
+  &:focus {
+    border: none;
+    border-bottom: 1px solid #d9d9d9;
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+.list-tree-container {
+  font-size: 12px;
+  &:hover {
+    .tree-current-node {
+      background-color: transparent;
+    }
+  }
+
+  .tree-current-node {
+    min-height: 32px;
+    padding: 0 12px 0 8px;
+    background-color: var(--gray-darkest);
+
+    &:hover {
+      background-color: var(--gray-darkest);
+    }
+
+    span {
+      font-weight: 500;
+    }
+  }
+  .ae-tree {
+    li {
+      min-height: 32px;
+      padding: 0 12px 0 12px;
+
+      &.active {
+        background-color: #daebf7;
+      }
+
+      .anticon.drilldown {
+        width: 16px;
+        font-size: 10px;
+      }
+      &:hover:not(.active) {
+        background-color: var(--gray-darkest);
+      }
+    }
+  }
+  .tree-node-content {
+    padding: 8px;
+  }
+  .list-tree-scrollbar {
+    max-height: 360px;
+  }
+  .anticon {
+    &.drillup,
+    &.folder {
+      width: 24px;
+      font-size: 16px;
+    }
+  }
+}

@@ -1,0 +1,52 @@
+import classnames from 'classnames';
+import React, { useEffect, useRef, useState } from 'react';
+
+import { useDispatch, useEditor, useSelector } from '../../hooks';
+import { ActionType } from '../../reducers';
+import Toolbar from './Toolbar';
+import Toolboard, { IToolboard, ToolPanel } from './Toolboard';
+
+type SiderBarProps = {
+  onResize: (x: number) => void;
+};
+
+function SiderBar(props: SiderBarProps) {
+  const control = useRef<IToolboard>(null);
+
+  const dispatch = useDispatch();
+  const visible = useSelector((state) => state.ui.sidebar.visible);
+  const [collapsed, setCollapsed] = useState(true);
+
+  const Content = useSelector((state) => state.ui.sidebar.content);
+
+  const editor = useEditor();
+
+  useEffect(() => {
+    dispatch({ type: ActionType.ToolboardRef, payload: control });
+  }, []);
+
+  return (
+    <div
+      className={classnames('sketch-sidebar', 'asany-editor-sidebar', {
+        collapsed: collapsed,
+        'sidebar-out': !visible,
+      })}
+    >
+      <Toolbar />
+      <Toolboard
+        onResize={props.onResize}
+        editor={editor}
+        ref={control}
+        setCollapsed={setCollapsed}
+      >
+        {Content && (
+          <ToolPanel className="tool-panel-content">
+            <Content />
+          </ToolPanel>
+        )}
+      </Toolboard>
+    </div>
+  );
+}
+
+export default React.memo(SiderBar);

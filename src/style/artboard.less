@@ -1,0 +1,90 @@
+.screen-viewport {
+  display: inline-block;
+  .thumbnail-generator {
+    height: 100%;
+  }
+  .screen {
+    position: absolute;
+    &::after {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0;
+      content: '';
+    }
+    &-info {
+      position: absolute;
+      bottom: 100%;
+      display: flex;
+      width: 100%;
+      height: 28px;
+      color: rgb(169, 175, 184);
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 28px;
+      cursor: pointer;
+      user-select: none;
+      span {
+        padding: 0 10px 0 5px;
+      }
+      &.is-active {
+        color: rgb(41, 141, 248);
+      }
+      .svg-icon {
+        flex-shrink: 0;
+        width: 12px;
+        fill: currentColor;
+      }
+    }
+    .canvas-bg-area {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      background-color: #fff;
+    }
+  }
+  .zoom-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: center center;
+    .canvas {
+      position: relative;
+      display: flex;
+      box-sizing: content-box;
+      background: none;
+      #canvas-portal {
+        flex: 1;
+      }
+    }
+    .moveable-control-box {
+      z-index: 10001;
+    }
+    // TODO 解决 Moveable 定位问题
+    #container {
+      &.navbar-fixed > #navbar {
+        position: absolute;
+        height: 59px;
+      }
+      &.navbar-fixed #mainnav-container {
+        position: absolute;
+      }
+    }
+  }
+}
+.infinite-Viewer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding-top: 30px;
+  padding-left: 30px;
+}

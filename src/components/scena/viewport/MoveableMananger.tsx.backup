@@ -1,0 +1,210 @@
+import React, { useRef, useCallback, useEffect, useState } from 'react';
+import Moveable, { OnResize, OnClick } from 'react-moveable';
+// import MoveableData from '../../../utils/MoveableData';
+// import Memory from '../../../utils/Memory';
+import { useSelector } from '../../../hooks';
+
+// interface MoveableManagerProps {
+// selectedTargets: Array<HTMLElement | SVGElement>;
+// selectedMenu: string;
+// verticalGuidelines: number[];
+// horizontalGuidelines: number[];
+// }
+
+function MoveableManager() {
+  const ref = useRef<Moveable>(null);
+  // const isShift = false;
+  // const moveableData = useRef(new MoveableData(new Memory()));
+
+  const viewed = useSelector(state => state.mode === 'VIEW');
+  const snaps = useSelector(state => state.ui.scena.snaps);
+  const moveable = useSelector(state => state.ui.scena.moveable);
+
+  const [selectedTargets, setSelectedTargets] = useState<Array<HTMLElement | SVGElement>>([]);
+
+  const { vertical: verticalGuidelines, horizontal: horizontalGuidelines } = snaps;
+
+  const {
+    resizable,
+    onResizeStart,
+    onResize,
+    onResizeStop,
+    selectedTargets: selectKeys,
+    ignoreTargets: ignoreKeys,
+  } = moveable;
+
+  useEffect(() => {
+    setSelectedTargets(
+      moveable.targets
+        .filter(
+          item =>
+            selectKeys.filter(id => !ignoreKeys.some(ignoreId => ignoreId == id)).some(id => id === item.id) &&
+            item.element &&
+            item.element.current
+        )
+        .map(item => item.element.current!)
+    );
+  }, [selectKeys, ignoreKeys]);
+
+  const handleResizeStart = useCallback(
+    e => {
+      onResizeStart(e);
+    },
+    [onResizeStart]
+  );
+  const handleResize = useCallback(
+    (e: OnResize) => {
+      onResize(e);
+    },
+    [onResize]
+  );
+  const handleResizeStop = useCallback(
+    e => {
+      onResizeStop(e);
+    },
+    [onResizeStop]
+  );
+
+  const handeWindowResize = useCallback(() => {
+    ref.current && ref.current!.updateRect();
+  }, [ref]);
+
+  const handleClick = (e: OnClick) => {
+    console.log('handleClick > ', e);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handeWindowResize);
+    return () => {
+      window.removeEventListener('resize', handeWindowResize);
+    };
+  }, []);
+  // useLayoutEffect(() => {
+  // moveableData.current.createFrame()
+  // selectedTargets.forEach(item => {
+  //   moveableData.current.createFrame(item, {});
+  // });
+  // moveableData.current.setSelectedTargets(selectedTargets);
+  // console.log('>>>>>>>>>>>>>', moveableData.current.getSelectedTargets());
+  // setTimeout(() => {
+  //   moveable.current?.updateRect('End', true, true);
+  // }, 500);
+  // }, [selectedTargets]);
+  const { draggable, onDragStart, onDrag, onDragStop } = moveable;
+
+  return (
+    <Moveable
+      ref={ref}
+      container={document.getElementsByClassName('zoom-area')[0] as any}
+      targets={moveable.disable || viewed ? [] : selectedTargets}
+      // parentPosition={{
+      //   top: -80,
+      //   left: -80,
+      // }}
+      draggable={draggable}
+      resizable={resizable}
+      onClick={handleClick}
+      // throttleResize={1}
+      // clippable={selectedMenu === 'Crop'}
+      dragArea={false /*selectedTargets.length > 1 || selectedMenu !== 'Text'*/}
+      // checkInput={selectedMenu === 'Text'}
+      // throttleDragRotate={isShift ? 45 : 0}
+      // keepRatio={isShift}
+      // rotatable={true}
+      // snappable={true}
+      // snapCenter={true}
+      // snapGap={false}
+      // roundable={true}
+      zoom={0.6}
+      origin={false}
+      verticalGuidelines={verticalGuidelines}
+      horizontalGuidelines={horizontalGuidelines}
+      //   elementGuidelines={elementGuidelines}
+      // clipArea={true}
+      onDragStart={onDragStart}
+      onDrag={onDrag}
+      onDragEnd={onDragStop}
+      //   onDragGroupStart={moveableData.onDragGroupStart}
+      //   onDragGroup={moveableData.onDragGroup}
+      //   onScaleStart={moveableData.onScaleStart}
+      //   onScale={moveableData.onScale}
+      //   onScaleGroupStart={moveableData.onScaleGroupStart}
+      //   onScaleGroup={moveableData.onScaleGroup}
+      onResizeStart={handleResizeStart}
+      onResize={handleResize}
+      onResizeEnd={handleResizeStop}
+      // onResizeGroupStart={moveableData.onResizeGroupStart}
+      //   onResizeGroup={moveableData.onResizeGroup}
+      //   onRotateStart={moveableData.onRotateStart}
+      //   onRotate={moveableData.onRotate}
+      //   onRotateGroupStart={moveableData.onRotateGroupStart}
+      //   onRotateGroup={moveableData.onRotateGroup}
+      //   defaultClipPath={memory.get('crop') || 'inset'}
+      //   onClip={moveableData.onClip}
+      //   onDragOriginStart={moveableData.onDragOriginStart}
+      //   onDragOrigin={e => {
+      //     moveableData.onDragOrigin(e);
+      //   }}
+      //   onRound={moveableData.onRound}
+      //   onClick={e => {
+      //     const target = e.inputTarget as any;
+      //     if (e.isDouble && target.isContentEditable) {
+      //       editor.selectMenu('Text');
+      //       const el = getContentElement(target);
+
+      //       if (el) {
+      //         el.focus();
+      //       }
+      //     }
+      //   }}
+      // onClickGroup={e => {
+      //   selecto.current!.clickTarget(e.inputEvent, e.inputTarget);
+      // }}
+      // onRenderStart={e => {
+      //   e.datas.prevData = moveableData.getFrame(e.target).get();
+      // }}
+      // onRender={e => {
+      //   e.datas.isRender = true;
+      //   eventBus.requestTrigger('render');
+      // }}
+      // onRenderEnd={e => {
+      //   eventBus.requestTrigger('render');
+      //   if (!e.datas.isRender) {
+      //     return;
+      //   }
+      //   this.historyManager.addAction('render', {
+      //     id: getId(e.target),
+      //     prev: e.datas.prevData,
+      //     next: moveableData.getFrame(e.target).get(),
+      //   });
+      // }}
+      // onRenderGroupStart={e => {
+      //   e.datas.prevDatas = e.targets.map(target => moveableData.getFrame(target).get());
+      // }}
+      // onRenderGroup={e => {
+      //   eventBus.requestTrigger('renderGroup', e);
+      //   e.datas.isRender = true;
+      // }}
+      //   onRenderGroupEnd={e => {
+      //     eventBus.requestTrigger('renderGroup', e);
+
+      //     if (!e.datas.isRender) {
+      //       return;
+      //     }
+      //     const prevDatas = e.datas.prevDatas;
+      //     const infos = e.targets.map((target, i) => {
+      //       return {
+      //         id: getId(target),
+      //         prev: prevDatas[i],
+      //         next: moveableData.getFrame(target).get(),
+      //       };
+      //     });
+      //     this.historyManager.addAction('renders', {
+      //       infos,
+      //     });
+      //   }}
+    ></Moveable>
+  );
+}
+
+export default MoveableManager;
