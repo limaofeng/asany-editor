@@ -5,15 +5,10 @@ import { isEqual } from 'lodash';
 import React, { useCallback, useState } from 'react';
 
 import devices from '../../../assets/devices';
-import { UIActionType } from '../../../reducers';
 import { useDispatch, useSelector } from '../../../hooks';
+import { UIActionType } from '../../../reducers/actions';
+import { DeviceScreen } from '../../../typings';
 import Screen from '../Screen';
-
-export interface DeviceScreen {
-  id: string;
-  name: string;
-  size: number[];
-}
 
 interface DeviceListProps {
   value: DeviceScreen;

@@ -1,12 +1,5 @@
-import { AsanyAction, GlobalAsanyAction } from '../../../typings';
-
-export enum UIScenaViewerActionType {
-  DUSTBIN_ACCEPT = 'DUSTBIN_ACCEPT',
-}
-
-export interface ViewerState {
-  dustbin: string[];
-}
+import type { AsanyAction, ViewerState } from '../../../typings';
+import { GlobalAsanyAction, UIScenaViewerActionType } from '../../actions';
 
 const defaultState: ViewerState = {
   dustbin: [],

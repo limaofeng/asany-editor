@@ -18,7 +18,7 @@ import DefaultLoadingComponent, {
 import Sidebar from './components/sidebar';
 import Toolbar from './components/toolbar/Toolbar';
 import { useDispatch, useSelector } from './hooks';
-import { ActionType } from './reducers';
+import { ActionType } from './reducers/actions';
 import RuntimeContainer from './RuntimeContainer';
 import { AsanyProject, EditorPlugin } from './typings';
 

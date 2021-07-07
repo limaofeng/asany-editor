@@ -1,8 +1,5 @@
-import { AsanyAction, AsanyProject, ProjectActionType } from '../typings';
-
-export { ProjectActionType } from '../typings';
-
-export interface IProjectState extends AsanyProject {}
+import type { AsanyAction, IProjectState } from '../typings';
+import { ProjectActionType } from './actions';
 
 export default function reducer(
   state: IProjectState,

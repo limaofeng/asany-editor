@@ -3,8 +3,8 @@ import React, { useCallback, useRef } from 'react';
 
 import { ComponentPropertyType } from '../../library/typings';
 import { useDispatch, useSelector } from '../../hooks';
-import { ActionType, UIActionType } from '../../reducers';
 import FormPanel from './FormPanel';
+import { ActionType, UIActionType } from '../../reducers/actions';
 
 function EditableZoom() {
   const dispatch = useDispatch();

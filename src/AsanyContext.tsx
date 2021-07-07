@@ -8,20 +8,18 @@ import React, {
 } from 'react';
 
 import { useDeepCompareEffect } from './utils';
-import sketchReducer, {
-  ActionType,
-  AsanyProviderMode,
-  defaultValue,
-  IAsanyState,
-} from './reducers';
-import {
+import sketchReducer, { defaultValue } from './reducers';
+import type {
   AsanyAction,
   AsanyProject,
+  AsanyProviderMode,
   EditorPlugin,
+  IAsanyState,
   IBlockData,
   IComponentData,
 } from './typings';
 import { getReducers } from './utils/plugin';
+import { ActionType } from './reducers/actions';
 
 type UnsubscribeFunc = () => void;
 

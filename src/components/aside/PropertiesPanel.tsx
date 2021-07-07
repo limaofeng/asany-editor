@@ -7,7 +7,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 // import { ComponentPropertyType, IComponentProperty } from '../../../library-manager/typings';
 import { useDebounce, visibleFilter } from '../../utils';
 import { useDispatch, useSelector } from '../../hooks';
-import { UIActionType } from '../../reducers/ui.reducer';
+import { UIActionType } from '../../reducers/actions';
 import {
   ComponentPropertyType,
   father,

@@ -2,9 +2,10 @@ import classnames from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { useDispatch, useEditor, useSelector } from '../../hooks';
-import { ActionType } from '../../reducers';
+import { ActionType } from '../../reducers/actions';
+import { IToolboard } from '../../typings';
 import Toolbar from './Toolbar';
-import Toolboard, { IToolboard, ToolPanel } from './Toolboard';
+import Toolboard, { ToolPanel } from './Toolboard';
 
 type SiderBarProps = {
   onResize: (x: number) => void;

@@ -1,69 +1,19 @@
-import {
+import type {
   AsanyAction,
-  AsanyProject,
+  AsanyProviderMode,
   EditorPlugin,
-  GlobalAsanyAction,
-  IPluginActionType,
-  WorkspaceActionType,
+  IAsanyState,
 } from '../typings';
 import { getFeatures, getScena, getSidebar, getToolbar } from '../utils/plugin';
-import featureReducer, {
-  IFeatureActionType,
-  IFeatureState,
-} from './features.reducer';
-import pluginReducer, { IPluginState } from './plugin.reducer';
-import projectReducer, {
-  IProjectState,
-  ProjectActionType,
-} from './project.reducer';
-import uiReducer, { IUIState, UIActionType } from './ui.reducer';
-import workspaceReducer, { IWorkspaceState } from './workspace.reducer';
+import { ActionType, GlobalAsanyAction, ProjectActionType } from './actions';
+import featureReducer from './features.reducer';
+import pluginReducer from './plugin.reducer';
+import projectReducer from './project.reducer';
+import { combineReducers } from './thunk';
+import uiReducer from './ui.reducer';
+import workspaceReducer from './workspace.reducer';
 
-export type AsanyProviderMode = 'VIEW' | 'CONFIG';
-
-export * from './ui.reducer';
-export * from './workspace.reducer';
-export * from './project.reducer';
-
-type IReducer<T, D> = (state: T, action: AsanyAction<D>) => T;
-
-export interface IAsanyState {
-  save: (project: AsanyProject) => void;
-  isReady: boolean;
-  mode: AsanyProviderMode;
-  ui: IUIState;
-  project: IProjectState;
-  workspace: IWorkspaceState;
-  features: IFeatureState;
-  plugins: IPluginState;
-}
-
-export const ActionType = {
-  BindSave: 'BindSave',
-  ...GlobalAsanyAction,
-  ...UIActionType,
-  ...ProjectActionType,
-  ...WorkspaceActionType,
-  ...IFeatureActionType,
-  ...IPluginActionType,
-};
-
-export function combineReducers(
-  reducers: { [key: string]: IReducer<any, any> },
-  defaultReducer?: IReducer<any, any> | any
-) {
-  return function (state: IAsanyState | any, action: AsanyAction<any>) {
-    for (const p in reducers) {
-      state[p] = reducers[p](state[p] || {}, action);
-    }
-    if (typeof defaultReducer == 'function') {
-      state = defaultReducer(state, action);
-    }
-    return { ...state };
-  };
-}
-
-const defaultReducer = (
+export const defaultReducer = (
   state: IAsanyState,
   action: AsanyAction<GlobalAsanyAction>
 ): any => {

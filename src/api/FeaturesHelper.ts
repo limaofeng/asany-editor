@@ -1,4 +1,4 @@
-import { ActionType } from '../reducers';
+import { ActionType } from '../reducers/actions';
 import { Feature, FeaturesHelper, IAsanyEditor } from '../typings';
 
 export default class FeaturesHelperImpl implements FeaturesHelper {

@@ -1,33 +1,5 @@
-import { AsanyAction, GlobalAsanyAction } from '../typings';
-
-export enum IFeatureActionType {
-  /**
-   * 缩放
-   */
-  FeatureZoom = 'Features/Zoom',
-  /**
-   * 标尺
-   */
-  FeatureRuler = 'Features/Ruler',
-  /**
-   * 配置块
-   */
-  FeatureBlock = 'Features/block',
-
-  SetFeatures = 'SetFeatures',
-
-  FeatureDrag = 'FeatureDrag',
-
-  FeatureSelecto = 'FeatureSelecto',
-}
-
-export interface IFeatureState {
-  zoom: boolean;
-  ruler: boolean;
-  block: boolean;
-  drag: boolean;
-  selecto: boolean;
-}
+import type { AsanyAction, IFeatureState } from '../typings';
+import { GlobalAsanyAction, IFeatureActionType } from './actions';
 
 const defaultState: IFeatureState = {
   zoom: false,

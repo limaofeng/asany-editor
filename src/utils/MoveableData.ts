@@ -1,8 +1,9 @@
 import MoveableHelper from 'moveable-helper';
-import Memory from './Memory';
 import { Frame } from 'scenejs';
+
+import { IUIScenaMoveableState } from '../typings';
+import Memory from './Memory';
 import { getId } from './utils';
-import { IUIScenaMoveableState } from '../reducers/ui.reducer/scena.reducer/moveable.reducer';
 
 export default class MoveableData
   extends MoveableHelper

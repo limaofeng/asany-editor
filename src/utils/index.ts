@@ -57,5 +57,3 @@ export function generateUUID() {
     ).toString(16)
   );
 }
-
-export * from './BlockAside';

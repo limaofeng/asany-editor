@@ -1,10 +1,14 @@
-import { IUIScenaState } from '../reducers/ui.reducer/scena.reducer';
-import { AsanyTool, IAsanyEditor, ScenaHelper } from '../typings';
-import { ActionType } from '../reducers';
+import {
+  AsanyTool,
+  DeviceScreen,
+  IAsanyEditor,
+  IUIScenaState,
+  ScenaHelper,
+} from '../typings';
 import { sleep } from '../utils';
 import { getScena } from '../utils/plugin';
-import { DeviceScreen } from '../components/scena/viewport/ScreenViewport';
 import devices from '../assets/devices';
+import { ActionType } from '../reducers/actions';
 
 class ScenaHelperImpl implements ScenaHelper {
   private editor: IAsanyEditor;

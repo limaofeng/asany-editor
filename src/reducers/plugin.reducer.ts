@@ -1,13 +1,5 @@
-import {
-  AsanyAction,
-  EditorPlugin,
-  GlobalAsanyAction,
-  IPluginActionType,
-} from '../typings';
-
-export interface IPluginState {
-  [key: string]: EditorPlugin;
-}
+import { AsanyAction, IPluginState } from '../typings';
+import { GlobalAsanyAction, IPluginActionType } from './actions';
 
 const defaultState: IPluginState = {};
 

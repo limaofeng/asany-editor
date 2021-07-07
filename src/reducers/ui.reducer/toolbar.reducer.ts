@@ -1,24 +1,5 @@
-import { AsanyAction, AsanyTool, GlobalAsanyAction } from '../../typings';
-
-export enum UIToolbarActionType {
-  /**
-   * 切换工具
-   */
-  ToolbarSelect = 'UIToolbar/ToolSelect',
-  /**
-   * 切换工具
-   */
-  ToolbarUnSelect = 'UIToolbar/ToolbarUnSelect',
-  /**
-   * 设置工具栏
-   */
-  SetToolbar = 'UI/SetToolbar',
-}
-
-export interface IUIToolbarState {
-  tools: AsanyTool[];
-  activeKeys: string[];
-}
+import type { AsanyAction, IUIToolbarState } from '../../typings';
+import { GlobalAsanyAction, UIToolbarActionType } from '../actions';
 
 const defaultState: IUIToolbarState = {
   tools: [],

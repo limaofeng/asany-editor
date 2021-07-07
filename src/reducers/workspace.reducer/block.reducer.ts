@@ -1,13 +1,15 @@
 import {
   AsanyAction,
-  BlockActionType,
   father,
-  GlobalAsanyAction,
   IBlockData,
   IUpdateBlockData,
-  ProjectActionType,
   IBlockState,
 } from '../../typings';
+import {
+  BlockActionType,
+  GlobalAsanyAction,
+  ProjectActionType,
+} from '../actions';
 
 const defaultState: IBlockState = {
   version: 0,

@@ -1,8 +1,7 @@
 import { ComponentType } from 'react';
-import { ActionType } from '../reducers';
-import { IUISidebarState } from '../reducers/ui.reducer/sidebar.reducer';
 
-import { IAsanyEditor, SidebarHelper } from '../typings';
+import { ActionType } from '../reducers/actions';
+import { IAsanyEditor, IUISidebarState, SidebarHelper } from '../typings';
 
 export default class SidebarHelperImpl implements SidebarHelper {
   private editor: IAsanyEditor;

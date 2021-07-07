@@ -1,86 +1,13 @@
-import { combineReducers } from '../../index';
-import { AsanyAction, GlobalAsanyAction, IAsanyEditor } from '../../../typings';
-import { dispatchWindowResize } from '../../../utils';
-import { DeviceScreen } from '../../../components/scena/viewport/ScreenViewport';
 import screens from '../../../assets/devices';
-
-import moveableReducer, { UIScenaMoveableActionType } from './moveable.reducer';
-import viewerReducer, {
-  UIScenaViewerActionType,
-  ViewerState,
-} from './viewer.reducer';
-import toolbarReducer, {
-  UIScenaToolbarActionType,
-  IUIScenaToolbarState,
-} from './toolbar.reducer';
-import MoveableState from './MoveableState';
-import { IUseBlockState } from '../../../hooks/useBlock';
+import type { AsanyAction, UIScenaGlobalState } from '../../../typings';
+import { dispatchWindowResize } from '../../../utils';
+import { GlobalAsanyAction, UIScenaGlobalActionType } from '../../actions';
+import { combineReducers } from '../../thunk';
+import moveableReducer from './moveable.reducer';
+import toolbarReducer from './toolbar.reducer';
+import viewerReducer from './viewer.reducer';
 
 export const defaultDeviceScreen = screens.find((i: any) => i.id === 'Desktop');
-
-interface GuidelinesDataSet {
-  horizontal: number[];
-  vertical: number[];
-}
-
-export enum UIScenaGlobalActionType {
-  /**
-   * 改变屏幕尺寸
-   */
-  ChangeScreenSize = 'ChangeScreenSize',
-  /**
-   * 改变屏幕尺寸拖拽方式
-   */
-  ChangeMoveWay = 'ChangeMoveWay',
-  /**
-   * 切换鼠标选区操作
-   */
-  ToggleSelecto = 'ChangeSelecto',
-  /**
-   * 画布缩放
-   */
-  CanvasZoom = 'CanvasZoom',
-  /**
-   * 画布缩小
-   */
-  CanvasZoomOut = 'CanvasZoomOut',
-  /**
-   * 画布放大
-   */
-  CanvasZoomIn = 'CanvasZoomIn',
-  /**
-   * 参考线
-   */
-  ChangeSnapGuides = 'ChangeSnapGuides',
-  SetScena = 'SetScena',
-  Loading = 'Loading',
-  ScenaReset = 'ScenaSetResetFunc',
-}
-
-export const UIScenaActionType = {
-  ...UIScenaGlobalActionType,
-  ...UIScenaMoveableActionType,
-  ...UIScenaViewerActionType,
-  ...UIScenaToolbarActionType,
-};
-
-export interface UIScenaGlobalState {
-  loading: boolean;
-  // 缩放比例
-  zoom: number;
-  reset?: () => void;
-  snaps: GuidelinesDataSet;
-  // 屏幕设置
-  screen: DeviceScreen;
-  // 点击事件
-  onClick?: (editor: IAsanyEditor, block?: IUseBlockState<any>) => void;
-}
-
-export interface IUIScenaState extends UIScenaGlobalState {
-  moveable: MoveableState;
-  viewer: ViewerState;
-  toolbar: IUIScenaToolbarState;
-}
 
 const scales = [20, 25, 33, 50, 66, 100, 150, 200, 300, 400, 500, 800, 1000];
 const minScale = scales[0];

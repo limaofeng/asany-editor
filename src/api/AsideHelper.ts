@@ -2,12 +2,12 @@ import React from 'react';
 import { ComponentType } from 'react';
 
 import { TabPane } from '../components/aside/Aside';
-import { ActionType } from '../reducers';
-import { IUIAsideState } from '../reducers/ui.reducer/aside.reducer';
-import {
+import { ActionType } from '../reducers/actions';
+import type {
   AsideHelper,
   AsideTabPane,
   IAsanyEditor,
+  IUIAsideState,
   PanelOptions,
   UndoFunc,
 } from '../typings';
@@ -53,6 +53,5 @@ export default class AsideHelperImpl implements AsideHelper {
   }
   close(): void {
     this.editor.store.dispatch({ type: ActionType.CloseAside });
-    // throw new Error('Method not implemented.');
   }
 }

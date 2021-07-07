@@ -1,6 +1,5 @@
-import { ActionType } from '../reducers';
-import { IUIToolbarState } from '../reducers/ui.reducer/toolbar.reducer';
-import { IAsanyEditor, ToolbarHelper } from '../typings';
+import { ActionType } from '../reducers/actions';
+import { IAsanyEditor, IUIToolbarState, ToolbarHelper } from '../typings';
 
 export default class ToolbarHelperImpl implements ToolbarHelper {
   private editor: IAsanyEditor;

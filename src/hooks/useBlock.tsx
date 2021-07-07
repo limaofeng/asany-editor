@@ -16,23 +16,22 @@ import React, {
 import { CSSProperties } from 'react';
 import { OnResize, OnResizeEnd, OnResizeStart } from 'react-moveable';
 
-// import { IComponentProperty } from '../../library-manager/typings';
-import { dispatchWindowResize, sleep } from '../utils';
 import BlockObserver from '../components/Observer';
-import {
-  BlockActionType,
-  father,
+import { father } from '../typings';
+import { dispatchWindowResize, sleep } from '../utils';
+import useDispatch from './useDispatch';
+import useEditor from './useEditor';
+import useSelector from './useSelector';
+
+// import { IComponentProperty } from '../../library-manager/typings';
+import type {
   IBlockData,
   IBlockDataProps,
   IBlockOptions,
   IComponentProperty,
   ICustomizer,
-  WorkspaceActionType,
 } from '../typings';
-import useDispatch from './useDispatch';
-import useEditor from './useEditor';
-import useSelector from './useSelector';
-
+import { BlockActionType, WorkspaceActionType } from '../reducers/actions';
 // import { MoveableOptions } from 'moveable';
 export interface IBlockContext {
   parentBlockKey: string;
@@ -109,7 +108,6 @@ type UpdateFunc<T> = (props: T | string, value?: any) => void;
 export interface IUseBlockState<T> extends IBlockData<T> {
   onClick: (e?: React.MouseEvent) => void;
   update: UpdateFunc<T>;
-  checked: boolean;
   props: T;
   Provider: React.ComponentType<IBlockProviderProps>;
 }
@@ -231,9 +229,6 @@ export default function useBlock<T extends IBlockDataProps>(
 
   const dispatch = useDispatch<BlockActionType>();
 
-  // TODO: 未声明的 status
-  const status = '';
-
   // const client = useApolloClient();
   const [version, forceRender] = useReducer((s) => s + 1, 0);
   const disabled = useSelector(
@@ -313,7 +308,6 @@ export default function useBlock<T extends IBlockDataProps>(
       handleScenaClick &&
         handleScenaClick(editor, {
           ...data,
-          checked: status === 'active',
           onClick: handleClick,
           update: handleChange,
           props: props.current,
@@ -491,7 +485,6 @@ export default function useBlock<T extends IBlockDataProps>(
   return (cacheResult.current = [
     {
       ...data,
-      checked: status === 'active',
       onClick: handleClick,
       update: handleChange,
       props: props.current,

@@ -1,23 +1,5 @@
-import { AsanyAction, AsanyTool, GlobalAsanyAction } from '../../../typings';
-
-export enum UIScenaToolbarActionType {
-  /**
-   * 切换工具
-   */
-  ScenaToolbarSelect = 'UIScenaToolbar/ToolSelect',
-  /**
-   * 切换工具
-   */
-  ScenaToolbarUnSelect = 'UIScenaToolbar/ToolbarUnSelect',
-  ScenaToggleVisible = 'UIScenaToolbar/ScenaToggleVisible',
-  ScenaSetToolbar = 'UIScenaToolbar/SetToolbar',
-}
-
-export interface IUIScenaToolbarState {
-  tools: AsanyTool[];
-  activeKeys: string[];
-  visible: boolean;
-}
+import { AsanyAction, IUIScenaToolbarState } from '../../../typings';
+import { GlobalAsanyAction, UIScenaToolbarActionType } from '../../actions';
 
 const defaultState: IUIScenaToolbarState = {
   tools: [],

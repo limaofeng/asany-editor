@@ -6,8 +6,8 @@ import { AsanyTool } from '../..';
 import Icon from '../../icon';
 import { useAsanyStore, useSelector } from '../../hooks';
 import useTools from '../../hooks/useTools';
-import { ActionType } from '../../reducers';
 import EnvironmentPicker from './EnvironmentPicker';
+import { ActionType } from '../../reducers/actions';
 
 interface HeaderProps {
   onBack?: () => void;

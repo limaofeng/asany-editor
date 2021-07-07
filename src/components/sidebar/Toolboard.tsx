@@ -14,9 +14,8 @@ import Icon from '../../icon';
 import Resizer from '../resizer';
 import { sleep } from '../../utils';
 import { useDispatch, useSelector } from '../../hooks';
-import { ActionType } from '../../reducers';
-import { UISidebarActionType } from '../../reducers/ui.reducer/sidebar.reducer';
-import { IAsanyEditor } from '../../typings';
+import { IAsanyEditor, IToolboard } from '../../typings';
+import { ActionType, UISidebarActionType } from '../../reducers/actions';
 
 interface Panel {
   title: string;
@@ -39,19 +38,6 @@ interface ToolboardProps {
   setCollapsed(collapsed: boolean): void;
   children: React.ReactNode;
   onResize: (x: number) => void;
-}
-
-export interface IToolboard {
-  back(): Promise<void>;
-  reopen(toolKey: string): void;
-  open(key: string, title: string, content: ComponentType<any>): void;
-  next(
-    index: number,
-    title: string | undefined,
-    content: ComponentType<any>,
-    width: number
-  ): void;
-  close(index?: number): void;
 }
 
 function Toolboard(props: ToolboardProps, ref: React.ForwardedRef<IToolboard>) {

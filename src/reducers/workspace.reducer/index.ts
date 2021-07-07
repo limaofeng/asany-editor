@@ -1,12 +1,12 @@
-import { combineReducers } from '../index';
+import { combineReducers } from '../thunk';
+import type { AsanyAction, IBlockState } from '../../typings';
+import blockReducer from './block.reducer';
 import {
-  AsanyAction,
   GlobalAsanyAction,
-  IBlockState,
   IPluginActionType,
   WorkspaceActionType,
-} from '../../typings';
-import blockReducer from './block.reducer';
+} from '../actions';
+
 export interface IWorkspaceState {
   block: IBlockState;
   [key: string]: any;

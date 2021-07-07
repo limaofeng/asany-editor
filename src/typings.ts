@@ -6,70 +6,22 @@ import {
   OnResizeStart,
 } from 'react-moveable';
 import { Frame } from 'scenejs';
-import { IUseBlockState } from './hooks/useBlock';
 
 import { DispatchWithoutAction, IAsanyStoreContext } from './AsanyContext';
+import { IUseBlockState } from './hooks/useBlock';
 import { Selector } from './hooks/useSelector';
-import { IAsanyState } from './reducers';
-import { IUIAsideState } from './reducers/ui.reducer/aside.reducer';
-import { IUIScenaState } from './reducers/ui.reducer/scena.reducer';
-import { IUISidebarState } from './reducers/ui.reducer/sidebar.reducer';
-import { IUIToolbarState } from './reducers/ui.reducer/toolbar.reducer';
+import MoveableState from './reducers/ui.reducer/scena.reducer/MoveableState';
+// import { IUIScenaState } from './reducers/ui.reducer/scena.reducer';
+// import { IUISidebarState } from './reducers/ui.reducer/sidebar.reducer';
+// import { IUIToolbarState } from './reducers/ui.reducer/toolbar.reducer';
+import MoveableData from './utils/MoveableData';
 
 export interface AsanyAction<T> {
   type: T;
   payload?: any;
 }
 
-export enum ProjectActionType {
-  ChangeCase = 'ChangeCase',
-}
-
 export const father = 'root';
-
-export enum BlockActionType {
-  /**
-   * 注册区块
-   */
-  RegistrationBlock = 'RegistrationBlock',
-  /**
-   * 卸载区块
-   */
-  UninstallBlock = 'UninstallBlock',
-  /**
-   * 推入区块
-   */
-  PushBlock = 'PushBlock',
-  /**
-   * 弹出区块
-   */
-  PopBlock = 'PopBlock',
-  /**
-   * 选中区块
-   */
-  SelectedBlock = 'SelectedBlock',
-  /**
-   * 取消区块选择
-   */
-  UncheckBlock = 'UncheckBlock',
-  /**
-   * 更新 Block 数据
-   */
-  UpdateBlockProps = 'UpdateBlockProps',
-  /**
-   * 更新 Block 数据
-   */
-  UpdateBlockMoreProps = 'UpdateBlockMoreProps',
-  /**
-   * 更新 Block 定制器
-   */
-  UpdateBlockCustomizer = 'UpdateBlockCustomizer',
-}
-
-export const WorkspaceActionType = {
-  ChangeStateByPlugin: 'ChangeStateByPlugin',
-  ...BlockActionType,
-};
 
 export interface IUpdateBlockData {
   title: any;
@@ -181,15 +133,6 @@ export interface ICustomizer {
    * 配置字段
    */
   fields: IComponentProperty[];
-}
-
-export enum IPluginActionType {
-  /**
-   * 添加插件
-   */
-  addPlugin = 'addPlugin',
-
-  PluginStateInit = 'PluginStateInit',
 }
 
 /**
@@ -378,6 +321,35 @@ export interface FeaturesHelper {
   drag(enable: boolean): void;
   selecto(enable: boolean): void;
   block(enable: boolean): void;
+}
+
+export interface GuidelinesDataSet {
+  horizontal: number[];
+  vertical: number[];
+}
+
+export interface DeviceScreen {
+  id: string;
+  name: string;
+  size: number[];
+}
+
+export interface UIScenaGlobalState {
+  loading: boolean;
+  // 缩放比例
+  zoom: number;
+  reset?: () => void;
+  snaps: GuidelinesDataSet;
+  // 屏幕设置
+  screen: DeviceScreen;
+  // 点击事件
+  onClick?: (editor: IAsanyEditor, block?: IUseBlockState<any>) => void;
+}
+
+export interface IUIScenaState extends UIScenaGlobalState {
+  moveable: MoveableState;
+  viewer: ViewerState;
+  toolbar: IUIScenaToolbarState;
 }
 
 export interface ScenaHelper {
@@ -585,11 +557,6 @@ interface AsanyProject {
   data: IComponentData | IApplicationData | IRemoteData;
 }
 
-export enum GlobalAsanyAction {
-  Init = 'Init',
-  ChangeMode = 'ChangeMode',
-}
-
 export interface ComponentDragObject {
   id: string;
   type: string;
@@ -741,5 +708,107 @@ export type IComponentProperty = {
     after?: any;
   };
 };
+
+export type IReducer<T, D> = (state: T, action: AsanyAction<D>) => T;
+
+export type AsanyProviderMode = 'VIEW' | 'CONFIG';
+
+export interface IUIState {
+  sidebar: IUISidebarState;
+  aside: IUIAsideState;
+  scena: IUIScenaState;
+  toolbar: IUIToolbarState;
+}
+
+export interface IUIAsideState {
+  control?: React.RefObject<any>;
+  tabs: AsideTabPane[];
+  options?: PanelOptions;
+  visible: boolean;
+}
+
+export interface IFeatureState {
+  zoom: boolean;
+  ruler: boolean;
+  block: boolean;
+  drag: boolean;
+  selecto: boolean;
+}
+
+export interface IToolboard {
+  back(): Promise<void>;
+  reopen(toolKey: string): void;
+  open(key: string, title: string, content: ComponentType<any>): void;
+  next(
+    index: number,
+    title: string | undefined,
+    content: ComponentType<any>,
+    width: number
+  ): void;
+  close(index?: number): void;
+}
+
+export interface IUISidebarState {
+  minWidth: number;
+  control?: React.RefObject<IToolboard>;
+  library?: IComponentLibrary;
+  tools: AsanyTool[];
+  activeKeys: string[];
+  width: number;
+  minimizable: boolean;
+  content?: React.ComponentType<any>;
+  toolboardKey?: string;
+  visible: boolean;
+  api?: any;
+}
+
+export interface IUIScenaMoveableState {
+  draggable: boolean;
+  resizable: boolean;
+  visible?: boolean;
+  selectedTargets: Array<HTMLElement | SVGElement>;
+  targets?: {
+    id: string;
+    element: React.RefObject<HTMLElement>;
+  }[];
+  data?: MoveableData;
+}
+
+export interface ViewerState {
+  dustbin: string[];
+}
+
+export interface IUIScenaToolbarState {
+  tools: AsanyTool[];
+  activeKeys: string[];
+  visible: boolean;
+}
+
+export interface IUIToolbarState {
+  tools: AsanyTool[];
+  activeKeys: string[];
+}
+
+export interface IProjectState extends AsanyProject {}
+
+export interface IWorkspaceState {
+  block: IBlockState;
+  [key: string]: any;
+}
+
+export interface IPluginState {
+  [key: string]: EditorPlugin;
+}
+
+export interface IAsanyState {
+  save: (project: AsanyProject) => void;
+  isReady: boolean;
+  mode: AsanyProviderMode;
+  ui: IUIState;
+  project: IProjectState;
+  workspace: IWorkspaceState;
+  features: IFeatureState;
+  plugins: IPluginState;
+}
 
 export { AsanyProject, IApplicationData, AsanyProjectType, IComponentData };

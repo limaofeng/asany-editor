@@ -63,7 +63,6 @@
     "@types/react-dom": "^17.0.8",
     "@types/react-transition-group": "^4.4.1",
     "@types/styled-components": "^5.1.11",
-    "@wessberg/rollup-plugin-ts": "^1.3.14",
     "autoprefixer": "^10.2.6",
     "babel-loader": "^8.2.2",
     "conventional-changelog-cli": "^2.1.1",

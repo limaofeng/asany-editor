@@ -2,9 +2,11 @@ import classnames from 'classnames';
 import React, { useCallback, useEffect, useReducer, useRef } from 'react';
 
 import { useDispatch, useEditor, useSelector } from '../../hooks';
-import { ActionType } from '../../reducers';
-import { UIActionType } from '../../reducers/ui.reducer';
-import { WorkspaceActionType } from '../../typings';
+import {
+  ActionType,
+  UIActionType,
+  WorkspaceActionType,
+} from '../../reducers/actions';
 import InfiniteViewer from '../InfiniteViewer';
 import Ruler, { RulerGuides } from '../Ruler';
 import SelectoMananger from './SelectoMananger';

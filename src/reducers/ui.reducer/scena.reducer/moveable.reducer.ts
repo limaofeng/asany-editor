@@ -1,39 +1,12 @@
-import { BlockActionType, ProjectActionType } from '../../../typings';
-import { AsanyAction, GlobalAsanyAction } from '../../../typings';
-import MoveableData from '../../../utils/MoveableData';
+import type { AsanyAction } from '../../../typings';
 import Memory from '../../../utils/Memory';
+import {
+  BlockActionType,
+  GlobalAsanyAction,
+  ProjectActionType,
+  UIScenaMoveableActionType,
+} from '../../actions';
 import MoveableState from './MoveableState';
-
-export enum UIScenaMoveableActionType {
-  /**
-   * 设置选中的元素
-   */
-  MoveableSelectedTargets = 'MoveableSelectedTargets',
-  /**
-   * 禁用 Moveable
-   */
-  MoveableDisable = 'UI/Scena/Moveable/Disable',
-  /**
-   * 启用 Moveable
-   */
-  MoveableEnable = 'UI/Scena/Moveable/Enable',
-  /**
-   * 忽略
-   */
-  MoveableIgnoreTargets = 'UI/Scena/Moveable/IgnoreTargets',
-}
-
-export interface IUIScenaMoveableState {
-  draggable: boolean;
-  resizable: boolean;
-  visible?: boolean;
-  selectedTargets: Array<HTMLElement | SVGElement>;
-  targets?: {
-    id: string;
-    element: React.RefObject<HTMLElement>;
-  }[];
-  data?: MoveableData;
-}
 
 export default function reducer(
   state: MoveableState,

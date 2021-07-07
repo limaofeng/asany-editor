@@ -1,31 +1,9 @@
-import { ISettings } from '../../components/aside/Aside';
+import type { AsanyAction, IUIAsideState } from '../../typings';
 import {
-  AsanyAction,
-  AsideTabPane,
+  BlockActionType,
   GlobalAsanyAction,
-  PanelOptions,
-} from '../../typings';
-import { BlockActionType } from '../../typings';
-
-export enum UIAsideActionType {
-  /**
-   * 打开右侧面板
-   */
-  OpenAside = 'OpenAside',
-  /**
-   * 关闭右侧面板
-   */
-  CloseAside = 'CloseAside',
-
-  AsideRef = 'AsideRef',
-}
-
-export interface IUIAsideState {
-  control?: React.RefObject<ISettings>;
-  tabs: AsideTabPane[];
-  options?: PanelOptions;
-  visible: boolean;
-}
+  UIAsideActionType,
+} from '../actions';
 
 const defaultState: IUIAsideState = {
   visible: false,
