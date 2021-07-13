@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import useBlock from '../../asany-editor/hooks/useBlock';
+import useBlock from '../../hooks/useBlock';
 import { ComponentPropertyType } from '../typings';
 
 interface LabelProps {

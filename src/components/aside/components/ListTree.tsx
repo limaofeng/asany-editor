@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import React, { useCallback, useEffect, useState } from 'react';
 
-import Icon from '../../../../icon';
+import Icon from '../../../icon';
 
 export interface ListTreeNode {
   id: string;
@@ -84,11 +84,11 @@ function ListTree(props: ListTreeProps) {
     (key: string) => {
       const selectKeys = getSelectKeys(treeData, key);
       setSelectKeys(selectKeys);
-      const node = selectKeys.reduce((list, key) => {
+      const node = selectKeys.reduce((list: any, key: any) => {
         if (!list.length) {
           return list;
         }
-        const node = list.find((item) => item.id == key);
+        const node = list.find((item: any) => item.id == key);
         if (node && node.children?.length) {
           return node.children;
         }

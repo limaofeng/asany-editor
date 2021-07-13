@@ -119,6 +119,7 @@ function getComponentClassName(item: IComponentProperty) {
   if (typeof item.renderer.name === 'string') {
     return `form-component-${item.renderer.name.toLowerCase()}`;
   }
+  return null;
 }
 
 PanelBody.defaultProps = {

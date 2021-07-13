@@ -1,3 +1,5 @@
+import './style/index.less';
+
 import classnames from 'classnames';
 import React, {
   ComponentType,
@@ -8,7 +10,6 @@ import React, {
 } from 'react';
 import { useState } from 'react';
 
-// import { NotFound, useReactComponent } from '../library-manager/LibraryManager';
 import { AsanyProvider } from './AsanyContext';
 import Aside from './components/aside/PropertiesPanel';
 import Scena from './components/scena';
@@ -22,6 +23,7 @@ import { ActionType } from './reducers/actions';
 import RuntimeContainer from './RuntimeContainer';
 import { AsanyProject, EditorPlugin } from './typings';
 
+// import { NotFound, useReactComponent } from '../library-manager/LibraryManager';
 // const LinkRender = ({ children, to, ...props }: any) => {
 //   const handleClick = (e: React.MouseEvent) => {
 //     e.stopPropagation();

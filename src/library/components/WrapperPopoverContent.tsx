@@ -3,7 +3,7 @@ import { CloseOutlined } from '@ant-design/icons';
 import './style/WrapperPopoverContent.less';
 import { IComponentProperty } from '../typings';
 import ConfigurationPanel from '../ConfigurationPanel';
-import { ICustomizer } from '../../asany-editor/typings';
+import { ICustomizer } from '../../typings';
 
 export interface PopoverFields<T> {
   /** 传递 fields 或者 根据当前的 value 某些值获得 fields 的函数 */
