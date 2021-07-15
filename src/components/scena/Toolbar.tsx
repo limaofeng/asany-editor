@@ -5,6 +5,16 @@ import Icon from '../../icon';
 import { useSelector } from '../../hooks';
 import useTools from '../../hooks/useTools';
 
+function iconRender(icon: any) {
+  if (!icon) {
+    return;
+  }
+  if (typeof icon === 'string') {
+    return <Icon name={icon} />;
+  }
+  return React.createElement(icon);
+}
+
 function Toolbar() {
   const tools = useTools((state) => state.ui.scena.toolbar.tools);
   const focus = useSelector(
@@ -32,12 +42,13 @@ function Toolbar() {
               <a
                 key={`${item.id}-${index}`}
                 onClick={item.onClick as any}
-                className={classnames('toolbar-icon', {
+                className={classnames('toolbar-icon', item.className, {
                   disabled: item.isDisabled!(focus[item.id]),
                   active: item.isSelected!(focus[item.id]),
                 })}
+                style={item.style}
               >
-                <Icon name={item.icon} />
+                {iconRender(item.icon)}
                 {item.name && (
                   <span className="toolbar-icon-tip">{item.name}</span>
                 )}
@@ -58,12 +69,13 @@ function Toolbar() {
               <a
                 key={`${item.id}-${index}`}
                 onClick={item.onClick as any}
-                className={classnames('toolbar-icon', {
+                className={classnames('toolbar-icon', item.className, {
                   disabled: item.isDisabled!(focus[item.id]),
                   active: item.isSelected!(focus[item.id]),
                 })}
+                style={item.style}
               >
-                <Icon name={item.icon} />
+                {iconRender(item.icon)}
                 {item.name && (
                   <span className="toolbar-icon-tip">{item.name}</span>
                 )}

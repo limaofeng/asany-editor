@@ -7,6 +7,13 @@ import { useSelector } from '../../hooks';
 import useTools from '../../hooks/useTools';
 import { AsanyTool } from '../../typings';
 
+function iconRender(icon: any) {
+  if (typeof icon === 'string') {
+    return <Icon name={icon} />;
+  }
+  return React.createElement(icon);
+}
+
 function Toolbar() {
   const toolboardKey = useSelector((state) => state.ui.sidebar.toolboardKey);
 
@@ -36,13 +43,18 @@ function Toolbar() {
           .map((item, index: number) => (
             <li
               key={`${item.id}-${index}`}
-              className={classnames('panel-switcher-list-item', {
-                'tools-extra': toolboardKey !== item.id,
-                selected: item.isSelected!(focus[item.id]),
-              })}
+              className={classnames(
+                'panel-switcher-list-item',
+                item.className,
+                {
+                  'tools-extra': toolboardKey !== item.id,
+                  selected: item.isSelected!(focus[item.id]),
+                }
+              )}
+              style={item.style}
               onClick={buildClick(item)}
             >
-              <Icon name={item.icon} />
+              {iconRender(item.icon)}
             </li>
           ))}
       </ul>
@@ -55,12 +67,17 @@ function Toolbar() {
           .map((item) => (
             <li
               key={`${item.id}`}
-              className={classnames('panel-switcher-list-item', {
-                selected: item.isSelected!(focus[item.id]),
-              })}
+              className={classnames(
+                'panel-switcher-list-item',
+                item.className,
+                {
+                  selected: item.isSelected!(focus[item.id]),
+                }
+              )}
               onClick={buildClick(item)}
+              style={item.style}
             >
-              <Icon name={item.icon} />
+              {iconRender(item.icon)}
             </li>
           ))}
       </ul>

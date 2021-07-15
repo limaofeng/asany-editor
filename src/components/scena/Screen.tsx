@@ -128,23 +128,25 @@ function Screen({ children }: ScreenProps) {
           height: `${zoom * 100}%`,
         }}
       >
-        <div
-          ref={screenHeader}
-          onClick={handleClick}
-          className={classnames('screen-info', {
-            'is-active': activeKey === root?.key,
-          })}
-        >
-          <span>{root?.title}</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="svg-icon icon attribute-setting"
-            viewBox="0 0 14 14"
-            aria-hidden="true"
+        {root?.title && (
+          <div
+            ref={screenHeader}
+            onClick={handleClick}
+            className={classnames('screen-info', {
+              'is-active': activeKey === root?.key,
+            })}
           >
-            <path d="M7.512.295l5.039 2.91c.316.182.511.52.511.886v5.818c0 .366-.195.704-.511.886l-5.04 2.91a1.023 1.023 0 0 1-1.023 0l-5.039-2.91a1.023 1.023 0 0 1-.511-.886V4.091c0-.366.195-.704.511-.886L6.49.295a1.023 1.023 0 0 1 1.023 0zM7 9a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
-          </svg>
-        </div>
+            <span>{root?.title}</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="svg-icon icon attribute-setting"
+              viewBox="0 0 14 14"
+              aria-hidden="true"
+            >
+              <path d="M7.512.295l5.039 2.91c.316.182.511.52.511.886v5.818c0 .366-.195.704-.511.886l-5.04 2.91a1.023 1.023 0 0 1-1.023 0l-5.039-2.91a1.023 1.023 0 0 1-.511-.886V4.091c0-.366.195-.704.511-.886L6.49.295a1.023 1.023 0 0 1 1.023 0zM7 9a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+            </svg>
+          </div>
+        )}
         <div className="canvas-bg-area" />
       </div>
       <div

@@ -42,12 +42,14 @@ export function reducer(
   action: AsanyAction<UIScenaGlobalActionType | GlobalAsanyAction>
 ): UIScenaGlobalState {
   if (action.type == UIScenaGlobalActionType.SetScena) {
+    const { workspace, toolbar } = action.payload;
     return {
       ...state,
       ...action.payload,
+      workspace,
       toolbar: {
         ...(state as any).toolbar,
-        ...action.payload.toolbar,
+        ...toolbar,
       },
     };
   }

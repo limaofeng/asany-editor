@@ -1,4 +1,4 @@
-import { ComponentType } from 'react';
+import { ComponentType, CSSProperties, ReactElement } from 'react';
 import {
   OnDragEnd,
   OnResize,
@@ -162,7 +162,7 @@ export interface AsanyTool {
   /**
    * 工具名称
    */
-  name?: string;
+  name?: string | React.ReactElement;
   /**
    * 是否可见
    */
@@ -200,6 +200,14 @@ export interface AsanyTool {
    * 自定义渲染逻辑
    */
   render?: (item: AsanyToolData) => React.ReactElement;
+  /**
+   * 样式
+   */
+  className?: string;
+  /**
+   * 样式
+   */
+  style?: CSSProperties;
 }
 
 export type AsanyToolData = {
@@ -342,6 +350,7 @@ export interface UIScenaGlobalState {
   snaps: GuidelinesDataSet;
   // 屏幕设置
   screen: DeviceScreen;
+  workspace?: ComponentType | ReactElement;
   // 点击事件
   onClick?: (editor: IAsanyEditor, block?: IUseBlockState<any>) => void;
 }
@@ -399,6 +408,10 @@ export interface ScenaHelper {
    * @param delay
    */
   unmask(delay?: number): Promise<void>;
+}
+
+export interface WorkspaceProps {
+  children: React.ReactNode | React.ReactNode[];
 }
 
 export interface SidebarHelper {

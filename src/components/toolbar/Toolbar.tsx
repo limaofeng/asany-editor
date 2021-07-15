@@ -1,16 +1,23 @@
-// import { EyeOutlined, LeftOutlined } from '@ant-design/icons';
 import classnames from 'classnames';
 import { isEqual } from 'lodash';
 import React, { useCallback } from 'react';
 import { AsanyTool } from '../..';
 import Icon from '../../icon';
-import { useAsanyStore, useSelector } from '../../hooks';
+import { useSelector } from '../../hooks';
 import useTools from '../../hooks/useTools';
-import EnvironmentPicker from './EnvironmentPicker';
-import { ActionType } from '../../reducers/actions';
 
 interface HeaderProps {
   onBack?: () => void;
+}
+
+function iconRender(icon: any) {
+  if (!icon) {
+    return null;
+  }
+  if (typeof icon === 'string') {
+    return <Icon name={icon} />;
+  }
+  return React.createElement(icon);
 }
 
 function render(item: AsanyTool, focus: any) {
@@ -20,21 +27,19 @@ function render(item: AsanyTool, focus: any) {
   ) : (
     <a
       key={item.id}
-      className={classnames('toolbar-icon', { disabled })}
+      className={classnames('toolbar-icon', item.className, { disabled })}
       onClick={item.onClick as any}
+      style={item.style}
     >
-      <Icon name={item.icon} />
-      <span className="toolbar-icon-tip">{item.name}</span>
+      {iconRender(item.icon)}
+      {item.name && <span className="toolbar-icon-tip">{item.name}</span>}
     </a>
   );
 }
 
 function Header(props: HeaderProps) {
   const { onBack } = props;
-  const store = useAsanyStore();
-  const dispatch = store.dispatch;
 
-  const viewed = useSelector((state) => state.mode === 'VIEW');
   const name = useSelector((state) => state.project && state.project.name);
 
   const tools = useTools((state) => state.ui.toolbar.tools);
@@ -49,37 +54,28 @@ function Header(props: HeaderProps) {
   );
 
   const handClickBack = useCallback(() => onBack && onBack(), []);
-  const handlePreview = () => {
-    dispatch({
-      type: ActionType.ChangeMode,
-      payload: viewed ? 'CONFIG' : 'VIEW',
-    });
-  };
 
   return (
     <div className="sketch-toolbar">
       <div className="toolbar-left" onClick={handClickBack}>
-        {/* <LeftOutlined className="back-icon toolbar-icon" /> */}
+        <Icon name="ToolbarBack" className="back-icon toolbar-icon" />
         <span className="title">{name}</span>
       </div>
       <div className="toolbar-center">
-        <div>
-          {tools
-            .filter(
-              (item) =>
-                item.position === 'left' && item.isVisibled!(focus[item.id])
-            )
-            .map(render, focus)}
-        </div>
+        {tools
+          .filter(
+            (item) =>
+              item.position === 'left' && item.isVisibled!(focus[item.id])
+          )
+          .map(render, focus)}
       </div>
       <div className="toolbar-right">
-        <a className="toolbar-icon" onClick={handlePreview}>
-          {/* <EyeOutlined className="toolbar-icon-wrapper" /> */}
-          <span className="toolbar-icon-tip">
-            {viewed ? '退出预览' : '预览'}
-          </span>
-        </a>
-        <EnvironmentPicker />
+        {tools
+          .filter(
+            (item) =>
+              item.position === 'right' && item.isVisibled!(focus[item.id])
+          )
+          .map(render, focus)}
       </div>
     </div>
   );

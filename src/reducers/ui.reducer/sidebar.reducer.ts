@@ -4,7 +4,7 @@ import { GlobalAsanyAction, UISidebarActionType } from '../actions';
 const defaultState: IUISidebarState = {
   tools: [],
   width: 250,
-  visible: true,
+  visible: false,
   library: undefined,
   activeKeys: [],
   minWidth: 170,

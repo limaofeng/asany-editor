@@ -43,22 +43,23 @@ function NotFound() {
 }
 
 function useComponent(
-  RootContainer: React.ComponentType<any>,
-  children?: React.ReactNode
+  _RootContainer: React.ComponentType<any>,
+  _children?: React.ReactNode
 ): React.ComponentType<any> {
   const project = useSelector((state) => state.project);
   const ReactComponent = useRef<ComponentType<any>>(NotFound);
-  const [, forceRender] = useReducer((s) => s + 1, 0);
+  // const [, forceRender] = useReducer((s) => s + 1, 0);
 
   if (!project || !project.type) {
     console.warn('project is null !');
   }
   // const data = project.data as IComponentData;
-  const Component: any = () => <></>;
+  // const Component: any = () => <></>;
   // const Component = useReactComponent(data ? data.id : 'notFound', {
   //   linkElement: LinkRender,
   // });
-  console.log(Component, forceRender, RootContainer, children);
+  // TODO: 需要修补
+  // console.log(Component, forceRender, RootContainer, children);
   // useEffect(() => {
   //   if (project.type !== 'component') {
   //     ReactComponent.current = () => <>{children}</>;

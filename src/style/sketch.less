@@ -105,7 +105,7 @@
         height: 100%;
         margin-right: 7px;
         color: rgb(141, 158, 167);
-        font-size: 16px;
+        font-size: 12px;
         cursor: pointer;
         transition: all 0.1s linear 0s;
       }
@@ -128,10 +128,9 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      width: 44px;
+      min-width: 44px;
       height: 100%;
       color: rgb(91, 107, 115);
-      border-top: 2px solid transparent;
       &.disabled {
         position: relative;
         color: rgb(200, 205, 208) !important;
@@ -162,10 +161,10 @@
         height: 16px;
       }
       .toolbar-icon-tip {
-        margin-top: 8px;
+        // margin-top: 8px;
         color: rgb(65, 80, 88);
         font-size: 12px;
-        line-height: 1;
+        // line-height: 1;
         white-space: nowrap;
       }
     }
@@ -235,7 +234,6 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          height: 51px;
           min-height: 51px;
           border: 1px solid transparent;
           border-right: 0;
@@ -283,7 +281,8 @@
       z-index: 10;
       flex: 1;
       flex-direction: column;
-      height: calc(100vh - 50px);
+      height: 100%;
+      display: flex;
       background: var(--background-panels);
       box-shadow: 1px 0 2px 0 rgba(100, 100, 100, 0.2);
       transition: transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
@@ -395,6 +394,13 @@
             }
           }
         }
+      }
+    }
+
+    &.falling {
+      .sidebar-resizer {
+        top: 90px;
+        height: calc(100vh - 91px);
       }
     }
   }
@@ -639,17 +645,30 @@
         flex: 1;
       }
 
+      .zoom-out {
+        z-index: 2;
+      }
+      .zoom-in {
+        z-index: 2;
+        left: -2px;
+      }
+
       .editable-zoom {
+        position: relative;
+        z-index: 1;
+        left: -1px;
+        background: var(--general-background);
+        border-top: 1px solid var(--gray-darkest);
+        border-bottom: 1px solid var(--gray-darkest);
         input {
           flex-basis: 20px;
-          max-width: 35px;
-          min-height: 20px;
+          max-width: 39px;
+          min-height: 18px;
           padding: 0;
+          border: 0;
           font-weight: 600;
           font-size: 12px;
           text-align: center;
-          background: var(--general-background);
-          border: 1px solid var(--gray-darkest);
           border-right: 0;
           border-left: 0;
           border-radius: 0;

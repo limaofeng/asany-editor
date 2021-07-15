@@ -873,3 +873,37 @@ Icon.register('Arrow', function Arrow({ onClick, className }: IconProps) {
     </a>
   );
 });
+Icon.register('SelectFilled', function SelectFilled() {
+  return (
+    <span role="img" aria-label="select" className="anticon select-icon">
+      <svg height="16" width="16">
+        <path d="M0,0l6,18l2-9h8L0,0z" />
+      </svg>
+    </span>
+  );
+});
+Icon.register(
+  'ToolbarBack',
+  function ToolbarBack({ onClick, className }: IconProps) {
+    return (
+      <a
+        onClick={onClick}
+        role="img"
+        aria-label="toolbar-back"
+        className={classnames('anticon toolbar-back', className)}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 8 12"
+          aria-hidden="true"
+          width="1em"
+          height="1em"
+          fill="currentColor"
+          type="dora"
+        >
+          <path d="M7.137 10.872a1.04 1.04 0 0 0 0-1.578L2.994 5.6l4.143-3.694a1.04 1.04 0 0 0 0-1.578 1.343 1.343 0 0 0-1.759 0L.363 4.81a1.042 1.042 0 0 0 0 1.58l5.015 4.482a1.343 1.343 0 0 0 1.76 0z"></path>
+        </svg>
+      </a>
+    );
+  }
+);

@@ -8,6 +8,8 @@ import React, {
 
 import classnames from 'classnames';
 
+import './style/index.less';
+
 type ResizeFunc = (e: React.MouseEvent) => void;
 
 export type ResizerProps = {

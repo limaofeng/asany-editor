@@ -2,6 +2,9 @@ import classnames from 'classnames';
 import React, { useCallback, useEffect, useReducer, useRef } from 'react';
 
 import { useDispatch, useEditor, useSelector } from '../../hooks';
+
+import { isElement, isValidElementType } from 'react-is';
+
 import {
   ActionType,
   UIActionType,
@@ -12,6 +15,7 @@ import Ruler, { RulerGuides } from '../Ruler';
 import SelectoMananger from './SelectoMananger';
 import Toolbar from './Toolbar';
 import ScreenViewport from './viewport/ScreenViewport';
+import { WorkspaceProps } from '../../typings';
 
 export interface ScenaStatus {
   dragStatus: boolean;
@@ -31,6 +35,18 @@ interface ScenaState {
   height: number;
   zoom: number;
   isOpenConfig: boolean;
+}
+
+function Workspace(props: WorkspaceProps) {
+  const workspace = useSelector((state) => state.ui.scena.workspace);
+  if (isElement(workspace)) {
+    return React.cloneElement(workspace, props);
+  }
+  if (isValidElementType(workspace)) {
+    const { children, ...otherProps } = props;
+    return React.createElement(workspace, otherProps, children);
+  }
+  return props.children as any;
 }
 
 function Scena(props: ScenaProps) {
@@ -169,7 +185,7 @@ function Scena(props: ScenaProps) {
         onZoom={handleZoom}
       >
         <ScreenViewport width={width} height={height}>
-          {props.children}
+          <Workspace>{props.children}</Workspace>
         </ScreenViewport>
       </InfiniteViewer>
       {selecto && <SelectoMananger />}

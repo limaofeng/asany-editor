@@ -1,5 +1,5 @@
 // import { CloseOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
-// import { Tabs } from 'antd';
+import { Tabs } from 'antd';
 import classnames from 'classnames';
 import React, {
   CSSProperties,
@@ -91,9 +91,9 @@ function Aside(props: AsideProps, ref: React.ForwardedRef<ISettings>) {
     state.current.panels = [];
   }, [tabs.map((item) => item.id || item.title)]);
 
-  // const handleChange = (activeKey: string) => {
-  //   setActiveKey(activeKey);
-  // };
+  const handleChange = (activeKey: string) => {
+    setActiveKey(activeKey);
+  };
 
   const handleCloseNextAside = async () => {
     if (state.current.nextIndex == -1) {
@@ -149,28 +149,26 @@ function Aside(props: AsideProps, ref: React.ForwardedRef<ISettings>) {
           })}
         >
           {!!tabs.length ? (
-            <div>
-              {' '}
-              {/**
             <Tabs
               className="settings-menu-tabs"
               activeKey={activeKey}
               onChange={handleChange}
               tabBarExtraContent={
                 <button type="button" className="close" onClick={onClose}>
-                  <CloseOutlined />
+                  {/* <CloseOutlined /> */}
                 </button>
               }
             >
               {tabs.map((item) => (
-                <Tabs.TabPane animated={false} tab={item.title} key={item.id || item.title}>
+                <Tabs.TabPane
+                  animated={false}
+                  tab={item.title}
+                  key={item.id || item.title}
+                >
                   {item.content}
                 </Tabs.TabPane>
               ))}
             </Tabs>
-             */}
-              sdfsdfsdfsdf
-            </div>
           ) : (
             <>
               <div className="settings-menu-header">
