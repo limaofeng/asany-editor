@@ -4,6 +4,10 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import AsanyEditor from '../src';
 
+import DemoPlugin from './editors/demo';
+
+import 'antd/dist/antd.css';
+
 const meta: Meta = {
   title: 'Welcome',
   component: AsanyEditor,
@@ -25,15 +29,17 @@ const Template: Story<any> = (args) => {
   return (
     <DndProvider backend={HTML5Backend}>
       <AsanyEditor
-        plugins={[]}
+        plugins={[DemoPlugin]}
         onSave={(data) => console.log(data)}
         project={{
-          id: '',
-          name: '',
-          type: '',
+          id: 'test',
+          name: (
+            <div style={{ color: '#727d83', fontSize: 16 }}>项目名称展示区域</div>
+          ) as any,
+          type: 'demo',
           data: {
-            id: '',
-            props: '',
+            id: '111',
+            props: [],
           },
         }}
       />

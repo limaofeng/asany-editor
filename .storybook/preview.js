@@ -2,7 +2,7 @@ import { configure } from '@storybook/react';
 
 const loaderFn = () => {
   const allExports = [
-   /*  require('../stories/Introduction.stories.mdx'),
+    /*  require('../stories/Introduction.stories.mdx'),
     require('../stories/Basic.stories.tsx'),
     require('../stories/Direction.stories.tsx'),
     require('../stories/Grid.stories.tsx'),
@@ -18,4 +18,5 @@ configure(loaderFn, module);
 export const parameters = {
   // https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args
   actions: { argTypesRegex: '^on.*' },
+  layout: 'fullscreen',
 };
