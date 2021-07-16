@@ -7,11 +7,6 @@ import reducer, { SketchActionType } from './reducer';
 import './icons';
 // import BlockLayers from '../../../sketch/components/BlockLayers';
 
-class ClasCom extends React.Component {
-  render() {
-    return <div>没有关闭及标题的弹出</div>;
-  }
-}
 
 export default {
   id: 'demo',
@@ -81,7 +76,7 @@ export default {
       },
       {
         id: 'bottom',
-        icon: 'SelectFilled',
+        icon: 'HandTouchSolid',
         position: 'bottom',
         onClick: (editor) => {
           editor.sidebar.open('bottom', '弹出面板', () => {
@@ -139,7 +134,6 @@ export default {
       ],
     },
     onClick: (editor) => {
-      editor.dispatch({ type: SketchActionType.Test });
       editor.aside.open(
         '属性面板',
         () => {

@@ -10,6 +10,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import Icon from '../../icon';
 
 import { sleep, useDeepCompareEffect } from '../../utils';
 
@@ -154,9 +155,9 @@ function Aside(props: AsideProps, ref: React.ForwardedRef<ISettings>) {
               activeKey={activeKey}
               onChange={handleChange}
               tabBarExtraContent={
-                <button type="button" className="close" onClick={onClose}>
-                  {/* <CloseOutlined /> */}
-                </button>
+                <a className="close" onClick={onClose}>
+                  <Icon name="Cross" />
+                </a>
               }
             >
               {tabs.map((item) => (
@@ -173,9 +174,9 @@ function Aside(props: AsideProps, ref: React.ForwardedRef<ISettings>) {
             <>
               <div className="settings-menu-header">
                 <h4>{title}</h4>
-                <button type="button" className="close" onClick={onClose}>
-                  {/* <CloseOutlined /> */}
-                </button>
+                <a className="close" onClick={onClose}>
+                  <Icon name="Cross" />
+                </a>
               </div>
               <div className="settings-menu-content">
                 {content || children}

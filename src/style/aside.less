@@ -73,18 +73,27 @@
         }
       }
       .ant-tabs-extra-content {
-        button {
+        margin-left: 1px;
+        a {
           padding: 0;
           overflow: visible;
           background: 0 0;
           border: none;
           outline: 0;
           box-shadow: none;
+          color: var(--gray-light);
+          &:hover {
+            color: var(--text-color-contrast);
+          }
         }
         .close {
-          padding: 10px 15px;
-          font-size: 12px;
-          line-height: 12px;
+          font-size: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 32px;
+          height: 30px;
+          margin-right: 4px;
         }
       }
     }
@@ -124,13 +133,17 @@
       line-height: 1.375;
     }
 
-    button {
+    a {
       padding: 0;
       overflow: visible;
       background: 0 0;
       border: none;
       outline: 0;
       box-shadow: none;
+      color: var(--gray-light);
+      &:hover {
+        color: var(--text-color-contrast);
+      }
     }
 
     .close {
@@ -164,7 +177,8 @@
       outline: 0;
     }
 
-    .ant-calendar-picker:hover .ant-calendar-picker-input:not(.ant-input-disabled) {
+    .ant-calendar-picker:hover
+      .ant-calendar-picker-input:not(.ant-input-disabled) {
       border-color: #b1b1b1;
       outline: 0;
     }
