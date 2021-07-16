@@ -158,9 +158,9 @@ function InfiniteViewer(props: InfiniteViewerProps) {
   }, []);
 
   useEffect(() => {
-    ref.current!.addEventListener('wheel', handleWheel);
+    ref.current?.addEventListener('wheel', handleWheel);
     return () => {
-      ref.current!.removeEventListener('wheel', handleWheel);
+      ref.current?.removeEventListener('wheel', handleWheel);
     };
   }, []);
 

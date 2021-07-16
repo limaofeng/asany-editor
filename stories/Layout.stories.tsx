@@ -9,17 +9,9 @@ import DemoPlugin from './editors/demo';
 import 'antd/dist/antd.css';
 
 const meta: Meta = {
-  title: 'Welcome',
-  component: AsanyEditor,
-  argTypes: {
-    children: {
-      control: {
-        type: 'text',
-      },
-    },
-  },
+  title: '编辑器/布局',
   parameters: {
-    controls: { expanded: true },
+    options: { showPanel: false },
   },
 };
 
@@ -34,7 +26,9 @@ const Template: Story<any> = (_args) => {
         project={{
           id: 'test',
           name: (
-            <div style={{ color: '#727d83', fontSize: 16 }}>项目名称展示区域</div>
+            <div style={{ color: '#727d83', fontSize: 16 }}>
+              项目名称展示区域
+            </div>
           ) as any,
           type: 'demo',
           data: {
@@ -50,5 +44,7 @@ const Template: Story<any> = (_args) => {
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
 export const Default = Template.bind({});
+
+Default.storyName = '布局';
 
 Default.args = {};
