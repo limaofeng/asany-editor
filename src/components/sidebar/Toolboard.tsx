@@ -260,8 +260,6 @@ function Toolboard(props: ToolboardProps, ref: React.ForwardedRef<IToolboard>) {
     }
   }, [minWidth, state.current.offset]);
 
-  console.log('children', children);
-
   return (
     <Resizer
       className={classnames('sidebar-resizer', {
