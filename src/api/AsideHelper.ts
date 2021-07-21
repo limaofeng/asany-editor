@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentType } from 'react';
 
-import { TabPane } from '../components/aside/Aside';
+import { TabPane } from '../components/aside/PropertiesPanel';
 import { ActionType } from '../reducers/actions';
 import type {
   AsideHelper,

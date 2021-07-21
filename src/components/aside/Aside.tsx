@@ -1,246 +1,196 @@
-// import { CloseOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
-import { Tabs } from 'antd';
-import classnames from 'classnames';
-import React, {
-  CSSProperties,
-  forwardRef,
-  useCallback,
-  useImperativeHandle,
-  useReducer,
-  useRef,
-  useState,
-} from 'react';
-import Icon from '../../icon';
+// import { Cascader } from 'antd';
+import { assign, isEqual } from 'lodash';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import { sleep, useDeepCompareEffect } from '../../utils';
+// import { visibleFilter } from '../../../library-manager/ConfigurationPanel';
+// import LibraryManager from '../../../library-manager/LibraryManager';
+// import { ComponentPropertyType, IComponentProperty } from '../../../library-manager/typings';
+import { useDebounce, visibleFilter } from '../../utils';
+import { useDispatch, useSelector } from '../../hooks';
+import { UIActionType } from '../../reducers/actions';
+import {
+  ComponentPropertyType,
+  father,
+  IComponentProperty,
+} from '../../typings';
+import Settings, { ISettings, TabPane } from './PropertiesPanel';
+import * as DataEntrys from './components/data-entry';
+import ConfigurationToolbar from './ConfigurationToolbar';
 
-export interface TabPane {
-  id?: string;
-  title: string;
-  content: React.ReactElement;
-}
+console.warn('📦 打包时, connect 逻辑会失效 TODO 临时解决方案', DataEntrys);
 
-interface Extra {
-  title: string;
-  summary?: string;
-  content: React.ReactElement;
-}
+interface AsideProps {}
 
-export interface AsideProps {
-  className?: string;
-  footer?: React.ReactElement;
-  onClose: (e: React.MouseEvent) => void;
-  title?: string;
-  content?: React.ReactElement;
-  tabs?: TabPane[];
-  extras?: Extra[];
-  children?: React.ReactElement;
-  style?: CSSProperties;
-}
+const tags: string[] = []; // LibraryManager.getComponentsByTag('模版/');
 
-interface AsideState {
-  next?: boolean;
-  nextIndex: number;
-  panels: Extra[];
-}
-
-export interface ISettings {
-  width: number;
-  back: () => Promise<void>;
-  switch: (activeKey: string) => void;
-  next: (title: string, content: React.ReactElement) => void;
-}
-
-function Aside(props: AsideProps, ref: React.ForwardedRef<ISettings>) {
-  const container = useRef<HTMLDivElement>(null);
-  const {
-    onClose,
-    title,
-    children,
-    extras = [],
-    content,
-    style,
-    className,
-    tabs = [],
-    footer,
-  } = props;
-  const state = useRef<AsideState>({
-    next: false,
-    nextIndex: -1,
-    panels: extras,
-  });
-  const [, forceRender] = useReducer((s) => s + 1, 0);
-  const [activeKey, setActiveKey] = useState<string | undefined>(
-    tabs.length ? tabs[0].id || tabs[0].title : undefined
-  );
-  const handleOpenNextAside = useCallback(
-    (index: number) => () => {
-      state.current.nextIndex = index;
-      forceRender();
+// TODO 组件配置信息
+const definitions: IComponentProperty[] = [
+  {
+    name: 'description',
+    label: '描述',
+    type: ComponentPropertyType.Text,
+    defaultValue: '',
+  },
+  {
+    name: 'cover',
+    label: '简图',
+    type: ComponentPropertyType.Text,
+    defaultValue: '',
+  },
+  {
+    name: 'tags',
+    label: '标签',
+    type: ComponentPropertyType.Text,
+    multiple: true,
+    defaultValue: [],
+    renderer: {
+      component: 'SelectTag',
+      props: { style: { width: '100%' } },
     },
+  },
+  {
+    name: 'type',
+    label: '类型',
+    type: ComponentPropertyType.Enum,
+    enumeration: {
+      id: 'componentType',
+      name: '组件类型',
+      values: [
+        {
+          id: 'Config',
+          name: '配置式',
+          value: 'Config',
+        },
+        {
+          id: 'SourceCode',
+          name: '源码式',
+          value: 'SourceCode',
+        },
+      ],
+    },
+    defaultValue: 'Config',
+  },
+  {
+    name: 'template',
+    label: '母版',
+    type: ComponentPropertyType.Text,
+    defaultValue: '',
+    renderer: (props: any) => {
+      const { onChange } = props;
+
+      let value: string[] = [];
+      if (props.value) {
+        const info: any = {}; // LibraryManager.getComponent(props.value);
+        const tag = info.tags.find((item: string) => item.startsWith('模版/'));
+        if (tag) {
+          const [, ...tags] = tag.split('/');
+          tags.push(info.id);
+          value = tags;
+        }
+      }
+
+      const handleChange = (values: any) => {
+        onChange(values[values.length - 1]);
+      };
+
+      // TODO: 默认
+      console.log('handleChange', handleChange, tags, value, handleChange);
+
+      return (
+        <>
+          {/*         <Cascader
+          options={tags}
+          value={value}
+          onChange={handleChange}
+          style={{ width: '100%' }}
+          expandTrigger="hover"
+        /> */}
+        </>
+      );
+    },
+  },
+];
+
+console.warn('需要删除', definitions);
+
+/**
+ * 定制面板
+ * @param props
+ */
+function Aside(_: AsideProps) {
+  const visible = useSelector((state) => state.ui.aside.visible);
+
+  const dispatch = useDispatch();
+  const currentValue = useRef();
+  const current = useSelector((state) => state.current);
+  const externalTabs = useSelector((state) => state.ui.aside.tabs);
+  const options = useSelector((state) => state.ui.aside.options || {}, isEqual);
+  const scenaToolbarVisible = useSelector(
+    (state) => state.ui.scena.toolbar.visible
+  );
+  const value = useSelector((state) => state.current?.value || {}, isEqual);
+  const [tabs, setTabs] = useState<TabPane[]>([]);
+
+  currentValue.current = value;
+
+  const handleChange = useDebounce(
+    (value: any) => {
+      current && current.onChange(assign({}, currentValue.current, value));
+    },
+    150,
+    [current]
+  );
+
+  const isRoot = !current || current.key === father;
+
+  const handleClose = useCallback(
+    () => dispatch({ type: UIActionType.CloseAside }),
     []
   );
 
-  useDeepCompareEffect(() => {
-    if (!tabs.length) {
-      return;
-    }
-    if (!tabs.some((item) => item.title === activeKey)) {
-      setActiveKey(tabs[0].id || tabs[0].title);
-    }
-    state.current.nextIndex = -1;
-    state.current.panels = [];
-  }, [tabs.map((item) => item.id || item.title)]);
+  const configuration = useRef<ISettings>(null);
 
-  const handleChange = (activeKey: string) => {
-    setActiveKey(activeKey);
-  };
+  useEffect(() => {
+    dispatch({
+      type: UIActionType.AsideRef,
+      payload: configuration,
+    });
+  }, []);
 
-  const handleCloseNextAside = async () => {
-    if (state.current.nextIndex == -1) {
-      return;
-    }
-    state.current.nextIndex--;
-    forceRender();
-    await sleep(250);
-    state.current.panels.pop();
-    forceRender();
-  };
+  useEffect(() => {
+    setTabs(
+      externalTabs.map((item) => ({
+        ...item,
+        content: <item.content onChange={handleChange} />,
+      }))
+    );
+  }, [externalTabs]);
 
-  useImperativeHandle<ISettings, any>(
-    ref,
-    () => ({
-      switch: (activeKey: string) => {
-        setActiveKey(activeKey);
-      },
-      back: async () => {
-        await handleCloseNextAside();
-      },
-      next: async (title: string, content: React.ReactElement<any>) => {
-        state.current.panels.push({
-          title,
-          content,
-        });
-        forceRender();
-        // 为了让动画更流畅, 延时 50ms 让元素先渲染到页面
-        await sleep(50);
-        state.current.nextIndex++;
-        forceRender();
-      },
-      get width() {
-        return container.current?.getBoundingClientRect().width || 0;
-      },
-    }),
-    []
-  );
+  if (!isRoot && !current) {
+    return <></>;
+  }
 
-  const { nextIndex, panels } = state.current;
-  const hasNextPanel = nextIndex != -1;
+  const top =
+    typeof options.top === 'number'
+      ? options.top
+      : 50 + (scenaToolbarVisible ? 40 : 0);
+
   return (
-    <div
-      ref={container}
-      className={classnames('settings-menu-container', className)}
-      style={style}
-    >
-      <div id="entry-controls">
-        <div
-          className={classnames('settings-menu settings-menu-pane', {
-            'settings-menu-pane-in': !hasNextPanel,
-            'settings-menu-pane-out-left': hasNextPanel,
-          })}
-        >
-          {!!tabs.length ? (
-            <Tabs
-              className="settings-menu-tabs"
-              activeKey={activeKey}
-              onChange={handleChange}
-              tabBarExtraContent={
-                <a className="close" onClick={onClose}>
-                  <Icon name="Cross" />
-                </a>
-              }
-            >
-              {tabs.map((item) => (
-                <Tabs.TabPane
-                  animated={false}
-                  tab={item.title}
-                  key={item.id || item.title}
-                >
-                  {item.content}
-                </Tabs.TabPane>
-              ))}
-            </Tabs>
-          ) : (
-            <>
-              <div className="settings-menu-header">
-                <h4>{title}</h4>
-                <a className="close" onClick={onClose}>
-                  <Icon name="Cross" />
-                </a>
-              </div>
-              <div className="settings-menu-content">
-                {content || children}
-                {!!extras.length && (
-                  <ul className="nav-list-block">
-                    {extras.map(({ title: extTitle, summary }, i) => {
-                      const lis = [
-                        <li
-                          key={String(`${i}-${title}`)}
-                          className="nav-list-item"
-                          onClick={handleOpenNextAside(i)}
-                          role="none"
-                        >
-                          <button type="button">
-                            <b>{extTitle}</b>
-                            <span>{summary}</span>
-                          </button>
-                          {/* <RightOutlined /> */}
-                        </li>,
-                      ];
-                      if (i !== extras.length - 1) {
-                        lis.push(
-                          <li
-                            key={String(`${i}-${title}-divider`)}
-                            className="divider"
-                          />
-                        );
-                      }
-                      return lis;
-                    })}
-                  </ul>
-                )}
-              </div>
-            </>
-          )}
-        </div>
-        {panels.map(({ title, content }, index) => (
-          <div
-            key={title}
-            className={classnames('settings-menu settings-menu-pane', {
-              'settings-menu-pane-in': index === nextIndex,
-              'settings-menu-pane-out-right': index > nextIndex,
-              'settings-menu-pane-out-left': index < nextIndex,
-            })}
-          >
-            <div className="ember-view active">
-              <div className="settings-menu-header subview">
-                <button
-                  className="back settings-menu-header-action"
-                  onClick={handleCloseNextAside}
-                >
-                  {/* <LeftOutlined /> */}
-                </button>
-                <h4>{title}</h4>
-                <div />
-              </div>
-              <div className="settings-menu-content">{content}</div>
-            </div>
-          </div>
-        ))}
-      </div>
-      {footer}
-    </div>
+    <Settings
+      className="sketch-configuration"
+      ref={configuration}
+      style={{
+        top: top,
+        width: options?.width || 240,
+        ...(visible
+          ? {}
+          : { transform: `translate3d(${options?.width || 240}px, 0, 0)` }),
+      }}
+      tabs={tabs.filter(visibleFilter(value))}
+      footer={<ConfigurationToolbar />}
+      onClose={handleClose}
+    />
   );
 }
 
-export default React.memo(forwardRef(Aside));
+export default React.memo(Aside);

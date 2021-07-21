@@ -11,7 +11,7 @@ import React, {
 import { useState } from 'react';
 
 import { AsanyProvider } from './AsanyContext';
-import Aside from './components/aside/PropertiesPanel';
+import Aside from './components/aside';
 import Scena from './components/scena';
 import DefaultLoadingComponent, {
   LoadingComponentProps,
