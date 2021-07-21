@@ -9,7 +9,7 @@ import DemoPlugin from './editors/demo';
 import 'antd/dist/antd.css';
 
 const meta: Meta = {
-  title: '编辑器/布局说明',
+  title: '编辑器/快捷栏',
   parameters: {
     options: { showPanel: false },
   },
@@ -45,6 +45,6 @@ const Template: Story<any> = (_args) => {
 // https://storybook.js.org/docs/react/workflows/unit-testing
 export const Default = Template.bind({});
 
-Default.storyName = '布局说明';
+Default.storyName = '快捷栏';
 
 Default.args = {};

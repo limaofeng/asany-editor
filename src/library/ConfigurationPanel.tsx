@@ -127,7 +127,7 @@ PanelBody.defaultProps = {
 };
 
 const ConfigurationPanel = ({
-  library = 'com.thuni-h.module.form',
+  library = 'cn.asany.editor.form',
   ...props
 }: ConfigurationPanelProps): JSX.Element => {
   const { value = {}, onChange, customizer } = props;

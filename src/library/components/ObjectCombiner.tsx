@@ -20,7 +20,7 @@ function ObjectCombiner(props: ObjectCombinerProps) {
   const { className, value, onChange } = props;
   const fields = props.fields.map((item) => ({
     ...item,
-    renderer: getRenderer('com.thuni-h.module.form', item),
+    renderer: getRenderer('cn.asany.editor.form', item),
   }));
   const [form] = Form.useForm();
   const handleValuesChange = (_: any, allValues: any) => {
