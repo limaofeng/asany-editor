@@ -1,5 +1,5 @@
 import { DependencyList, useCallback, useEffect, useRef } from 'react';
-import { isEqual, debounce, throttle as lodashThrottle } from 'lodash';
+import { isEqual, debounce, throttle as lodashThrottle } from 'lodash-es';
 
 export function useDebounce<T extends (...args: any) => any>(
   fn: T,

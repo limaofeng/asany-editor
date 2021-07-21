@@ -3,7 +3,7 @@ import { IComponentVersion, ComponentPropertyType } from '../library/typings';
 import ConfigurationPanel from '../library/ConfigurationPanel';
 import { AutoComplete, Select, Divider } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import LibraryManager from '../library/LibraryManager';
+import LibraryManager from '@asany/library-manager';
 
 const GroupInput = ({ value, ...props }: any) => {
   const groups = LibraryManager.getGroups();

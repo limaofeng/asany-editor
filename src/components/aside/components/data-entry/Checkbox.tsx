@@ -1,7 +1,7 @@
 import { Checkbox } from 'antd';
-import { connect } from '../../../../library/LibraryManager';
+import { registerComponent } from '@asany/library-manager';
 
-export default connect(
+export default registerComponent(
   {
     id: 'com.thuni.him.asany.properties.Checkbox',
     name: '复选框',

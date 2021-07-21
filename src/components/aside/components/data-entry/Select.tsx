@@ -11,7 +11,7 @@ import React, {
 import { useClickAway } from 'react-use';
 
 import Icon from '../../../../icon';
-import { connect } from '../../../../library/LibraryManager';
+import { registerComponent } from '@asany/library-manager';
 
 export interface SelectOption {
   label: string | React.ReactElement;
@@ -245,7 +245,7 @@ const Select = (props: SelectProps) => {
   );
 };
 
-export default connect(
+export default registerComponent(
   {
     id: 'com.thuni.him.asany.properties.Select',
     name: '组件信息',

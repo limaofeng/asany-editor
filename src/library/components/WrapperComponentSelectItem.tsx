@@ -2,7 +2,7 @@ import React, { memo, MutableRefObject } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import { IMultipleWrapperData } from './MultipleWrapper';
 // import ComponentPicker from '../../component-picker';
-import { useReactComponent } from '../LibraryManager';
+import { useReactComponent } from '@asany/library-manager';
 import { SortableHandler } from './WrapperItem';
 
 export interface WrapperItemProps {

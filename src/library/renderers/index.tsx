@@ -1,5 +1,7 @@
+import LibraryManager from '@asany/library-manager';
 import { Radio, Select } from 'antd';
 import React, { ComponentType } from 'react';
+
 import MultipleWrapper from '../components/MultipleWrapper';
 import {
   ComponentPropertyRenderer,
@@ -7,7 +9,6 @@ import {
   ComponentPropertyType,
   IComponentProperty,
 } from '../typings';
-import LibraryManager from '../../library/LibraryManager';
 
 const EmptyRenderer = () => <></>;
 

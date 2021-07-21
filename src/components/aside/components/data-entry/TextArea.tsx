@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import { connect } from '../../../../library/LibraryManager';
+import { registerComponent } from '@asany/library-manager';
 import ScrubbableControl, { AutoSizeType } from './ScrubbableControl';
 
 interface TextAreaProps {
@@ -27,7 +27,7 @@ function TextArea(props: TextAreaProps) {
   );
 }
 
-export default connect<TextAreaProps>(
+export default registerComponent<TextAreaProps>(
   {
     id: 'com.thuni.him.asany.properties.TextArea',
     name: '文本域',

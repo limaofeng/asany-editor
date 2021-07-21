@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events';
-import { isEqual } from 'lodash';
+import { isEqual } from 'lodash-es';
 
 type CallbackFunc = (
   value: any,

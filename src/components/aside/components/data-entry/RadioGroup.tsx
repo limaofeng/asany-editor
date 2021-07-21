@@ -1,5 +1,6 @@
 import React from 'react';
-import { connect } from '../../../../library/LibraryManager';
+import { registerComponent } from '@asany/library-manager';
+
 import SegmentedControl, { SegmentedControlOption } from './SegmentedControl';
 
 interface RadioGroupProps {
@@ -15,7 +16,7 @@ function RadioGroup(props: RadioGroupProps) {
   );
 }
 
-export default connect(
+export default registerComponent(
   {
     id: 'com.thuni.him.asany.properties.RadioGroup',
     name: '组件信息',

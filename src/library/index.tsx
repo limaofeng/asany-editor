@@ -1,6 +1,6 @@
 import { cloneDeepWith } from 'lodash';
 
-import LibraryManager from './LibraryManager';
+import LibraryManager from '@asany/library-manager';
 
 export * from './typings';
 export { default as ConfigurationPanel } from './ConfigurationPanel';
