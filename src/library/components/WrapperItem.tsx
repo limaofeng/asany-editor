@@ -1,8 +1,10 @@
-import React, { memo, MutableRefObject } from 'react';
 import { CloseOutlined, EditOutlined } from '@ant-design/icons';
+import Icon from '@asany/icons';
 import { Checkbox, Input } from 'antd';
+import React, { memo, MutableRefObject } from 'react';
+
 import { IMultipleWrapperData } from './MultipleWrapper';
-import Icon from '../../icon';
+
 // import { SortableItemContentProps } from '../../sortable';
 
 export const SortableHandler = () => {

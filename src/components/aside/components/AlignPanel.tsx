@@ -1,7 +1,8 @@
+import Icon from '@asany/icons';
 import React from 'react';
-import IconButton from './IconButton';
 import styled from 'styled-components';
-import Icon from '../../../icon';
+
+import IconButton from './IconButton';
 
 const aligns = [
   { icon: 'AlignLeft', title: '左对齐' },

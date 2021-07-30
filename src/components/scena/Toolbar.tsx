@@ -1,7 +1,8 @@
-import { isEqual } from 'lodash';
-import React from 'react';
+import Icon from '@asany/icons';
 import classnames from 'classnames';
-import Icon from '../../icon';
+import { isEqual } from 'lodash-es';
+import React from 'react';
+
 import { useSelector } from '../../hooks';
 import useTools from '../../hooks/useTools';
 

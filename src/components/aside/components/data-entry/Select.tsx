@@ -1,3 +1,5 @@
+import Icon from '@asany/icons';
+import { registerComponent } from '@asany/library-manager';
 import { Popover } from 'antd';
 import classnames from 'classnames';
 import React, {
@@ -9,9 +11,6 @@ import React, {
   useState,
 } from 'react';
 import { useClickAway } from 'react-use';
-
-import Icon from '../../../../icon';
-import { registerComponent } from '@asany/library-manager';
 
 export interface SelectOption {
   label: string | React.ReactElement;

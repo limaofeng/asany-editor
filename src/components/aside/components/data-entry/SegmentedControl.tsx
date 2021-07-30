@@ -1,7 +1,8 @@
-import React, { CSSProperties, useEffect, useState } from 'react';
-import classnames from 'classnames';
-import Icon from '../../../../icon';
+import Icon from '@asany/icons';
 import { Tooltip } from 'antd';
+import classnames from 'classnames';
+import React, { CSSProperties, useEffect, useState } from 'react';
+
 export interface SegmentedControlOption {
   label: string;
   value: string;

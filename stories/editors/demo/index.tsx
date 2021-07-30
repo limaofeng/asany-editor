@@ -4,9 +4,7 @@ import { useSelector } from '../../../src/hooks';
 import { EditorPlugin } from '../../../src/typings';
 import reducer, { SketchActionType } from './reducer';
 
-import './icons';
 // import BlockLayers from '../../../sketch/components/BlockLayers';
-
 
 export default {
   id: 'demo',

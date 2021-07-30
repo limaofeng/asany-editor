@@ -1,7 +1,7 @@
 import { CheckOutlined, DownOutlined } from '@ant-design/icons';
 import { InputNumber, Popover } from 'antd';
 import classnames from 'classnames';
-import { isEqual } from 'lodash';
+import { isEqual } from 'lodash-es';
 import React, { useCallback, useState } from 'react';
 
 import devices from '../../../assets/devices';

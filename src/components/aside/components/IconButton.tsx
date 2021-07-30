@@ -1,8 +1,7 @@
+import Icon from '@asany/icons';
 import { Tooltip } from 'antd';
 import classnames from 'classnames';
 import React, { forwardRef, MutableRefObject, useRef } from 'react';
-
-import Icon from '../../../icon';
 
 interface IconButtonProps {
   tooltip?: string;

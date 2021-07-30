@@ -1,8 +1,8 @@
+import Icon from '@asany/icons';
 import { Tooltip } from 'antd';
 import classnames from 'classnames';
 import React, { CSSProperties, useEffect, useRef, useState } from 'react';
 
-import Icon from '../../../icon';
 export interface OptionButtonProps {
   onChange?: (value: boolean) => void;
   value?: boolean;

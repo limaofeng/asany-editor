@@ -311,6 +311,7 @@ export interface IScena {
     tools?: AsanyTool[];
     visible?: boolean;
   };
+  workspace: ComponentType<any>;
   onClick(editor: IAsanyEditor, block?: IUseBlockState<any>): void;
 }
 

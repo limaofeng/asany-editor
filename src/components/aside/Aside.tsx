@@ -1,5 +1,5 @@
 // import { Cascader } from 'antd';
-import { assign, isEqual } from 'lodash';
+import { assign, isEqual } from 'lodash-es';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 // import { visibleFilter } from '../../../library-manager/ConfigurationPanel';

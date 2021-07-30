@@ -1,8 +1,7 @@
+import Icon from '@asany/icons';
 import classnames from 'classnames';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import React, { useCallback, useEffect, useState } from 'react';
-
-import Icon from '../../../icon';
 
 export interface ListTreeNode {
   id: string;

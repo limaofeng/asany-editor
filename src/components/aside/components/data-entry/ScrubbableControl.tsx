@@ -1,6 +1,6 @@
 import { Input, InputNumber, Tooltip } from 'antd';
 import classnames from 'classnames';
-import { isEqual } from 'lodash';
+import { isEqual } from 'lodash-es';
 import React, {
   ChangeEvent,
   CSSProperties,
@@ -10,7 +10,7 @@ import React, {
   useState,
 } from 'react';
 
-import Icon from '../../../../icon';
+import Icon from '@asany/icons';
 import { useDeepCompareEffect } from '../../../../utils';
 import { InputFormat, InputText } from '../typings';
 

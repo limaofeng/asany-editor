@@ -1,4 +1,5 @@
 // import { CloseOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
+import Icon from '@asany/icons';
 import { Tabs } from 'antd';
 import classnames from 'classnames';
 import React, {
@@ -10,7 +11,6 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import Icon from '../../icon';
 
 import { sleep, useDeepCompareEffect } from '../../utils';
 

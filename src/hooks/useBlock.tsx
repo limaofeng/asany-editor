@@ -1,7 +1,7 @@
 // import { ApolloClient, useApolloClient } from '@apollo/client';
 import classnames from 'classnames';
 import { EventEmitter } from 'events';
-import { isEqual } from 'lodash';
+import { isEqual } from 'lodash-es';
 import React, {
   DependencyList,
   MouseEventHandler,

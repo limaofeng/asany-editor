@@ -6,7 +6,7 @@ import React, {
   CSSProperties,
 } from 'react';
 import classnames from 'classnames';
-import { throttle } from 'lodash';
+import { throttle } from 'lodash-es';
 import { drag, OnDrag, OnDragStart } from '@daybrush/drag';
 import { calculateScaling } from '../reducers/ui.reducer/scena.reducer';
 import { useDragDropManager, useDrop } from 'react-dnd';

@@ -1,4 +1,4 @@
-import { cloneDeepWith } from 'lodash';
+import { cloneDeepWith } from 'lodash-es';
 
 import LibraryManager from '@asany/library-manager';
 

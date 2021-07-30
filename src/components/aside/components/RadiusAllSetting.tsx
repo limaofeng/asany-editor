@@ -1,15 +1,16 @@
-import React, {
-  useState,
-  memo,
-  ChangeEvent,
-  useEffect,
-  useCallback,
-} from 'react';
+import Icon from '@asany/icons';
 import { Input } from 'antd';
-import Icon from '../../../icon';
-import { isEqual } from 'lodash';
-import { onlyNumber } from './utils';
+import { isEqual } from 'lodash-es';
+import React, {
+  ChangeEvent,
+  memo,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
+
 import { RadiusAllSettingProps } from './typings';
+import { onlyNumber } from './utils';
 
 const icons = [
   'TopLeftCornerRadius',

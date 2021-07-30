@@ -1,5 +1,3 @@
-import './icons';
-
 export { default } from './AsanyEditor';
 export { AsanyProvider } from './AsanyContext';
 export { default as useBlock } from './hooks/useBlock';

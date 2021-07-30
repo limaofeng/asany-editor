@@ -7,7 +7,7 @@ import {
 import { getRenderer } from '../renderers';
 import { visibleFilter, FormItemWrapper } from '../ConfigurationPanel';
 import { Form } from 'antd';
-import { isEqual } from 'lodash';
+import { isEqual } from 'lodash-es';
 
 interface ObjectCombinerProps {
   value?: any;

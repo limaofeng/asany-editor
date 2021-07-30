@@ -1,3 +1,4 @@
+import Icon from '@asany/icons';
 import classnames from 'classnames';
 import React, {
   ComponentType,
@@ -10,12 +11,11 @@ import React, {
   useState,
 } from 'react';
 
-import Icon from '../../icon';
-import Resizer from '../resizer';
-import { sleep } from '../../utils';
 import { useDispatch, useSelector } from '../../hooks';
-import { IAsanyEditor, IToolboard } from '../../typings';
 import { ActionType, UISidebarActionType } from '../../reducers/actions';
+import { IAsanyEditor, IToolboard } from '../../typings';
+import { sleep } from '../../utils';
+import Resizer from '../resizer';
 
 interface Panel {
   title: string;
