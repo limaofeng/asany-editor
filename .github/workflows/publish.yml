@@ -12,7 +12,8 @@ jobs:
       with:
         node-version: 14.x
         registry-url: https://registry.npmjs.org/
-    - run: yarn
+    - name: Install deps and build (with cache)
+      uses: bahmutov/npm-install@v1
     - run: yarn publish --access public
       env:
         NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
