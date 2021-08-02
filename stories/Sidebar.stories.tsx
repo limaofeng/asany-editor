@@ -18,18 +18,15 @@ const meta: Meta = {
 export default meta;
 
 const Template: Story<any> = (_args) => {
+  const plugin = { ...DemoPlugin };
   return (
     <DndProvider backend={HTML5Backend}>
       <AsanyEditor
-        plugins={[DemoPlugin]}
+        plugins={[plugin]}
         onSave={(data) => console.log(data)}
         project={{
           id: 'test',
-          name: (
-            <div style={{ color: '#727d83', fontSize: 16 }}>
-              项目名称展示区域
-            </div>
-          ) as any,
+          name: (<div style={{ color: '#727d83', fontSize: 16 }}>项目名称展示区域</div>) as any,
           type: 'demo',
           data: {
             id: '111',

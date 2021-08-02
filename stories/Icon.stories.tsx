@@ -29,45 +29,49 @@ const client = new ApolloClient({
 export default meta;
 
 const Template: Story<any> = (_args) => {
-  DemoPlugin.scena.workspace = () => {
-    const store = useStore();
-    const [lib, setLib] = useState<IconLibrary | undefined>();
-    const loadLocalLibrary = useCallback(async () => {
-      const lib = await store.local();
-      setLib(lib);
-    }, []);
-    useEffect(() => {
-      loadLocalLibrary();
-      return store.onChange(loadLocalLibrary);
-    }, []);
+  const plugin = { ...DemoPlugin };
+  plugin.scena = {
+    ...plugin.scena,
+    workspace: () => {
+      const store = useStore();
+      const [lib, setLib] = useState<IconLibrary | undefined>();
+      const loadLocalLibrary = useCallback(async () => {
+        const lib = await store.local();
+        setLib(lib);
+      }, []);
+      useEffect(() => {
+        loadLocalLibrary();
+        return store.onChange(loadLocalLibrary);
+      }, []);
 
-    if (!lib) {
-      return <></>;
-    }
+      if (!lib) {
+        return <></>;
+      }
 
-    return (
-      <div
-        style={{
-          width: '100%',
-          padding: 20,
-        }}
-      >
-        <h3>{lib.description}</h3>
-        <hr />
-        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-          {lib.icons.map((item) => (
-            <Icon key={item.id} style={{ padding: 16 }} name={item.name} />
-          ))}
+      return (
+        <div
+          style={{
+            width: '100%',
+            padding: 20,
+          }}
+        >
+          <h3>{lib.description}</h3>
+          <hr />
+          <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+            {lib.icons.map((item) => (
+              <Icon key={item.id} style={{ padding: 16 }} name={item.name} />
+            ))}
+          </div>
         </div>
-      </div>
-    );
+      );
+    },
   };
   return (
     <DndProvider backend={HTML5Backend}>
       <ApolloProvider client={client}>
         <IconProvider>
           <AsanyEditor
-            plugins={[DemoPlugin]}
+            plugins={[plugin]}
             onSave={(data) => console.log(data)}
             project={{
               id: 'test',
