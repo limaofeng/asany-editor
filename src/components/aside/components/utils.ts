@@ -2,8 +2,7 @@ import { radiusArr, InputText, MIXED } from './typings';
 
 export const radiusSize = (arr: radiusArr) => new Set(arr).size === 1;
 
-export const onlyNumber = (value: string | number) =>
-  (value + '').replace(/[^0-9]/gi, '');
+export const onlyNumber = (value: string | number) => (value + '').replace(/[^0-9]/gi, '');
 
 // 用于圆角的过滤样式
 export const radiusFormat = {

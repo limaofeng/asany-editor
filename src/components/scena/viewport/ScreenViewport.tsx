@@ -41,9 +41,7 @@ export function DeviceList(props: DeviceListProps) {
   }, []);
   return types.map((item: any) => (
     <div key={item.name} className="screen-picker-device-type">
-      <span className="screen-picker-device-header">
-        {item.name.toUpperCase()}
-      </span>
+      <span className="screen-picker-device-header">{item.name.toUpperCase()}</span>
       <ul>
         {item.children.map((device: DeviceScreen) => (
           <li key={device.id} onClick={handleClick(device)}>
@@ -78,12 +76,7 @@ function ScreenSize(props: ScreenSizeProps) {
   return (
     <label className={classnames({ 'is-active': focused })}>
       <span className="title">{label}</span>
-      <InputNumber
-        value={value}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        size="small"
-      />
+      <InputNumber value={value} onFocus={handleFocus} onBlur={handleBlur} size="small" />
     </label>
   );
 }
@@ -124,9 +117,7 @@ function DeviceScreenPicker() {
                 <div className="screen-picker-icon" />
                 <div className="screen-picker-device">
                   <div className="screen-picker-device-name">{screen.name}</div>
-                  <div className="screen-picker-device-size">
-                    {screen.size.join('x')}
-                  </div>
+                  <div className="screen-picker-device-size">{screen.size.join('x')}</div>
                 </div>
               </>
             )}

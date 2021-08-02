@@ -62,20 +62,10 @@ function Header(props: HeaderProps) {
         <span className="title">{name}</span>
       </div>
       <div className="toolbar-center">
-        {tools
-          .filter(
-            (item) =>
-              item.position === 'left' && item.isVisibled!(focus[item.id])
-          )
-          .map(render, focus)}
+        {tools.filter((item) => item.position === 'left' && item.isVisibled!(focus[item.id])).map(render, focus)}
       </div>
       <div className="toolbar-right">
-        {tools
-          .filter(
-            (item) =>
-              item.position === 'right' && item.isVisibled!(focus[item.id])
-          )
-          .map(render, focus)}
+        {tools.filter((item) => item.position === 'right' && item.isVisibled!(focus[item.id])).map(render, focus)}
       </div>
     </div>
   );

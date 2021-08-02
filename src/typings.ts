@@ -1,10 +1,5 @@
 import { ComponentType, CSSProperties, ReactElement } from 'react';
-import {
-  OnDragEnd,
-  OnResize,
-  OnResizeEnd,
-  OnResizeStart,
-} from 'react-moveable';
+import { OnDragEnd, OnResize, OnResizeEnd, OnResizeStart } from 'react-moveable';
 import { Frame } from 'scenejs';
 
 import { DispatchWithoutAction, IAsanyStoreContext } from './AsanyContext';
@@ -438,21 +433,12 @@ export interface SidebarHelper {
    * @param keys
    */
   unselect(...keys: string[]): void;
-  open(
-    toolKey: string,
-    title: string,
-    body: ComponentType<any>
-  ): UndoFunc | void;
+  open(toolKey: string, title: string, body: ComponentType<any>): UndoFunc | void;
   next(content: ComponentType<any>, width?: number): void;
   next(title: string, content: ComponentType<any>): void;
   next(title: string, content: ComponentType<any>, width?: number): void;
   next(index: number, content: ComponentType<any>, width?: number): void;
-  next(
-    index: number,
-    title: string,
-    content: ComponentType<any>,
-    width?: number
-  ): void;
+  next(index: number, title: string, content: ComponentType<any>, width?: number): void;
   close(index?: number): void;
   reopen(toolKey: string): void;
   /**
@@ -578,9 +564,7 @@ export interface ComponentDragObject {
   [key: string]: any;
 }
 
-export type CreateDragObjectFunc = (
-  component: IComponent
-) => ComponentDragObject;
+export type CreateDragObjectFunc = (component: IComponent) => ComponentDragObject;
 
 export type IComponentLibrary = {
   tags: string[];
@@ -629,11 +613,7 @@ export type ComponentPropertyRendererSetting = {
   props: { [key: string]: any };
 };
 
-export type ComponentPropertyRenderer =
-  | string
-  | ComponentType<any>
-  | ComponentPropertyRendererSetting
-  | any;
+export type ComponentPropertyRenderer = string | ComponentType<any> | ComponentPropertyRendererSetting | any;
 
 export enum ComponentPropertyType {
   JSON = 'JSON',
@@ -753,12 +733,7 @@ export interface IToolboard {
   back(): Promise<void>;
   reopen(toolKey: string): void;
   open(key: string, title: string, content: ComponentType<any>): void;
-  next(
-    index: number,
-    title: string | undefined,
-    content: ComponentType<any>,
-    width: number
-  ): void;
+  next(index: number, title: string | undefined, content: ComponentType<any>, width: number): void;
   close(index?: number): void;
 }
 

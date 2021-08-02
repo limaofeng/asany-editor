@@ -15,14 +15,7 @@ export interface OptionButtonProps {
 }
 
 const OptionButton = (props: OptionButtonProps) => {
-  const {
-    onChange,
-    tooltip,
-    icon,
-    className,
-    style = {},
-    value = false,
-  } = props;
+  const { onChange, tooltip, icon, className, style = {}, value = false } = props;
   const ref = useRef<HTMLDivElement>(null);
   const [internalState, setInternalState] = useState<boolean>(value);
 
@@ -43,21 +36,11 @@ const OptionButton = (props: OptionButtonProps) => {
   };
 
   return (
-    <Tooltip
-      transitionName=""
-      mouseEnterDelay={0.6}
-      mouseLeaveDelay={0.01}
-      placement="bottom"
-      title={tooltip}
-    >
+    <Tooltip transitionName="" mouseEnterDelay={0.6} mouseLeaveDelay={0.01} placement="bottom" title={tooltip}>
       <div
         ref={ref}
         style={style}
-        className={classnames(
-          'option-button',
-          { active: internalState },
-          className
-        )}
+        className={classnames('option-button', { active: internalState }, className)}
         tabIndex={0}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}

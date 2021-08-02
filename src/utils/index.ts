@@ -1,11 +1,7 @@
 import { DependencyList, useCallback, useEffect, useRef } from 'react';
 import { isEqual, debounce, throttle as lodashThrottle } from 'lodash-es';
 
-export function useDebounce<T extends (...args: any) => any>(
-  fn: T,
-  delay: number,
-  deps?: DependencyList
-) {
+export function useDebounce<T extends (...args: any) => any>(fn: T, delay: number, deps?: DependencyList) {
   return useCallback(debounce(fn, delay), deps || []);
 }
 
@@ -22,10 +18,7 @@ function useDeepCompareMemoize(value: any) {
   return ref.current;
 }
 
-export function useDeepCompareEffect(
-  effect: React.EffectCallback,
-  dependencies?: Object
-) {
+export function useDeepCompareEffect(effect: React.EffectCallback, dependencies?: Object) {
   useEffect(effect, useDeepCompareMemoize(dependencies));
 }
 
@@ -51,9 +44,6 @@ export const visibleFilter = (props: any) => {
 
 export function generateUUID() {
   return '10000000-1000-4000-8000-100000000000'.replace(/[018]/g, (c: any) =>
-    (
-      c ^
-      (crypto.getRandomValues(new Uint32Array(1))[0] & (15 >> (c / 4)))
-    ).toString(16)
+    (c ^ (crypto.getRandomValues(new Uint32Array(1))[0] & (15 >> (c / 4)))).toString(16)
   );
 }

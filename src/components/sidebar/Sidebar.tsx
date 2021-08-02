@@ -17,9 +17,7 @@ function SiderBar(props: SiderBarProps) {
   const dispatch = useDispatch();
   const visible = useSelector((state) => state.ui.sidebar.visible);
   const [collapsed, setCollapsed] = useState(true);
-  const scenaToolbarVisible = useSelector(
-    (state) => state.ui.scena.toolbar.visible
-  );
+  const scenaToolbarVisible = useSelector((state) => state.ui.scena.toolbar.visible);
 
   const Content = useSelector((state) => state.ui.sidebar.content);
 
@@ -38,12 +36,7 @@ function SiderBar(props: SiderBarProps) {
       })}
     >
       <Toolbar />
-      <Toolboard
-        onResize={props.onResize}
-        editor={editor}
-        ref={control}
-        setCollapsed={setCollapsed}
-      >
+      <Toolboard onResize={props.onResize} editor={editor} ref={control} setCollapsed={setCollapsed}>
         {Content && (
           <ToolPanel className="tool-panel-content">
             <Content />

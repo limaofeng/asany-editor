@@ -1,14 +1,7 @@
 import { Input, InputNumber, Tooltip } from 'antd';
 import classnames from 'classnames';
 import { isEqual } from 'lodash-es';
-import React, {
-  ChangeEvent,
-  CSSProperties,
-  memo,
-  useCallback,
-  useRef,
-  useState,
-} from 'react';
+import React, { ChangeEvent, CSSProperties, memo, useCallback, useRef, useState } from 'react';
 
 import Icon from '@asany/icons';
 import { useDeepCompareEffect } from '../../../../utils';
@@ -72,9 +65,7 @@ const ScrubbableControl = (props: ScrubbableControlProps) => {
     if (trigger == 'change') {
       return;
     }
-    const foramtValue =
-      (format && format.output && format.output(internalValue)) ||
-      internalValue;
+    const foramtValue = (format && format.output && format.output(internalValue)) || internalValue;
     internalValue && onChange && onChange(foramtValue);
   }, [internalValue]);
 
@@ -83,9 +74,7 @@ const ScrubbableControl = (props: ScrubbableControlProps) => {
     const internalValue = handleInputFormat(value);
     setInternalValue(internalValue);
     if (trigger == 'change' && onChange) {
-      const foramtValue =
-        (format && format.output && format.output(internalValue)) ||
-        internalValue;
+      const foramtValue = (format && format.output && format.output(internalValue)) || internalValue;
       onChange(foramtValue);
     }
   }, []);
@@ -95,34 +84,17 @@ const ScrubbableControl = (props: ScrubbableControlProps) => {
   }, []);
 
   return (
-    <Tooltip
-      transitionName=""
-      mouseEnterDelay={0.6}
-      mouseLeaveDelay={0.01}
-      placement="bottom"
-      title={label}
-    >
+    <Tooltip transitionName="" mouseEnterDelay={0.6} mouseLeaveDelay={0.01} placement="bottom" title={label}>
       <div
         style={style}
         onClick={handleFocus}
-        className={classnames(
-          'scrubbable-control left-col design-input design-rows-items',
-          className,
-          {
-            disabled,
-            is_textarea: inputType == 'textarea',
-          }
-        )}
+        className={classnames('scrubbable-control left-col design-input design-rows-items', className, {
+          disabled,
+          is_textarea: inputType == 'textarea',
+        })}
       >
         {renderIcon(icon)}
-        {renderInput(
-          props,
-          input,
-          internalValue,
-          handleFocus,
-          handleBlur,
-          handleChange
-        )}
+        {renderInput(props, input, internalValue, handleFocus, handleBlur, handleChange)}
       </div>
     </Tooltip>
   );
@@ -148,9 +120,7 @@ function renderInput(
   internalValue: string,
   handleFocus: () => void,
   handleBlur: () => void,
-  handleChange: (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> & any
-  ) => void
+  handleChange: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> & any) => void
 ) {
   const { inputType = 'input', placeholder, disabled, width, autoSize } = props;
   if (inputType == 'textarea') {

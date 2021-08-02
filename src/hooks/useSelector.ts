@@ -3,16 +3,11 @@ import { IAsanyStateContext, IAsanyStoreContext } from '../AsanyContext';
 import useAsanyStore from './useAsanyStore';
 
 export type Selector<Selected> = (state: IAsanyStateContext) => Selected;
-export type EqualityFn<Selected> = (
-  theNew: Selected,
-  latest: Selected
-) => boolean;
+export type EqualityFn<Selected> = (theNew: Selected, latest: Selected) => boolean;
 
 function toAsanyState(store: IAsanyStoreContext<any>): IAsanyStateContext {
   const state = store.getState();
-  const block: any = state.workspace.block.blocks.find(
-    (item) => item.key == state.workspace.block.activeKey
-  );
+  const block: any = state.workspace.block.blocks.find((item) => item.key == state.workspace.block.activeKey);
   if (block) {
     block.value = block.props;
   }

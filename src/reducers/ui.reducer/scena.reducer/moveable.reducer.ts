@@ -1,21 +1,11 @@
 import type { AsanyAction } from '../../../typings';
 import Memory from '../../../utils/Memory';
-import {
-  BlockActionType,
-  GlobalAsanyAction,
-  ProjectActionType,
-  UIScenaMoveableActionType,
-} from '../../actions';
+import { BlockActionType, GlobalAsanyAction, ProjectActionType, UIScenaMoveableActionType } from '../../actions';
 import MoveableState from './MoveableState';
 
 export default function reducer(
   state: MoveableState,
-  action: AsanyAction<
-    | UIScenaMoveableActionType
-    | GlobalAsanyAction
-    | BlockActionType
-    | ProjectActionType
-  >
+  action: AsanyAction<UIScenaMoveableActionType | GlobalAsanyAction | BlockActionType | ProjectActionType>
 ): MoveableState {
   if (action.type == BlockActionType.UncheckBlock) {
     state.selectedTargetKeys = [];

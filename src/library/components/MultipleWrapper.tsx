@@ -51,10 +51,7 @@ export interface MultipleWrapperProps {
   value: IMultipleWrapperData<any>[];
   initializer?: (data: IMultipleWrapperData<any>) => IMultipleWrapperData<any>;
   onChange: (value: IMultipleWrapperData<any>[]) => void;
-  pipeline?: (
-    value: IMultipleWrapperData<any>[],
-    current: IMultipleWrapperData<any>
-  ) => IMultipleWrapperData<any>[];
+  pipeline?: (value: IMultipleWrapperData<any>[], current: IMultipleWrapperData<any>) => IMultipleWrapperData<any>[];
 }
 
 interface ItemRenderProps {
@@ -75,31 +72,15 @@ type BuildItemRenderOptions = {
   children: any;
 };
 
-const buildItemRender = (
-  XItemRender: ItemRender | undefined,
-  options: BuildItemRenderOptions
-) => {
-  const {
-    children,
-    className,
-    buildChange,
-    buildDelete,
-    popoverContentVisible,
-  } = options;
+const buildItemRender = (XItemRender: ItemRender | undefined, options: BuildItemRenderOptions) => {
+  const { children, className, buildChange, buildDelete, popoverContentVisible } = options;
   const InnerItemRender = React.forwardRef((props: any, ref: any) => {
     if (!children && !XItemRender) {
       return <WrapperItem {...props} ref={ref} />;
     }
-    return XItemRender ? (
-      <XItemRender {...props} ref={ref} />
-    ) : (
-      React.cloneElement(children, { ...props, ref })
-    );
+    return XItemRender ? <XItemRender {...props} ref={ref} /> : React.cloneElement(children, { ...props, ref });
   });
-  return (
-    { data, drag, ...props }: any /*SortableItemContentProps*/,
-    ref: any
-  ) => {
+  return ({ data, drag, ...props }: any /*SortableItemContentProps*/, ref: any) => {
     const itemRenderProps: ItemRenderProps = {
       drag,
       data,
@@ -193,9 +174,7 @@ export function MultipleWrapper<T>(props: MultipleWrapperProps) {
   const handleItemChange = (data: any) => (newData: any) => {
     const { value } = temp.current;
     console.log('Items Change', data, newData);
-    const newValue = value.map((item: any) =>
-      item.id === data.id ? { ...data, ...newData } : item
-    );
+    const newValue = value.map((item: any) => (item.id === data.id ? { ...data, ...newData } : item));
     setValue(pipeline ? pipeline(newValue, newData) : newValue);
   };
 
@@ -207,12 +186,7 @@ export function MultipleWrapper<T>(props: MultipleWrapperProps) {
     if (immediatelyShow) {
       immediatelyShowPopoverWhenCreated.current = true;
     }
-    const item = getAddItem(
-      sortableType.current,
-      itemName,
-      canSortItem,
-      getAddData
-    );
+    const item = getAddItem(sortableType.current, itemName, canSortItem, getAddData);
     setValue([...value, initializer ? initializer(item) : item]);
   };
 
@@ -263,8 +237,7 @@ export function MultipleWrapper<T>(props: MultipleWrapperProps) {
               {React.cloneElement(children, {
                 id: item.id,
                 data: item,
-                popoverContentVisible:
-                  immediatelyShowPopoverWhenCreated.current,
+                popoverContentVisible: immediatelyShowPopoverWhenCreated.current,
                 onDelete: handleDelete(item),
                 onChange: handleItemChange(item),
               })}

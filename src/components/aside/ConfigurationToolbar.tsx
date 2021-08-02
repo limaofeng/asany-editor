@@ -32,11 +32,7 @@ function EditableZoom() {
         </svg>
       </button>
       <div className="editable-zoom">
-        <input
-          type="text"
-          onChange={handleChange}
-          value={`${Math.floor(zoom * 100)}%`}
-        />
+        <input type="text" onChange={handleChange} value={`${Math.floor(zoom * 100)}%`} />
       </div>
       <button className="zoom-in" onClick={handleIn}>
         <svg id="zoom-in" className="icon-zoom-in" width={16} height={16}>
@@ -66,11 +62,7 @@ function Guides() {
   };
   return (
     <div>
-      <FormPanel
-        value={{ ruler }}
-        onChange={handleChange}
-        customizer={customizer.current}
-      />
+      <FormPanel value={{ ruler }} onChange={handleChange} customizer={customizer.current} />
     </div>
   );
 }
@@ -90,9 +82,7 @@ function ConfigurationToolbar({ children }: ConfigurationToolbarProps) {
             overlayClassName="guides-popover"
             placement="topLeft"
             // tslint:disable-next-line:jsx-no-lambda
-            getPopupContainer={() =>
-              document.getElementsByClassName('settings-footer')[0] as any
-            }
+            getPopupContainer={() => document.getElementsByClassName('settings-footer')[0] as any}
             content={<Guides />}
             transitionName=""
             trigger="click"

@@ -5,11 +5,7 @@ interface AsidePanelProps {
 }
 
 function AsidePanel(props: AsidePanelProps) {
-  return (
-    <div className="sketch-configuration-body scrollbars-visible">
-      {props.children}
-    </div>
-  );
+  return <div className="sketch-configuration-body scrollbars-visible">{props.children}</div>;
 }
 
 export default React.memo(AsidePanel);

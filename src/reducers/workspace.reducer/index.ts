@@ -1,11 +1,7 @@
 import { combineReducers } from '../thunk';
 import type { AsanyAction, IBlockState } from '../../typings';
 import blockReducer from './block.reducer';
-import {
-  GlobalAsanyAction,
-  IPluginActionType,
-  WorkspaceActionType,
-} from '../actions';
+import { GlobalAsanyAction, IPluginActionType, WorkspaceActionType } from '../actions';
 
 export interface IWorkspaceState {
   block: IBlockState;

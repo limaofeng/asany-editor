@@ -1,15 +1,5 @@
-import {
-  AsanyAction,
-  father,
-  IBlockData,
-  IUpdateBlockData,
-  IBlockState,
-} from '../../typings';
-import {
-  BlockActionType,
-  GlobalAsanyAction,
-  ProjectActionType,
-} from '../actions';
+import { AsanyAction, father, IBlockData, IUpdateBlockData, IBlockState } from '../../typings';
+import { BlockActionType, GlobalAsanyAction, ProjectActionType } from '../actions';
 
 const defaultState: IBlockState = {
   version: 0,
@@ -41,10 +31,7 @@ export default function reducer(
   action: AsanyAction<BlockActionType | GlobalAsanyAction | ProjectActionType>
 ): IBlockState {
   const { stack } = state || {};
-  if (
-    action.type === ProjectActionType.ChangeCase &&
-    action.payload.type === 'component'
-  ) {
+  if (action.type === ProjectActionType.ChangeCase && action.payload.type === 'component') {
     return {
       ...defaultState,
       version: state.version + 1,
@@ -81,8 +68,7 @@ export default function reducer(
       return {
         ...state,
         version: state.version + 1,
-        activeKey:
-          state.activeKey === action.payload.key ? father : state.activeKey,
+        activeKey: state.activeKey === action.payload.key ? father : state.activeKey,
         blocks: state.blocks.filter(({ key }) => key != action.payload.key),
       };
     case BlockActionType.PushBlock:

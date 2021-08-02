@@ -1,29 +1,15 @@
 import Icon from '@asany/icons';
 import { Input } from 'antd';
 import { isEqual } from 'lodash-es';
-import React, {
-  ChangeEvent,
-  memo,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import React, { ChangeEvent, memo, useCallback, useEffect, useState } from 'react';
 
 import { RadiusAllSettingProps } from './typings';
 import { onlyNumber } from './utils';
 
-const icons = [
-  'TopLeftCornerRadius',
-  'TopRightCornerRadius',
-  'BottomRightCornerRadius',
-  'BottomLeftCornerRadius',
-];
+const icons = ['TopLeftCornerRadius', 'TopRightCornerRadius', 'BottomRightCornerRadius', 'BottomLeftCornerRadius'];
 
 const RadiusAllSetting = (props: RadiusAllSettingProps) => {
-  const {
-    onChange,
-    value: [tl = 0, tr = 0, br = 0, bl = 0] = [0, 0, 0, 0],
-  } = props;
+  const { onChange, value: [tl = 0, tr = 0, br = 0, bl = 0] = [0, 0, 0, 0] } = props;
 
   // 记录输入位置
   const [index, setIndex] = useState(0);
@@ -59,14 +45,11 @@ const RadiusAllSetting = (props: RadiusAllSettingProps) => {
   );
 
   // 设置图标及文本选中
-  const handleFocus = useCallback(
-    (event: React.FocusEvent<HTMLInputElement>) => {
-      const index = parseInt(event.target.getAttribute('data-id')!);
-      setIndex(index);
-      event.target.select();
-    },
-    []
-  );
+  const handleFocus = useCallback((event: React.FocusEvent<HTMLInputElement>) => {
+    const index = parseInt(event.target.getAttribute('data-id')!);
+    setIndex(index);
+    event.target.select();
+  }, []);
 
   return (
     <div className="raidus-change-box design-colums ">
@@ -77,13 +60,7 @@ const RadiusAllSetting = (props: RadiusAllSettingProps) => {
         {icons.map((_, i) => {
           return (
             <div className="input-box" key={i}>
-              <Input
-                data-id={i}
-                onFocus={handleFocus}
-                value={value[i]}
-                onBlur={handleBlur}
-                onChange={handleChange}
-              />
+              <Input data-id={i} onFocus={handleFocus} value={value[i]} onBlur={handleBlur} onChange={handleChange} />
             </div>
           );
         })}

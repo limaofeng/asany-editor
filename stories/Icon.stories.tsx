@@ -1,4 +1,3 @@
-import '../src/icons';
 import 'antd/dist/antd.css';
 
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
@@ -22,7 +21,7 @@ const meta: Meta = {
 };
 
 const client = new ApolloClient({
-  uri: 'http://api.asany.cn/graphql',
+  uri: 'https://api.asany.cn/graphql',
   cache: new InMemoryCache(),
 });
 

@@ -20,13 +20,9 @@ function Screen({ children }: ScreenProps) {
   const moveableContainer = useRef<HTMLDivElement>(null);
 
   const root = useSelector((state) =>
-    state.workspace.block.blocks.find(
-      (item) => item.key.startsWith('root/') && item.key.split('/').length == 2
-    )
+    state.workspace.block.blocks.find((item) => item.key.startsWith('root/') && item.key.split('/').length == 2)
   );
-  const disabled = useSelector(
-    (state) => state.mode === 'VIEW' || !state.features.block
-  );
+  const disabled = useSelector((state) => state.mode === 'VIEW' || !state.features.block);
   const isZoom = useSelector((state) => state.features.zoom);
   const zoom = useSelector((state) => state.ui.scena.zoom);
   const [width, height] = useSelector((state) => state.ui.scena.screen.size);
@@ -38,10 +34,7 @@ function Screen({ children }: ScreenProps) {
 
   useSelector((state) => state.ui.scena.moveable.enable);
 
-  const {
-    vertical: verticalGuidelines,
-    horizontal: horizontalGuidelines,
-  } = snaps;
+  const { vertical: verticalGuidelines, horizontal: horizontalGuidelines } = snaps;
 
   // const lastKey = useSelector(
   //   ({
@@ -149,15 +142,9 @@ function Screen({ children }: ScreenProps) {
         )}
         <div className="canvas-bg-area" />
       </div>
-      <div
-        className="zoom-area"
-        ref={moveableContainer}
-        style={{ transform: `scale(${zoom})` }}
-      >
+      <div className="zoom-area" ref={moveableContainer} style={{ transform: `scale(${zoom})` }}>
         <div ref={block(artboard)} className="canvas" style={style}>
-          <Provider deps={[project?.data?.id, children?.type?.info?.id]}>
-            {children}
-          </Provider>
+          <Provider deps={[project?.data?.id, children?.type?.info?.id]}>{children}</Provider>
         </div>
         {!disabled && (
           <>

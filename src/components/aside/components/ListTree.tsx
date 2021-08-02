@@ -43,14 +43,7 @@ function getSelectKeys(treeData: ListTreeNode[], key: string): string[] {
 }
 
 function ListTree(props: ListTreeProps) {
-  const {
-    reload,
-    treeData,
-    labelName = 'label',
-    itemRender: ItemRender,
-    onChange,
-    value,
-  } = props;
+  const { reload, treeData, labelName = 'label', itemRender: ItemRender, onChange, value } = props;
 
   const [selectKeys, setSelectKeys] = useState<string[]>([]);
   const [openKeys, setOpenKeys] = useState<string[]>([]);
@@ -125,18 +118,12 @@ function ListTree(props: ListTreeProps) {
   return (
     <div className="list-tree-container">
       {parentNode && (
-        <div
-          onClick={handleBack}
-          className="tree-current-node flex items-center"
-        >
+        <div onClick={handleBack} className="tree-current-node flex items-center">
           <Icon name="Drillup" />
           <span className="flex-1">{parentNode[labelName]}</span>
         </div>
       )}
-      <OverlayScrollbarsComponent
-        className="list-tree-scrollbar"
-        options={{ scrollbars: { autoHide: 'scroll' } }}
-      >
+      <OverlayScrollbarsComponent className="list-tree-scrollbar" options={{ scrollbars: { autoHide: 'scroll' } }}>
         {!!dirs.length && (
           <ul className="ae-tree">
             {dirs.map((item) => (
@@ -160,12 +147,7 @@ function ListTree(props: ListTreeProps) {
             {list
               .filter((item) => !(item.children || []).length)
               .map((item) => (
-                <ItemRender
-                  {...item}
-                  key={item.id}
-                  selected={selectKeys.includes(item.id)}
-                  onChange={handleChange}
-                />
+                <ItemRender {...item} key={item.id} selected={selectKeys.includes(item.id)} onChange={handleChange} />
               ))}
           </ul>
         </div>

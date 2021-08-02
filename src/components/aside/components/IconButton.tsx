@@ -11,10 +11,7 @@ interface IconButtonProps {
   onClick?: () => void;
 }
 
-const IconButton = (
-  props: IconButtonProps,
-  externalRef: React.ForwardedRef<HTMLSpanElement>
-) => {
+const IconButton = (props: IconButtonProps, externalRef: React.ForwardedRef<HTMLSpanElement>) => {
   const { tooltip, onClick, icon, className, checked } = props;
   const ref = useRef<HTMLSpanElement>(null);
   const handleClick = () => {
@@ -27,13 +24,7 @@ const IconButton = (
     ((externalRef as MutableRefObject<any>) || ref).current?.blur();
   };
   return (
-    <Tooltip
-      transitionName=""
-      mouseEnterDelay={0.6}
-      mouseLeaveDelay={0.01}
-      placement="bottom"
-      title={tooltip}
-    >
+    <Tooltip transitionName="" mouseEnterDelay={0.6} mouseLeaveDelay={0.01} placement="bottom" title={tooltip}>
       <span
         ref={externalRef || ref}
         tabIndex={0}
@@ -48,6 +39,4 @@ const IconButton = (
   );
 };
 
-export default React.memo(
-  forwardRef<HTMLSpanElement, IconButtonProps>(IconButton)
-);
+export default React.memo(forwardRef<HTMLSpanElement, IconButtonProps>(IconButton));

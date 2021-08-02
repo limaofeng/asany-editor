@@ -3,14 +3,7 @@ import { ComponentType } from 'react';
 
 import { TabPane } from '../components/aside/PropertiesPanel';
 import { ActionType } from '../reducers/actions';
-import type {
-  AsideHelper,
-  AsideTabPane,
-  IAsanyEditor,
-  IUIAsideState,
-  PanelOptions,
-  UndoFunc,
-} from '../typings';
+import type { AsideHelper, AsideTabPane, IAsanyEditor, IUIAsideState, PanelOptions, UndoFunc } from '../typings';
 
 export default class AsideHelperImpl implements AsideHelper {
   private editor: IAsanyEditor;
@@ -28,11 +21,7 @@ export default class AsideHelperImpl implements AsideHelper {
     aside.control.current.next(title, React.createElement(body));
   }
   open(tabs: AsideTabPane[], options?: PanelOptions): void | UndoFunc;
-  open(
-    title: string,
-    body: ComponentType<any>,
-    options?: PanelOptions
-  ): void | UndoFunc;
+  open(title: string, body: ComponentType<any>, options?: PanelOptions): void | UndoFunc;
   open(title: any, body?: any) {
     let options;
     const tabs: TabPane[] = [];

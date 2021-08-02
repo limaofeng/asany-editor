@@ -30,11 +30,8 @@ export default function reducer(
   if (action.type == UISidebarActionType.SidebarUnSelect) {
     return {
       ...state,
-      toolboardKey:
-        state.toolboardKey === action.payload ? undefined : state.toolboardKey,
-      activeKeys: state.activeKeys.filter(
-        (item) => !action.payload.includes(item)
-      ),
+      toolboardKey: state.toolboardKey === action.payload ? undefined : state.toolboardKey,
+      activeKeys: state.activeKeys.filter((item) => !action.payload.includes(item)),
     };
   }
   if (action.type == UISidebarActionType.ToolboardKey) {

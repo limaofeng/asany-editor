@@ -29,19 +29,9 @@ WrapperPopoverContent.defaultProps = {
 };
 
 function WrapperPopoverContent(props: WrapperPopoverContentProps<any>) {
-  const {
-    contentRef,
-    fields: fieldsProp,
-    value,
-    maxHeight,
-    width,
-    onClose,
-    onChange,
-  } = props;
+  const { contentRef, fields: fieldsProp, value, maxHeight, width, onClose, onChange } = props;
 
-  const [fields, setFields] = useState<IComponentProperty[]>(
-    [] as IComponentProperty[]
-  );
+  const [fields, setFields] = useState<IComponentProperty[]>([] as IComponentProperty[]);
 
   const [customizer, setCustomizer] = useState<ICustomizer>({
     groups: [
@@ -55,9 +45,7 @@ function WrapperPopoverContent(props: WrapperPopoverContentProps<any>) {
   });
 
   useEffect(() => {
-    const currentFields: IComponentProperty[] = Array.isArray(fieldsProp)
-      ? fieldsProp
-      : fieldsProp(value);
+    const currentFields: IComponentProperty[] = Array.isArray(fieldsProp) ? fieldsProp : fieldsProp(value);
     setFields(currentFields);
     setCustomizer({
       groups: [
@@ -89,11 +77,7 @@ function WrapperPopoverContent(props: WrapperPopoverContentProps<any>) {
        有弹出层的需要配置(如 select ) 基于 弹出层基于父组件而不是 body 上
      */}
       <div className="popover-content__form">
-        <ConfigurationPanel
-          customizer={customizer}
-          onChange={onChange}
-          value={value}
-        />
+        <ConfigurationPanel customizer={customizer} onChange={onChange} value={value} />
       </div>
     </div>
   );

@@ -7,12 +7,7 @@ import FormFieldset from '../components/form/FormFieldset';
 import { DEFAULT_GROUP_ID, ICustomizer } from '../typings';
 import { useFormSelector, useFormState } from './FormStateContext';
 import { getRenderer } from './renderers';
-import {
-  ComponentPropertyRendererSetting,
-  ComponentPropertyType,
-  IComponentProperty,
-  IGroup,
-} from './typings';
+import { ComponentPropertyRendererSetting, ComponentPropertyType, IComponentProperty, IGroup } from './typings';
 
 interface ConfigurationPanelProps {
   customizer: ICustomizer;
@@ -29,12 +24,7 @@ interface FormItemWrapperProps {
   size: string;
 }
 
-export function FormItemWrapper({
-  component: Item,
-  field,
-  defaultValue,
-  ...props
-}: FormItemWrapperProps) {
+export function FormItemWrapper({ component: Item, field, defaultValue, ...props }: FormItemWrapperProps) {
   // console.log('FormItemWrapper', field, Item, defaultValue, props);
   const extProps = useFormSelector((state) => {
     if (Array.isArray(field.deps)) {
@@ -77,14 +67,10 @@ const PanelBody = (props: PanelBodyProps) => {
   return (
     <React.Fragment>
       {fields.filter(visibleFilter(value)).map((item) => {
-        const {
-          component,
-          props = {},
-        } = item.renderer as ComponentPropertyRendererSetting;
+        const { component, props = {} } = item.renderer as ComponentPropertyRendererSetting;
         const ComponentForm = component as React.ComponentType<any>;
         const lable = item.hiddenLabel ? '' : !item.multiple && item.label;
-        const valuePropName =
-          item.type === ComponentPropertyType.Boolean ? 'checked' : undefined;
+        const valuePropName = item.type === ComponentPropertyType.Boolean ? 'checked' : undefined;
         return (
           <Form.Item
             key={`${group}-${item.name}`}
@@ -96,17 +82,9 @@ const PanelBody = (props: PanelBodyProps) => {
             <FormField
               field={item}
               layout={item.layout || layout}
-              className={classnames(
-                `form-item-${group}-${item.name}`,
-                getComponentClassName(item)
-              )}
+              className={classnames(`form-item-${group}-${item.name}`, getComponentClassName(item))}
             >
-              <FormItemWrapper
-                {...props}
-                field={item}
-                component={ComponentForm}
-                size="small"
-              />
+              <FormItemWrapper {...props} field={item} component={ComponentForm} size="small" />
             </FormField>
           </Form.Item>
         );
@@ -126,10 +104,7 @@ PanelBody.defaultProps = {
   layout: 'Stacked',
 };
 
-const ConfigurationPanel = ({
-  library = 'cn.asany.editor.form',
-  ...props
-}: ConfigurationPanelProps): JSX.Element => {
+const ConfigurationPanel = ({ library = 'cn.asany.editor.form', ...props }: ConfigurationPanelProps): JSX.Element => {
   const { value = {}, onChange, customizer } = props;
   const [groups, setGroups] = useState<IGroup[]>([]);
   const [defaultValue, setDefaultValue] = useState({});
@@ -143,10 +118,7 @@ const ConfigurationPanel = ({
     setGroups(
       customizer.fields
         .reduce((groups: IGroup[], definition) => {
-          const id =
-            (typeof definition.group === 'boolean'
-              ? definition.name
-              : definition.group) || 'DEFAULT';
+          const id = (typeof definition.group === 'boolean' ? definition.name : definition.group) || 'DEFAULT';
           let group: IGroup = groups.find((g: any) => g.id === id)!;
           if (group) {
             group.fields.push({
@@ -205,28 +177,12 @@ const ConfigurationPanel = ({
   // }, []);
   // console.log('blockProps-------groups', groups, value);
   return (
-    <Form
-      form={form}
-      component={false}
-      name="control-hooks"
-      onValuesChange={handleValuesChange}
-    >
-      {groups
-        .filter(visibleFilter(value))
-        .map(({ id, name, layout, fields }) => (
-          <FormFieldset
-            title={!id.startsWith(DEFAULT_GROUP_ID) && name}
-            key={id}
-          >
-            <PanelBody
-              group={id}
-              layout={layout!}
-              fields={fields}
-              value={value}
-              Form={Form}
-            />
-          </FormFieldset>
-        ))}
+    <Form form={form} component={false} name="control-hooks" onValuesChange={handleValuesChange}>
+      {groups.filter(visibleFilter(value)).map(({ id, name, layout, fields }) => (
+        <FormFieldset title={!id.startsWith(DEFAULT_GROUP_ID) && name} key={id}>
+          <PanelBody group={id} layout={layout!} fields={fields} value={value} Form={Form} />
+        </FormFieldset>
+      ))}
     </Form>
   );
 };

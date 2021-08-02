@@ -1,12 +1,6 @@
 import { Form } from 'antd';
 import { FormInstance, FormProps, useForm } from 'antd/lib/form/Form';
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useReducer,
-  useRef,
-} from 'react';
+import React, { useCallback, useContext, useEffect, useReducer, useRef } from 'react';
 import { EventEmitter } from 'events';
 // import { useEnvSelector } from '../environment-manager';
 
@@ -44,9 +38,7 @@ class FormEventManager {
   getState = () => this.form!.getFieldsValue();
 }
 
-const FormStateContext = React.createContext<FormEventManager>(
-  new FormEventManager()
-);
+const FormStateContext = React.createContext<FormEventManager>(new FormEventManager());
 
 function FormProvider(props: FormProviderProps) {
   const form = props.form;

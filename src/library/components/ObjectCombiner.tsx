@@ -1,9 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  IComponentProperty,
-  ComponentPropertyRendererSetting,
-  ComponentPropertyType,
-} from '../typings';
+import { IComponentProperty, ComponentPropertyRendererSetting, ComponentPropertyType } from '../typings';
 import { getRenderer } from '../renderers';
 import { visibleFilter, FormItemWrapper } from '../ConfigurationPanel';
 import { Form } from 'antd';
@@ -33,22 +29,12 @@ function ObjectCombiner(props: ObjectCombinerProps) {
     }
   }, [value]);
   return (
-    <Form
-      form={form}
-      className={className}
-      layout="inline"
-      component={'div'}
-      onValuesChange={handleValuesChange}
-    >
+    <Form form={form} className={className} layout="inline" component={'div'} onValuesChange={handleValuesChange}>
       {fields.filter(visibleFilter(props.value)).map((item) => {
-        const {
-          component,
-          props = {},
-        } = item.renderer as ComponentPropertyRendererSetting;
+        const { component, props = {} } = item.renderer as ComponentPropertyRendererSetting;
         const ComponentForm = component as React.ComponentType<any>;
         const lable = item.hiddenLabel ? '' : !item.multiple && item.label;
-        const valuePropName =
-          item.type === ComponentPropertyType.Boolean ? 'checked' : undefined;
+        const valuePropName = item.type === ComponentPropertyType.Boolean ? 'checked' : undefined;
         return (
           <Form.Item
             className={`object-combiner-field-${item.name}`}
@@ -57,12 +43,7 @@ function ObjectCombiner(props: ObjectCombinerProps) {
             name={item.name}
             valuePropName={valuePropName}
           >
-            <FormItemWrapper
-              {...props}
-              field={item}
-              component={ComponentForm}
-              size="small"
-            />
+            <FormItemWrapper {...props} field={item} component={ComponentForm} size="small" />
           </Form.Item>
         );
       })}

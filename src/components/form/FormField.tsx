@@ -10,24 +10,12 @@ interface FormFieldProps {
   children: React.ReactElement;
 }
 
-function FormField({
-  field,
-  className,
-  children,
-  layout = 'Inline',
-  ...props
-}: FormFieldProps) {
+function FormField({ field, className, children, layout = 'Inline', ...props }: FormFieldProps) {
   return (
     <div
-      className={classnames(
-        'smart-form-field',
-        `smart-form-field-layout-${layout.toLocaleLowerCase()}`,
-        className,
-        {
-          'inline-show-label':
-            layout == 'Inline' && field.label && !field.hiddenLabel,
-        }
-      )}
+      className={classnames('smart-form-field', `smart-form-field-layout-${layout.toLocaleLowerCase()}`, className, {
+        'inline-show-label': layout == 'Inline' && field.label && !field.hiddenLabel,
+      })}
     >
       {field.label && !field.hiddenLabel && (
         <label className="smart-form-field-label">

@@ -1,21 +1,14 @@
+import './icons';
 import './style/index.less';
 
 import classnames from 'classnames';
-import React, {
-  ComponentType,
-  useCallback,
-  useEffect,
-  useReducer,
-  useRef,
-} from 'react';
+import React, { ComponentType, useCallback, useEffect, useReducer, useRef } from 'react';
 import { useState } from 'react';
 
 import { AsanyProvider } from './AsanyContext';
 import Aside from './components/aside';
 import Scena from './components/scena';
-import DefaultLoadingComponent, {
-  LoadingComponentProps,
-} from './components/scena/LoadingComponent';
+import DefaultLoadingComponent, { LoadingComponentProps } from './components/scena/LoadingComponent';
 import Sidebar from './components/sidebar';
 import Toolbar from './components/toolbar/Toolbar';
 import { useDispatch, useSelector } from './hooks';
@@ -42,10 +35,7 @@ function NotFound() {
   return <>404</>;
 }
 
-function useComponent(
-  _RootContainer: React.ComponentType<any>,
-  _children?: React.ReactNode
-): React.ComponentType<any> {
+function useComponent(_RootContainer: React.ComponentType<any>, _children?: React.ReactNode): React.ComponentType<any> {
   const project = useSelector((state) => state.project);
   const ReactComponent = useRef<ComponentType<any>>(NotFound);
   // const [, forceRender] = useReducer((s) => s + 1, 0);
@@ -116,9 +106,7 @@ function Editor({
   const WorkComponent = useComponent(container, children);
 
   const visible = useSelector((state) => state.ui.aside.visible);
-  const scenaToolbarVisible = useSelector(
-    (state) => state.ui.scena.toolbar.visible
-  );
+  const scenaToolbarVisible = useSelector((state) => state.ui.scena.toolbar.visible);
   const loading = useSelector((state) => state.ui.scena.loading);
   const control = useSelector((state) => state.ui.aside.control);
 
@@ -174,15 +162,7 @@ interface AsanyWarpperProps {
 }
 
 export default function AsanyEditor(props: AsanyWarpperProps) {
-  const {
-    children,
-    project,
-    onSave,
-    onBack,
-    container = RuntimeContainer,
-    plugins = [],
-    loading,
-  } = props;
+  const { children, project, onSave, onBack, container = RuntimeContainer, plugins = [], loading } = props;
   const [version, forceRender] = useReducer((s) => s + 1, 0);
   useEffect(() => {
     if (!project) {
@@ -192,12 +172,7 @@ export default function AsanyEditor(props: AsanyWarpperProps) {
   }, [project]);
   return (
     <AsanyProvider version={version} plugins={[...plugins]} value={project}>
-      <Editor
-        onSave={onSave}
-        loading={loading}
-        container={container}
-        onBack={onBack}
-      >
+      <Editor onSave={onSave} loading={loading} container={container} onBack={onBack}>
         {children}
       </Editor>
     </AsanyProvider>

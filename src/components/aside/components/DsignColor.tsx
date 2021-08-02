@@ -22,25 +22,14 @@ const DsignColor = (props: DsignColorProp) => {
             className="color-chit"
             style={{ backgroundColor: colorStyle.backgroundColor }}
           >
-            <div
-              className="color-chit-alpha"
-              style={{ opacity: colorStyle.opacity }}
-            />
+            <div className="color-chit-alpha" style={{ opacity: colorStyle.opacity }} />
           </div>
         </div>
         <div className="color-value">
-          <ScrubbableControl
-            format={inputFormat}
-            onChange={handleChange}
-            value={0}
-          />
+          <ScrubbableControl format={inputFormat} onChange={handleChange} value={0} />
         </div>
         <div className="color-percentage">
-          <ScrubbableControl
-            format={inputFormat}
-            onChange={handleChange}
-            value={0}
-          />
+          <ScrubbableControl format={inputFormat} onChange={handleChange} value={0} />
         </div>
       </div>
       <DsignIcons

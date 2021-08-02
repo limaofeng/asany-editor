@@ -11,9 +11,7 @@ interface RadioGroupProps {
 
 function RadioGroup(props: RadioGroupProps) {
   const { value, onChange, options } = props;
-  return (
-    <SegmentedControl options={options} value={value} onChange={onChange} />
-  );
+  return <SegmentedControl options={options} value={value} onChange={onChange} />;
 }
 
 export default registerComponent(

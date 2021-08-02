@@ -7,13 +7,7 @@ import AsidePanel from '../components/aside/AsidePanel';
 import CurrentElementInformation from '../components/aside/components/CurrentElementInformation';
 import FormPanel from '../components/aside/FormPanel';
 import { useSelector } from '../hooks';
-import {
-  AsideTabPane,
-  ComponentPropertyType,
-  DEFAULT_GROUP_ID,
-  ICustomizer,
-  IFieldGroup,
-} from '../typings';
+import { AsideTabPane, ComponentPropertyType, DEFAULT_GROUP_ID, ICustomizer, IFieldGroup } from '../typings';
 
 function createPanel(customizer: ICustomizer) {
   return ({ onChange: handleChange }: any) => {
@@ -45,9 +39,7 @@ const createTabPane = (item: any): AsideTabPane => ({
 export function buildAside(customizer: ICustomizer) {
   const tabs = [];
 
-  const fields = customizer.fields.map((item) =>
-    item.group ? item : { ...item, group: DEFAULT_GROUP_ID }
-  );
+  const fields = customizer.fields.map((item) => (item.group ? item : { ...item, group: DEFAULT_GROUP_ID }));
   const sourceGroups = [...(customizer.groups || [])];
 
   if (customizer.frame) {
@@ -83,9 +75,7 @@ export function buildAside(customizer: ICustomizer) {
     });
   } else {
     for (const tab of customTabs) {
-      tab.groups = groups.filter(({ id }) =>
-        (tab.groups as string[]).some((g) => g === id || (g as any).id === id)
-      );
+      tab.groups = groups.filter(({ id }) => (tab.groups as string[]).some((g) => g === id || (g as any).id === id));
     }
   }
 
@@ -98,9 +88,7 @@ export function buildAside(customizer: ICustomizer) {
         title: item.name,
         customizer: {
           groups,
-          fields: fields.filter((field) =>
-            groupIds.includes(field.group! as string)
-          ),
+          fields: fields.filter((field) => groupIds.includes(field.group! as string)),
         },
       };
     })

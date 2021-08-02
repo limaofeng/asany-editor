@@ -16,9 +16,7 @@ export default function reducer(
   if (action.type == UIToolbarActionType.ToolbarUnSelect) {
     return {
       ...state,
-      activeKeys: state.activeKeys.filter(
-        (item) => !action.payload.includes(item)
-      ),
+      activeKeys: state.activeKeys.filter((item) => !action.payload.includes(item)),
     };
   }
   if (action.type == UIToolbarActionType.SetToolbar) {

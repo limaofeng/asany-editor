@@ -32,18 +32,8 @@ const DsignAutoLayout = () => {
           },
         ]}
       />
-      <ScrubbableControl
-        className="spacing-between-items"
-        format={inputFormat}
-        value={0}
-        icon="VectorSpacing"
-      />
-      <ScrubbableControl
-        className="padding-around-items"
-        format={inputFormat}
-        value={0}
-        icon="VectorPadding"
-      />
+      <ScrubbableControl className="spacing-between-items" format={inputFormat} value={0} icon="VectorSpacing" />
+      <ScrubbableControl className="padding-around-items" format={inputFormat} value={0} icon="VectorPadding" />
       <IconButton
         ref={ref}
         className={classnames('alignment-and-padding', { active: visible })}

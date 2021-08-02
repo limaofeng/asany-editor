@@ -51,31 +51,16 @@ export interface ISettings {
   next: (title: string, content: React.ReactElement) => void;
 }
 
-function PropertiesPanel(
-  props: PropertiesPanelProps,
-  ref: React.ForwardedRef<ISettings>
-) {
+function PropertiesPanel(props: PropertiesPanelProps, ref: React.ForwardedRef<ISettings>) {
   const container = useRef<HTMLDivElement>(null);
-  const {
-    onClose,
-    title,
-    children,
-    extras = [],
-    content,
-    style,
-    className,
-    tabs = [],
-    footer,
-  } = props;
+  const { onClose, title, children, extras = [], content, style, className, tabs = [], footer } = props;
   const state = useRef<PropertiesPanelState>({
     next: false,
     nextIndex: -1,
     panels: extras,
   });
   const [, forceRender] = useReducer((s) => s + 1, 0);
-  const [activeKey, setActiveKey] = useState<string | undefined>(
-    tabs.length ? tabs[0].id || tabs[0].title : undefined
-  );
+  const [activeKey, setActiveKey] = useState<string | undefined>(tabs.length ? tabs[0].id || tabs[0].title : undefined);
   const handleOpenNextPanel = useCallback(
     (index: number) => () => {
       state.current.nextIndex = index;
@@ -140,11 +125,7 @@ function PropertiesPanel(
   const { nextIndex, panels } = state.current;
   const hasNextPanel = nextIndex != -1;
   return (
-    <div
-      ref={container}
-      className={classnames('settings-menu-container', className)}
-      style={style}
-    >
+    <div ref={container} className={classnames('settings-menu-container', className)} style={style}>
       <div id="entry-controls">
         <div
           className={classnames('settings-menu settings-menu-pane', {
@@ -164,11 +145,7 @@ function PropertiesPanel(
               }
             >
               {tabs.map((item) => (
-                <Tabs.TabPane
-                  animated={false}
-                  tab={item.title}
-                  key={item.id || item.title}
-                >
+                <Tabs.TabPane animated={false} tab={item.title} key={item.id || item.title}>
                   {item.content}
                 </Tabs.TabPane>
               ))}
@@ -201,12 +178,7 @@ function PropertiesPanel(
                         </li>,
                       ];
                       if (i !== extras.length - 1) {
-                        lis.push(
-                          <li
-                            key={String(`${i}-${title}-divider`)}
-                            className="divider"
-                          />
-                        );
+                        lis.push(<li key={String(`${i}-${title}-divider`)} className="divider" />);
                       }
                       return lis;
                     })}
@@ -227,10 +199,7 @@ function PropertiesPanel(
           >
             <div className="ember-view active">
               <div className="settings-menu-header subview">
-                <button
-                  className="back settings-menu-header-action"
-                  onClick={handleCloseNextPanel}
-                >
+                <button className="back settings-menu-header-action" onClick={handleCloseNextPanel}>
                   {/* <LeftOutlined /> */}
                 </button>
                 <h4>{title}</h4>

@@ -5,9 +5,7 @@ import { IUIScenaMoveableState } from '../typings';
 import Memory from './Memory';
 import { getId } from './utils';
 
-export default class MoveableData
-  extends MoveableHelper
-  implements IUIScenaMoveableState {
+export default class MoveableData extends MoveableHelper implements IUIScenaMoveableState {
   private _selectedTargets: Array<HTMLElement | SVGElement> = [];
   constructor(private memory: Memory) {
     super({
@@ -74,9 +72,7 @@ export default class MoveableData
     const memory = this.memory;
 
     if (!frames.length) {
-      return properties.map(
-        (property, i) => memory.get(property.join('///')) || defaultValues[i]
-      );
+      return properties.map((property, i) => memory.get(property.join('///')) || defaultValues[i]);
     }
 
     return properties.map((property, i) => {

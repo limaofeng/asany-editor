@@ -25,11 +25,7 @@ const buildClick = (editor: IAsanyEditor, item: AsanyTool): ToolClick => {
   const onClick = item.onClick;
   return (e: any) => {
     e.stopPropagation();
-    if (
-      !item.isSelected!(
-        item.useSelector ? item.useSelector(editor.state) : undefined
-      )
-    ) {
+    if (!item.isSelected!(item.useSelector ? item.useSelector(editor.state) : undefined)) {
       item.deselect = onClick && onClick(editor);
     } else {
       item.deselect ? item.deselect(editor) : editor.sidebar.close();

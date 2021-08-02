@@ -65,9 +65,7 @@ interface ComponentIDProps {
 function ComponentID({ onChange, value, versions }: ComponentIDProps) {
   const point = value ? value.lastIndexOf('.') : 0;
   const group = value ? value.substring(0, point) : '';
-  const [artifact, version = 'letest'] = value
-    ? value.substr(point + 1).split(':')
-    : ['', 'letest'];
+  const [artifact, version = 'letest'] = value ? value.substr(point + 1).split(':') : ['', 'letest'];
   const [state, setState] = useState({
     group,
     artifact,
@@ -108,13 +106,7 @@ function ComponentID({ onChange, value, versions }: ComponentIDProps) {
     onChange(`${state.group}.${state.artifact}:${state.version}`);
   };
 
-  return (
-    <ConfigurationPanel
-      customizer={customizer.current}
-      value={state}
-      onChange={handleChange}
-    />
-  );
+  return <ConfigurationPanel customizer={customizer.current} value={state} onChange={handleChange} />;
 }
 
 export default ComponentID;

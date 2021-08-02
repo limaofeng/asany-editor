@@ -17,14 +17,7 @@ interface RulerProps {
 }
 
 function Ruler(props: RulerProps) {
-  const {
-    zoom,
-    scrollY = 0,
-    scrollX = 0,
-    onResetScroll,
-    onGuides,
-    offsetLeft: offsetleft,
-  } = props;
+  const { zoom, scrollY = 0, scrollX = 0, onResetScroll, onGuides, offsetLeft: offsetleft } = props;
 
   const box = useRef<HTMLDivElement>(null);
   const horizontal = useRef<Guides>(null);
@@ -96,11 +89,7 @@ function Ruler(props: RulerProps) {
           onChangeGuides={handleChangeGuides('horizontal')}
         />
       </div>
-      <div
-        className="ruler vertical"
-        style={{ left: offsetleft }}
-        onClick={handleClick}
-      >
+      <div className="ruler vertical" style={{ left: offsetleft }} onClick={handleClick}>
         <Guides
           ref={vertical}
           type="vertical"
@@ -118,12 +107,7 @@ function Ruler(props: RulerProps) {
           onChangeGuides={handleChangeGuides('vertical')}
         />
       </div>
-      <div
-        ref={box}
-        className="box"
-        style={{ left: offsetleft }}
-        onClick={handleRulerReset}
-      />
+      <div ref={box} className="box" style={{ left: offsetleft }} onClick={handleRulerReset} />
     </>
   );
 }

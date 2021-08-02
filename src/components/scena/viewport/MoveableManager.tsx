@@ -1,12 +1,5 @@
 import React, { useRef, useCallback, useEffect } from 'react';
-import Moveable, {
-  OnResize,
-  OnClick,
-  OnDragStart,
-  OnDrag,
-  OnDragEnd,
-  OnClickGroup,
-} from 'react-moveable';
+import Moveable, { OnResize, OnClick, OnDragStart, OnDrag, OnDragEnd, OnClickGroup } from 'react-moveable';
 // import MoveableData from '../../../utils/MoveableData';
 // import Memory from '../../../utils/Memory';
 // interface MoveableManagerProps {

@@ -2,14 +2,7 @@ import Icon from '@asany/icons';
 import { registerComponent } from '@asany/library-manager';
 import { Popover } from 'antd';
 import classnames from 'classnames';
-import React, {
-  ComponentType,
-  memo,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { ComponentType, memo, useCallback, useEffect, useRef, useState } from 'react';
 import { useClickAway } from 'react-use';
 
 export interface SelectOption {
@@ -27,15 +20,10 @@ type ElementType = string | React.ReactElement<any>;
 type Compare = (value: string, option: SelectOption) => boolean;
 
 interface SelectProps {
-  popover?: React.ForwardRefExoticComponent<
-    SelectPopoverProps & React.RefAttributes<unknown>
-  >;
+  popover?: React.ForwardRefExoticComponent<SelectPopoverProps & React.RefAttributes<unknown>>;
   popoverClassName?: string;
   className?: string;
-  getOption?: (
-    options: (SelectOption | SelectOptionGroup)[],
-    value: string
-  ) => SelectOption;
+  getOption?: (options: (SelectOption | SelectOptionGroup)[], value: string) => SelectOption;
   placeholder?: string;
   resultType?: 'object' | 'string';
   options?: (SelectOption | SelectOptionGroup)[];
@@ -65,10 +53,9 @@ export interface SelectPopoverProps {
   compare: OptionCompare;
 }
 
-const renderSelectOption = (
-  compare: OptionCompare,
-  onChange: (option: SelectOption) => void
-) => (option: SelectOption | SelectOptionGroup) => {
+const renderSelectOption = (compare: OptionCompare, onChange: (option: SelectOption) => void) => (
+  option: SelectOption | SelectOptionGroup
+) => {
   const { label } = option;
   if (option.hasOwnProperty('value')) {
     const item = option as SelectOption;
@@ -76,14 +63,8 @@ const renderSelectOption = (
       onChange(item.value as any);
     };
     return (
-      <li
-        className="asayneditor-select-option"
-        key={item.value}
-        onClick={handleClick}
-      >
-        <span className="left-icon">
-          {compare(item) && <Icon name="VectorCorrect" />}
-        </span>
+      <li className="asayneditor-select-option" key={item.value} onClick={handleClick}>
+        <span className="left-icon">{compare(item) && <Icon name="VectorCorrect" />}</span>
         <span className="center-text">{item.label}</span>
       </li>
     );
@@ -109,9 +90,7 @@ const SelectModal = React.memo((props: SelectPopoverProps) => {
 
   return (
     <div ref={ref}>
-      <ul className="dsign-list">
-        {options.map(renderSelectOption(compare, onChange))}
-      </ul>
+      <ul className="dsign-list">{options.map(renderSelectOption(compare, onChange))}</ul>
     </div>
   );
 });
@@ -218,10 +197,7 @@ const Select = (props: SelectProps) => {
         offset: [0, -32],
       }}
       arrowPointAtCenter={false}
-      overlayClassName={classnames(
-        'asanyeditor-dsign-popover',
-        popoverClassName
-      )}
+      overlayClassName={classnames('asanyeditor-dsign-popover', popoverClassName)}
       content={popoverContent}
       transitionName=""
     >
@@ -233,9 +209,7 @@ const Select = (props: SelectProps) => {
         onClick={handleClick}
       >
         {icon && renderIcon(icon)}
-        <div className="select-title">
-          {renderTitle(getOption(options, value!), placeholder)}
-        </div>
+        <div className="select-title">{renderTitle(getOption(options, value!), placeholder)}</div>
         <div className="indicator">
           <Icon name="DownArrow" />
         </div>

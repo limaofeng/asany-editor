@@ -35,9 +35,7 @@ export default class SidebarHelperImpl implements SidebarHelper {
   select(key: string, toolboard?: boolean) {
     const tools = this.tools();
     const item = tools.find((item) => item.id === key);
-    const mutexs = item!.mutex
-      ? tools.filter((t) => t.mutex === item!.mutex)
-      : [];
+    const mutexs = item!.mutex ? tools.filter((t) => t.mutex === item!.mutex) : [];
 
     if (mutexs.length) {
       this.unselect(...mutexs.map((item) => item.id));
@@ -63,12 +61,7 @@ export default class SidebarHelperImpl implements SidebarHelper {
   next(title: string, content: ComponentType<any>): void;
   next(title: string, content: ComponentType<any>, width?: number): void;
   next(index: number, content: ComponentType<any>, width?: number): void;
-  next(
-    index: number,
-    title: string,
-    content: ComponentType<any>,
-    width?: number
-  ): void;
+  next(index: number, title: string, content: ComponentType<any>, width?: number): void;
   next(index: any, title?: any, content?: any, width?: any) {
     const toolboard = this.editor.state.ui.sidebar.control!.current!;
     if (typeof index === 'number') {
@@ -77,10 +70,7 @@ export default class SidebarHelperImpl implements SidebarHelper {
       } else {
         toolboard.next(index, title, content, width || 250);
       }
-    } else if (
-      typeof index === 'function' ||
-      (index.prototype && index.prototype.isReactComponent)
-    ) {
+    } else if (typeof index === 'function' || (index.prototype && index.prototype.isReactComponent)) {
       toolboard.next(-1, undefined, index, title || 250);
     } else {
       toolboard.next(-1, index, title, content || 250);
@@ -94,9 +84,7 @@ export default class SidebarHelperImpl implements SidebarHelper {
   }
 
   async close(index?: number) {
-    this.editor.state.ui.sidebar.control!.current!.close(
-      typeof index === 'number' ? index : undefined
-    );
+    this.editor.state.ui.sidebar.control!.current!.close(typeof index === 'number' ? index : undefined);
   }
 
   back(): void {

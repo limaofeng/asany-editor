@@ -32,10 +32,7 @@ function crbc(component: ComponentType<any>, props: any = {}, name?: string) {
   return { name, component: component || EmptyRenderer, props };
 }
 
-export function getDefaultRenderer(
-  library: string,
-  item: IComponentProperty
-): ComponentPropertyRendererSetting {
+export function getDefaultRenderer(library: string, item: IComponentProperty): ComponentPropertyRendererSetting {
   switch (item.type) {
     case ComponentPropertyType.Integer:
       return cr(`${library}.InputNumber`);
@@ -60,10 +57,7 @@ export function getDefaultRenderer(
   }
 }
 
-function getBasisRenderer(
-  library: string,
-  item: IComponentProperty
-): ComponentPropertyRenderer {
+function getBasisRenderer(library: string, item: IComponentProperty): ComponentPropertyRenderer {
   if (!item.renderer) {
     return getDefaultRenderer(library, item);
   }
@@ -89,9 +83,7 @@ function getBasisRenderer(
   }
   if (typeof item.renderer['component'] === 'string') {
     if (item.renderer['props']) {
-      const { component, name } = cr(
-        `${library}.${item.renderer['component']}`
-      );
+      const { component, name } = cr(`${library}.${item.renderer['component']}`);
       return crbc(component, item.renderer['props'], name);
     }
     return cr(`${library}.${item.renderer['component']}`);
@@ -99,10 +91,7 @@ function getBasisRenderer(
   return crbc(item.renderer['component'] as any, item.renderer['props']);
 }
 
-export function getRenderer(
-  library: string,
-  item: IComponentProperty
-): ComponentPropertyRenderer {
+export function getRenderer(library: string, item: IComponentProperty): ComponentPropertyRenderer {
   const render = getBasisRenderer(library, item);
   if (item.wrappers) {
     if ((item as any).wrapperRender) {

@@ -13,10 +13,7 @@ const scales = [20, 25, 33, 50, 66, 100, 150, 200, 300, 400, 500, 800, 1000];
 const minScale = scales[0];
 const maxScale = scales[scales.length - 1];
 
-export function calculateScaling(
-  zoom: number,
-  type: 'out' | 'in' | 'change' = 'change'
-) {
+export function calculateScaling(zoom: number, type: 'out' | 'in' | 'change' = 'change') {
   let newZoom = zoom;
   if (type == 'out') {
     newZoom = [...scales].reverse().find((item) => item < newZoom) || newZoom;
@@ -63,10 +60,7 @@ export function reducer(
     setTimeout(dispatchWindowResize, 10);
     return { ...state, screen: action.payload };
   }
-  if (
-    action.type === UIScenaGlobalActionType.CanvasZoom &&
-    action.payload !== state.zoom
-  ) {
+  if (action.type === UIScenaGlobalActionType.CanvasZoom && action.payload !== state.zoom) {
     return {
       ...state,
       zoom: calculateScaling(action.payload * 100) / 100,

@@ -1,10 +1,4 @@
-import {
-  AsanyTool,
-  DeviceScreen,
-  IAsanyEditor,
-  IUIScenaState,
-  ScenaHelper,
-} from '../typings';
+import { AsanyTool, DeviceScreen, IAsanyEditor, IUIScenaState, ScenaHelper } from '../typings';
 import { sleep } from '../utils';
 import { getScena } from '../utils/plugin';
 import devices from '../assets/devices';
@@ -29,9 +23,7 @@ class ScenaHelperImpl implements ScenaHelper {
     select: (key: string) => {
       const tools = this.editor.state.ui.scena.toolbar.tools;
       const item = tools.find((item) => item.id === key);
-      const mutexs = item!.mutex
-        ? tools.filter((t) => t.mutex === item!.mutex)
-        : [];
+      const mutexs = item!.mutex ? tools.filter((t) => t.mutex === item!.mutex) : [];
 
       if (mutexs.length) {
         this.toolbar.unselect(...mutexs.map((item) => item.id));

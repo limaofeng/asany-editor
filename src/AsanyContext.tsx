@@ -1,14 +1,10 @@
-import { debounce } from 'lodash-es';
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useReducer,
-  useState,
-} from 'react';
+import React, { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
 
-import { useDeepCompareEffect } from './utils';
 import sketchReducer, { defaultValue } from './reducers';
+import { ActionType } from './reducers/actions';
+import { useDeepCompareEffect } from './utils';
+import { getReducers } from './utils/plugin';
+
 import type {
   AsanyAction,
   AsanyProject,
@@ -18,9 +14,6 @@ import type {
   IBlockData,
   IComponentData,
 } from './typings';
-import { getReducers } from './utils/plugin';
-import { ActionType } from './reducers/actions';
-
 type UnsubscribeFunc = () => void;
 
 type SubscribeCallback = () => void;
@@ -38,9 +31,7 @@ export type IAsanyStoreContext<D> = {
 /**
  * 创建Content状态
  */
-export const AsanyContext = React.createContext<IAsanyStoreContext<any>>(
-  [] as any
-);
+export const AsanyContext = React.createContext<IAsanyStoreContext<any>>([] as any);
 
 export interface AsanyProviderProps {
   children: JSX.Element;
@@ -50,10 +41,7 @@ export interface AsanyProviderProps {
   version?: number;
 }
 
-function useStore(
-  mode: AsanyProviderMode,
-  plugins: EditorPlugin[] = []
-): IAsanyStoreContext<any> {
+function useStore(mode: AsanyProviderMode, plugins: EditorPlugin[] = []): IAsanyStoreContext<any> {
   const [state, dispatch] = useReducer<React.ReducerWithoutAction<IAsanyState>>(
     sketchReducer as any,
     defaultValue(mode, plugins)
@@ -74,14 +62,11 @@ function useStore(
     [listeners]
   );
   // TODO 后期需要优化，解决由于 hover 导致的频繁触发
-  const handleDispatchSubscribe = useCallback(
-    debounce(() => {
-      for (const listener of listeners) {
-        listener();
-      }
-    }),
-    [listeners]
-  );
+  const handleDispatchSubscribe = useCallback(() => {
+    for (const listener of listeners) {
+      listener();
+    }
+  }, [listeners]);
 
   const initStore = {
     getState: () => state,
@@ -130,11 +115,7 @@ export const AsanyProvider = (props: AsanyProviderProps) => {
   }, [data]);
   // TODO 是否应该提供一个机制，用于检测 store 是否数据完成加载
   return useMemo(
-    () => (
-      <AsanyContext.Provider value={store}>
-        {store.getState().isReady && children}
-      </AsanyContext.Provider>
-    ),
+    () => <AsanyContext.Provider value={store}>{store.getState().isReady && children}</AsanyContext.Provider>,
     [version, store.getState().isReady]
   );
 };

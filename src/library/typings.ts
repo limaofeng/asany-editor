@@ -74,11 +74,7 @@ export type ComponentPropertyRendererSetting = {
   props: { [key: string]: any };
 };
 
-export type ComponentPropertyRenderer =
-  | string
-  | FC<any>
-  | ComponentPropertyRendererSetting
-  | any;
+export type ComponentPropertyRenderer = string | FC<any> | ComponentPropertyRendererSetting | any;
 
 export type VisibleFunc = (props: any) => boolean;
 

@@ -1,10 +1,7 @@
 import { EventEmitter } from 'events';
 import { isEqual } from 'lodash-es';
 
-type CallbackFunc = (
-  value: any,
-  prevValue: any
-) => void | boolean | Promise<void>;
+type CallbackFunc = (value: any, prevValue: any) => void | boolean | Promise<void>;
 
 class BlockObserver<T> {
   private key: string;
@@ -29,12 +26,7 @@ class BlockObserver<T> {
     for (var key of Object.keys(values || {})) {
       if (!isEqual(this.values[key], values[key])) {
         if (!this.eventEmitter.eventNames().includes(key)) {
-          console.warn(
-            this.key,
-            'key = ',
-            key,
-            '在 customizer.fields 中未声明!'
-          );
+          console.warn(this.key, 'key = ', key, '在 customizer.fields 中未声明!');
         }
         if (this.eventEmitter.emit(key, values[key], this.values[key])) {
           this.values[key] = values[key];
@@ -44,9 +36,7 @@ class BlockObserver<T> {
   }
 
   clear() {
-    this.eventEmitter
-      .eventNames()
-      .forEach(this.eventEmitter.removeAllListeners.bind(this.eventEmitter));
+    this.eventEmitter.eventNames().forEach(this.eventEmitter.removeAllListeners.bind(this.eventEmitter));
   }
 }
 

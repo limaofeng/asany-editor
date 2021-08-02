@@ -1,9 +1,4 @@
-import type {
-  AsanyAction,
-  AsanyProviderMode,
-  EditorPlugin,
-  IAsanyState,
-} from '../typings';
+import type { AsanyAction, AsanyProviderMode, EditorPlugin, IAsanyState } from '../typings';
 import { getFeatures, getScena, getSidebar, getToolbar } from '../utils/plugin';
 import { ActionType, GlobalAsanyAction, ProjectActionType } from './actions';
 import featureReducer from './features.reducer';
@@ -13,10 +8,7 @@ import { combineReducers } from './thunk';
 import uiReducer from './ui.reducer';
 import workspaceReducer from './workspace.reducer';
 
-export const defaultReducer = (
-  state: IAsanyState,
-  action: AsanyAction<GlobalAsanyAction>
-): any => {
+export const defaultReducer = (state: IAsanyState, action: AsanyAction<GlobalAsanyAction>): any => {
   if (action.type === GlobalAsanyAction.Init) {
     state.isReady = true;
   }
@@ -40,10 +32,7 @@ const reducers = combineReducers(
   defaultReducer
 );
 
-export const defaultValue = (
-  mode: AsanyProviderMode,
-  plugins: EditorPlugin[]
-): IAsanyState => {
+export const defaultValue = (mode: AsanyProviderMode, plugins: EditorPlugin[]): IAsanyState => {
   return {
     isReady: false,
     mode,

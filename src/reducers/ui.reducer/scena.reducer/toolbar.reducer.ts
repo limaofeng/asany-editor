@@ -20,9 +20,7 @@ export default function reducer(
   if (action.type == UIScenaToolbarActionType.ScenaToolbarUnSelect) {
     return {
       ...state,
-      activeKeys: state.activeKeys.filter(
-        (item) => !action.payload.includes(item)
-      ),
+      activeKeys: state.activeKeys.filter((item) => !action.payload.includes(item)),
     };
   }
   if (action.type == UIScenaToolbarActionType.ScenaSetToolbar) {

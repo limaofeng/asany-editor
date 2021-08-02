@@ -4,20 +4,12 @@ import { combineReducers } from '../reducers/thunk';
 
 import type { AsanyProjectType, IAsanyState } from '../typings';
 
-export const getPlugins = (
-  state: IAsanyState,
-  projectType: AsanyProjectType
-) => {
-  const allPlugins = Object.keys(state.plugins).map(
-    (key) => state.plugins[key]
-  );
+export const getPlugins = (state: IAsanyState, projectType: AsanyProjectType) => {
+  const allPlugins = Object.keys(state.plugins).map((key) => state.plugins[key]);
   return allPlugins.filter((plugin) => plugin.types.includes(projectType));
 };
 
-export const getReducers = (
-  state: IAsanyState,
-  projectType: AsanyProjectType
-) => {
+export const getReducers = (state: IAsanyState, projectType: AsanyProjectType) => {
   const plugins = getPlugins(state, projectType);
   const reducers = plugins
     .filter((p) => !!p.reducer)

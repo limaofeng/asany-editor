@@ -64,20 +64,11 @@ function Toolboard(props: ToolboardProps, ref: React.ForwardedRef<IToolboard>) {
   };
 
   const handleOpen = useCallback(
-    async (
-      index: number,
-      title: string,
-      content: ComponentType,
-      width: number,
-      key?: string
-    ) => {
+    async (index: number, title: string, content: ComponentType, width: number, key?: string) => {
       const originalIndex = state.current.index;
       key = state.current.activeKey = key || state.current.activeKey!;
-      const panels = state.current.panels[key]
-        ? state.current.panels[key]
-        : (state.current.panels[key] = []);
-      const currentIndex =
-        index == -1 ? originalIndex + 1 : Math.min(index, originalIndex + 1);
+      const panels = state.current.panels[key] ? state.current.panels[key] : (state.current.panels[key] = []);
+      const currentIndex = index == -1 ? originalIndex + 1 : Math.min(index, originalIndex + 1);
       if (originalIndex > currentIndex) {
         handleClose(currentIndex + 1);
       }
@@ -137,12 +128,7 @@ function Toolboard(props: ToolboardProps, ref: React.ForwardedRef<IToolboard>) {
       open(key: string, title: string, content: ComponentType) {
         handleOpen(0, title, content, 250, key);
       },
-      next(
-        index: number,
-        title: string,
-        content: ComponentType,
-        width: number
-      ) {
+      next(index: number, title: string, content: ComponentType, width: number) {
         handleOpen(index, title, content, width);
       },
       reopen(key: string) {
@@ -189,9 +175,7 @@ function Toolboard(props: ToolboardProps, ref: React.ForwardedRef<IToolboard>) {
       return 0;
     }
     const collapsedStartIndex = state.current.index + 1;
-    return -panels
-      .slice(collapsedStartIndex, index)
-      .reduce((location, item) => location + item.width, 0);
+    return -panels.slice(collapsedStartIndex, index).reduce((location, item) => location + item.width, 0);
   };
   const getLeft = (panels: Panel[], index: number): number => {
     if (index == 0) {

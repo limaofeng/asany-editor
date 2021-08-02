@@ -24,13 +24,7 @@ import useEditor from './useEditor';
 import useSelector from './useSelector';
 
 // import { IComponentProperty } from '../../library-manager/typings';
-import type {
-  IBlockData,
-  IBlockDataProps,
-  IBlockOptions,
-  IComponentProperty,
-  ICustomizer,
-} from '../typings';
+import type { IBlockData, IBlockDataProps, IBlockOptions, IComponentProperty, ICustomizer } from '../typings';
 import { BlockActionType, WorkspaceActionType } from '../reducers/actions';
 // import { MoveableOptions } from 'moveable';
 export interface IBlockContext {
@@ -42,28 +36,12 @@ export const BlockContext = React.createContext<IBlockContext>({
 });
 
 // TODO 会导致不能刷新 / 或者频繁刷新
-const buildBlockProvider = (
-  blockKey: string,
-  cache: React.RefObject<IUseBlock<any>>
-) => {
+const buildBlockProvider = (blockKey: string, cache: React.RefObject<IUseBlock<any>>) => {
   const keys = blockKey.split('/');
   const lastKey = keys[keys.length - 1];
   return React.forwardRef(
-    (
-      {
-        style,
-        children,
-        deps,
-        clickable,
-        onClick: exitOnClick,
-        className,
-        ...props
-      }: IBlockProviderProps,
-      ref
-    ) => {
-      const disabled = useSelector(
-        (state) => !!(state.mode === 'VIEW' || !state.features.block)
-      );
+    ({ style, children, deps, clickable, onClick: exitOnClick, className, ...props }: IBlockProviderProps, ref) => {
+      const disabled = useSelector((state) => !!(state.mode === 'VIEW' || !state.features.block));
       const context = useRef({ parentBlockKey: blockKey });
       return useMemo(
         () => {
@@ -140,10 +118,7 @@ function buildListeners(
 ) {
   observer.clear();
   const fields = customizer.fields || [];
-  const general =
-    options.draggable || options.resizable
-      ? [{ name: 'frame' } as IComponentProperty]
-      : [];
+  const general = options.draggable || options.resizable ? [{ name: 'frame' } as IComponentProperty] : [];
   for (const field of [...fields, ...general]) {
     const { before, convert, after } = field.hooks || {};
     observer.on(field.name, async (value: any) => {
@@ -198,9 +173,7 @@ export function useBlockContext(key: string) {
 }
 
 // {}: /*areas = ['hover', 'active'], moveable: moveableOptions*/
-export default function useBlock<T extends IBlockDataProps>(
-  origin: IBlockOptions<T>
-): IUseBlock<T> {
+export default function useBlock<T extends IBlockDataProps>(origin: IBlockOptions<T>): IUseBlock<T> {
   // 初始化状态 - 向 Sketch 注册之后标示为 true
   const editor = useEditor();
   const initialized = useRef(false);
@@ -216,13 +189,9 @@ export default function useBlock<T extends IBlockDataProps>(
   // 创建 BlockProvider，组合 useBlockContext 使用
   const Provider = useRef(buildBlockProvider(data.key, cacheResult));
   // 通过 customizer.fields 及 data.props 生成配置默认数据
-  const props = useRef<any>(
-    initialize(data.customizer?.fields || [], { ...data.props })
-  );
+  const props = useRef<any>(initialize(data.customizer?.fields || [], { ...data.props }));
   // 监听 store 中对应 block 的值变化, 即下面的 values 变量
-  const observer = useRef<BlockObserver<T>>(
-    new BlockObserver(data.key, emitter.current)
-  );
+  const observer = useRef<BlockObserver<T>>(new BlockObserver(data.key, emitter.current));
   // 是否显示选框
   const isMoveable = useRef<boolean>(false);
   const handleScenaClick = useSelector((state) => state.ui.scena.onClick);
@@ -231,14 +200,9 @@ export default function useBlock<T extends IBlockDataProps>(
 
   // const client = useApolloClient();
   const [version, forceRender] = useReducer((s) => s + 1, 0);
-  const disabled = useSelector(
-    (state) => state.mode === 'VIEW' || !state.features.block
-  );
+  const disabled = useSelector((state) => state.mode === 'VIEW' || !state.features.block);
   const values = useSelector(
-    (state) =>
-      state.workspace.block.blocks.find(
-        ({ key: itemKey }) => itemKey === data.key
-      )?.props,
+    (state) => state.workspace.block.blocks.find(({ key: itemKey }) => itemKey === data.key)?.props,
     isEqual
   );
 
@@ -298,11 +262,7 @@ export default function useBlock<T extends IBlockDataProps>(
         return;
       }
       // TODO 如果为 moveable 事件，不触发 SelectedBlock 逻辑
-      if (
-        e &&
-        (e.target as any).className.includes &&
-        (e.target as any).className.includes('moveable-control')
-      ) {
+      if (e && (e.target as any).className.includes && (e.target as any).className.includes('moveable-control')) {
         return;
       }
       handleScenaClick &&
@@ -402,18 +362,12 @@ export default function useBlock<T extends IBlockDataProps>(
     if (data.customizer?.dynamic) {
       return;
     }
-    buildListeners(
-      observer.current,
-      data.customizer!,
-      props.current,
-      forceRender,
-      {
-        // client,
-        onChange: handleChange,
-        resizable: !!data.options?.resizable,
-        draggable: !!data.options?.draggable,
-      }
-    );
+    buildListeners(observer.current, data.customizer!, props.current, forceRender, {
+      // client,
+      onChange: handleChange,
+      resizable: !!data.options?.resizable,
+      draggable: !!data.options?.draggable,
+    });
     observer.current.observe(values);
     forceRender();
   }, []);
@@ -429,18 +383,12 @@ export default function useBlock<T extends IBlockDataProps>(
         payload: data,
       });
     }
-    buildListeners(
-      observer.current,
-      data.customizer!,
-      props.current,
-      forceRender,
-      {
-        // client,
-        onChange: handleChange,
-        resizable: !!data.options?.resizable,
-        draggable: !!data.options?.draggable,
-      }
-    );
+    buildListeners(observer.current, data.customizer!, props.current, forceRender, {
+      // client,
+      onChange: handleChange,
+      resizable: !!data.options?.resizable,
+      draggable: !!data.options?.draggable,
+    });
     // TODO: 可能会存在 318 行类似的 BUG
   }, [origin.customizer]);
 

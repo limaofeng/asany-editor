@@ -1,12 +1,5 @@
 import MoveableHelper from 'moveable-helper';
-import {
-  OnDrag,
-  OnDragEnd,
-  OnDragStart,
-  OnResize,
-  OnResizeEnd,
-  OnResizeStart,
-} from 'react-moveable';
+import { OnDrag, OnDragEnd, OnDragStart, OnResize, OnResizeEnd, OnResizeStart } from 'react-moveable';
 import { EventEmitter } from 'events';
 import { Frame } from 'scenejs';
 
@@ -47,9 +40,7 @@ export default class MoveableState extends MoveableHelper {
     return elements.length === 1 ? !!elements[0].resizable : false;
   }
   get elements(): MoveableElement[] {
-    return this._selectedTargetKeys.map((item) =>
-      this._elements.get(item)
-    ) as MoveableElement[];
+    return this._selectedTargetKeys.map((item) => this._elements.get(item)) as MoveableElement[];
   }
   get enable(): boolean {
     return this._enable;
@@ -83,9 +74,7 @@ export default class MoveableState extends MoveableHelper {
   getHTMLElements(keys: string[]): HTMLElement[] {
     return keys
       .filter((item) => item)
-      .map((key) =>
-        this._elements.has(key) ? this._elements.get(key)!.element : null
-      )
+      .map((key) => (this._elements.has(key) ? this._elements.get(key)!.element : null))
       .map((item) => item?.current) as HTMLElement[];
   }
   public setProperty(names: string[], value: any) {
@@ -122,9 +111,7 @@ export default class MoveableState extends MoveableHelper {
     const memory = this.memory;
 
     if (!frames.length) {
-      return properties.map(
-        (property, i) => memory.get(property.join('///')) || defaultValues[i]
-      );
+      return properties.map((property, i) => memory.get(property.join('///')) || defaultValues[i]);
     }
 
     return properties.map((property, i) => {
@@ -134,9 +121,7 @@ export default class MoveableState extends MoveableHelper {
     });
   }
   private get(target: HTMLElement | SVGElement) {
-    return Array.from(this._elements.values()).find(
-      (ele) => ele.element.current === target
-    );
+    return Array.from(this._elements.values()).find((ele) => ele.element.current === target);
   }
   onResizeStart = (e: OnResizeStart) => {
     e.dragStart && this.onDragStart(e.dragStart);
@@ -149,13 +134,8 @@ export default class MoveableState extends MoveableHelper {
     _super.testRender(e.target);
     this.get(e.target)?.emitter.emit('resize.resizing', e);
   };
-  public render = (
-    target: HTMLElement | SVGElement,
-    frame: Frame = this.getFrame(target)
-  ) => {
-    const element = Array.from(this._elements.values()).find(
-      (ele) => ele.element.current === target
-    );
+  public render = (target: HTMLElement | SVGElement, frame: Frame = this.getFrame(target)) => {
+    const element = Array.from(this._elements.values()).find((ele) => ele.element.current === target);
     if (element && element.render) {
       element.render(target, frame);
     } else {

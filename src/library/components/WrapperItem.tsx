@@ -9,11 +9,7 @@ import { IMultipleWrapperData } from './MultipleWrapper';
 
 export const SortableHandler = () => {
   return (
-    <span
-      role="img"
-      aria-label="sortable-handler-icon"
-      className="anticon sortable-handler-icon"
-    >
+    <span role="img" aria-label="sortable-handler-icon" className="anticon sortable-handler-icon">
       <svg
         fill="currentColor"
         preserveAspectRatio="xMidYMid meet"
@@ -69,9 +65,7 @@ function WrapperItem(props: WrapperItemProps) {
     nameLink,
   } = props;
 
-  const handleChange = (key: string) => (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleChange = (key: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange({ ...data, [key]: event.target.value || ' ' });
   };
 
@@ -101,11 +95,7 @@ function WrapperItem(props: WrapperItemProps) {
           </a>
         )}
         {canDelete && data.isPreset ? (
-          <Checkbox
-            style={{ marginLeft: '6px' }}
-            checked={!data.isDelete}
-            onClick={onDelete}
-          />
+          <Checkbox style={{ marginLeft: '6px' }} checked={!data.isDelete} onClick={onDelete} />
         ) : (
           <a onClick={onDelete}>
             <CloseOutlined />

@@ -1,5 +1,5 @@
 *.log
-.DS_Store
+storybook-static
 node_modules
 .cache
 dist

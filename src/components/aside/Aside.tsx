@@ -1,23 +1,20 @@
 // import { Cascader } from 'antd';
+import './components/data-entry';
+
 import { assign, isEqual } from 'lodash-es';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+
+import { useDispatch, useSelector } from '../../hooks';
+import { UIActionType } from '../../reducers/actions';
+import { ComponentPropertyType, father, IComponentProperty } from '../../typings';
+import { useDebounce, visibleFilter } from '../../utils';
+import ConfigurationToolbar from './ConfigurationToolbar';
+import Settings, { ISettings, TabPane } from './PropertiesPanel';
 
 // import { visibleFilter } from '../../../library-manager/ConfigurationPanel';
 // import LibraryManager from '../../../library-manager/LibraryManager';
 // import { ComponentPropertyType, IComponentProperty } from '../../../library-manager/typings';
-import { useDebounce, visibleFilter } from '../../utils';
-import { useDispatch, useSelector } from '../../hooks';
-import { UIActionType } from '../../reducers/actions';
-import {
-  ComponentPropertyType,
-  father,
-  IComponentProperty,
-} from '../../typings';
-import Settings, { ISettings, TabPane } from './PropertiesPanel';
-import * as DataEntrys from './components/data-entry';
-import ConfigurationToolbar from './ConfigurationToolbar';
-
-console.warn('📦 打包时, connect 逻辑会失效 TODO 临时解决方案', DataEntrys);
+// console.warn('📦 打包时, connect 逻辑会失效 TODO 临时解决方案', DataEntrys);
 
 interface AsideProps {}
 
@@ -125,9 +122,7 @@ function Aside(_: AsideProps) {
   const current = useSelector((state) => state.current);
   const externalTabs = useSelector((state) => state.ui.aside.tabs);
   const options = useSelector((state) => state.ui.aside.options || {}, isEqual);
-  const scenaToolbarVisible = useSelector(
-    (state) => state.ui.scena.toolbar.visible
-  );
+  const scenaToolbarVisible = useSelector((state) => state.ui.scena.toolbar.visible);
   const value = useSelector((state) => state.current?.value || {}, isEqual);
   const [tabs, setTabs] = useState<TabPane[]>([]);
 
@@ -143,10 +138,7 @@ function Aside(_: AsideProps) {
 
   const isRoot = !current || current.key === father;
 
-  const handleClose = useCallback(
-    () => dispatch({ type: UIActionType.CloseAside }),
-    []
-  );
+  const handleClose = useCallback(() => dispatch({ type: UIActionType.CloseAside }), []);
 
   const configuration = useRef<ISettings>(null);
 
@@ -170,10 +162,7 @@ function Aside(_: AsideProps) {
     return <></>;
   }
 
-  const top =
-    typeof options.top === 'number'
-      ? options.top
-      : 50 + (scenaToolbarVisible ? 40 : 0);
+  const top = typeof options.top === 'number' ? options.top : 50 + (scenaToolbarVisible ? 40 : 0);
 
   return (
     <Settings
@@ -182,9 +171,7 @@ function Aside(_: AsideProps) {
       style={{
         top: top,
         width: options?.width || 240,
-        ...(visible
-          ? {}
-          : { transform: `translate3d(${options?.width || 240}px, 0, 0)` }),
+        ...(visible ? {} : { transform: `translate3d(${options?.width || 240}px, 0, 0)` }),
       }}
       tabs={tabs.filter(visibleFilter(value))}
       footer={<ConfigurationToolbar />}

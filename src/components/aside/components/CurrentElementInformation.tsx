@@ -57,9 +57,7 @@ const CurrentElementInformation = () => {
 
   const screen = useSelector((state) => state.ui.scena.screen);
 
-  const { width, height, x, y, rotate, radius } = useHTMLElementResize(
-    current?.element
-  );
+  const { width, height, x, y, rotate, radius } = useHTMLElementResize(current?.element);
 
   const [notchActive, setNotchActive] = useState<boolean>(false);
   const [radiusDisabled, setRadiusDisabled] = useState<boolean>(false);
@@ -152,9 +150,7 @@ const CurrentElementInformation = () => {
           />
           <OptionButton
             onChange={iconsHandleChange(IconsConst.Notch)}
-            icon={
-              notchActive ? 'ConstrainProportionsOn' : 'ConstrainProportionsOff'
-            }
+            icon={notchActive ? 'ConstrainProportionsOn' : 'ConstrainProportionsOff'}
           />
         </div>
         <div className="design-rows design-colums content-col">
@@ -171,21 +167,13 @@ const CurrentElementInformation = () => {
             disabled={radiusDisabled}
             icon="TopLeftCornerRadius"
           />
-          <OptionButton
-            onChange={iconsHandleChange(IconsConst.Semicircle)}
-            icon="VectorSemicircle"
-          />
+          <OptionButton onChange={iconsHandleChange(IconsConst.Semicircle)} icon="VectorSemicircle" />
         </div>
         {radiusDisabled && (
-          <RadiusAllSetting
-            value={state.current[IconsConst.Radius]}
-            onChange={handleChange(IconsConst.Radius)}
-          />
+          <RadiusAllSetting value={state.current[IconsConst.Radius]} onChange={handleChange(IconsConst.Radius)} />
         )}
         <div className="clipping-box">
-          <Checkbox onChange={handleChange(IconsConst.Clipping)}>
-            剪裁内容
-          </Checkbox>
+          <Checkbox onChange={handleChange(IconsConst.Clipping)}>剪裁内容</Checkbox>
         </div>
       </div>
     </div>

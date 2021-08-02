@@ -16,16 +16,8 @@ interface SegmentedControlProps {
   onChange?: (state: string) => void;
 }
 const SegmentedControl = (props: SegmentedControlProps) => {
-  const {
-    style = {},
-    className,
-    options = [],
-    value: defaultValue,
-    onChange,
-  } = props;
-  const [value, setValue] = useState(
-    defaultValue || (options.length && options[0].value)
-  );
+  const { style = {}, className, options = [], value: defaultValue, onChange } = props;
+  const [value, setValue] = useState(defaultValue || (options.length && options[0].value));
   useEffect(() => {
     if (!defaultValue || defaultValue === value) {
       return;
@@ -41,10 +33,7 @@ const SegmentedControl = (props: SegmentedControlProps) => {
       style={style}
       className={classnames('segmented-control-container', className, {
         first: value && options.length && options[0].value === value,
-        last:
-          value &&
-          options.length &&
-          options[options.length - 1].value === value,
+        last: value && options.length && options[options.length - 1].value === value,
       })}
     >
       {options.map(({ icon, value: itemValue, label }) => {

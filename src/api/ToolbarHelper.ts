@@ -17,9 +17,7 @@ export default class ToolbarHelperImpl implements ToolbarHelper {
   select(key: string) {
     const tools = this.tools();
     const item = tools.find((item) => item.id === key);
-    const mutexs = item!.mutex
-      ? tools.filter((t) => t.mutex === item!.mutex)
-      : [];
+    const mutexs = item!.mutex ? tools.filter((t) => t.mutex === item!.mutex) : [];
 
     if (mutexs.length) {
       this.unselect(...mutexs.map((item) => item.id));

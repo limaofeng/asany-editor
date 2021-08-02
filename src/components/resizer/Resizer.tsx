@@ -1,10 +1,4 @@
-import React, {
-  CSSProperties,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { CSSProperties, useCallback, useEffect, useRef, useState } from 'react';
 
 import classnames from 'classnames';
 
@@ -24,13 +18,7 @@ export type ResizerProps = {
 };
 
 function Resizer(props: ResizerProps) {
-  const {
-    className,
-    handleClassName,
-    direction = 'x',
-    children,
-    style,
-  } = props;
+  const { className, handleClassName, direction = 'x', children, style } = props;
   const { onResizeStart, onResize, onResizeEnd } = props;
 
   const [active, setActive] = useState(false);
@@ -88,10 +76,7 @@ function Resizer(props: ResizerProps) {
       })}
       style={style}
     >
-      <div
-        className={classnames('handle', handleClassName)}
-        onMouseDown={handleMouseDown}
-      ></div>
+      <div className={classnames('handle', handleClassName)} onMouseDown={handleMouseDown}></div>
       {children}
     </div>
   );

@@ -1,10 +1,4 @@
-import React, {
-  useRef,
-  useCallback,
-  useReducer,
-  useEffect,
-  CSSProperties,
-} from 'react';
+import React, { useRef, useCallback, useReducer, useEffect, CSSProperties } from 'react';
 import classnames from 'classnames';
 import { throttle } from 'lodash-es';
 import { drag, OnDrag, OnDragStart } from '@daybrush/drag';
@@ -68,11 +62,7 @@ function InfiniteViewer(props: InfiniteViewerProps) {
 
   const manager = useDragDropManager();
 
-  const [{ handlerId }, connectDrop] = useDrop<
-    DustbinDragObject,
-    DustbinDropResult,
-    any
-  >({
+  const [{ handlerId }, connectDrop] = useDrop<DustbinDragObject, DustbinDropResult, any>({
     accept: 'dustbin',
     drop() {
       return { type: 'dustbin' };
@@ -120,9 +110,7 @@ function InfiniteViewer(props: InfiniteViewerProps) {
     (x: number, y: number) => {
       state.current.scrollX -= x;
       state.current.scrollY -= y;
-      onScroll
-        ? onScroll(state.current.scrollX, state.current.scrollY)
-        : forceRender();
+      onScroll ? onScroll(state.current.scrollX, state.current.scrollY) : forceRender();
     },
     [onScroll]
   );
@@ -131,10 +119,7 @@ function InfiniteViewer(props: InfiniteViewerProps) {
     if (store.current.zPoints.reduce(sum, 0) != 0) {
       handleZoom(store.current.zPoints.reduce(sum, 0));
     } else {
-      handleScroll(
-        store.current.xPoints.reduce(sum, 0),
-        store.current.yPoints.reduce(sum, 0)
-      );
+      handleScroll(store.current.xPoints.reduce(sum, 0), store.current.yPoints.reduce(sum, 0));
     }
     store.current.xPoints = [];
     store.current.yPoints = [];
@@ -145,10 +130,7 @@ function InfiniteViewer(props: InfiniteViewerProps) {
     event.preventDefault();
     event.stopPropagation();
     const zoom = (event as any).wheelDeltaX + (event as any).wheelDeltaY;
-    const deltaZ =
-      zoom != 0 &&
-      (event as any).wheelDeltaX == 0 &&
-      Math.abs((event as any).wheelDeltaY) % 120 == 0;
+    const deltaZ = zoom != 0 && (event as any).wheelDeltaX == 0 && Math.abs((event as any).wheelDeltaY) % 120 == 0;
 
     store.current.xPoints.push(event.deltaX);
     store.current.yPoints.push(event.deltaY);
@@ -187,11 +169,7 @@ function InfiniteViewer(props: InfiniteViewerProps) {
     };
   }, [isDrag]);
   return (
-    <div
-      ref={ref}
-      style={style}
-      className={classnames('infinite-Viewer', className)}
-    >
+    <div ref={ref} style={style} className={classnames('infinite-Viewer', className)}>
       {React.cloneElement(children, { scrollX, scrollY, zoom })}
     </div>
   );

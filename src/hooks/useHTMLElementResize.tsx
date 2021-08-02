@@ -36,19 +36,9 @@ export const parsingRadius = (radius: string): any => {
     case 1:
       return new Array(4).fill(currentRadius[0]);
     case 2:
-      return [
-        currentRadius[0],
-        currentRadius[1],
-        currentRadius[0],
-        currentRadius[1],
-      ];
+      return [currentRadius[0], currentRadius[1], currentRadius[0], currentRadius[1]];
     case 3:
-      return [
-        currentRadius[0],
-        currentRadius[1],
-        currentRadius[2],
-        currentRadius[1],
-      ];
+      return [currentRadius[0], currentRadius[1], currentRadius[2], currentRadius[1]];
     case 4:
       return currentRadius;
     default:

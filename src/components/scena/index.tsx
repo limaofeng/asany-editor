@@ -5,11 +5,7 @@ import { useDispatch, useEditor, useSelector } from '../../hooks';
 
 import { isElement, isValidElementType } from 'react-is';
 
-import {
-  ActionType,
-  UIActionType,
-  WorkspaceActionType,
-} from '../../reducers/actions';
+import { ActionType, UIActionType, WorkspaceActionType } from '../../reducers/actions';
 import InfiniteViewer from '../InfiniteViewer';
 import Ruler, { RulerGuides } from '../Ruler';
 import SelectoMananger from './SelectoMananger';
@@ -56,9 +52,7 @@ function Scena(props: ScenaProps) {
   const isVisible = useSelector((state) => state.ui.scena.toolbar.visible);
   const isRuler = useSelector((state) => state.features.ruler);
   const isZoom = useSelector((state) => state.features.zoom);
-  const disabled = useSelector(
-    (state) => state.mode === 'VIEW' || !state.features.block
-  );
+  const disabled = useSelector((state) => state.mode === 'VIEW' || !state.features.block);
   const onClick = useSelector((state) => state.ui.scena.onClick);
   const drag = useSelector((state) => state.features.drag);
   const [width, height] = useSelector((state) => state.ui.scena.screen.size);
@@ -194,9 +188,7 @@ function Scena(props: ScenaProps) {
         rulable={isRuler}
         scrollX={scrollX + (width * (1 - zoom)) / 2}
         scrollY={scrollY + (height * (1 - zoom)) / 2}
-        offsetLeft={
-          minimizable ? 0 : keepOpen ? leftSiderbarWidth + props.offsetLeft : 0
-        }
+        offsetLeft={minimizable ? 0 : keepOpen ? leftSiderbarWidth + props.offsetLeft : 0}
         onResetScroll={handleResetScroll}
         onGuides={handleGuides}
       />

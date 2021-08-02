@@ -5,9 +5,7 @@ import './style/WrapperPopover.less';
 import { IMultipleWrapperData } from './MultipleWrapper';
 import { PopoverFields } from './WrapperPopoverContent';
 
-interface WrapperPopoverProps<T>
-  extends IMultipleWrapperData<T>,
-    PopoverFields<T> {
+interface WrapperPopoverProps<T> extends IMultipleWrapperData<T>, PopoverFields<T> {
   /**
    * 点击 编辑按钮 和 popoverContent 区域之外 直接关闭 popover
    * 注意: ( select 等 子元素 弹出层 会在 body 上挂载，并非 区域内 )

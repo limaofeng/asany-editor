@@ -36,21 +36,14 @@ function Toolbar() {
     <div className="panel-switcher">
       <ul className="panel-switcher-list tool-panel-list">
         {tools
-          .filter(
-            (item) =>
-              item.position === 'top' && item.isVisibled!(focus[item.id])
-          )
+          .filter((item) => item.position === 'top' && item.isVisibled!(focus[item.id]))
           .map((item, index: number) => (
             <li
               key={`${item.id}-${index}`}
-              className={classnames(
-                'panel-switcher-list-item',
-                item.className,
-                {
-                  'tools-extra': toolboardKey !== item.id,
-                  selected: item.isSelected!(focus[item.id]),
-                }
-              )}
+              className={classnames('panel-switcher-list-item', item.className, {
+                'tools-extra': toolboardKey !== item.id,
+                selected: item.isSelected!(focus[item.id]),
+              })}
               style={item.style}
               onClick={buildClick(item)}
             >
@@ -60,20 +53,13 @@ function Toolbar() {
       </ul>
       <ul className="panel-switcher-list">
         {tools
-          .filter(
-            (item) =>
-              item.position === 'bottom' && item.isVisibled!(focus[item.id])
-          )
+          .filter((item) => item.position === 'bottom' && item.isVisibled!(focus[item.id]))
           .map((item) => (
             <li
               key={`${item.id}`}
-              className={classnames(
-                'panel-switcher-list-item',
-                item.className,
-                {
-                  selected: item.isSelected!(focus[item.id]),
-                }
-              )}
+              className={classnames('panel-switcher-list-item', item.className, {
+                selected: item.isSelected!(focus[item.id]),
+              })}
               onClick={buildClick(item)}
               style={item.style}
             >
