@@ -12,6 +12,7 @@ import DemoPlugin from './editors/demo';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { IconLibrary } from '@asany/icons/dist/store/IconDatabase';
+import { useCallback } from 'react';
 
 const meta: Meta = {
   title: '编辑器/图标',
@@ -31,10 +32,13 @@ const Template: Story<any> = (_args) => {
   DemoPlugin.scena.workspace = () => {
     const store = useStore();
     const [lib, setLib] = useState<IconLibrary | undefined>();
+    const loadLocalLibrary = useCallback(async () => {
+      const lib = await store.local();
+      setLib(lib);
+    }, []);
     useEffect(() => {
-      store.local().then((lib) => {
-        setLib(lib);
-      });
+      loadLocalLibrary();
+      return store.onChange(loadLocalLibrary);
     }, []);
 
     if (!lib) {
@@ -67,11 +71,7 @@ const Template: Story<any> = (_args) => {
             onSave={(data) => console.log(data)}
             project={{
               id: 'test',
-              name: (
-                <div style={{ color: '#727d83', fontSize: 16 }}>
-                  项目名称展示区域
-                </div>
-              ) as any,
+              name: (<div style={{ color: '#727d83', fontSize: 16 }}>项目名称展示区域</div>) as any,
               type: 'demo',
               data: {
                 id: '111',
