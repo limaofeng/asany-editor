@@ -168,8 +168,9 @@ function InfiniteViewer(props: InfiniteViewerProps) {
       dragger.unset();
     };
   }, [isDrag]);
+
   return (
-    <div ref={ref} style={style} className={classnames('infinite-Viewer', className)}>
+    <div ref={ref} style={style} className={classnames('infinite-viewer', className)}>
       {React.cloneElement(children, { scrollX, scrollY, zoom })}
     </div>
   );

@@ -8,7 +8,7 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import AsanyEditor from '../src';
-import DemoPlugin from './editors/demo';
+import IconPlugin from '../src/plugins/Icon';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { IconLibrary } from '@asany/icons/dist/store/IconDatabase';
@@ -29,43 +29,43 @@ const client = new ApolloClient({
 export default meta;
 
 const Template: Story<any> = (_args) => {
-  const plugin = { ...DemoPlugin };
-  plugin.scena = {
-    ...plugin.scena,
-    workspace: () => {
-      const store = useStore();
-      const [lib, setLib] = useState<IconLibrary | undefined>();
-      const loadLocalLibrary = useCallback(async () => {
-        const lib = await store.local();
-        setLib(lib);
-      }, []);
-      useEffect(() => {
-        loadLocalLibrary();
-        return store.onChange(loadLocalLibrary);
-      }, []);
+  const plugin = { ...IconPlugin };
+  // plugin.scena = {.
+  //   ...plugin.scena,
+  //   workspace: () => {
+  //     const store = useStore();
+  //     const [lib, setLib] = useState<IconLibrary | undefined>();
+  //     const loadLocalLibrary = useCallback(async () => {
+  //       const lib = await store.local();
+  //       setLib(lib);
+  //     }, []);
+  //     useEffect(() => {
+  //       loadLocalLibrary();
+  //       return store.onChange(loadLocalLibrary);
+  //     }, []);
 
-      if (!lib) {
-        return <></>;
-      }
+  //     if (!lib) {
+  //       return <></>;
+  //     }
 
-      return (
-        <div
-          style={{
-            width: '100%',
-            padding: 20,
-          }}
-        >
-          <h3>{lib.description}</h3>
-          <hr />
-          <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-            {lib.icons.map((item) => (
-              <Icon key={item.id} style={{ padding: 16 }} name={item.name} />
-            ))}
-          </div>
-        </div>
-      );
-    },
-  };
+  //     return (
+  //       <div
+  //         style={{
+  //           width: '100%',
+  //           padding: 20,
+  //         }}
+  //       >
+  //         <h3>{lib.description}</h3>
+  //         <hr />
+  //         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+  //           {lib.icons.map((item) => (
+  //             <Icon key={item.id} style={{ padding: 16 }} name={item.name} />
+  //           ))}
+  //         </div>
+  //       </div>
+  //     );
+  //   },
+  // };
   return (
     <DndProvider backend={HTML5Backend}>
       <ApolloProvider client={client}>

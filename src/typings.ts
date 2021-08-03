@@ -283,6 +283,7 @@ export interface ISidebar {
 }
 
 export interface IToolbar {
+  content?: ComponentType;
   tools?: AsanyTool[];
 }
 
@@ -772,6 +773,7 @@ export interface IUIScenaToolbarState {
 
 export interface IUIToolbarState {
   tools: AsanyTool[];
+  content?: ComponentType<any>;
   activeKeys: string[];
 }
 

@@ -6,7 +6,7 @@ function SelectoMananger() {
   return (
     <Selecto
       ref={selecto}
-      dragContainer={'.infinite-Viewer'}
+      dragContainer={'.infinite-viewer'}
       hitRate={0}
       selectableTargets={['[data-scena-element]']}
       selectByClick={true}

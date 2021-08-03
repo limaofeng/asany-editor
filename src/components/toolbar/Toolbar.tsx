@@ -41,6 +41,7 @@ function Header(props: HeaderProps) {
   const { onBack } = props;
 
   const name = useSelector((state) => state.project && state.project.name);
+  const content = useSelector((state) => state.ui.toolbar.content);
 
   const tools = useTools((state) => state.ui.toolbar.tools);
 
@@ -61,12 +62,18 @@ function Header(props: HeaderProps) {
         <Icon name="ToolbarBack" className="back-icon toolbar-icon" />
         <span className="title">{name}</span>
       </div>
-      <div className="toolbar-center">
-        {tools.filter((item) => item.position === 'left' && item.isVisibled!(focus[item.id])).map(render, focus)}
-      </div>
-      <div className="toolbar-right">
-        {tools.filter((item) => item.position === 'right' && item.isVisibled!(focus[item.id])).map(render, focus)}
-      </div>
+      {content ? (
+        React.createElement(content)
+      ) : (
+        <>
+          <div className="toolbar-center">
+            {tools.filter((item) => item.position === 'left' && item.isVisibled!(focus[item.id])).map(render, focus)}
+          </div>
+          <div className="toolbar-right">
+            {tools.filter((item) => item.position === 'right' && item.isVisibled!(focus[item.id])).map(render, focus)}
+          </div>
+        </>
+      )}
     </div>
   );
 }

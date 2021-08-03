@@ -20,7 +20,7 @@ export default function reducer(
     };
   }
   if (action.type == UIToolbarActionType.SetToolbar) {
-    return { ...state, tools: action.payload.tools };
+    return { ...state, content: action.payload.content, tools: action.payload.tools };
   }
   if (action.type == GlobalAsanyAction.Init) {
     return defaultState;

@@ -2,7 +2,8 @@ import { CheckOutlined, DownOutlined } from '@ant-design/icons';
 import { InputNumber, Popover } from 'antd';
 import classnames from 'classnames';
 import { isEqual } from 'lodash-es';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { CSSProperties } from 'styled-components';
 
 import devices from '../../../assets/devices';
 import { useDispatch, useSelector } from '../../../hooks';
@@ -153,19 +154,36 @@ interface ScreenViewportProps {
 function ScreenViewport(props: ScreenViewportProps) {
   const isZoom = useSelector((state) => state.features.zoom);
   const { children, scrollX = 0, scrollY = 0, width, height } = props;
+  let sidebarWidth = useSelector((state) => state.ui.sidebar.width);
+  const sidebarMinWidth = useSelector((state) => state.ui.sidebar.minWidth);
+  const sidebarMinimizable = useSelector((state) => state.ui.sidebar.minimizable);
+  const [style, setStyle] = useState<CSSProperties>({});
+
+  useEffect(() => {
+    if (!isZoom) {
+      return;
+    }
+    setStyle({
+      width,
+      height,
+      transform: `matrix(1, 0, 0, 1, ${scrollX}, ${scrollY})`,
+    });
+  }, [width, height]);
+
+  useEffect(() => {
+    if (isZoom) {
+      return;
+    }
+    if (sidebarMinimizable) {
+      sidebarWidth = 0;
+    } else {
+      sidebarWidth = Math.max(sidebarMinWidth, sidebarWidth);
+    }
+    setStyle({ marginLeft: sidebarWidth, display: 'flex', width: `calc(100% - ${sidebarWidth}px)`, minHeight: `100%` });
+  }, [sidebarWidth, sidebarMinimizable, sidebarMinWidth]);
+
   return (
-    <div
-      className="screen-viewport"
-      style={
-        isZoom
-          ? {
-              width,
-              height,
-              transform: `matrix(1, 0, 0, 1, ${scrollX}, ${scrollY})`,
-            }
-          : {}
-      }
-    >
+    <div className="screen-viewport" style={style}>
       <Screen>{children}</Screen>
     </div>
   );
