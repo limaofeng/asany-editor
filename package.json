@@ -49,12 +49,9 @@
     }
   ],
   "dependencies": {
-    "@asany/icons": "^0.1.5",
-    "@asany/library-manager": "^0.1.4",
     "@daybrush/drag": "^0.19.3",
     "@scena/react-guides": "^0.16.0",
-    "antd": "^4.16.6",
-    "lodash-es": "^4.17.21",
+    "moveable-helper": "^0.4.0",
     "overlayscrollbars-react": "^0.2.3",
     "react-moveable": "^0.28.3",
     "react-selecto": "^1.12.0",
@@ -63,6 +60,8 @@
     "styled-components": "^5.3.0"
   },
   "devDependencies": {
+    "@asany/icons": "^0.1.5",
+    "@asany/library-manager": "^0.1.4",
     "@babel/core": "^7.14.6",
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
@@ -78,6 +77,7 @@
     "@types/react-is": "^17.0.2",
     "@types/react-transition-group": "^4.4.1",
     "@types/styled-components": "^5.1.11",
+    "antd": "^4.16.10",
     "autoprefixer": "^10.2.6",
     "babel-loader": "^8.2.2",
     "conventional-changelog-cli": "^2.1.1",
@@ -86,7 +86,7 @@
     "husky": "^7.0.0",
     "less": "^4.1.1",
     "less-loader": "^7.3.0",
-    "moveable-helper": "^0.4.0",
+    "lodash-es": "^4.17.21",
     "pinst": "^2.1.6",
     "postcss": "^8.3.5",
     "postcss-modules": "^4.1.3",

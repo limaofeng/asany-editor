@@ -6,9 +6,6 @@ import { DispatchWithoutAction, IAsanyStoreContext } from './AsanyContext';
 import { IUseBlockState } from './hooks/useBlock';
 import { Selector } from './hooks/useSelector';
 import MoveableState from './reducers/ui.reducer/scena.reducer/MoveableState';
-// import { IUIScenaState } from './reducers/ui.reducer/scena.reducer';
-// import { IUISidebarState } from './reducers/ui.reducer/sidebar.reducer';
-// import { IUIToolbarState } from './reducers/ui.reducer/toolbar.reducer';
 import MoveableData from './utils/MoveableData';
 
 export interface AsanyAction<T> {
@@ -306,7 +303,7 @@ export interface IScena {
     tools?: AsanyTool[];
     visible?: boolean;
   };
-  workspace: ComponentType<any>;
+  workspace?: ComponentType<any>;
   onClick(editor: IAsanyEditor, block?: IUseBlockState<any>): void;
 }
 
