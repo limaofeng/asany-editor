@@ -54,6 +54,7 @@ function Toolboard(props: ToolboardProps, ref: React.ForwardedRef<IToolboard>) {
 
   const dispatch = useDispatch();
 
+  const visible = useSelector((state) => state.ui.sidebar.visible);
   const minimizable = useSelector((state) => state.ui.sidebar.minimizable);
   const keepOpen = useSelector((state) => !!state.ui.sidebar.content);
   const width = useSelector((state) => state.ui.sidebar.width);
@@ -231,6 +232,9 @@ function Toolboard(props: ToolboardProps, ref: React.ForwardedRef<IToolboard>) {
   const vw = calculateWidth(width, state.current.offset);
 
   useEffect(() => {
+    if (!visible) {
+      return;
+    }
     let newMinimizable = false;
     const newWidth = state.current.width + state.current.offset;
     if (minWidth - newWidth > minWidth / 2 || newWidth <= 30) {
@@ -242,7 +246,7 @@ function Toolboard(props: ToolboardProps, ref: React.ForwardedRef<IToolboard>) {
         payload: newMinimizable,
       });
     }
-  }, [minWidth, state.current.offset]);
+  }, [visible, minWidth, state.current.offset]);
 
   return (
     <Resizer

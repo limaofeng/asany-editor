@@ -134,7 +134,9 @@ textarea {
       left: 52px;
       z-index: 1;
       width: 300px;
-      height: 100%;
+      &.resizer.direction-x {
+        height: calc(100vh - var(--editor-navigation-height));
+      }
 
       .panel-container .panel-view {
         height: 100%;

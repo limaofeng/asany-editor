@@ -86,7 +86,7 @@ export default function reducer(
       minWidth,
       width,
       content,
-      minimizable,
+      minimizable: !action.payload.visible || minimizable,
       tools: action.payload.tools,
       visible: action.payload.visible != false,
     };

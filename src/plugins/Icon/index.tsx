@@ -40,6 +40,7 @@ export default {
   },
   reducer: reducer,
   sidebar: {
+    visible: false,
     content: Sidebar,
     tools: [
       {
@@ -85,7 +86,7 @@ export default {
   },
   scena: {
     workspace: Workspace,
-    onClick: (editor) => {
+    /*  onClick: (editor) => {
       editor.aside.open(
         '属性面板',
         () => {
@@ -109,7 +110,7 @@ export default {
           width: 380,
         }
       );
-    },
+    }, */
   },
   features: [],
 } as EditorPlugin;

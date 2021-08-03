@@ -173,6 +173,7 @@ function Scena(props: ScenaProps) {
         style={{ cursor: drag ? cursorstyle : '' }}
         drag={drag}
         zoom={zoom}
+        isZoom={isZoom}
         scrollX={scrollX}
         scrollY={scrollY}
         onScroll={handleScroll}

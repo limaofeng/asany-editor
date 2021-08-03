@@ -305,7 +305,7 @@ export interface IScena {
     visible?: boolean;
   };
   workspace?: ComponentType<any>;
-  onClick(editor: IAsanyEditor, block?: IUseBlockState<any>): void;
+  onClick?(editor: IAsanyEditor, block?: IUseBlockState<any>): void;
 }
 
 export interface ToolsHelper {

@@ -29,6 +29,7 @@ interface InfiniteViewerProps {
   children: JSX.Element;
   drag?: boolean;
   zoom?: number;
+  isZoom?: boolean;
   scrollX?: number;
   scrollY?: number;
   onScroll: (x: number, y: number) => void;
@@ -44,7 +45,7 @@ interface DustbinDropResult {
 }
 
 function InfiniteViewer(props: InfiniteViewerProps) {
-  const { className, onZoom, onScroll, style, drag: isDrag, children } = props;
+  const { className, onZoom, onScroll, style, drag: isDrag, isZoom, children } = props;
 
   const dustbin = useSelector((state) => state.ui.scena.viewer.dustbin);
 
@@ -140,11 +141,14 @@ function InfiniteViewer(props: InfiniteViewerProps) {
   }, []);
 
   useEffect(() => {
+    if (!isZoom) {
+      return;
+    }
     ref.current?.addEventListener('wheel', handleWheel);
     return () => {
       ref.current?.removeEventListener('wheel', handleWheel);
     };
-  }, []);
+  }, [isZoom]);
 
   useEffect(() => {
     if (!isDrag) {

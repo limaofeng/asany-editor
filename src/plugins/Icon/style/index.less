@@ -1,7 +1,97 @@
+.icon-editor {
+  --editor-navigation-height: 64px;
+}
+.ie-navigation {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  height: 100%;
+
+  .navigation-left {
+    display: flex;
+    flex: 0 0 210px;
+    align-items: center;
+    height: 100%;
+    padding-right: 10px;
+
+    .title {
+      padding-left: 16px;
+    }
+  }
+
+  .ie-navigation-container {
+    flex: 1;
+    padding: 0 24px 0 24px;
+    .ie-search {
+      border: 1px solid #e1e1e1;
+      border-radius: 4px;
+      box-sizing: padding-box;
+      color: #4b4b4b;
+      margin: 0;
+      outline: 0;
+      transition: color 0.3s, border 0.3s;
+      display: flex;
+
+      .ie-icon-typs {
+        border-radius: 4px 0 0 4px;
+        background-color: #fafafa;
+        border-right: 1px solid #e1e1e1;
+        color: #4b4b4b;
+        select {
+          appearance: none;
+          background-color: transparent;
+          border: 0;
+          box-sizing: padding-box;
+          cursor: pointer;
+          display: inline-block;
+          font-size: 0.875rem;
+          height: 32px;
+          min-height: 30px;
+          outline: 0;
+          padding: 0 32px 0 11px;
+          position: relative;
+          transition: background-color 0.3s, color 0.3s, border 0.3s;
+          vertical-align: middle;
+        }
+      }
+      .ie-icon-input {
+        flex: 1;
+        input {
+          color: #4b4b4b;
+          padding-left: 40px;
+          border-radius: 0;
+          height: 32px;
+          margin: 0;
+          outline: 0;
+          border: 0;
+          transition: color 0.3s, border 0.3s;
+          background-color: transparent;
+        }
+      }
+    }
+  }
+
+  .ie-my-libraries {
+    width: 128px;
+    padding-right: 24;
+    display: flex;
+    align-items: center;
+
+    .button-text {
+      font-size: 14px;
+      color: var(--primary-color);
+    }
+  }
+}
+
 .ie-libraries {
-  padding: 24px;
   width: 100%;
   background-color: var(--gray-color-background);
+  .os-host {
+    height: calc(100vh - var(--editor-navigation-height));
+    padding: 24px;
+  }
+
   .libraries-header-section {
     .libraries-header {
       color: var(--primary-second-color);
@@ -13,6 +103,8 @@
   }
 
   .library-list-wrapper {
+    display: flex;
+    flex-wrap: wrap;
     .library-container {
       width: 280px;
       height: 420px;
@@ -22,6 +114,28 @@
       display: inline-block;
       vertical-align: top;
       position: relative;
+
+      &.library-create {
+        display: flex;
+        align-items: center;
+        .library-create-form {
+          flex: 1;
+          display: block;
+          display: flex;
+          justify-content: center;
+        }
+        .library-name-input {
+          height: 32px;
+          width: 220px;
+          padding: 0 10px 0 10px;
+          font-weight: lighter;
+          background-color: transparent;
+          border: 0;
+          border-bottom: 1px solid #aaa;
+          color: #000;
+        }
+      }
+
       .library-image-wrapper {
         width: 100%;
         height: 350px;

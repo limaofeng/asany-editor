@@ -30,7 +30,7 @@ function SiderBar(props: SiderBarProps) {
   return (
     <div
       className={classnames('sketch-sidebar', 'asany-editor-sidebar', {
-        collapsed: collapsed,
+        collapsed: visible && collapsed,
         'sidebar-out': !visible,
         falling: scenaToolbarVisible,
       })}

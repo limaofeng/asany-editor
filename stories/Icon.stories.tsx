@@ -73,6 +73,7 @@ const Template: Story<any> = (_args) => {
           <AsanyEditor
             plugins={[plugin]}
             onSave={(data) => console.log(data)}
+            className="icon-editor"
             project={{
               id: 'test',
               name: (<div style={{ color: '#727d83', fontSize: 16 }}>项目名称展示区域</div>) as any,

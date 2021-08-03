@@ -58,14 +58,14 @@ function Header(props: HeaderProps) {
 
   return (
     <div className="sketch-toolbar">
-      <div className="toolbar-left" onClick={handClickBack}>
-        <Icon name="ToolbarBack" className="back-icon toolbar-icon" />
-        <span className="title">{name}</span>
-      </div>
       {content ? (
         React.createElement(content)
       ) : (
         <>
+          <div className="toolbar-left" onClick={handClickBack}>
+            <Icon name="ToolbarBack" className="back-icon toolbar-icon" />
+            <span className="title">{name}</span>
+          </div>
           <div className="toolbar-center">
             {tools.filter((item) => item.position === 'left' && item.isVisibled!(focus[item.id])).map(render, focus)}
           </div>
