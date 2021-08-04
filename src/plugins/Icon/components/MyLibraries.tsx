@@ -1,8 +1,34 @@
 import React from 'react';
-import { Input } from 'antd';
+import { useHistory } from 'react-router-dom';
+import { Input, Card } from 'antd';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
+import { Link } from 'react-router-dom';
 
-import 'overlayscrollbars/css/OverlayScrollbars.css';
+function LibraryCard() {
+  let history = useHistory();
+
+  function handleClick() {
+    history.push('/libraries/1');
+  }
+  return (
+    <Card
+      className="library-container"
+      hoverable
+      cover={
+        <div onClick={handleClick} className="library-image-wrapper empty-library">
+          <i className="empty-library-icon icon-creative-cloud-library"></i>
+        </div>
+      }
+    >
+      <div className="lib-description">
+        <h1 className="library-name-header">
+          <Link to="/libraries/1">My Library</Link>
+        </h1>
+        <p className="library-item-count-label">0 items</p>
+      </div>
+    </Card>
+  );
+}
 
 function MyLibraries() {
   return (
@@ -16,28 +42,9 @@ function MyLibraries() {
                 <Input className="library-name-input ant-input-rimless" placeholder="图标库名称" />
               </div>
             </div>
-            <div className="library-container">
-              <div className="library-image-wrapper empty-library">
-                <i className="empty-library-icon icon-creative-cloud-library large"></i>
-              </div>
-              <div className="lib-description clear-fix">
-                <h1 className="library-name-header truncate">
-                  <a>My Library</a>
-                </h1>
-                <p className="library-item-count-label">0 items</p>
-              </div>
-            </div>
-            <div className="library-container">
-              <div className="library-image-wrapper empty-library">
-                <i className="empty-library-icon icon-creative-cloud-library large"></i>
-              </div>
-              <div className="lib-description clear-fix">
-                <h1 className="library-name-header truncate">
-                  <a>My Library</a>
-                </h1>
-                <p className="library-item-count-label">0 items</p>
-              </div>
-            </div>
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(() => (
+              <LibraryCard />
+            ))}
           </div>
         </div>
       </OverlayScrollbarsComponent>
@@ -45,4 +52,4 @@ function MyLibraries() {
   );
 }
 
-export default MyLibraries;
+export default React.memo(MyLibraries);

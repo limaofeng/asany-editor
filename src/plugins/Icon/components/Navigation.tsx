@@ -12,16 +12,16 @@ function Navigation() {
         <div className="ie-search">
           <div className="ie-icon-typs">
             <select>
-              <option>矢量图</option>
+              <option>Images</option>
             </select>
           </div>
           <div className="ie-icon-input">
-            <input placeholder="搜索图标" />
+            <input placeholder="Search" />
           </div>
         </div>
       </div>
       <div className="ie-my-libraries">
-        <a className="button-text">我的图标库</a>
+        <a className="button-text">My Libraries</a>
       </div>
     </div>
   );

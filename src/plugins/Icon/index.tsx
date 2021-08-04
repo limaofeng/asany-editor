@@ -1,35 +1,13 @@
+import './style/index.less';
+import 'overlayscrollbars/css/OverlayScrollbars.css';
+
 import React from 'react';
 
-import { IPluginActionType } from '../../reducers/actions';
-import { AsanyAction, EditorPlugin } from '../../typings';
+import { EditorPlugin } from '../../typings';
 import Navigation from './components/Navigation';
 import Sidebar from './components/Sidebar';
 import Workspace from './components/Workspace';
-
-import './style/index.less';
-
-export enum IconActionType {
-  /**
-   * 更新 Block 定制器
-   */
-  UpdateBlockCustomizer = 'UpdateBlockCustomizer',
-  Test = 'Form/Test',
-}
-
-export interface ISketchState {
-  count: number;
-}
-
-const defaultState: ISketchState = {
-  count: 0,
-};
-
-export function reducer(state: ISketchState, action: AsanyAction<IconActionType | IPluginActionType>): ISketchState {
-  if (action.type === IPluginActionType.PluginStateInit) {
-    return defaultState;
-  }
-  return state;
-}
+import reducer from './reducer';
 
 export default {
   id: 'demo',
@@ -38,9 +16,9 @@ export default {
   toolbar: {
     content: Navigation,
   },
-  reducer: reducer,
+  reducer,
   sidebar: {
-    visible: false,
+    visible: true,
     content: Sidebar,
     tools: [
       {

@@ -93,6 +93,7 @@
       padding-bottom: 0;
     }
 
+    .navigation-left,
     .toolbar-left {
       display: flex;
       flex: 0 0 248px;
@@ -103,7 +104,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 44px;
+        width: var(--editor-navigation-height);
         height: 100%;
         margin-right: 7px;
         color: rgb(141, 158, 167);
@@ -116,7 +117,7 @@
         display: inline;
         max-width: initial !important;
         overflow: hidden;
-        color: rgb(82, 94, 113);
+        color: var(--primary-second-color);
         font-size: 14px;
         line-height: unset;
         white-space: nowrap;

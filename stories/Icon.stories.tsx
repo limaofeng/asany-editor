@@ -1,18 +1,18 @@
 import 'antd/dist/antd.css';
 
-import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
-import Icon, { IconProvider, useStore } from '@asany/icons';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import Icon, { IconProvider } from '@asany/icons';
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { useCallback } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import AsanyEditor from '../src';
 import IconPlugin from '../src/plugins/Icon';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { IconLibrary } from '@asany/icons/dist/store/IconDatabase';
-import { useCallback } from 'react';
 
 const meta: Meta = {
   title: '编辑器/图标',
@@ -70,20 +70,22 @@ const Template: Story<any> = (_args) => {
     <DndProvider backend={HTML5Backend}>
       <ApolloProvider client={client}>
         <IconProvider>
-          <AsanyEditor
-            plugins={[plugin]}
-            onSave={(data) => console.log(data)}
-            className="icon-editor"
-            project={{
-              id: 'test',
-              name: (<div style={{ color: '#727d83', fontSize: 16 }}>项目名称展示区域</div>) as any,
-              type: 'demo',
-              data: {
-                id: '111',
-                props: [],
-              },
-            }}
-          />
+          <Router>
+            <AsanyEditor
+              plugins={[plugin]}
+              onSave={(data) => console.log(data)}
+              className="icon-editor"
+              project={{
+                id: 'test',
+                name: (<div style={{ color: '#727d83', fontSize: 16 }}>项目名称展示区域</div>) as any,
+                type: 'demo',
+                data: {
+                  id: '111',
+                  props: [],
+                },
+              }}
+            />
+          </Router>
         </IconProvider>
       </ApolloProvider>
     </DndProvider>
