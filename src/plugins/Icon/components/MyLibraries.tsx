@@ -1,8 +1,46 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Input, Card } from 'antd';
+import classnames from 'classnames';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import { Link } from 'react-router-dom';
+import Icon from '@asany/icons';
+
+function LibraryCreate() {
+  const [name, setName] = useState<string>();
+  const [active, setActive] = useState<boolean>();
+
+  const handleChange = useCallback((e) => {
+    setName(e.target.value);
+  }, []);
+
+  const handleFocus = useCallback(() => {
+    setActive(true);
+  }, []);
+
+  const handleBlur = useCallback((e) => {
+    setActive(!!e.target.value);
+  }, []);
+
+  return (
+    <Card className="library-container library-create">
+      <div className={classnames('library-create-form', { active })}>
+        <Input
+          onChange={handleChange}
+          className="library-name-input ant-input-rimless"
+          value={name}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          placeholder="Library Name"
+        />
+        <div className="library-action-buttons">
+          <Icon name="VectorSubtraction" />
+          <Icon name="VectorAlign" />
+        </div>
+      </div>
+    </Card>
+  );
+}
 
 function LibraryCard() {
   let history = useHistory();
@@ -35,13 +73,10 @@ function MyLibraries() {
     <div className="ie-libraries">
       <OverlayScrollbarsComponent className="libraries-scrollbar" options={{ scrollbars: { autoHide: 'scroll' } }}>
         <div className="libraries-header-section">
-          <h1 className="libraries-header">图标库</h1>
+          <h1 className="libraries-header">Libraries</h1>
           <div className="library-list-wrapper">
-            <div className="library-container library-create">
-              <div className="library-create-form">
-                <Input className="library-name-input ant-input-rimless" placeholder="图标库名称" />
-              </div>
-            </div>
+            <LibraryCreate />
+
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(() => (
               <LibraryCard />
             ))}

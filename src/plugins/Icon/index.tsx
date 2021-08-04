@@ -18,7 +18,7 @@ export default {
   },
   reducer,
   sidebar: {
-    visible: true,
+    visible: false,
     content: Sidebar,
     tools: [
       {

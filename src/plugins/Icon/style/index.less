@@ -91,9 +91,7 @@
     }
   }
 }
-
-.ie-libraries,
-.ie-library-details {
+.ie-libraries {
   color: var(--primary-second-color);
   width: 100%;
   background-color: var(--gray-color-background);
@@ -109,10 +107,25 @@
 
   .libraries-header-section {
     .libraries-header {
+      display: flex;
+      color: var(--primary-third-color);
       margin-top: 14px;
-      font-size: 24px;
+      font-size: 21px;
       line-height: 32px;
       margin-bottom: 24px;
+      align-items: center;
+      .icon-arrow {
+        margin: 0 6px;
+      }
+      .library-current {
+        color: var(--primary-second-color);
+      }
+    }
+    .subheading {
+      .library-detail-header-library-total-count-text {
+        color: var(--text-color-subtle-contrast);
+        line-height: 32px;
+      }
     }
   }
 
@@ -130,22 +143,59 @@
       background: #e0dfdf;
 
       &.library-create {
-        display: flex;
-        align-items: center;
+        .ant-card-body {
+          display: flex;
+          align-items: center;
+          height: 100%;
+        }
         .library-create-form {
           flex: 1;
           display: block;
           display: flex;
           justify-content: center;
+          align-items: center;
+          flex-direction: column;
+
+          &.active {
+            .library-action-buttons .anticon {
+              opacity: 1;
+            }
+          }
+
+          .library-action-buttons {
+            height: 40px;
+            width: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .anticon {
+              height: 32px;
+              width: 32px;
+              display: flex;
+              opacity: 0;
+              justify-content: center;
+              align-items: center;
+              transition: opacity 0.5s;
+            }
+          }
         }
         .library-name-input {
           height: 32px;
           width: 220px;
           padding: 0 10px 0 10px;
           background-color: transparent;
+          font-style: italic;
           border: 0;
+          border-radius: 0;
           border-bottom: 1px solid #aaa;
           color: var(--primary-second-color);
+          &:hover {
+            &::placeholder {
+              color: var(--primary-second-color);
+              transition: color 0.3s, border 0.3s;
+            }
+          }
         }
       }
 
@@ -185,5 +235,14 @@
         }
       }
     }
+  }
+}
+.ie-library-details {
+  .libraries-header-section .libraries-header {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .mosaic-container {
+    padding: 24px;
   }
 }
