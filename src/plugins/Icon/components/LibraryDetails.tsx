@@ -1,6 +1,7 @@
 import Icon from '@asany/icons';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function LibraryDetails() {
   return (
@@ -8,7 +9,7 @@ function LibraryDetails() {
       <OverlayScrollbarsComponent className="libraries-scrollbar" options={{ scrollbars: { autoHide: 'scroll' } }}>
         <div className="libraries-header-section">
           <h1 className="libraries-header">
-            Libraries <Icon className="icon-arrow" name="nifty/admin-tools" />{' '}
+            <Link to="/libraries">Libraries</Link> <Icon className="icon-arrow" name="nifty/admin-tools" />
             <span className="library-current">Default</span>
           </h1>
           <div className="subheading">

@@ -1,5 +1,6 @@
 import './icons';
 import './style/index.less';
+import './style/tailwind.css';
 
 import classnames from 'classnames';
 import React, { ComponentType, useCallback, useEffect, useReducer, useRef } from 'react';

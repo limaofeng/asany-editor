@@ -14,6 +14,9 @@ function Workspace() {
       <Route exact path="/iframe.html">
         <LibraryDetails />
       </Route>
+      <Route path="/libraries">
+        <MyLibraries />
+      </Route>
       <Route path="/libraries/:id">
         <LibraryDetails />
       </Route>
