@@ -12,7 +12,7 @@ function Workspace() {
   return (
     <Switch>
       <Route exact path="/iframe.html">
-        <LibraryDetails />
+        <MyLibraries />
       </Route>
       <Route path="/libraries">
         <MyLibraries />
