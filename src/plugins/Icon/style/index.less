@@ -210,6 +210,15 @@
         }
       }
 
+      .ant-card-cover {
+        .ant-spin-blur {
+          opacity: 1;
+        }
+        .ant-spin-container:after {
+          background-color: var(--main-color-brand);
+        }
+      }
+
       .library-image-wrapper {
         border-top-left-radius: 2px;
         border-top-right-radius: 2px;
@@ -224,25 +233,37 @@
       }
       .ant-card-body {
         padding: 0;
+        height: 70px;
+        display: flex;
+        flex-direction: row;
       }
       .lib-description {
-        padding-top: 4px;
-        position: relative;
-        height: 70px;
+        padding: 8px 0 16px 16px;
+        flex: 1;
         .library-name-header {
-          position: absolute;
           bottom: 50%;
           font-weight: 300;
           font-size: 18px;
-          margin: 5px 15px 0 15px;
-          padding-bottom: 4px;
+          line-height: 24px;
+          margin: 0;
         }
         .library-item-count-label {
-          position: absolute;
           top: 50%;
-          margin: 0 0 0 15px;
           font-size: 15px;
           color: #787878;
+          margin-bottom: 0;
+        }
+      }
+      .lib-actions-menu {
+        display: flex;
+        align-items: center;
+        padding-right: 8px;
+        .ant-dropdown-link {
+          height: 32px;
+          width: 32px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
       }
     }

@@ -22,7 +22,7 @@ const meta: Meta = {
 };
 
 const client = new ApolloClient({
-  uri: 'http://localhost:8080/graphql',
+  uri: 'https://api.asany.cn/graphql',
   cache: new InMemoryCache(),
 });
 
