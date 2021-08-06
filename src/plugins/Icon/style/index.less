@@ -100,6 +100,24 @@
     color: var(--primary-second-color);
   }
 
+  a.name-editing-cancel,
+  a.name-editing-ok {
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+      color: var(--primary-color);
+    }
+    &.name-editing-cancel {
+      font-size: 14px;
+    }
+    &.name-editing-ok {
+      font-size: 16px;
+    }
+  }
+
   .os-host {
     height: calc(100vh - var(--editor-navigation-height));
     padding: 24px;
@@ -145,6 +163,10 @@
       position: relative;
       background: #e0dfdf;
 
+      &.ant-card-hoverable {
+        cursor: default;
+      }
+
       &.library-create {
         .ant-card-body {
           display: flex;
@@ -160,7 +182,7 @@
           flex-direction: column;
 
           &.active {
-            .library-action-buttons .anticon {
+            .library-action-buttons .anyicon {
               opacity: 1;
             }
           }
@@ -179,8 +201,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-
-            .anticon {
+            .name-editing-cancel {
+              font-size: 16px;
+            }
+            .name-editing-ok {
+              font-size: 18px;
+            }
+            .anyicon {
               height: 32px;
               width: 32px;
               display: flex;
@@ -238,16 +265,44 @@
         flex-direction: row;
       }
       .lib-description {
-        padding: 8px 0 16px 16px;
+        padding: 6px 0 12px 16px;
         flex: 1;
         .library-name-header {
-          bottom: 50%;
+          padding-right: 32px;
+          height: 28px;
           font-weight: 300;
           font-size: 18px;
-          line-height: 24px;
+          line-height: 28px;
           margin: 0;
+          display: flex;
+          align-items: center;
+
+          .ant-input-rimless {
+            padding: 0;
+            height: 28px;
+            font-weight: 300;
+            color: var(--primary-second-color);
+            font-size: inherit;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            border-bottom-color: var(--text-color-subtle-contrast);
+          }
+
+          .ant-spin-blur {
+            opacity: 0;
+          }
+
+          .ant-spin-container:after {
+            background-color: transparent;
+          }
+
+          .ant-spin-container {
+            display: flex;
+            flex-direction: row;
+          }
         }
         .library-item-count-label {
+          height: 24px;
           top: 50%;
           font-size: 15px;
           color: #787878;
@@ -261,6 +316,7 @@
         .ant-dropdown-link {
           height: 32px;
           width: 32px;
+          font-size: 24px;
           display: flex;
           justify-content: center;
           align-items: center;

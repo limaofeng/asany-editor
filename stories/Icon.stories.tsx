@@ -1,12 +1,9 @@
 import 'antd/dist/antd.css';
 
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
-import Icon, { IconProvider } from '@asany/icons';
+import { IconProvider } from '@asany/icons';
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { useCallback } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -30,42 +27,7 @@ export default meta;
 
 const Template: Story<any> = (_args) => {
   const plugin = { ...IconPlugin };
-  // plugin.scena = {.
-  //   ...plugin.scena,
-  //   workspace: () => {
-  //     const store = useStore();
-  //     const [lib, setLib] = useState<IconLibrary | undefined>();
-  //     const loadLocalLibrary = useCallback(async () => {
-  //       const lib = await store.local();
-  //       setLib(lib);
-  //     }, []);
-  //     useEffect(() => {
-  //       loadLocalLibrary();
-  //       return store.onChange(loadLocalLibrary);
-  //     }, []);
 
-  //     if (!lib) {
-  //       return <></>;
-  //     }
-
-  //     return (
-  //       <div
-  //         style={{
-  //           width: '100%',
-  //           padding: 20,
-  //         }}
-  //       >
-  //         <h3>{lib.description}</h3>
-  //         <hr />
-  //         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-  //           {lib.icons.map((item) => (
-  //             <Icon key={item.id} style={{ padding: 16 }} name={item.name} />
-  //           ))}
-  //         </div>
-  //       </div>
-  //     );
-  //   },
-  // };
   return (
     <DndProvider backend={HTML5Backend}>
       <ApolloProvider client={client}>

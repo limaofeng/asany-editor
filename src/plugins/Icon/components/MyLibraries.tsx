@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Input, Card, Spin, Dropdown, Menu, Modal } from 'antd';
 import classnames from 'classnames';
@@ -69,8 +69,12 @@ function LibraryCreate(props: LibraryCreateProps) {
         />
         <Spin spinning={loading} indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}>
           <div className="library-action-buttons">
-            <Icon name="VectorAlign" onClick={handleCancel} />
-            <Icon name="VectorSubtraction" onClick={active ? handleSubmit : undefined} />
+            <a className="name-editing-cancel" onClick={handleCancel}>
+              <Icon name="Ion/close" />
+            </a>
+            <a className="name-editing-ok" onClick={active ? handleSubmit : undefined}>
+              <Icon name="Ion/checkmark" />
+            </a>
           </div>
         </Spin>
       </div>
@@ -86,16 +90,54 @@ type LibraryCardProps = {
 
 function LibraryCard({ library, submiting, onClickDelete }: LibraryCardProps) {
   const actionsContainer = useRef<HTMLDivElement>(null);
+  const name = useRef<Input>(null);
+  const [state, setState] = useState({ submiting, editing: false });
   let history = useHistory();
 
-  function handleClick() {
-    history.push('/libraries/1');
-  }
+  const [updateLibrary, { loading }] = useMutation(gql`
+    mutation updateLibrary($id: ID!, $input: LibraryUpdateInput!) {
+      library: updateLibrary(id: $id, input: $input) {
+        id
+        name
+      }
+    }
+  `);
+
+  useEffect(() => {
+    setState({ ...state, submiting });
+  }, [submiting]);
+
+  const handleClick = useCallback(() => {
+    history.push('/libraries/' + library.id);
+  }, []);
 
   const handleMenuClick = useCallback((e) => {
-    if (e.key === 'delete') {
-      onClickDelete(library);
+    switch (e.key) {
+      case 'delete':
+        return onClickDelete(library);
+      case 'rename':
+        setTimeout(() => {
+          name.current?.focus();
+        }, 100);
+        return setState({ editing: true, submiting: false });
     }
+  }, []);
+
+  const handleEditCancel = useCallback(() => {
+    setState({ editing: false, submiting: false });
+  }, []);
+
+  const handleNameSave = useCallback(async () => {
+    await updateLibrary({
+      variables: {
+        id: library.id,
+        input: {
+          name: name.current?.input.value,
+          description: library.description,
+        },
+      },
+    });
+    setState({ editing: false, submiting: false });
   }, []);
 
   return (
@@ -103,19 +145,34 @@ function LibraryCard({ library, submiting, onClickDelete }: LibraryCardProps) {
       className="library-container"
       hoverable
       cover={
-        <Spin spinning={submiting} indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}>
+        <Spin spinning={state.submiting} indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}>
           <div onClick={handleClick} className="library-image-wrapper empty-library"></div>
         </Spin>
       }
     >
       <div className="lib-description">
         <h1 className="library-name-header">
-          <Link to="/libraries/1">{library.name}</Link>
+          {state.editing ? (
+            <>
+              <Input ref={name} className="ant-input-rimless" defaultValue={library.name} />
+              <Spin spinning={loading} indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}>
+                <a className="name-editing-cancel" onClick={handleEditCancel}>
+                  <Icon name="Ion/close" />
+                </a>
+                <a className="name-editing-ok" onClick={handleNameSave}>
+                  <Icon name="Ion/checkmark" />
+                </a>
+              </Spin>
+            </>
+          ) : (
+            <Link to={`/libraries/${library.id}`}>{library.name}</Link>
+          )}
         </h1>
         <p className="library-item-count-label">{library.total} items</p>
       </div>
       <div ref={actionsContainer} className="lib-actions-menu">
         <Dropdown
+          arrow
           transitionName=""
           trigger={['click']}
           placement="bottomRight"
@@ -127,7 +184,9 @@ function LibraryCard({ library, submiting, onClickDelete }: LibraryCardProps) {
             </Menu>
           }
         >
-          <Icon onClick={(e) => e.preventDefault()} className="ant-dropdown-link" name="VectorSubtraction" />
+          <a className="ant-dropdown-link">
+            <Icon onClick={(e) => e.preventDefault()} name="Ion/navicon" />
+          </a>
         </Dropdown>
       </div>
     </Card>
@@ -146,12 +205,11 @@ function MyLibraries() {
         libraries: iconLibraries {
           id
           name
-          # total
+          total
           description
         }
       }
-    `,
-    { fetchPolicy: 'no-cache' }
+    `
   );
 
   const [deleteLibrary] = useMutation(gql`
