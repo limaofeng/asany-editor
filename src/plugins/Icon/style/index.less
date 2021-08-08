@@ -326,11 +326,100 @@
   }
 }
 .ie-library-details {
-  .libraries-header-section .libraries-header {
-    margin-top: 0;
-    margin-bottom: 0;
+  .libraries-header-section {
+    display: flex;
+    .library-left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .library-right {
+      display: flex;
+      align-items: center;
+      .ant-dropdown-link {
+        height: 28px;
+        font-size: 28px;
+      }
+    }
+    .libraries-header {
+      margin-top: 0;
+      margin-bottom: 0;
+
+      .anyicon {
+        font-size: 18px;
+      }
+    }
   }
   .mosaic-container {
-    padding: 24px;
+    min-height: calc(100vh - 88px - var(--editor-navigation-height));
+    padding-top: 12px;
+    padding-bottom: 24px;
+
+    .icon-mosaic-set {
+      .ims-header-section {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-size: 24px;
+        margin-bottom: 16px;
+        box-shadow: 0 2px #f1f1f1, 0 3px #d4d4d4;
+
+        .ims-hs-title {
+          flex: 1;
+          padding-left: 4px;
+        }
+
+        .ims-hs-actions {
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+
+    .icon-mosaic {
+      display: inline-flex;
+      margin-right: 12px;
+      margin-top: 12px;
+      cursor: pointer;
+
+      &.mode-list {
+        width: 280px;
+        margin-right: 48px;
+        margin-top: 24px;
+        margin-bottom: 12px;
+        .icon-thumb {
+          background: transparent;
+          height: 48px;
+          width: 48px;
+          justify-content: start;
+        }
+        &:hover .icon-thumb {
+          box-shadow: none;
+        }
+        box-shadow: 0 2px #f1f1f1, 0 3px #d4d4d4;
+      }
+
+      &:hover {
+        .icon-thumb {
+          box-shadow: inset 0 0 0 3px #ccc;
+        }
+      }
+
+      &.selected {
+        .icon-thumb {
+          box-shadow: inset 0 0 0 3px var(--primary-focus-color);
+          background: var(--general-background);
+        }
+      }
+    }
+
+    .icon-thumb {
+      width: 72px;
+      height: 72px;
+      font-size: 32px;
+      transition: background 0.1s;
+      border-radius: 5px;
+      background-color: #ddd;
+    }
   }
 }

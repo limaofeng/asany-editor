@@ -18,8 +18,8 @@ export default {
   },
   reducer,
   sidebar: {
-    visible: false,
-    content: Sidebar,
+    visible: true,
+    // content: Sidebar,
     tools: [
       {
         id: 'top',

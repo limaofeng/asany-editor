@@ -54,10 +54,10 @@
     tslib "^2.3.0"
     zen-observable-ts "^1.1.0"
 
-"@asany/icons@^0.1.7":
-  version "0.1.7"
-  resolved "https://registry.npmjs.org/@asany/icons/-/icons-0.1.7.tgz#c09e4c2b592ec1848883a996961bbca463a8c1fb"
-  integrity sha512-RDFjRDfz5iIlxU7IaZ9pGR27Y8vdS1+vQSayc5uDyonUY5wjt+qNWhVPtol8w649iKtCio/uNbIY7nRvHEQg+g==
+"@asany/icons@^0.1.8":
+  version "0.1.8"
+  resolved "https://registry.npmjs.org/@asany/icons/-/icons-0.1.8.tgz#effeea84d59662f6d6d2df9d8917aa3f7e4dc7db"
+  integrity sha512-8TE1WP0CiKSOin6jVvda6fEVylNqz2gGnoJ9eLIlkCma5i2CkYglpLUuA+2K0lhIA4KjPeflxJ2iAOHbGixpcw==
   dependencies:
     classnames "^2.3.1"
     dexie "^3.0.3"
