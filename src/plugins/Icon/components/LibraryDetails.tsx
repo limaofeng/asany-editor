@@ -29,16 +29,12 @@ const GET_LIBRARY_DETAILS = gql`
 type IconThumbProps = {
   icon: any;
   selected: boolean;
-  onClick(id: string): void;
 };
 
 const IconMosaic = React.memo((props: IconThumbProps) => {
-  const { selected, icon, onClick } = props;
-  const handleClick = useCallback(() => {
-    onClick && onClick(icon.id);
-  }, []);
+  const { selected, icon } = props;
   return (
-    <div className={classnames('icon-mosaic', { selected })} data-key={icon.id} onClick={handleClick}>
+    <div className={classnames('icon-mosaic', { selected })} data-key={icon.id}>
       <span
         role="img"
         className="anyicon icon-thumb"
@@ -66,16 +62,6 @@ function LibraryDetails() {
   const popupContainer = useCallback(() => dropdownContainer.current!, []);
 
   const handleMenuClick = useCallback(() => {}, []);
-
-  const handleIconClick = useCallback((key: string) => {
-    // setSelectedKeys((selectedKeys) => {
-    //   console.log('selectedKeys', selectedKeys, key);
-    //   if (selectedKeys.includes(key)) {
-    //     return selectedKeys.filter((item) => item !== key);
-    //   }
-    //   return [...selectedKeys, key];
-    // });
-  }, []);
 
   const { library } = data || {};
 
@@ -123,12 +109,7 @@ function LibraryDetails() {
               </div>
               <div className="ims-header-body">
                 {library?.icons.map((item) => (
-                  <IconMosaic
-                    key={item.id}
-                    selected={selectedKeys.has(item.id!)}
-                    onClick={handleIconClick}
-                    icon={item}
-                  />
+                  <IconMosaic key={item.id} selected={selectedKeys.has(item.id!)} icon={item} />
                 ))}
               </div>
             </div>
