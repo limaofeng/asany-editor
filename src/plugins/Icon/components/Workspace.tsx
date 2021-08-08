@@ -11,6 +11,9 @@ function Workspace() {
   }, [location]);
   return (
     <Switch>
+      <Route path="/asany-editor/iframe.html">
+        <MyLibraries />
+      </Route>
       <Route exact path="/iframe.html">
         <LibraryDetails />
       </Route>
