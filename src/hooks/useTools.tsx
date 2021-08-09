@@ -28,7 +28,7 @@ const buildClick = (editor: IAsanyEditor, item: AsanyTool): ToolClick => {
     if (!item.isSelected!(item.useSelector ? item.useSelector(editor.state) : undefined)) {
       item.deselect = onClick && onClick(editor);
     } else {
-      item.deselect ? item.deselect(editor) : editor.sidebar.close();
+      item.deselect ? item.deselect(editor) : onClick && onClick(editor);
     }
   };
 };

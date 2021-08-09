@@ -374,11 +374,14 @@
           align-items: center;
         }
       }
+      .ims-header-body {
+        margin-left: -12px;
+      }
     }
 
     .icon-mosaic {
       display: inline-flex;
-      margin-right: 12px;
+      margin-left: 12px;
       margin-top: 12px;
       cursor: pointer;
 
@@ -421,5 +424,16 @@
       border-radius: 5px;
       background-color: #ddd;
     }
+  }
+  .os-host {
+    width: calc(100% - 240px);
+  }
+  .control-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 240px;
+    height: 100%;
+    background: #ddd;
   }
 }

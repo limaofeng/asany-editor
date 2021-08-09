@@ -157,5 +157,5 @@ export default {
       );
     },
   },
-  features: ['zoom', 'ruler'],
+  features: [],
 } as EditorPlugin;

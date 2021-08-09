@@ -70,6 +70,14 @@
   dependencies:
     lodash-es "^4.17.21"
 
+"@asany/sortable@^0.1.16":
+  version "0.1.16"
+  resolved "https://registry.npmjs.org/@asany/sortable/-/sortable-0.1.16.tgz#3ef612a73d22c1faa3ddfe12dc50102a56f57fd4"
+  integrity sha512-RrM1yhstoTWA/Ero0WPuS3trtpVdfIRDRDT5NKjWlpCssaW0nyIme98G/fuixEMh2kVUS+CuvHJRVWOu15ngwQ==
+  dependencies:
+    immutability-helper "^3.1.1"
+    react-flip-toolkit "^7.0.13"
+
 "@babel/code-frame@7.10.4":
   version "7.10.4"
   resolved "https://registry.npmjs.org/@babel/code-frame/-/code-frame-7.10.4.tgz#168da1a36e90da68ae8d49c0f1b48c7c6249213a"
@@ -7332,6 +7340,13 @@ flatted@^3.1.0:
   resolved "https://registry.npmjs.org/flatted/-/flatted-3.2.2.tgz#64bfed5cb68fe3ca78b3eb214ad97b63bedce561"
   integrity sha512-JaTY/wtrcSyvXJl4IMFHPKyFur1sE9AUqc0QnhOaJ0CxHtAoIV8pYDzeEfAaNEtGkOfq4gr3LBFmdXW5mOQFnA==
 
+flip-toolkit@7.0.13:
+  version "7.0.13"
+  resolved "https://registry.npmjs.org/flip-toolkit/-/flip-toolkit-7.0.13.tgz#015d2d7ae4ef0abe3d1adff45fd98d4b63ef0202"
+  integrity sha512-9rj4mPk2FeKu/FW8Rvl3YrU8Hc7uSUYpzk3ZBeVF0xaaZsoVMLrfmffrDsrQgASvbTbd5kEf9yjfSwEZ+30cKg==
+  dependencies:
+    rematrix "0.2.2"
+
 flush-write-stream@^1.0.0:
   version "1.1.1"
   resolved "https://registry.npmjs.org/flush-write-stream/-/flush-write-stream-1.1.1.tgz#8dd7d873a1babc207d94ead0c2e0e44276ebf2e8"
@@ -8377,6 +8392,11 @@ immer@8.0.1:
   version "8.0.1"
   resolved "https://registry.npmjs.org/immer/-/immer-8.0.1.tgz#9c73db683e2b3975c424fb0572af5889877ae656"
   integrity sha512-aqXhGP7//Gui2+UrEtvxZxSquQVXTpZ7KDxfCcKAF3Vysvw0CViVaW9RZ1j1xlIYqaaaipBoqdqeibkc18PNvA==
+
+immutability-helper@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.npmjs.org/immutability-helper/-/immutability-helper-3.1.1.tgz#2b86b2286ed3b1241c9e23b7b21e0444f52f77b7"
+  integrity sha512-Q0QaXjPjwIju/28TsugCHNEASwoCcJSyJV3uO1sOIQGI0jKgm9f41Lvz0DZj3n46cNCyAZTsEYoY4C2bVRUzyQ==
 
 import-cwd@^3.0.0:
   version "3.0.0"
@@ -12248,7 +12268,7 @@ prompts@^2.0.1, prompts@^2.4.0:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.0.0, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.0.0, prop-types@^15.5.7, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -12925,6 +12945,14 @@ react-fast-compare@^3.0.1, react-fast-compare@^3.2.0:
   resolved "https://registry.npmjs.org/react-fast-compare/-/react-fast-compare-3.2.0.tgz#641a9da81b6a6320f270e89724fb45a0b39e43bb"
   integrity sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==
 
+react-flip-toolkit@^7.0.13:
+  version "7.0.13"
+  resolved "https://registry.npmjs.org/react-flip-toolkit/-/react-flip-toolkit-7.0.13.tgz#3dd0b58e0cc54c3420bcbf973df899d1d63cd626"
+  integrity sha512-HNsw07LPR9mduytuIzRhb/uslkxFkQlHoXFA2M3O0CutwKM9v7X0SK44uxJgo+S5iP2FeR8gTBSbq/fkrxYEfg==
+  dependencies:
+    flip-toolkit "7.0.13"
+    prop-types "^15.5.7"
+
 react-focus-lock@^2.1.0:
   version "2.5.2"
   resolved "https://registry.npmjs.org/react-focus-lock/-/react-focus-lock-2.5.2.tgz#f1e4db5e25cd8789351f2bd5ebe91e9dcb9c2922"
@@ -13448,6 +13476,11 @@ remark-squeeze-paragraphs@4.0.0:
   integrity sha512-8qRqmL9F4nuLPIgl92XUuxI3pFxize+F1H0e/W3llTk0UsjJaj01+RrirkMw7P21RKe4X6goQhYRSvNWX+70Rw==
   dependencies:
     mdast-squeeze-paragraphs "^4.0.0"
+
+rematrix@0.2.2:
+  version "0.2.2"
+  resolved "https://registry.npmjs.org/rematrix/-/rematrix-0.2.2.tgz#c96a050260782db9908904885991256e23beda5d"
+  integrity sha512-agFFS3RzrLXJl5LY5xg/xYyXvUuVAnkhgKO7RaO9J1Ssth6yvbO+PIiV67V59MB5NCdAK2flvGvNT4mdKVniFA==
 
 remove-trailing-separator@^1.0.1:
   version "1.1.0"

@@ -34,8 +34,8 @@ export default class SidebarHelperImpl implements SidebarHelper {
 
   select(key: string, toolboard?: boolean) {
     const tools = this.tools();
-    const item = tools.find((item) => item.id === key);
-    const mutexs = item!.mutex ? tools.filter((t) => t.mutex === item!.mutex) : [];
+    const item = tools.find((item) => item.id === key)!;
+    const mutexs = item.mutex ? tools.filter((t) => t.mutex === item.mutex && t.id != key) : [];
 
     if (mutexs.length) {
       this.unselect(...mutexs.map((item) => item.id));

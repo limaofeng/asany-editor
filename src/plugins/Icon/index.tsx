@@ -5,38 +5,47 @@ import React from 'react';
 
 import { EditorPlugin } from '../../typings';
 import Navigation from './components/Navigation';
-import Sidebar from './components/Sidebar';
+// import Sidebar from './components/Sidebar';
 import Workspace from './components/Workspace';
 import reducer from './reducer';
 
 export default {
-  id: 'demo',
+  id: 'icon',
   description: '',
-  types: ['demo'],
+  types: ['icon'],
   toolbar: {
     content: Navigation,
   },
   reducer,
   sidebar: {
-    visible: false,
-    content: Sidebar,
+    visible: true,
+    // content: Sidebar,
     tools: [
       {
-        id: 'top',
-        icon: () => (
-          <div
-            style={{
-              wordWrap: 'break-word',
-              wordBreak: 'break-all',
-              width: 14,
-              color: '#727d83',
-            }}
-          >
-            左侧快捷栏
-          </div>
-        ),
-        style: { height: '100%' },
+        id: 'selecto',
+        name: '选择',
+        icon: 'SelectFilled',
         position: 'top',
+        mutex: 'icons-actions',
+        useSelector: (state) => state.workspace.icon.selecto,
+        isSelected: (selecto) => selecto,
+        onClick: (editor) => {
+          return editor.sidebar.select('selecto');
+          //   // const active = !editor.state.workspace.icon.selecto;
+          //   // editor.dispatch({ type: IconActionType.SELECTO, payload: active });
+        },
+      },
+      {
+        id: 'move',
+        name: '选择',
+        icon: 'Move',
+        position: 'top',
+        mutex: 'icons-actions',
+        useSelector: (state) => state.workspace.icon.move,
+        isSelected: (move) => move,
+        onClick: (editor) => {
+          return editor.sidebar.select('move');
+        },
       },
       {
         id: 'bottom',
