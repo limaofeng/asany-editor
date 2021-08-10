@@ -4,7 +4,7 @@ import { Dropdown, Menu, Spin } from 'antd';
 import classnames from 'classnames';
 import gql from 'graphql-tag';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
-import React, { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
+import React, { forwardRef, useCallback, useEffect, useRef, useState, memo } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Selecto from 'react-selecto';
 import { useSelector } from '../../../hooks';
@@ -33,62 +33,49 @@ interface IconThumbProps extends SortableItemProps<any> {
   selected: boolean;
 }
 
-const IconMosaic = forwardRef((props: IconThumbProps, ref: any) => {
-  const { drag } = props;
-  const { selected, onClick, ...icon } = props.data;
-  console.log('icon', icon.name, selected);
-  const handleClick = () => {
-    console.log('handleClick', icon, onClick);
-    onClick(icon.id);
-  };
-  return (
-    <div ref={drag(ref)} className={classnames('icon-mosaic', { selected })} data-key={icon.id}>
-      <span
-        onClick={handleClick}
-        role="img"
-        className="anyicon icon-thumb"
-        aria-label={icon.name}
-        dangerouslySetInnerHTML={{
-          __html: icon.content,
-        }}
-      />
-    </div>
-  );
-});
+const IconMosaic = memo(
+  forwardRef((props: IconThumbProps, ref: any) => {
+    const { drag, icon, selected } = props;
+    // const handleClick = () => {
+    //   console.log('handleClick', icon, onClick);
+    //   onClick(icon.id);
+    // };
+    //ref={drag(ref)}
+    return (
+      <div className={classnames('icon-mosaic', { selected })} data-key={icon.id}>
+        <span
+          // onClick={handleClick}
+          role="img"
+          className="anyicon icon-thumb"
+          aria-label={icon.name}
+          dangerouslySetInnerHTML={{
+            __html: icon.content,
+          }}
+        />
+      </div>
+    );
+  })
+);
 
 function LibraryDetails() {
   const dropdownContainer = useRef<HTMLDivElement>(null);
   const mosaicContainer = useRef<HTMLDivElement>(null);
+  const temp = useRef<{ selecto?: boolean; move?: boolean; selectedKeys: Set<string> }>({ selectedKeys: new Set() });
   const selecto = useRef<Selecto>(null);
   const params = useParams<{ id: string }>();
-  const [icons, setIcons] = useState<any[]>([]);
+  // const [icons, setIcons] = useState<any[]>([]);
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set<string>());
-  const selectoEnabled = useSelector((state) => state.workspace.icon.selecto);
-  const moveEnabled = useSelector((state) => state.workspace.icon.move);
-  const id = params.id || '555'; // TODO: 调试完成后，去掉固定变量
 
-  console.log('selectoEnabled', selectoEnabled);
+  temp.current.selecto = useSelector((state) => state.workspace.icon.selecto);
+  temp.current.move = useSelector((state) => state.workspace.icon.move);
+  temp.current.selectedKeys = selectedKeys;
+
+  const id = params.id || '555'; // TODO: 调试完成后，去掉固定变量
 
   const { data, loading } = useQuery<{ library: IconLibrary }>(GET_LIBRARY_DETAILS, {
     variables: { id },
     fetchPolicy: 'cache-and-network',
   });
-
-  useEffect(() => {
-    if (!data?.library.icons || !data.library.icons.length) {
-      return;
-    }
-    console.log('rechange icons');
-    setIcons(
-      data.library.icons.map((item) => ({
-        ...item,
-        selected: selectedKeys.has(item.id!),
-        id: item.id!,
-        type: 'sortable-card',
-        onClick: handleIconClick,
-      }))
-    );
-  }, [data?.library.icons, Array.from(selectedKeys).join(',')]);
 
   const popupContainer = useCallback(() => dropdownContainer.current!, []);
 
@@ -110,6 +97,10 @@ function LibraryDetails() {
   }, []);
 
   const { library } = data || {};
+
+  const handleSelectoDragCondition = useCallback(() => !!temp.current.selecto, []);
+
+  const handleMoveDragCondition = useCallback(() => !!temp.current.move, []);
 
   // const icons = library?.icons || [];
   return (
@@ -158,12 +149,20 @@ function LibraryDetails() {
                 className="ims-header-body"
                 layout="grid"
                 style={{ listStyle: 'none', padding: 0 }}
-                items={icons}
+                items={library?.icons || []}
                 onChange={handleChange}
-                itemRender={IconMosaic}
+                dragCondition={handleMoveDragCondition}
+                itemRender={(props, ref) => (
+                  <IconMosaic
+                    {...props}
+                    icon={props.data}
+                    selected={temp.current.selectedKeys.has(props.data.id)}
+                    ref={ref}
+                  />
+                )}
               />
             </div>
-            {/* <Selecto
+            <Selecto
               ref={selecto}
               // The container to add a selection element
               container={mosaicContainer.current}
@@ -181,7 +180,7 @@ function LibraryDetails() {
               toggleContinueSelect={'shift'}
               // The container for keydown and keyup events
               keyContainer={window}
-              dragCondition={() => selectoEnabled}
+              dragCondition={handleSelectoDragCondition}
               // The rate at which the target overlaps the drag area to be selected. (default: 100)
               hitRate={0}
               onSelect={(e) => {
@@ -190,8 +189,14 @@ function LibraryDetails() {
                   e.removed.map((item) => item.dataset['key']!).forEach(selectedKeys.delete.bind(selectedKeys));
                   return new Set<string>(selectedKeys);
                 });
+                // e.added.forEach((el) => {
+                //   el.classList.add('selected');
+                // });
+                // e.removed.forEach((el) => {
+                //   el.classList.remove('selected');
+                // });
               }}
-            /> */}
+            />
           </div>
         </OverlayScrollbarsComponent>
         <div className="control-panel">sdfsdf</div>

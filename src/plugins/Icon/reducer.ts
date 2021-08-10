@@ -18,8 +18,8 @@ export interface ISketchState {
 
 const defaultState: ISketchState = {
   count: 0,
-  selecto: true,
-  move: false,
+  selecto: false,
+  move: true,
 };
 
 export default function reducer(
