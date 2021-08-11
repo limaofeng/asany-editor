@@ -9,7 +9,7 @@ import { UIActionType } from '../../reducers/actions';
 import { ComponentPropertyType, father, IComponentProperty } from '../../typings';
 import { useDebounce, visibleFilter } from '../../utils';
 import ConfigurationToolbar from './ConfigurationToolbar';
-import Settings, { ISettings, TabPane } from './PropertiesPanel';
+import PropertiesPanel, { IPropertiesPanel, TabPane } from './PropertiesPanel';
 
 // import { visibleFilter } from '../../../library-manager/ConfigurationPanel';
 // import LibraryManager from '../../../library-manager/LibraryManager';
@@ -140,7 +140,7 @@ function Aside(_: AsideProps) {
 
   const handleClose = useCallback(() => dispatch({ type: UIActionType.CloseAside }), []);
 
-  const configuration = useRef<ISettings>(null);
+  const configuration = useRef<IPropertiesPanel>(null);
 
   useEffect(() => {
     dispatch({
@@ -165,7 +165,7 @@ function Aside(_: AsideProps) {
   const top = typeof options.top === 'number' ? options.top : 50 + (scenaToolbarVisible ? 40 : 0);
 
   return (
-    <Settings
+    <PropertiesPanel
       className="sketch-configuration"
       ref={configuration}
       style={{

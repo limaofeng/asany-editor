@@ -70,10 +70,10 @@
   dependencies:
     lodash-es "^4.17.21"
 
-"@asany/sortable@^0.1.19":
-  version "0.1.19"
-  resolved "https://registry.npmjs.org/@asany/sortable/-/sortable-0.1.19.tgz#d0aa9765f42230798274e783782ab7a5d4275a77"
-  integrity sha512-b1X7I6M167g49Kz7aNLasmQLxWDhylT144kjzRT711yrd2QazOjj3r41Hp5D+E/nb1PjhdJYfpbZAzEdfWuYFA==
+"@asany/sortable@^0.1.22":
+  version "0.1.22"
+  resolved "https://registry.npmjs.org/@asany/sortable/-/sortable-0.1.22.tgz#199065b0eda4485fa9825168615a41e844aec361"
+  integrity sha512-kdgEzD6PZ0t7P9Th+yO7h7u+2DMq+12Ljg1bUJwP2ouuF3nfGs5dA8h6qucD0AyD2Bug3I+FpwbXvuV6gOt5Fg==
   dependencies:
     immutability-helper "^3.1.1"
     react-flip-toolkit "^7.0.13"

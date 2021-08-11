@@ -1,14 +1,16 @@
 import { useQuery } from '@apollo/client';
 import Icon, { IconLibrary } from '@asany/icons';
+import Sortable, { SortableItemProps } from '@asany/sortable';
 import { Dropdown, Menu, Spin } from 'antd';
 import classnames from 'classnames';
 import gql from 'graphql-tag';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
-import React, { forwardRef, useCallback, useEffect, useRef, useState, memo } from 'react';
+import React, { forwardRef, memo, useCallback, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Selecto from 'react-selecto';
+
 import { useSelector } from '../../../hooks';
-import Sortable, { SortableItemProps } from '@asany/sortable';
+import LibraryControlPanel from './LibraryControlPanel';
 
 const GET_LIBRARY_DETAILS = gql`
   query library($id: ID!) {
@@ -35,16 +37,18 @@ interface IconThumbProps extends SortableItemProps<any> {
 
 const IconMosaic = memo(
   forwardRef((props: IconThumbProps, ref: any) => {
-    const { drag, icon, selected } = props;
-    // const handleClick = () => {
-    //   console.log('handleClick', icon, onClick);
-    //   onClick(icon.id);
-    // };
-    //ref={drag(ref)}
+    const { drag, icon, selected, className, clicked } = props;
     return (
-      <div className={classnames('icon-mosaic', { selected })} data-key={icon.id}>
+      <div
+        ref={drag(ref)}
+        className={classnames(
+          'icon-mosaic',
+          { selected, 'sortable-item-dragging': clicked && !className?.includes('sortable-item-dragging') },
+          className
+        )}
+        data-key={icon.id}
+      >
         <span
-          // onClick={handleClick}
           role="img"
           className="anyicon icon-thumb"
           aria-label={icon.name}
@@ -79,21 +83,10 @@ function LibraryDetails() {
 
   const popupContainer = useCallback(() => dropdownContainer.current!, []);
 
-  const handleIconClick = useCallback((key: string) => {
-    // setSelectedKeys((selectedKeys) => {
-    //   if (selectedKeys.has(key)) {
-    //     selectedKeys.delete(key);
-    //   } else {
-    //     selectedKeys.add(key);
-    //   }
-    //   return new Set(selectedKeys);
-    // });
-  }, []);
-
   const handleMenuClick = useCallback(() => {}, []);
 
-  const handleChange = useCallback((data, event) => {
-    console.log(data, event);
+  const handleChange = useCallback((_, event) => {
+    // console.log('sort change', event);
   }, []);
 
   const { library } = data || {};
@@ -102,7 +95,6 @@ function LibraryDetails() {
 
   const handleMoveDragCondition = useCallback(() => !!temp.current.move, []);
 
-  // const icons = library?.icons || [];
   return (
     <div className="ie-libraries ie-library-details">
       <Spin spinning={loading}>
@@ -137,7 +129,13 @@ function LibraryDetails() {
               </Dropdown>
             </div>
           </div>
-          <div ref={mosaicContainer} className="mosaic-container">
+          <div
+            ref={mosaicContainer}
+            className={classnames('mosaic-container', {
+              'feature-move': temp.current.move,
+              'feature-selecto': temp.current.selecto,
+            })}
+          >
             <div className="icon-mosaic-set">
               <div className="ims-header-section">
                 <span className="ims-hs-title">title</span>
@@ -164,42 +162,32 @@ function LibraryDetails() {
             </div>
             <Selecto
               ref={selecto}
-              // The container to add a selection element
               container={mosaicContainer.current}
-              // The area to drag selection element (default: container)
               dragContainer={mosaicContainer.current!}
-              // Targets to select. You can register a queryselector or an Element.
               selectableTargets={['.icon-mosaic']}
-              // Whether to select by click (default: true)
               selectByClick={true}
-              // Whether to select from the target inside (default: true)
               selectFromInside={true}
-              // After the select, whether to select the next target with the selected target (deselected if the target is selected again).
               continueSelect={false}
-              // Determines which key to continue selecting the next target via keydown and keyup.
               toggleContinueSelect={'shift'}
-              // The container for keydown and keyup events
               keyContainer={window}
               dragCondition={handleSelectoDragCondition}
-              // The rate at which the target overlaps the drag area to be selected. (default: 100)
               hitRate={0}
               onSelect={(e) => {
                 setSelectedKeys((selectedKeys) => {
                   e.added.map((item) => item.dataset['key']!).forEach(selectedKeys.add.bind(selectedKeys));
                   e.removed.map((item) => item.dataset['key']!).forEach(selectedKeys.delete.bind(selectedKeys));
+                  // 为了显示效果，通过 JSAPI 先直接修改样式
+                  e.added.forEach((el) => el.classList.add('selected'));
+                  e.removed.forEach((el) => el.classList.remove('selected'));
                   return new Set<string>(selectedKeys);
                 });
-                // e.added.forEach((el) => {
-                //   el.classList.add('selected');
-                // });
-                // e.removed.forEach((el) => {
-                //   el.classList.remove('selected');
-                // });
               }}
             />
           </div>
         </OverlayScrollbarsComponent>
-        <div className="control-panel">sdfsdf</div>
+        <div className="control-panel sketch-configuration">
+          <LibraryControlPanel />
+        </div>
       </Spin>
     </div>
   );

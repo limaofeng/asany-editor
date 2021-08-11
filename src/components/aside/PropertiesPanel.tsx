@@ -44,14 +44,14 @@ interface PropertiesPanelState {
   panels: Extra[];
 }
 
-export interface ISettings {
+export interface IPropertiesPanel {
   width: number;
   back: () => Promise<void>;
   switch: (activeKey: string) => void;
   next: (title: string, content: React.ReactElement) => void;
 }
 
-function PropertiesPanel(props: PropertiesPanelProps, ref: React.ForwardedRef<ISettings>) {
+function PropertiesPanel(props: PropertiesPanelProps, ref: React.ForwardedRef<IPropertiesPanel>) {
   const container = useRef<HTMLDivElement>(null);
   const { onClose, title, children, extras = [], content, style, className, tabs = [], footer } = props;
   const state = useRef<PropertiesPanelState>({
@@ -95,7 +95,7 @@ function PropertiesPanel(props: PropertiesPanelProps, ref: React.ForwardedRef<IS
     forceRender();
   };
 
-  useImperativeHandle<ISettings, any>(
+  useImperativeHandle<IPropertiesPanel, any>(
     ref,
     () => ({
       switch: (activeKey: string) => {

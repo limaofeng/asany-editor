@@ -3,17 +3,17 @@ import React from 'react';
 
 // import ConfigurationPanel from '../../library-manager/ConfigurationPanel';
 // import { ComponentPropertyType } from '../../library-manager/typings';
-import AsidePanel from '../components/aside/AsidePanel';
+
 import CurrentElementInformation from '../components/aside/components/CurrentElementInformation';
 import FormPanel from '../components/aside/FormPanel';
 import { useSelector } from '../hooks';
 import { AsideTabPane, ComponentPropertyType, DEFAULT_GROUP_ID, ICustomizer, IFieldGroup } from '../typings';
 
-function createPanel(customizer: ICustomizer) {
+export function createDynaActionForm(customizer: ICustomizer) {
   return ({ onChange: handleChange }: any) => {
     const value = useSelector((state) => state.current?.value);
     return (
-      <AsidePanel>
+      <div className="sketch-configuration-body scrollbars-visible">
         <OverlayScrollbarsComponent
           options={{ scrollbars: { autoHide: 'scroll' } }}
           style={{ height: 'calc(100vh - 136px)' }}
@@ -25,7 +25,7 @@ function createPanel(customizer: ICustomizer) {
             customizer={customizer!}
           />
         </OverlayScrollbarsComponent>
-      </AsidePanel>
+      </div>
     );
   };
 }
@@ -33,7 +33,7 @@ function createPanel(customizer: ICustomizer) {
 const createTabPane = (item: any): AsideTabPane => ({
   title: item.name,
   visible: item.visible,
-  content: createPanel(item.customizer),
+  content: createDynaActionForm(item.customizer),
 });
 
 export function buildAside(customizer: ICustomizer) {
