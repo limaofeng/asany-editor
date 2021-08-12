@@ -62,7 +62,7 @@
   },
   "devDependencies": {
     "@apollo/client": "^3.4.5",
-    "@asany/icons": "^0.1.8",
+    "@asany/icons": "^0.1.10",
     "@asany/library-manager": "^0.1.4",
     "@asany/sortable": "^0.1.22",
     "@babel/core": "^7.14.6",

@@ -447,5 +447,36 @@
     width: 240px;
     height: 100%;
     background: #fff;
+
+    .sketch-configuration-body {
+      height: calc(100vh - 64px);
+    }
+
+    .global-panel {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .import-icons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .import-icon-container {
+          display: block;
+          padding: 0 16px 16px 16px;
+          font-size: 160px;
+        }
+        p {
+          font-size: 14px;
+          margin-bottom: 0;
+        }
+        button {
+          width: auto;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+      }
+    }
   }
 }

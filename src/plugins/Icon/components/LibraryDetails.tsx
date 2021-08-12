@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import Icon, { IconLibrary } from '@asany/icons';
+import Icon, { IconLibraryDefinition, IconDefinition } from '@asany/icons';
 import Sortable, { SortableItemProps } from '@asany/sortable';
 import { Dropdown, Menu, Spin } from 'antd';
 import classnames from 'classnames';
@@ -30,8 +30,8 @@ const GET_LIBRARY_DETAILS = gql`
   }
 `;
 
-interface IconThumbProps extends SortableItemProps<any> {
-  icon: any;
+interface IconThumbProps extends SortableItemProps<IconDefinition> {
+  icon: IconDefinition;
   selected: boolean;
 }
 
@@ -74,9 +74,9 @@ function LibraryDetails() {
   temp.current.move = useSelector((state) => state.workspace.icon.move);
   temp.current.selectedKeys = selectedKeys;
 
-  const id = params.id || '555'; // TODO: 调试完成后，去掉固定变量
+  const id = params.id || '753'; // TODO: 调试完成后，去掉固定变量
 
-  const { data, loading } = useQuery<{ library: IconLibrary }>(GET_LIBRARY_DETAILS, {
+  const { data, loading } = useQuery<{ library: IconLibraryDefinition }>(GET_LIBRARY_DETAILS, {
     variables: { id },
     fetchPolicy: 'cache-and-network',
   });
@@ -85,7 +85,7 @@ function LibraryDetails() {
 
   const handleMenuClick = useCallback(() => {}, []);
 
-  const handleChange = useCallback((_, event) => {
+  const handleChange = useCallback((_) => {
     // console.log('sort change', event);
   }, []);
 
@@ -150,7 +150,7 @@ function LibraryDetails() {
                 items={library?.icons || []}
                 onChange={handleChange}
                 dragCondition={handleMoveDragCondition}
-                itemRender={(props, ref) => (
+                itemRender={(props: any, ref) => (
                   <IconMosaic
                     {...props}
                     icon={props.data}
@@ -185,9 +185,7 @@ function LibraryDetails() {
             />
           </div>
         </OverlayScrollbarsComponent>
-        <div className="control-panel sketch-configuration">
-          <LibraryControlPanel />
-        </div>
+        <div className="control-panel sketch-configuration">{library && <LibraryControlPanel library={library} />}</div>
       </Spin>
     </div>
   );

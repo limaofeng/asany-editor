@@ -4,7 +4,7 @@ import { Input, Card, Spin, Dropdown, Menu, Modal } from 'antd';
 import classnames from 'classnames';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import { Link } from 'react-router-dom';
-import Icon, { IconLibrary } from '@asany/icons';
+import Icon, { IconLibraryDefinition } from '@asany/icons';
 import { useMutation, useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import { LoadingOutlined } from '@ant-design/icons';
@@ -84,8 +84,8 @@ function LibraryCreate(props: LibraryCreateProps) {
 // TODO: 尝试添加及删除时的动画
 type LibraryCardProps = {
   submiting: boolean;
-  library: IconLibrary;
-  onClickDelete: (library: IconLibrary) => void;
+  library: IconLibraryDefinition;
+  onClickDelete: (library: IconLibraryDefinition) => void;
 };
 
 function LibraryCard({ library, submiting, onClickDelete }: LibraryCardProps) {
@@ -194,12 +194,16 @@ function LibraryCard({ library, submiting, onClickDelete }: LibraryCardProps) {
 }
 
 function MyLibraries() {
-  const [state, setState] = useState<{ library?: IconLibrary; deleteLibraryLoading?: boolean; visible: boolean }>({
+  const [state, setState] = useState<{
+    library?: IconLibraryDefinition;
+    deleteLibraryLoading?: boolean;
+    visible: boolean;
+  }>({
     visible: false,
     deleteLibraryLoading: false,
   });
 
-  const { data, loading, refetch } = useQuery<{ libraries: IconLibrary[] }>(
+  const { data, loading, refetch } = useQuery<{ libraries: IconLibraryDefinition[] }>(
     gql`
       query libraries {
         libraries: iconLibraries {
@@ -226,7 +230,7 @@ function MyLibraries() {
     setState({ visible: false });
   }, []);
 
-  const handleClickDelete = useCallback((library: IconLibrary) => {
+  const handleClickDelete = useCallback((library: IconLibraryDefinition) => {
     setState({ visible: true, library });
   }, []);
 
