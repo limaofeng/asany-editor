@@ -21,11 +21,12 @@ const IMPORT_ICONS = gql`
 `;
 
 interface GlobalPanelProps {
+  refresh: () => Promise<void>;
   library: IconLibraryDefinition;
 }
 
 function GlobalPanel(props: GlobalPanelProps) {
-  const { library } = props;
+  const { library, refresh } = props;
 
   const file = useRef<HTMLInputElement>(null);
 
@@ -42,12 +43,13 @@ function GlobalPanel(props: GlobalPanelProps) {
     );
     file.current?.setAttribute('type', 'text');
     file.current?.setAttribute('type', 'file');
-    importIcons({
+    await importIcons({
       variables: {
         library: library.id,
         icons,
       },
     });
+    refresh();
   }, []);
 
   return (
@@ -94,6 +96,7 @@ function GlobalPanel(props: GlobalPanelProps) {
 }
 
 interface LibraryControlPanelProps {
+  refresh: () => Promise<void>;
   library: IconLibraryDefinition;
 }
 

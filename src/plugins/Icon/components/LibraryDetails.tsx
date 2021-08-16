@@ -5,7 +5,7 @@ import { Dropdown, Menu, Spin } from 'antd';
 import classnames from 'classnames';
 import gql from 'graphql-tag';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
-import React, { forwardRef, memo, useCallback, useRef, useState } from 'react';
+import React, { forwardRef, memo, useCallback, useMemo, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Selecto from 'react-selecto';
 
@@ -67,16 +67,15 @@ function LibraryDetails() {
   const temp = useRef<{ selecto?: boolean; move?: boolean; selectedKeys: Set<string> }>({ selectedKeys: new Set() });
   const selecto = useRef<Selecto>(null);
   const params = useParams<{ id: string }>();
-  // const [icons, setIcons] = useState<any[]>([]);
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set<string>());
 
   temp.current.selecto = useSelector((state) => state.workspace.icon.selecto);
   temp.current.move = useSelector((state) => state.workspace.icon.move);
   temp.current.selectedKeys = selectedKeys;
 
-  const id = params.id || '753'; // TODO: 调试完成后，去掉固定变量
+  const id = params.id || '762'; // TODO: 调试完成后，去掉固定变量
 
-  const { data, loading } = useQuery<{ library: IconLibraryDefinition }>(GET_LIBRARY_DETAILS, {
+  const { data, loading, refetch } = useQuery<{ library: IconLibraryDefinition }>(GET_LIBRARY_DETAILS, {
     variables: { id },
     fetchPolicy: 'cache-and-network',
   });
@@ -89,11 +88,13 @@ function LibraryDetails() {
     // console.log('sort change', event);
   }, []);
 
-  const { library } = data || {};
-
   const handleSelectoDragCondition = useCallback(() => !!temp.current.selecto, []);
 
   const handleMoveDragCondition = useCallback(() => !!temp.current.move, []);
+
+  const { library } = data || {};
+
+  const icons = useMemo(() => (library?.icons || []).map((item) => ({ ...item })), [library?.icons]);
 
   return (
     <div className="ie-libraries ie-library-details">
@@ -147,7 +148,7 @@ function LibraryDetails() {
                 className="ims-header-body"
                 layout="grid"
                 style={{ listStyle: 'none', padding: 0 }}
-                items={library?.icons || []}
+                items={icons}
                 onChange={handleChange}
                 dragCondition={handleMoveDragCondition}
                 itemRender={(props: any, ref) => (
@@ -185,7 +186,9 @@ function LibraryDetails() {
             />
           </div>
         </OverlayScrollbarsComponent>
-        <div className="control-panel sketch-configuration">{library && <LibraryControlPanel library={library} />}</div>
+        <div className="control-panel sketch-configuration">
+          {library && <LibraryControlPanel refresh={refetch as any} library={library} />}
+        </div>
       </Spin>
     </div>
   );
