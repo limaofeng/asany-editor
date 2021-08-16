@@ -1,13 +1,14 @@
 import { useQuery } from '@apollo/client';
 import Icon, { IconLibraryDefinition, IconDefinition } from '@asany/icons';
 import Sortable, { SortableItemProps } from '@asany/sortable';
-import { Dropdown, Menu, Spin } from 'antd';
+import { Dropdown, Input, Menu, Spin } from 'antd';
 import classnames from 'classnames';
 import gql from 'graphql-tag';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import React, { forwardRef, memo, useCallback, useMemo, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Selecto from 'react-selecto';
+import { LoadingOutlined } from '@ant-design/icons';
 
 import { useSelector } from '../../../hooks';
 import LibraryControlPanel from './LibraryControlPanel';
@@ -29,6 +30,33 @@ const GET_LIBRARY_DETAILS = gql`
     }
   }
 `;
+
+type LibraryNameProps = {
+  library: IconLibraryDefinition;
+  editing: false;
+  onRevoke: () => void;
+};
+
+function LibraryName(props: LibraryNameProps) {
+  const { library, editing, onRevoke } = props;
+  const loading = useState(false);
+  if (editing) {
+    return (
+      <div className="library-name-editing">
+        <Input className="ant-input-rimless" defaultValue={library.name} />
+        <Spin spinning={loading} indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}>
+          <a className="name-editing-cancel" onClick={onRevoke}>
+            <Icon name="Ion/close" />
+          </a>
+          <a className="name-editing-ok">
+            <Icon name="Ion/checkmark" />
+          </a>
+        </Spin>
+      </div>
+    );
+  }
+  return <span className="library-current">{library.name}</span>;
+}
 
 interface IconThumbProps extends SortableItemProps<IconDefinition> {
   icon: IconDefinition;
@@ -68,6 +96,7 @@ function LibraryDetails() {
   const selecto = useRef<Selecto>(null);
   const params = useParams<{ id: string }>();
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set<string>());
+  const [editing, setEditing] = useState(false);
 
   temp.current.selecto = useSelector((state) => state.workspace.icon.selecto);
   temp.current.move = useSelector((state) => state.workspace.icon.move);
@@ -79,6 +108,10 @@ function LibraryDetails() {
     variables: { id },
     fetchPolicy: 'cache-and-network',
   });
+
+  const handleStatus = useCallback(() => {
+    setEditing((editing) => !editing);
+  }, []);
 
   const popupContainer = useCallback(() => dropdownContainer.current!, []);
 
@@ -105,7 +138,7 @@ function LibraryDetails() {
               <h1 className="libraries-header">
                 <Link to="/libraries">Libraries</Link>
                 <Icon className="icon-arrow" name="Ion/chevron-right" />
-                <span className="library-current">{library?.name}</span>
+                {library && <LibraryName editing={editing} onRevoke={handleStatus} library={library} />}
               </h1>
               <div className="subheading">
                 <span className="library-detail-header-library-total-count-text">{library?.total} items</span>
