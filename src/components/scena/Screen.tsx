@@ -142,7 +142,11 @@ function Screen({ children }: ScreenProps) {
         )}
         <div className="canvas-bg-area" />
       </div>
-      <div className="zoom-area" ref={moveableContainer} style={{ transform: `scale(${zoom})` }}>
+      <div
+        className={classnames('zoom-area', { 'no-zoom': !isZoom })}
+        ref={moveableContainer}
+        style={{ transform: `scale(${zoom})` }}
+      >
         <div ref={block(artboard)} className="canvas" style={style}>
           <Provider deps={[project?.data?.id, children?.type?.info?.id]}>{children}</Provider>
         </div>

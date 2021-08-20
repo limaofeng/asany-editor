@@ -1,7 +1,6 @@
 import classnames from 'classnames';
 import React from 'react';
-
-import { IComponentProperty } from '../../library/typings';
+import { IComponentProperty } from 'sunmao';
 
 interface FormFieldProps {
   field: IComponentProperty;

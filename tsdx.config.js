@@ -1,7 +1,5 @@
 const postcss = require('rollup-plugin-postcss');
 const replace = require('@rollup/plugin-replace');
-const autoprefixer = require('autoprefixer');
-const cssnano = require('cssnano');
 
 module.exports = {
   rollup(config, options) {
@@ -16,15 +14,10 @@ module.exports = {
     });
     config.plugins.push(
       postcss({
-        plugins: [
-          autoprefixer(),
-          cssnano({
-            preset: 'default',
-          }),
-        ],
-        inject: true,
+        config: {
+          path: './postcss.config.js',
+        },
         extract: !!options.writeMeta,
-        less: true,
       })
     );
     return config;

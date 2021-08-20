@@ -1,5 +1,6 @@
 import './icons';
 import './style/index.less';
+import './style/tailwind.css';
 
 import classnames from 'classnames';
 import React, { ComponentType, useCallback, useEffect, useReducer, useRef } from 'react';
@@ -15,21 +16,6 @@ import { useDispatch, useSelector } from './hooks';
 import { ActionType } from './reducers/actions';
 import RuntimeContainer from './RuntimeContainer';
 import { AsanyProject, EditorPlugin } from './typings';
-
-// import { NotFound, useReactComponent } from '../library-manager/LibraryManager';
-// const LinkRender = ({ children, to, ...props }: any) => {
-//   const handleClick = (e: React.MouseEvent) => {
-//     e.stopPropagation();
-//     e.preventDefault();
-//     props.onClick && props.onClick(e);
-//     console.log('ignore click', e);
-//   };
-//   return (
-//     <a {...props} onClick={handleClick}>
-//       {children}
-//     </a>
-//   );
-// };
 
 function NotFound() {
   return <>404</>;
@@ -85,6 +71,7 @@ function useComponent(_RootContainer: React.ComponentType<any>, _children?: Reac
 }
 
 interface AsanyProps {
+  className?: string;
   onSave?: (data: AsanyProject) => void;
   onBack?: () => void;
   loading?: React.ComponentType<LoadingComponentProps>;
@@ -93,6 +80,7 @@ interface AsanyProps {
 }
 
 function Editor({
+  className,
   onSave,
   container,
   loading: LoadingComponent = DefaultLoadingComponent,
@@ -122,7 +110,7 @@ function Editor({
   }, []);
 
   return (
-    <div className="asany-editor sketch-container">
+    <div className={classnames('asany-editor sketch-container', className)}>
       <Toolbar {...props} />
       <div className="asany-editor-body-container">
         <div
@@ -151,6 +139,7 @@ function Editor({
 }
 
 interface AsanyWarpperProps {
+  className?: string;
   loading?: React.ComponentType<LoadingComponentProps>;
   project: AsanyProject;
   wrapper?: ComponentType<any>;
@@ -162,7 +151,7 @@ interface AsanyWarpperProps {
 }
 
 export default function AsanyEditor(props: AsanyWarpperProps) {
-  const { children, project, onSave, onBack, container = RuntimeContainer, plugins = [], loading } = props;
+  const { children, project, onSave, onBack, container = RuntimeContainer, plugins = [], loading, className } = props;
   const [version, forceRender] = useReducer((s) => s + 1, 0);
   useEffect(() => {
     if (!project) {
@@ -172,7 +161,7 @@ export default function AsanyEditor(props: AsanyWarpperProps) {
   }, [project]);
   return (
     <AsanyProvider version={version} plugins={[...plugins]} value={project}>
-      <Editor onSave={onSave} loading={loading} container={container} onBack={onBack}>
+      <Editor className={className} onSave={onSave} loading={loading} container={container} onBack={onBack}>
         {children}
       </Editor>
     </AsanyProvider>

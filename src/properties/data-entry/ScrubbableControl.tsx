@@ -4,7 +4,7 @@ import { isEqual } from 'lodash-es';
 import React, { ChangeEvent, CSSProperties, memo, useCallback, useRef, useState } from 'react';
 
 import Icon from '@asany/icons';
-import { useDeepCompareEffect } from '../../../../utils';
+import { useDeepCompareEffect } from '../../utils';
 import { InputFormat, InputText } from '../typings';
 
 const { TextArea } = Input;

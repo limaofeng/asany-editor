@@ -1,8 +1,8 @@
 import React, { memo, useEffect, useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import './style/WrapperPopoverContent.less';
-import { IComponentProperty } from '../typings';
-import ConfigurationPanel from '../ConfigurationPanel';
+import { IComponentProperty } from 'sunmao';
+import DynaActionForm from '../DynaActionForm';
 import { ICustomizer } from '../../typings';
 
 export interface PopoverFields<T> {
@@ -77,7 +77,7 @@ function WrapperPopoverContent(props: WrapperPopoverContentProps<any>) {
        有弹出层的需要配置(如 select ) 基于 弹出层基于父组件而不是 body 上
      */}
       <div className="popover-content__form">
-        <ConfigurationPanel customizer={customizer} onChange={onChange} value={value} />
+        <DynaActionForm customizer={customizer} onChange={onChange} value={value} />
       </div>
     </div>
   );

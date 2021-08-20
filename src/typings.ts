@@ -283,6 +283,7 @@ export interface ISidebar {
 }
 
 export interface IToolbar {
+  content?: ComponentType;
   tools?: AsanyTool[];
 }
 
@@ -304,7 +305,7 @@ export interface IScena {
     visible?: boolean;
   };
   workspace?: ComponentType<any>;
-  onClick(editor: IAsanyEditor, block?: IUseBlockState<any>): void;
+  onClick?(editor: IAsanyEditor, block?: IUseBlockState<any>): void;
 }
 
 export interface ToolsHelper {
@@ -772,6 +773,7 @@ export interface IUIScenaToolbarState {
 
 export interface IUIToolbarState {
   tools: AsanyTool[];
+  content?: ComponentType<any>;
   activeKeys: string[];
 }
 

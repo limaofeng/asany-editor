@@ -78,7 +78,7 @@ export default function reducer(
   }
   if (action.type == UISidebarActionType.SetSidebar) {
     const content = action.payload.content;
-    const width = action.payload.width || state.width;
+    const width = content ? action.payload.width || state.width : 0;
     const minimizable = action.payload.minimizable || state.minimizable;
     const minWidth = action.payload.minWidth || state.minWidth;
     return {
@@ -86,7 +86,7 @@ export default function reducer(
       minWidth,
       width,
       content,
-      minimizable,
+      minimizable: !action.payload.visible || minimizable,
       tools: action.payload.tools,
       visible: action.payload.visible != false,
     };

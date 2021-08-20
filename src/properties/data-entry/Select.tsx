@@ -1,8 +1,7 @@
 import Icon from '@asany/icons';
-import { registerComponent } from '@asany/library-manager';
 import { Popover } from 'antd';
 import classnames from 'classnames';
-import React, { ComponentType, memo, useCallback, useEffect, useRef, useState } from 'react';
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { useClickAway } from 'react-use';
 
 export interface SelectOption {
@@ -218,11 +217,4 @@ const Select = (props: SelectProps) => {
   );
 };
 
-export default registerComponent(
-  {
-    id: 'com.thuni.him.asany.properties.Select',
-    name: '组件信息',
-    library: 'AsanyEditor.Config',
-  },
-  memo(Select)
-) as ComponentType<SelectProps>;
+export default memo(Select);

@@ -1,6 +1,3 @@
-// import { Cascader } from 'antd';
-import './components/data-entry';
-
 import { assign, isEqual } from 'lodash-es';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -9,12 +6,7 @@ import { UIActionType } from '../../reducers/actions';
 import { ComponentPropertyType, father, IComponentProperty } from '../../typings';
 import { useDebounce, visibleFilter } from '../../utils';
 import ConfigurationToolbar from './ConfigurationToolbar';
-import Settings, { ISettings, TabPane } from './PropertiesPanel';
-
-// import { visibleFilter } from '../../../library-manager/ConfigurationPanel';
-// import LibraryManager from '../../../library-manager/LibraryManager';
-// import { ComponentPropertyType, IComponentProperty } from '../../../library-manager/typings';
-// console.warn('📦 打包时, connect 逻辑会失效 TODO 临时解决方案', DataEntrys);
+import PropertiesPanel, { IPropertiesPanel, TabPane } from './PropertiesPanel';
 
 interface AsideProps {}
 
@@ -140,7 +132,7 @@ function Aside(_: AsideProps) {
 
   const handleClose = useCallback(() => dispatch({ type: UIActionType.CloseAside }), []);
 
-  const configuration = useRef<ISettings>(null);
+  const configuration = useRef<IPropertiesPanel>(null);
 
   useEffect(() => {
     dispatch({
@@ -165,7 +157,7 @@ function Aside(_: AsideProps) {
   const top = typeof options.top === 'number' ? options.top : 50 + (scenaToolbarVisible ? 40 : 0);
 
   return (
-    <Settings
+    <PropertiesPanel
       className="sketch-configuration"
       ref={configuration}
       style={{

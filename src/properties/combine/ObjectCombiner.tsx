@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
-import { IComponentProperty, ComponentPropertyRendererSetting, ComponentPropertyType } from '../typings';
-import { getRenderer } from '../renderers';
-import { visibleFilter, FormItemWrapper } from '../ConfigurationPanel';
 import { Form } from 'antd';
 import { isEqual } from 'lodash-es';
+import React, { useEffect } from 'react';
+import { ComponentPropertyRendererSetting, ComponentPropertyType, IComponentProperty, useSunmao } from 'sunmao';
+
+import { FormItemWrapper, visibleFilter } from '../DynaActionForm';
+import { getRenderer } from '../renderers';
 
 interface ObjectCombinerProps {
   value?: any;
@@ -14,9 +15,12 @@ interface ObjectCombinerProps {
 
 function ObjectCombiner(props: ObjectCombinerProps) {
   const { className, value, onChange } = props;
+
+  const sunmao = useSunmao();
+
   const fields = props.fields.map((item) => ({
     ...item,
-    renderer: getRenderer('cn.asany.editor.form', item),
+    renderer: getRenderer(sunmao, 'cn.asany.editor.form', item),
   }));
   const [form] = Form.useForm();
   const handleValuesChange = (_: any, allValues: any) => {
