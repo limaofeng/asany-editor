@@ -1,9 +1,9 @@
 import { Popover } from 'antd';
 import React, { useCallback, useRef } from 'react';
 
-import { ComponentPropertyType } from '../../library/typings';
+import { ComponentPropertyType } from 'sunmao';
 import { useDispatch, useSelector } from '../../hooks';
-import FormPanel from './FormPanel';
+import FormPanel from '../../properties/DynaActionForm';
 import { ActionType, UIActionType } from '../../reducers/actions';
 
 function EditableZoom() {

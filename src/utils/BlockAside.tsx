@@ -1,12 +1,12 @@
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import React from 'react';
 
-// import ConfigurationPanel from '../../library-manager/ConfigurationPanel';
+// import DynaActionForm from '../../library-manager/DynaActionForm';
 // import { ComponentPropertyType } from '../../library-manager/typings';
 
-import CurrentElementInformation from '../components/aside/components/CurrentElementInformation';
-import FormPanel from '../components/aside/FormPanel';
+import FormPanel from '../properties/DynaActionForm';
 import { useSelector } from '../hooks';
+import CurrentElementInformation from '../properties/CurrentElementInformation';
 import { AsideTabPane, ComponentPropertyType, DEFAULT_GROUP_ID, ICustomizer, IFieldGroup } from '../typings';
 
 export function createDynaActionForm(customizer: ICustomizer) {

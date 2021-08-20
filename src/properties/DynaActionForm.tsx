@@ -1,15 +1,15 @@
 import classnames from 'classnames';
 import isEqual from 'lodash/isEqual';
 import React, { useEffect, useState } from 'react';
+import { ComponentPropertyRendererSetting, ComponentPropertyType, IComponentProperty, IGroup, useSunmao } from 'sunmao';
 
-import FormField from '../components/form/FormField';
-import FormFieldset from '../components/form/FormFieldset';
 import { DEFAULT_GROUP_ID, ICustomizer } from '../typings';
+import FormField from './FormField';
+import FormFieldset from './FormFieldset';
 import { useFormSelector, useFormState } from './FormStateContext';
 import { getRenderer } from './renderers';
-import { ComponentPropertyRendererSetting, ComponentPropertyType, IComponentProperty, IGroup } from './typings';
 
-interface ConfigurationPanelProps {
+interface DynaActionFormProps {
   customizer: ICustomizer;
   library?: string;
   layout?: 'Inline' | 'Stacked';
@@ -104,8 +104,11 @@ PanelBody.defaultProps = {
   layout: 'Stacked',
 };
 
-const ConfigurationPanel = ({ library = 'cn.asany.editor.form', ...props }: ConfigurationPanelProps): JSX.Element => {
+const DynaActionForm = ({ library = 'cn.asany.editor.form', ...props }: DynaActionFormProps): JSX.Element => {
   const { value = {}, onChange, customizer } = props;
+
+  const sunmao = useSunmao();
+
   const [groups, setGroups] = useState<IGroup[]>([]);
   const [defaultValue, setDefaultValue] = useState({});
   const [form, Form] = useFormState();
@@ -123,7 +126,7 @@ const ConfigurationPanel = ({ library = 'cn.asany.editor.form', ...props }: Conf
           if (group) {
             group.fields.push({
               ...definition,
-              renderer: getRenderer(library, definition),
+              renderer: getRenderer(sunmao, library, definition),
             });
           } else {
             const _group = (customizer.groups || []).find((g) => g.id == id);
@@ -134,7 +137,7 @@ const ConfigurationPanel = ({ library = 'cn.asany.editor.form', ...props }: Conf
             }
             group.fields.push({
               ...definition,
-              renderer: getRenderer(library, definition),
+              renderer: getRenderer(sunmao, library, definition),
             });
           }
           defaultValue[definition.name] = definition.defaultValue;
@@ -187,8 +190,8 @@ const ConfigurationPanel = ({ library = 'cn.asany.editor.form', ...props }: Conf
   );
 };
 
-ConfigurationPanel.defaultProps = {
+DynaActionForm.defaultProps = {
   layout: 'Inline',
 };
 
-export default React.memo(ConfigurationPanel);
+export default React.memo(DynaActionForm);

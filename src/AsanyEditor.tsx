@@ -17,21 +17,6 @@ import { ActionType } from './reducers/actions';
 import RuntimeContainer from './RuntimeContainer';
 import { AsanyProject, EditorPlugin } from './typings';
 
-// import { NotFound, useReactComponent } from '../library-manager/LibraryManager';
-// const LinkRender = ({ children, to, ...props }: any) => {
-//   const handleClick = (e: React.MouseEvent) => {
-//     e.stopPropagation();
-//     e.preventDefault();
-//     props.onClick && props.onClick(e);
-//     console.log('ignore click', e);
-//   };
-//   return (
-//     <a {...props} onClick={handleClick}>
-//       {children}
-//     </a>
-//   );
-// };
-
 function NotFound() {
   return <>404</>;
 }

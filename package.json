@@ -42,11 +42,17 @@
   "size-limit": [
     {
       "path": "dist/editor.cjs.production.min.js",
-      "limit": "10 KB"
+      "limit": "2 MB",
+      "ignore": [
+        "fonteditor-core"
+      ]
     },
     {
       "path": "dist/editor.esm.js",
-      "limit": "10 KB"
+      "limit": "1 MB",
+      "ignore": [
+        "fonteditor-core"
+      ]
     }
   ],
   "dependencies": {
@@ -63,7 +69,6 @@
   "devDependencies": {
     "@apollo/client": "^3.4.5",
     "@asany/icons": "^0.1.10",
-    "@asany/library-manager": "^0.1.4",
     "@asany/sortable": "^0.1.22",
     "@babel/core": "^7.14.6",
     "@commitlint/cli": "^12.1.4",
@@ -104,6 +109,7 @@
     "react-use": "^17.2.4",
     "rollup-plugin-postcss": "^4.0.0",
     "size-limit": "^5.0.1",
+    "sunmao": "^0.2.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "tsdx": "^0.14.1",
     "tslib": "^2.3.0",

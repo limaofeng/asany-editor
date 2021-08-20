@@ -1,6 +1,3 @@
-// import { Cascader } from 'antd';
-import './components/data-entry';
-
 import { assign, isEqual } from 'lodash-es';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -10,11 +7,6 @@ import { ComponentPropertyType, father, IComponentProperty } from '../../typings
 import { useDebounce, visibleFilter } from '../../utils';
 import ConfigurationToolbar from './ConfigurationToolbar';
 import PropertiesPanel, { IPropertiesPanel, TabPane } from './PropertiesPanel';
-
-// import { visibleFilter } from '../../../library-manager/ConfigurationPanel';
-// import LibraryManager from '../../../library-manager/LibraryManager';
-// import { ComponentPropertyType, IComponentProperty } from '../../../library-manager/typings';
-// console.warn('📦 打包时, connect 逻辑会失效 TODO 临时解决方案', DataEntrys);
 
 interface AsideProps {}
 

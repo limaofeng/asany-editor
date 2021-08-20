@@ -1,6 +1,5 @@
 import React from 'react';
 import classnames from 'classnames';
-import { registerComponent } from '@asany/library-manager';
 import ScrubbableControl from './ScrubbableControl';
 
 interface InputProps {
@@ -26,11 +25,4 @@ function Input(props: InputProps) {
   );
 }
 
-export default registerComponent(
-  {
-    id: 'com.thuni.him.asany.properties.Input',
-    name: '组件信息',
-    library: 'AsanyEditor.Config',
-  },
-  Input
-);
+export default Input;

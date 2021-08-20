@@ -32,14 +32,14 @@ const GET_LIBRARY_DETAILS = gql`
 `;
 
 type LibraryNameProps = {
+  editing: boolean;
   library: IconLibraryDefinition;
-  editing: false;
   onRevoke: () => void;
 };
 
 function LibraryName(props: LibraryNameProps) {
   const { library, editing, onRevoke } = props;
-  const loading = useState(false);
+  const [loading] = useState(false);
   if (editing) {
     return (
       <div className="library-name-editing">

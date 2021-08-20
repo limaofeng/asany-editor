@@ -2,15 +2,15 @@ import { Checkbox } from 'antd';
 import React, { memo, useEffect, useReducer, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-import useHTMLElementResize from '../../../hooks/useHTMLElementResize';
-import devices from '../../../assets/devices';
-import useSelector from '../../../hooks/useSelector';
+import devices from '../assets/devices';
+import useSelector from '../hooks/useSelector';
+import useHTMLElementResize from '../hooks/useHTMLElementResize';
+import ScrubbableControl from './data-entry/ScrubbableControl';
+import SegmentedControl from './data-entry/SegmentedControl';
 import Select, { SelectOptionGroup } from './data-entry/Select';
 import IconButton from './IconButton';
 import OptionButton from './OptionButton';
 import RadiusAllSetting from './RadiusAllSetting';
-import ScrubbableControl from './data-entry/ScrubbableControl';
-import SegmentedControl from './data-entry/SegmentedControl';
 import { IconsConst, InputText } from './typings';
 import { inputFormat, radiusFormat, rotateFormat } from './utils';
 
