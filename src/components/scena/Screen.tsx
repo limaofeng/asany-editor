@@ -1,14 +1,14 @@
 import classnames from 'classnames';
 import React, { useCallback, useEffect, useRef } from 'react';
 import { useDragDropManager, useDrop } from 'react-dnd';
+// import { useBlock } from 'sunmao';
 
-// import ThumbnailGenerator from '../../../thumbnail';
-// import { IThumbnailGenerator } from '../../../thumbnail/ThumbnailGenerator';
 import { useSelector } from '../../hooks';
-import useBlock from '../../hooks/useBlock';
 import { father } from '../../typings';
 import MoveableManager from './viewport/MoveableManager';
 
+// import ThumbnailGenerator from '../../../thumbnail';
+// import { IThumbnailGenerator } from '../../../thumbnail/ThumbnailGenerator';
 interface ScreenProps {
   children?: JSX.Element;
 }
@@ -78,12 +78,12 @@ function Screen({ children }: ScreenProps) {
     registry.types.set(handlerId, dustbin);
   }, [handlerId, dustbin]);
 
-  const [{ Provider }, block] = useBlock({
-    key: father,
-    title: '主模块',
-    icon: '',
-    customizer: { fields: [] },
-  });
+  // const [{ Provider }, block] = useBlock({
+  //   key: father,
+  //   title: '主模块',
+  //   icon: '',
+  //   customizer: { fields: [] },
+  // });
 
   const handleClick = useCallback(
     (e: React.MouseEvent) => {
@@ -147,8 +147,9 @@ function Screen({ children }: ScreenProps) {
         ref={moveableContainer}
         style={{ transform: `scale(${zoom})` }}
       >
-        <div ref={block(artboard)} className="canvas" style={style}>
-          <Provider deps={[project?.data?.id, children?.type?.info?.id]}>{children}</Provider>
+        <div /*ref={block(artboard)}*/ className="canvas" style={style}>
+          {children}
+          {/* <Provider deps={[project?.data?.id, children?.type?.info?.id]}></Provider> */}
         </div>
         {!disabled && (
           <>
