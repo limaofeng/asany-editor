@@ -3,7 +3,6 @@ import { OnDragEnd, OnResize, OnResizeEnd, OnResizeStart } from 'react-moveable'
 import { Frame } from 'scenejs';
 
 import { DispatchWithoutAction, IAsanyStoreContext } from './AsanyContext';
-import { IUseBlockState } from './hooks/useBlock';
 import { Selector } from './hooks/useSelector';
 import MoveableState from './reducers/ui.reducer/scena.reducer/MoveableState';
 import MoveableData from './utils/MoveableData';
@@ -305,7 +304,7 @@ export interface IScena {
     visible?: boolean;
   };
   workspace?: ComponentType<any>;
-  onClick?(editor: IAsanyEditor, block?: IUseBlockState<any>): void;
+  onClick?(editor: IAsanyEditor): void;
 }
 
 export interface ToolsHelper {
@@ -346,7 +345,7 @@ export interface UIScenaGlobalState {
   screen: DeviceScreen;
   workspace?: ComponentType | ReactElement;
   // 点击事件
-  onClick?: (editor: IAsanyEditor, block?: IUseBlockState<any>) => void;
+  onClick?: (editor: IAsanyEditor) => void;
 }
 
 export interface IUIScenaState extends UIScenaGlobalState {

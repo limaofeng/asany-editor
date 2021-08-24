@@ -4,7 +4,6 @@ import { useDragDropManager, useDrop } from 'react-dnd';
 // import { useBlock } from 'sunmao';
 
 import { useSelector } from '../../hooks';
-import { father } from '../../typings';
 import MoveableManager from './viewport/MoveableManager';
 
 // import ThumbnailGenerator from '../../../thumbnail';
@@ -27,7 +26,7 @@ function Screen({ children }: ScreenProps) {
   const zoom = useSelector((state) => state.ui.scena.zoom);
   const [width, height] = useSelector((state) => state.ui.scena.screen.size);
   const activeKey = useSelector((state) => state.workspace.block.activeKey);
-  const project = useSelector((state) => state.project);
+  // const project = useSelector((state) => state.project);
   const snaps = useSelector((state) => state.ui.scena.snaps);
   const moveable = useSelector((state) => state.ui.scena.moveable);
   const dustbin = useSelector((state) => state.ui.scena.viewer.dustbin);
