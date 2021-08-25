@@ -1,6 +1,4 @@
 import { ComponentType, CSSProperties, ReactElement } from 'react';
-import { OnDragEnd, OnResize, OnResizeEnd, OnResizeStart } from 'react-moveable';
-import { Frame } from 'scenejs';
 
 import { DispatchWithoutAction, IAsanyStoreContext } from './AsanyContext';
 import { Selector } from './hooks/useSelector';
@@ -10,15 +8,6 @@ import MoveableData from './utils/MoveableData';
 export interface AsanyAction<T> {
   type: T;
   payload?: any;
-}
-
-export const father = 'root';
-
-export interface IUpdateBlockData {
-  title: any;
-  key: string;
-  props: any;
-  customizer: any;
 }
 
 export interface IComponent {
@@ -49,48 +38,6 @@ export interface IComponent {
    */
   props?: IComponentProperty[];
 }
-
-export interface IBlockState {
-  version: number;
-  component: string;
-  info: IComponent;
-  activeKey?: string;
-  blocks: IBlockData<any>[];
-  stack: string[];
-}
-
-export interface IBlockDataProps {
-  frame?: Frame;
-  [key: string]: any;
-}
-
-export interface IBlockData<T> {
-  key: string;
-  icon: string;
-  title: string;
-  props?: T;
-  customizer?: ICustomizer;
-  version?: number;
-  options?: {
-    /**
-     * 当前 Block 可以拖入的配置信息
-     * 该配置信息，并不实现拖拽功能。拖入功能需要组件自己实现。该配置信息主要是辅助生成组件面板信息
-     */
-    drop?: ComponentDropConfig;
-    resizable?: boolean;
-    draggable?: boolean;
-    /**
-     * 当启用 resizable || draggable 及后, 组件的渲染逻辑
-     */
-    render?: (target: HTMLElement | SVGElement, frame: Frame) => void;
-    onResizeStart?: (e: OnResizeStart) => void;
-    onResize?: (e: OnResize) => void;
-    onResizeStop?: (e: OnResizeEnd) => void;
-    onDragStop?: (e: OnDragEnd) => void;
-  };
-}
-
-export interface IBlockOptions<T> extends IBlockData<T> {}
 
 export interface IFieldGroup {
   id: string;
@@ -249,7 +196,7 @@ export type AsanyToolData = {
   deselect: UndoFunc | void;
 };
 
-export type Feature = 'zoom' | 'block' | 'ruler' | 'selecto' | 'drag';
+export type Feature = 'zoom' | 'ruler' | 'selecto' | 'drag';
 
 type Reducer = (state: any, action: any) => any;
 
@@ -321,7 +268,6 @@ export interface FeaturesHelper {
   zoom(enable: boolean): void;
   drag(enable: boolean): void;
   selecto(enable: boolean): void;
-  block(enable: boolean): void;
 }
 
 export interface GuidelinesDataSet {
@@ -682,10 +628,21 @@ export interface IUIAsideState {
 }
 
 export interface IFeatureState {
+  /**
+   * 缩放
+   */
   zoom: boolean;
+  /**
+   * 标尺
+   */
   ruler: boolean;
-  block: boolean;
+  /**
+   * 拖拽
+   */
   drag: boolean;
+  /**
+   * 选择
+   */
   selecto: boolean;
 }
 
@@ -742,7 +699,6 @@ export interface IUIToolbarState {
 export interface IProjectState extends AsanyProject {}
 
 export interface IWorkspaceState {
-  block: IBlockState;
   [key: string]: any;
 }
 

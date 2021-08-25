@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useReducer, useRef } from 'react';
 
 import { useDispatch, useEditor, useSelector } from '../../hooks';
 
-import { ActionType, UIActionType, WorkspaceActionType } from '../../reducers/actions';
+import { ActionType, UIActionType } from '../../reducers/actions';
 import InfiniteViewer from '../InfiniteViewer';
 import Ruler, { RulerGuides } from '../Ruler';
 import SelectoMananger from './SelectoMananger';
@@ -37,7 +37,7 @@ function Scena(props: ScenaProps) {
   const isVisible = useSelector((state) => state.ui.scena.toolbar.visible);
   const isRuler = useSelector((state) => state.features.ruler);
   const isZoom = useSelector((state) => state.features.zoom);
-  const disabled = useSelector((state) => state.mode === 'VIEW' || !state.features.block);
+  const disabled = useSelector((state) => state.mode === 'VIEW');
   const onClick = useSelector((state) => state.ui.scena.onClick);
   const drag = useSelector((state) => state.features.drag);
   const [width, height] = useSelector((state) => state.ui.scena.screen.size);
@@ -91,7 +91,8 @@ function Scena(props: ScenaProps) {
       if (disabled) {
         return;
       }
-      dispatch({ type: WorkspaceActionType.UncheckBlock });
+      // TODO: 取消 Block 的选中效果
+      console.warn('取消 Block 的选中效果');
     },
     [disabled, onClick]
   );

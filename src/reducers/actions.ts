@@ -163,48 +163,9 @@ export enum GlobalAsanyAction {
 export enum ProjectActionType {
   ChangeCase = 'ChangeCase',
 }
-export enum BlockActionType {
-  /**
-   * 注册区块
-   */
-  RegistrationBlock = 'RegistrationBlock',
-  /**
-   * 卸载区块
-   */
-  UninstallBlock = 'UninstallBlock',
-  /**
-   * 推入区块
-   */
-  PushBlock = 'PushBlock',
-  /**
-   * 弹出区块
-   */
-  PopBlock = 'PopBlock',
-  /**
-   * 选中区块
-   */
-  SelectedBlock = 'SelectedBlock',
-  /**
-   * 取消区块选择
-   */
-  UncheckBlock = 'UncheckBlock',
-  /**
-   * 更新 Block 数据
-   */
-  UpdateBlockProps = 'UpdateBlockProps',
-  /**
-   * 更新 Block 数据
-   */
-  UpdateBlockMoreProps = 'UpdateBlockMoreProps',
-  /**
-   * 更新 Block 定制器
-   */
-  UpdateBlockCustomizer = 'UpdateBlockCustomizer',
-}
 
 export const WorkspaceActionType = {
   ChangeStateByPlugin: 'ChangeStateByPlugin',
-  ...BlockActionType,
 };
 
 export enum IFeatureActionType {
@@ -216,10 +177,6 @@ export enum IFeatureActionType {
    * 标尺
    */
   FeatureRuler = 'Features/Ruler',
-  /**
-   * 配置块
-   */
-  FeatureBlock = 'Features/block',
 
   SetFeatures = 'SetFeatures',
 

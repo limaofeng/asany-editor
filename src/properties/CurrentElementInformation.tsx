@@ -53,11 +53,12 @@ const CurrentElementInformation = () => {
   // 用于状态的变更
   const state = useRef<any>({});
   const [, forceRender] = useReducer((s) => s + 1, 0);
-  const current = useSelector((state) => state.current);
+  // const current = useSelector((state) => state.current);
 
   const screen = useSelector((state) => state.ui.scena.screen);
 
-  const { width, height, x, y, rotate, radius } = useHTMLElementResize(current?.element);
+  // TODO: useHTMLElementResize 函数入参类型应该调整为 HTMLElement
+  const { width, height, x, y, rotate, radius } = useHTMLElementResize(document.body as any);
 
   const [notchActive, setNotchActive] = useState<boolean>(false);
   const [radiusDisabled, setRadiusDisabled] = useState<boolean>(false);

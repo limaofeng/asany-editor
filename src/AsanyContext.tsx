@@ -4,7 +4,7 @@ import sketchReducer, { defaultValue } from './reducers';
 import { ActionType } from './reducers/actions';
 import { getReducers } from './utils/plugin';
 
-import type { AsanyAction, AsanyProject, AsanyProviderMode, EditorPlugin, IAsanyState, IBlockData } from './typings';
+import type { AsanyAction, AsanyProject, AsanyProviderMode, EditorPlugin, IAsanyState } from './typings';
 type UnsubscribeFunc = () => void;
 
 type SubscribeCallback = () => void;
@@ -95,13 +95,4 @@ export const AsanyProvider = (props: AsanyProviderProps) => {
     [version, store.getState().isReady]
   );
 };
-
-export interface ICurrentBlockData<T = any> extends IBlockData<T> {
-  value: T;
-  element: React.RefObject<HTMLElement>;
-  onChange: (props: any) => void;
-}
-
-export interface IAsanyStateContext extends IAsanyState {
-  current?: ICurrentBlockData<any>;
-}
+export interface IAsanyStateContext extends IAsanyState {}

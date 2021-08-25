@@ -15,39 +15,39 @@ export default function reducer(
   state: IUISidebarState,
   action: AsanyAction<UISidebarActionType | GlobalAsanyAction>
 ): IUISidebarState {
-  if (action.type == UISidebarActionType.ChangeSymbols) {
+  if (action.type === UISidebarActionType.ChangeSymbols) {
     return { ...state, library: action.payload };
   }
-  if (action.type == UISidebarActionType.ToolboardRef) {
+  if (action.type === UISidebarActionType.ToolboardRef) {
     return { ...state, control: action.payload };
   }
-  if (action.type == UISidebarActionType.API) {
+  if (action.type === UISidebarActionType.API) {
     return { ...state, api: action.payload };
   }
-  if (action.type == UISidebarActionType.SidebarSelect) {
+  if (action.type === UISidebarActionType.SidebarSelect) {
     return { ...state, activeKeys: [...state.activeKeys, action.payload] };
   }
-  if (action.type == UISidebarActionType.SidebarUnSelect) {
+  if (action.type === UISidebarActionType.SidebarUnSelect) {
     return {
       ...state,
       toolboardKey: state.toolboardKey === action.payload ? undefined : state.toolboardKey,
       activeKeys: state.activeKeys.filter((item) => !action.payload.includes(item)),
     };
   }
-  if (action.type == UISidebarActionType.ToolboardKey) {
+  if (action.type === UISidebarActionType.ToolboardKey) {
     return {
       ...state,
       toolboardKey: action.payload,
       activeKeys: [action.payload, ...state.activeKeys],
     };
   }
-  if (action.type == UISidebarActionType.SidebarVisible) {
+  if (action.type === UISidebarActionType.SidebarVisible) {
     return {
       ...state,
       visible: action.payload,
     };
   }
-  if (action.type == UISidebarActionType.SidebarSetContent) {
+  if (action.type === UISidebarActionType.SidebarSetContent) {
     const content = action.payload.content;
     const width = action.payload.width || state.width;
     const minWidth = action.payload.minWidth || state.minWidth;
@@ -58,25 +58,25 @@ export default function reducer(
       minWidth,
     };
   }
-  if (action.type == UISidebarActionType.SidebarRemoveContent) {
+  if (action.type === UISidebarActionType.SidebarRemoveContent) {
     return {
       ...state,
       content: undefined,
     };
   }
-  if (action.type == UISidebarActionType.SidebarContentMinimize) {
+  if (action.type === UISidebarActionType.SidebarContentMinimize) {
     return {
       ...state,
       minimizable: action.payload,
     };
   }
-  if (action.type == UISidebarActionType.SidebarContentWidth) {
+  if (action.type === UISidebarActionType.SidebarContentWidth) {
     return {
       ...state,
       width: action.payload,
     };
   }
-  if (action.type == UISidebarActionType.SetSidebar) {
+  if (action.type === UISidebarActionType.SetSidebar) {
     const content = action.payload.content;
     const width = content ? action.payload.width || state.width : 0;
     const minimizable = action.payload.minimizable || state.minimizable;
@@ -91,7 +91,7 @@ export default function reducer(
       visible: action.payload.visible != false,
     };
   }
-  if (action.type == GlobalAsanyAction.Init) {
+  if (action.type === GlobalAsanyAction.Init) {
     return defaultState;
   }
   return state;

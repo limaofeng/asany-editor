@@ -1,6 +1,5 @@
 import { DependencyList, useCallback, useEffect, useMemo, useRef } from 'react';
 import { isEqual, debounce, throttle as lodashThrottle } from 'lodash-es';
-export { buildAside, createDynaActionForm } from './BlockAside';
 
 export function useDebounce<T extends (...args: any) => any>(fn: T, delay: number, deps?: DependencyList) {
   return useCallback(debounce(fn, delay), deps || []);
@@ -43,7 +42,7 @@ export const visibleFilter = (props: any) => {
     if (typeof visible === 'function') {
       return visible(props);
     }
-    return visible != false;
+    return visible !== false;
   };
 };
 

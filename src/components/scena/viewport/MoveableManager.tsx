@@ -1,5 +1,5 @@
 import React, { useRef, useCallback, useEffect, useReducer, useMemo } from 'react';
-import Moveable, { OnResize, OnClick, OnDragStart, OnDrag, OnDragEnd, OnClickGroup } from 'react-moveable';
+import Moveable, { OnClick } from 'react-moveable';
 import { useSelector } from '../../../hooks';
 // import MoveableData from '../../../utils/MoveableData';
 // import Memory from '../../../utils/Memory';

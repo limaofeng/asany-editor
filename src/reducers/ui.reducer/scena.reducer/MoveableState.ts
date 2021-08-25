@@ -1,24 +1,7 @@
 import MoveableHelper from 'moveable-helper';
-import { OnDrag, OnDragEnd, OnDragStart, OnResize, OnResizeEnd, OnResizeStart } from 'react-moveable';
 import { EventEmitter } from 'events';
-import { Frame } from 'scenejs';
 
 type EventCallback = (...params: any) => void;
-
-interface MoveableElement {
-  element: React.RefObject<HTMLElement>;
-  emitter: EventEmitter;
-  render?: (target: HTMLElement | SVGElement, frame: Frame) => void;
-  update: (props: any | string, value: string | any) => void;
-  resizable?: boolean;
-  onResizeStart?: (e: OnResizeStart) => void;
-  onResize?: (e: OnResize) => void;
-  onResizeStop?: (e: OnResizeEnd) => void;
-  draggable?: boolean;
-  onDragStart?: (e: OnDragStart) => void;
-  onDrag?: (e: OnDrag) => void;
-  onDragStop?: (e: OnDragEnd) => void;
-}
 
 export default class MoveableState extends MoveableHelper {
   private emitter = new EventEmitter();

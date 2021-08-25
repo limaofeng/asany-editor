@@ -15,7 +15,7 @@ const maxScale = scales[scales.length - 1];
 
 export function calculateScaling(zoom: number, type: 'out' | 'in' | 'change' = 'change') {
   let newZoom = zoom;
-  if (type == 'out') {
+  if (type === 'out') {
     newZoom = [...scales].reverse().find((item) => item < newZoom) || newZoom;
   } else if (type === 'in') {
     newZoom = scales.find((item) => item > newZoom) || newZoom;
@@ -38,7 +38,7 @@ export function reducer(
   state: UIScenaGlobalState,
   action: AsanyAction<UIScenaGlobalActionType | GlobalAsanyAction>
 ): UIScenaGlobalState {
-  if (action.type == UIScenaGlobalActionType.SetScena) {
+  if (action.type === UIScenaGlobalActionType.SetScena) {
     const { workspace, toolbar } = action.payload;
     return {
       ...state,
@@ -50,13 +50,13 @@ export function reducer(
       },
     };
   }
-  if (action.type == UIScenaGlobalActionType.Loading) {
+  if (action.type === UIScenaGlobalActionType.Loading) {
     return { ...state, loading: action.payload };
   }
-  if (action.type == UIScenaGlobalActionType.ScenaReset) {
+  if (action.type === UIScenaGlobalActionType.ScenaReset) {
     return { ...state, reset: action.payload };
   }
-  if (action.type == UIScenaGlobalActionType.ChangeScreenSize) {
+  if (action.type === UIScenaGlobalActionType.ChangeScreenSize) {
     setTimeout(dispatchWindowResize, 10);
     return { ...state, screen: action.payload };
   }
@@ -88,7 +88,7 @@ export function reducer(
       zoom: calculateScaling(state.zoom * 100, 'in') / 100,
     };
   }
-  if (action.type == GlobalAsanyAction.Init) {
+  if (action.type === GlobalAsanyAction.Init) {
     return { ...state, ...defaultState };
   }
   return state;
