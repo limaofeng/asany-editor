@@ -304,7 +304,7 @@ export interface IScena {
     visible?: boolean;
   };
   workspace?: ComponentType<any>;
-  onClick?(editor: IAsanyEditor, block?: IUseBlockState<any>): void;
+  onClick?(editor: IAsanyEditor): void;
 }
 
 export interface ToolsHelper {
@@ -345,7 +345,7 @@ export interface UIScenaGlobalState {
   screen: DeviceScreen;
   workspace?: ComponentType | ReactElement;
   // 点击事件
-  onClick?: (editor: IAsanyEditor, block?: IUseBlockState<any>) => void;
+  onClick?: (editor: IAsanyEditor) => void;
 }
 
 export interface IUIScenaState extends UIScenaGlobalState {
