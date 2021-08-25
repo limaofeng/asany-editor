@@ -1,5 +1,6 @@
-import React, { useRef, useCallback, useEffect } from 'react';
+import React, { useRef, useCallback, useEffect, useReducer, useMemo } from 'react';
 import Moveable, { OnResize, OnClick, OnDragStart, OnDrag, OnDragEnd, OnClickGroup } from 'react-moveable';
+import { useSelector } from '../../../hooks';
 // import MoveableData from '../../../utils/MoveableData';
 // import Memory from '../../../utils/Memory';
 // interface MoveableManagerProps {
@@ -11,18 +12,18 @@ import Moveable, { OnResize, OnClick, OnDragStart, OnDrag, OnDragEnd, OnClickGro
 // onResizeStop, ignoreTargets, onDragStop, verticalGuidelines, horizontalGuidelines;
 interface MoveableManagerProps {
   container?: HTMLElement | null;
-  resizable?: boolean;
-  onResizeStart?: any;
-  onResize?: (resize: OnResize) => void;
-  onResizeStop?: any;
-  selectedTargets: HTMLElement[];
-  draggable?: boolean;
-  onDragStart?: (drag: OnDragStart) => void;
-  onDrag?: (drag: OnDrag) => void;
-  onDragStop?: (drag: OnDragEnd) => void;
-  onClickGroup?: (group: OnClickGroup) => void;
-  verticalGuidelines?: number[];
-  horizontalGuidelines?: number[];
+  // resizable?: boolean;
+  // onResizeStart?: any;
+  // onResize?: (resize: OnResize) => void;
+  // onResizeStop?: any;
+  // selectedTargets: HTMLElement[];
+  // draggable?: boolean;
+  // onDragStart?: (drag: OnDragStart) => void;
+  // onDrag?: (drag: OnDrag) => void;
+  // onDragStop?: (drag: OnDragEnd) => void;
+  // onClickGroup?: (group: OnClickGroup) => void;
+  // verticalGuidelines?: number[];
+  // horizontalGuidelines?: number[];
 }
 
 function MoveableManager(props: MoveableManagerProps) {
@@ -30,23 +31,48 @@ function MoveableManager(props: MoveableManagerProps) {
 
   const {
     container,
-    selectedTargets,
-    draggable,
-    resizable,
-    verticalGuidelines,
-    horizontalGuidelines,
-    onDragStart,
-    onDrag,
-    onDragStop,
-    onResizeStart,
-    onResize,
-    onResizeStop,
-    onClickGroup,
+    // selectedTargets,
+    // draggable,
+    // resizable,
+    // verticalGuidelines,
+    // horizontalGuidelines,
+    // onDragStart,
+    // onDrag,
+    // onDragStop,
+    // onResizeStart,
+    // onResize,
+    // onResizeStop,
+    // onClickGroup,
   } = props;
+
+  const [, forceRender] = useReducer((s) => s + 1, 0);
+
+  const snaps = useSelector((state) => state.ui.scena.snaps);
+  const moveable = useSelector((state) => state.ui.scena.moveable);
+
+  const { vertical: verticalGuidelines, horizontal: horizontalGuidelines } = snaps;
+
+  const draggable = undefined; // moveable.draggable;
+  const resizable = undefined; // moveable.resizable;
+  // const selectedTargets = moveable.selectedTargets;
+  const onResizeStart = moveable.onResizeStart;
+  const onResize = moveable.onResize;
+  const onResizeStop = undefined; // moveable.onResizeStop;
+  const onDragStart = moveable.onDragStart;
+  const onDrag = moveable.onDrag;
+  const onDragStop = undefined;
+  const onClickGroup = undefined;
 
   //   const [selectedTargets, setSelectedTargets] = useState<Array<HTMLElement | SVGElement>>([]);
 
   //   const { vertical: verticalGuidelines, horizontal: horizontalGuidelines } = snaps;
+
+  useEffect(() => {
+    return moveable.on('state-change', () => {
+      console.log('state-change??');
+      forceRender();
+    });
+  }, []);
 
   const handeWindowResize = useCallback(() => {
     ref.current && ref.current!.updateRect();
@@ -62,6 +88,9 @@ function MoveableManager(props: MoveableManagerProps) {
       window.removeEventListener('resize', handeWindowResize);
     };
   }, []);
+
+  const selectedTargets = useMemo(() => Array.from(moveable.getTargets()), [moveable.getTargets()]);
+
   return (
     <Moveable
       ref={ref}

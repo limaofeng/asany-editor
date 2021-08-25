@@ -142,7 +142,7 @@ export interface ScreenProps {
 }
 
 interface ScreenViewportProps {
-  children: JSX.Element;
+  children: React.ReactNode;
   width?: number;
   height?: number;
   zoom?: number;

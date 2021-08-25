@@ -1,48 +1,32 @@
-import { IPluginActionType, UISidebarActionType } from '../../src/reducers/actions';
-import { AsanyAction } from '../../src/typings';
+import { IBlockData } from 'sunmao';
+import { IPluginActionType } from '../../src/reducers/actions';
+import { AsanyAction, ICustomizer } from '../../src/typings';
 
-export enum IconActionType {
+export enum SketchActionType {
   /**
    * 更新 Block 定制器
    */
-  UpdateBlockCustomizer = 'UpdateBlockCustomizer',
-  SELECTO = 'ICON/SELECTO',
-  MOVE = 'ICON/MOVE',
+  USER_CUSTOMIZER = 'USER_CUSTOMIZER',
 }
 
 export interface ISketchState {
-  count: number;
-  selecto: boolean;
-  move: boolean;
+  value?: any;
+  customizer?: ICustomizer;
+  change?: (value: any) => void;
 }
 
-const defaultState: ISketchState = {
-  count: 0,
-  selecto: true,
-  move: false,
-};
+const defaultState: ISketchState = {};
 
 export default function reducer(
   state: ISketchState,
-  action: AsanyAction<IconActionType | IPluginActionType | UISidebarActionType>
+  action: AsanyAction<SketchActionType | IPluginActionType>
 ): ISketchState {
   if (action.type === IPluginActionType.PluginStateInit) {
     return defaultState;
   }
-  if (action.type === IconActionType.SELECTO) {
-    return { ...defaultState, selecto: action.payload };
-  }
-  if (action.type === UISidebarActionType.SidebarSelect) {
-    console.log(action);
-    return {
-      ...defaultState,
-      selecto: action.payload.includes('selecto'),
-      move: action.payload.includes('move'),
-    };
-  }
-  if (action.type === UISidebarActionType.SidebarUnSelect) {
-    console.log(action);
-    return { ...defaultState, selecto: !action.payload.includes('selecto'), move: !action.payload.includes('move') };
+  if (action.type === SketchActionType.USER_CUSTOMIZER) {
+    const { customizer } = action.payload;
+    return { ...state, customizer };
   }
   return state;
 }

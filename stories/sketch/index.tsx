@@ -12,7 +12,7 @@ import reducer from './reducer';
 export default {
   id: 'icon',
   description: '',
-  types: ['icon'],
+  types: ['component'],
   toolbar: {
     content: Navigation,
   },

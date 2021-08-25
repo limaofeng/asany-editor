@@ -3,22 +3,19 @@ import React, { useCallback, useEffect, useReducer, useRef } from 'react';
 
 import { useDispatch, useEditor, useSelector } from '../../hooks';
 
-import { isElement, isValidElementType } from 'react-is';
-
 import { ActionType, UIActionType, WorkspaceActionType } from '../../reducers/actions';
 import InfiniteViewer from '../InfiniteViewer';
 import Ruler, { RulerGuides } from '../Ruler';
 import SelectoMananger from './SelectoMananger';
 import Toolbar from './Toolbar';
 import ScreenViewport from './viewport/ScreenViewport';
-import { WorkspaceProps } from '../../typings';
 
 export interface ScenaStatus {
   dragStatus: boolean;
 }
 interface ScenaProps {
   offsetLeft: number;
-  // children: JSX.Element;
+  children: React.ReactNode;
 }
 
 type CursorStyle = 'grab' | 'grabbing' | '';
@@ -31,18 +28,6 @@ interface ScenaState {
   height: number;
   zoom: number;
   isOpenConfig: boolean;
-}
-
-function Workspace(props: WorkspaceProps) {
-  const workspace = useSelector((state) => state.ui.scena.workspace);
-  if (isElement(workspace)) {
-    return React.cloneElement(workspace, props);
-  }
-  if (isValidElementType(workspace)) {
-    const { children, ...otherProps } = props;
-    return React.createElement(workspace, otherProps, children);
-  }
-  return props.children as any;
 }
 
 function Scena(props: ScenaProps) {
@@ -180,7 +165,7 @@ function Scena(props: ScenaProps) {
         onZoom={handleZoom}
       >
         <ScreenViewport width={width} height={height}>
-          <Workspace />
+          {props.children}
         </ScreenViewport>
       </InfiniteViewer>
       {selecto && <SelectoMananger />}

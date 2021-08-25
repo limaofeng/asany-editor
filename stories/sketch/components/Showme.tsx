@@ -3,7 +3,7 @@ import { useBlock } from 'sunmao';
 import { ComponentPropertyType } from 'sunmao';
 
 function Showme() {
-  const [{ key, props, update, Provider }] = useBlock({
+  const { key, props, update, Provider } = useBlock({
     key: 'xxx',
     icon: '',
     title: '',
@@ -23,7 +23,7 @@ function Showme() {
   console.log('>>>>>', props.title);
 
   return (
-    <Provider clickable={true}>
+    <Provider style={{ flex: 1 }} clickable>
       Show me your code: {props.title} <br /> key = {key}
     </Provider>
   );

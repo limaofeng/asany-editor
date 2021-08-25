@@ -3,7 +3,7 @@ import { component, library } from 'sunmao';
 
 import { Input, InputNumber, Select, TextArea } from './properties/data-entry';
 
-@library({ name: 'AsanyEditor', namespace: 'cn.asany.ui.editor' })
+@library({ name: 'AsanyEditor', namespace: 'cn.asany.ui.editor.properties' })
 class EditorLibrary {
   @component({})
   Input = Input;

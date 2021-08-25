@@ -1,42 +1,38 @@
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
-import React from 'react';
+import React, { useContext, useRef } from 'react';
 
 // import DynaActionForm from '../../library-manager/DynaActionForm';
 // import { ComponentPropertyType } from '../../library-manager/typings';
 
 import FormPanel from '../properties/DynaActionForm';
-import { useSelector } from '../hooks';
+// import { useSelector } from '../hooks';
 import CurrentElementInformation from '../properties/CurrentElementInformation';
 import { AsideTabPane, ComponentPropertyType, DEFAULT_GROUP_ID, ICustomizer, IFieldGroup } from '../typings';
 
-export function createDynaActionForm(customizer: ICustomizer) {
+export const DynaActionFormContext = React.createContext<any>({});
+
+export function createDynaActionForm(customizer: ICustomizer, namespace: string = 'cn.asany.ui.editor.properties') {
   return ({ onChange: handleChange }: any) => {
-    const value = useSelector((state) => state.current?.value);
+    const container = useRef<HTMLDivElement>(null);
+    const value = useContext(DynaActionFormContext);
+
     return (
-      <div className="sketch-configuration-body scrollbars-visible">
-        <OverlayScrollbarsComponent
-          options={{ scrollbars: { autoHide: 'scroll' } }}
-          style={{ height: 'calc(100vh - 136px)' }}
-        >
-          <FormPanel
-            library="com.thuni.him.asany.properties"
-            value={value}
-            onChange={handleChange}
-            customizer={customizer!}
-          />
+      <div ref={container} className="sketch-configuration-body scrollbars-visible">
+        <OverlayScrollbarsComponent options={{ scrollbars: { autoHide: 'scroll' } }}>
+          <FormPanel library={namespace} value={value} onChange={handleChange} customizer={customizer!} />
         </OverlayScrollbarsComponent>
       </div>
     );
   };
 }
 
-const createTabPane = (item: any): AsideTabPane => ({
+const createTabPane = (item: any, namespace?: string): AsideTabPane => ({
   title: item.name,
   visible: item.visible,
-  content: createDynaActionForm(item.customizer),
+  content: createDynaActionForm(item.customizer, namespace),
 });
 
-export function buildAside(customizer: ICustomizer) {
+export function buildAside(customizer: ICustomizer, namespace?: string) {
   const tabs = [];
 
   const fields = customizer.fields.map((item) => (item.group ? item : { ...item, group: DEFAULT_GROUP_ID }));
@@ -93,5 +89,6 @@ export function buildAside(customizer: ICustomizer) {
       };
     })
   );
-  return tabs.map(createTabPane);
+
+  return tabs.map((tab) => createTabPane(tab, namespace));
 }

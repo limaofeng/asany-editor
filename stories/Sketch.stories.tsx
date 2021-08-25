@@ -9,8 +9,8 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import Sunmao, { SketchProvider, library, component, SunmaoProvider } from 'sunmao';
-import AsanyEditor from '../src';
-import SketchPlugin from './sketch';
+import editorLibraries from '../src/sunmao';
+import SunmaoEditor from './sketch/SunmaoEditor';
 import Showme from './sketch/components/Showme';
 
 const meta: Meta = {
@@ -39,32 +39,29 @@ class TestLibrary {
 }
 
 const Template: Story<any> = (_args) => {
-  const plugin = { ...SketchPlugin };
   const sunmao = new Sunmao();
   const x = new TestLibrary();
   sunmao.addLibrary(x as any);
+  sunmao.addLibrary(...editorLibraries);
   return (
     <DndProvider backend={HTML5Backend}>
       <SunmaoProvider sunmao={sunmao}>
         <ApolloProvider client={client}>
           <IconProvider>
             <Router>
-              <SketchProvider>
-                <AsanyEditor
-                  plugins={[plugin]}
-                  onSave={(data) => console.log(data)}
-                  className="icon-editor"
-                  project={{
-                    id: 'test',
-                    name: (<div style={{ color: '#727d83', fontSize: 16 }}>项目名称展示区域</div>) as any,
-                    type: 'icon',
-                    data: {
-                      id: '111',
-                      props: [],
+              <SunmaoEditor
+                id="0"
+                name="测试"
+                data={{
+                  template: 'cn.asany.ui.sunmao.test.Showme',
+                  props: [
+                    {
+                      key: 'root/xxx',
+                      props: { title: '观自在菩萨' },
                     },
-                  }}
-                />
-              </SketchProvider>
+                  ],
+                }}
+              />
             </Router>
           </IconProvider>
         </ApolloProvider>

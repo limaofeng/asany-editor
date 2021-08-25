@@ -45,6 +45,7 @@ interface PropertiesPanelState {
 }
 
 export interface IPropertiesPanel {
+  container: HTMLDivElement;
   width: number;
   back: () => Promise<void>;
   switch: (activeKey: string) => void;
@@ -98,6 +99,7 @@ function PropertiesPanel(props: PropertiesPanelProps, ref: React.ForwardedRef<IP
   useImperativeHandle<IPropertiesPanel, any>(
     ref,
     () => ({
+      container: container.current,
       switch: (activeKey: string) => {
         setActiveKey(activeKey);
       },

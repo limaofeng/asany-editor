@@ -295,7 +295,7 @@ export interface EditorPlugin {
   sidebar?: ISidebar;
   scena?: IScena;
   aside?: ComponentType;
-  types: AsanyProjectType[];
+  types: string[];
 }
 
 export interface IScena {
@@ -403,7 +403,9 @@ export interface ScenaHelper {
   unmask(delay?: number): Promise<void>;
 }
 
-export interface WorkspaceProps {}
+export interface WorkspaceProps {
+  children?: React.ReactNode;
+}
 
 export interface SidebarHelper {
   state: IUISidebarState;
@@ -450,6 +452,9 @@ export interface SidebarHelper {
 export interface PanelOptions {
   top?: number | 'auto';
   width?: number;
+  value?: void;
+  watchValue?: (callback: (value: any) => void) => () => void;
+  update?: (value: any) => void;
 }
 
 export interface AsideHelper {
@@ -503,53 +508,13 @@ export interface IAsanyEditor {
   dispatch: DispatchWithoutAction<any>;
 }
 
-type AsanyProjectType = 'component' | 'application' | string;
+type AsanyProjectType = 'component';
 
-interface IComponentData {
-  id: string;
-  props: any;
-}
-
-interface IRouteComponentData {}
-
-export interface IRouteComponent extends IRoute {
-  component: ComponentType;
-}
-
-export interface IRoute {
-  id: string;
-  path?: string;
-  name?: string;
-  type: 'menu' | 'header' | 'divider' | 'route';
-  icon?: string;
-  authorized: boolean;
-  wrappers: any[];
-  routes: any[] | undefined;
-  exact: boolean;
-  parent: any;
-  index: number;
-}
-
-export interface IRouteData extends IRoute {
-  component: IComponentData;
-  configuration: IRouteComponentData;
-}
-
-interface IApplicationData {
-  id?: string;
-  routes: IRouteData[];
-}
-
-interface IRemoteData {
-  uri: string;
-  id: string;
-}
-
-interface AsanyProject {
+interface AsanyProject<D = any, T = AsanyProjectType> {
   id: string;
   name: string;
-  type: AsanyProjectType;
-  data: IComponentData | IApplicationData | IRemoteData;
+  type: T;
+  data: D;
 }
 
 export interface ComponentDragObject {
@@ -796,4 +761,4 @@ export interface IAsanyState {
   plugins: IPluginState;
 }
 
-export { AsanyProject, IApplicationData, AsanyProjectType, IComponentData };
+export { AsanyProject, AsanyProjectType };

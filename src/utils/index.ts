@@ -1,5 +1,6 @@
-import { DependencyList, useCallback, useEffect, useRef } from 'react';
+import { DependencyList, useCallback, useEffect, useMemo, useRef } from 'react';
 import { isEqual, debounce, throttle as lodashThrottle } from 'lodash-es';
+export { buildAside, createDynaActionForm } from './BlockAside';
 
 export function useDebounce<T extends (...args: any) => any>(fn: T, delay: number, deps?: DependencyList) {
   return useCallback(debounce(fn, delay), deps || []);
@@ -18,8 +19,12 @@ function useDeepCompareMemoize(value: any) {
   return ref.current;
 }
 
-export function useDeepCompareEffect(effect: React.EffectCallback, dependencies?: Object) {
+export function useDeepCompareEffect(effect: React.EffectCallback, dependencies?: DependencyList) {
   useEffect(effect, useDeepCompareMemoize(dependencies));
+}
+
+export function useDeepCompareMemo<T>(factory: () => T, dependencies?: DependencyList): T {
+  return useMemo(factory, useDeepCompareMemoize(dependencies));
 }
 
 export const dispatchWindowResize = lodashThrottle(() => {

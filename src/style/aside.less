@@ -42,6 +42,16 @@
     }
 
     > .settings-menu-tabs.ant-tabs {
+      height: 100%;
+      .ant-tabs-content {
+        height: 100%;
+        .sketch-configuration-body {
+          height: 100%;
+          > .os-host {
+            height: inherit;
+          }
+        }
+      }
       .ant-tabs-nav {
         margin-bottom: 5px;
         line-height: 30px;
@@ -176,8 +186,7 @@
       outline: 0;
     }
 
-    .ant-calendar-picker:hover
-      .ant-calendar-picker-input:not(.ant-input-disabled) {
+    .ant-calendar-picker:hover .ant-calendar-picker-input:not(.ant-input-disabled) {
       border-color: #b1b1b1;
       outline: 0;
     }

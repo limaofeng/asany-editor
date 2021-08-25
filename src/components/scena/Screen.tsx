@@ -9,7 +9,7 @@ import MoveableManager from './viewport/MoveableManager';
 // import ThumbnailGenerator from '../../../thumbnail';
 // import { IThumbnailGenerator } from '../../../thumbnail/ThumbnailGenerator';
 interface ScreenProps {
-  children?: JSX.Element;
+  children?: React.ReactNode;
 }
 
 function Screen({ children }: ScreenProps) {
@@ -26,14 +26,7 @@ function Screen({ children }: ScreenProps) {
   const zoom = useSelector((state) => state.ui.scena.zoom);
   const [width, height] = useSelector((state) => state.ui.scena.screen.size);
   const activeKey = useSelector((state) => state.workspace.block.activeKey);
-  // const project = useSelector((state) => state.project);
-  const snaps = useSelector((state) => state.ui.scena.snaps);
-  const moveable = useSelector((state) => state.ui.scena.moveable);
   const dustbin = useSelector((state) => state.ui.scena.viewer.dustbin);
-
-  useSelector((state) => state.ui.scena.moveable.enable);
-
-  const { vertical: verticalGuidelines, horizontal: horizontalGuidelines } = snaps;
 
   // const lastKey = useSelector(
   //   ({
@@ -150,31 +143,17 @@ function Screen({ children }: ScreenProps) {
           {children}
           {/* <Provider deps={[project?.data?.id, children?.type?.info?.id]}></Provider> */}
         </div>
-        {!disabled && (
-          <>
-            <MoveableManager
-              container={moveableContainer.current}
-              draggable={moveable.draggable}
-              resizable={moveable.resizable}
-              selectedTargets={moveable.selectedTargets}
-              verticalGuidelines={verticalGuidelines}
-              horizontalGuidelines={horizontalGuidelines}
-              onResizeStart={moveable.onResizeStart}
-              onResize={moveable.onResize}
-              onResizeStop={moveable.onResizeStop}
-              onDragStart={moveable.onDragStart}
-              onDrag={moveable.onDrag}
-            />
-            <MoveableManager
+        <MoveableManager container={moveableContainer.current} />
+        <>
+          {/* <MoveableManager
               container={moveableContainer.current}
               selectedTargets={moveable
                 .getHTMLElements([lastKey])
                 .filter((item) => !moveable.selectedTargets.includes(item))}
               verticalGuidelines={verticalGuidelines}
               horizontalGuidelines={horizontalGuidelines}
-            />
-          </>
-        )}
+            /> */}
+        </>
       </div>
     </>
   );
