@@ -3,7 +3,6 @@ import { OnDragEnd, OnResize, OnResizeEnd, OnResizeStart } from 'react-moveable'
 import { Frame } from 'scenejs';
 
 import { DispatchWithoutAction, IAsanyStoreContext } from './AsanyContext';
-import { IUseBlockState } from './hooks/useBlock';
 import { Selector } from './hooks/useSelector';
 import MoveableState from './reducers/ui.reducer/scena.reducer/MoveableState';
 import MoveableData from './utils/MoveableData';
@@ -404,9 +403,7 @@ export interface ScenaHelper {
   unmask(delay?: number): Promise<void>;
 }
 
-export interface WorkspaceProps {
-  children: React.ReactNode | React.ReactNode[];
-}
+export interface WorkspaceProps {}
 
 export interface SidebarHelper {
   state: IUISidebarState;

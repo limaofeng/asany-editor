@@ -18,7 +18,7 @@ export interface ScenaStatus {
 }
 interface ScenaProps {
   offsetLeft: number;
-  children: JSX.Element;
+  // children: JSX.Element;
 }
 
 type CursorStyle = 'grab' | 'grabbing' | '';
@@ -180,7 +180,7 @@ function Scena(props: ScenaProps) {
         onZoom={handleZoom}
       >
         <ScreenViewport width={width} height={height}>
-          <Workspace>{props.children}</Workspace>
+          <Workspace />
         </ScreenViewport>
       </InfiniteViewer>
       {selecto && <SelectoMananger />}
