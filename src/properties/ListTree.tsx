@@ -29,7 +29,7 @@ interface ListTreeProps {
 
 function getSelectKeys(treeData: ListTreeNode[], key: string): string[] {
   for (const node of treeData) {
-    if (node.id == key) {
+    if (node.id === key) {
       return [node.id];
     }
     if (node.children?.length) {
@@ -54,7 +54,7 @@ function ListTree(props: ListTreeProps) {
     let parentNode;
     setList(
       openKeys.reduce((list, key) => {
-        const node = list.find((item) => item.id == key);
+        const node = list.find((item) => item.id === key);
         if (node) {
           parentNode = node;
           return node.children || [];
@@ -80,7 +80,7 @@ function ListTree(props: ListTreeProps) {
         if (!list.length) {
           return list;
         }
-        const node = list.find((item: any) => item.id == key);
+        const node = list.find((item: any) => item.id === key);
         if (node && node.children?.length) {
           return node.children;
         }

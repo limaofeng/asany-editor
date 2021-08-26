@@ -2,8 +2,7 @@ import { CheckOutlined, DownOutlined } from '@ant-design/icons';
 import { InputNumber, Popover } from 'antd';
 import classnames from 'classnames';
 import { isEqual } from 'lodash-es';
-import React, { useCallback, useEffect, useState } from 'react';
-import { CSSProperties } from 'styled-components';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import devices from '../../../assets/devices';
 import { useDispatch, useSelector } from '../../../hooks';
@@ -143,7 +142,7 @@ export interface ScreenProps {
 }
 
 interface ScreenViewportProps {
-  children: JSX.Element;
+  children: React.ReactNode;
   width?: number;
   height?: number;
   zoom?: number;
@@ -152,35 +151,28 @@ interface ScreenViewportProps {
 }
 
 function ScreenViewport(props: ScreenViewportProps) {
-  const isZoom = useSelector((state) => state.features.zoom);
   const { children, scrollX = 0, scrollY = 0, width, height } = props;
+
+  const isZoom = useSelector((state) => state.features.zoom);
   let sidebarWidth = useSelector((state) => state.ui.sidebar.width);
   const sidebarMinWidth = useSelector((state) => state.ui.sidebar.minWidth);
   const sidebarMinimizable = useSelector((state) => state.ui.sidebar.minimizable);
-  const [style, setStyle] = useState<CSSProperties>({});
 
-  useEffect(() => {
-    if (!isZoom) {
-      return;
-    }
-    setStyle({
-      width,
-      height,
-      transform: `matrix(1, 0, 0, 1, ${scrollX}, ${scrollY})`,
-    });
-  }, [width, height]);
-
-  useEffect(() => {
+  const style = useMemo(() => {
     if (isZoom) {
-      return;
+      return {
+        width,
+        height,
+        transform: `matrix(1, 0, 0, 1, ${scrollX}, ${scrollY})`,
+      };
     }
     if (sidebarMinimizable) {
       sidebarWidth = 0;
     } else {
       sidebarWidth = Math.max(sidebarMinWidth, sidebarWidth);
     }
-    setStyle({ marginLeft: sidebarWidth, display: 'flex', width: `calc(100% - ${sidebarWidth}px)`, minHeight: `100%` });
-  }, [sidebarWidth, sidebarMinimizable, sidebarMinWidth]);
+    return { marginLeft: sidebarWidth, display: 'flex', width: `calc(100% - ${sidebarWidth}px)`, minHeight: `100%` };
+  }, [isZoom, width, height, scrollX, scrollY, sidebarWidth, sidebarMinimizable, sidebarMinWidth]);
 
   return (
     <div className="screen-viewport" style={style}>

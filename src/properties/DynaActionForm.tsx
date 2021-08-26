@@ -129,7 +129,7 @@ const DynaActionForm = ({ library = 'cn.asany.editor.form', ...props }: DynaActi
               renderer: getRenderer(sunmao, library, definition),
             });
           } else {
-            const _group = (customizer.groups || []).find((g) => g.id == id);
+            const _group = (customizer.groups || []).find((g) => g.id === id);
             if (_group) {
               groups.push((group = { ..._group, fields: [] }));
             } else {
@@ -144,7 +144,7 @@ const DynaActionForm = ({ library = 'cn.asany.editor.form', ...props }: DynaActi
           return groups;
         }, [])
         .map((group) => {
-          if (group.fields.length == 1 && !(group as any).visible) {
+          if (group.fields.length === 1 && !(group as any).visible) {
             (group as any).visible = group.fields[0].visible;
           }
           return group;

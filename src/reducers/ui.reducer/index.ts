@@ -14,7 +14,7 @@ export default combineReducers(
     toolbar: toolbarReducer,
   },
   (state: any, action: AsanyAction<any>) => {
-    if (action.type == GlobalAsanyAction.Init) {
+    if (action.type === GlobalAsanyAction.Init) {
       return { ...state, tools: [] };
     }
     return state;

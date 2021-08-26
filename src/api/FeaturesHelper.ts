@@ -6,12 +6,6 @@ export default class FeaturesHelperImpl implements FeaturesHelper {
   constructor(editor: IAsanyEditor) {
     this.editor = editor;
   }
-  block(enable: boolean): void {
-    return this.editor.store.dispatch({
-      type: ActionType.FeatureBlock,
-      payload: enable,
-    });
-  }
   has(feature: Feature): boolean {
     return (this.editor.state.features as any)[feature as string];
   }

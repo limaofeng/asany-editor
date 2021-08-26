@@ -13,18 +13,18 @@ function FormField({ field, className, children, layout = 'Inline', ...props }: 
   return (
     <div
       className={classnames('smart-form-field', `smart-form-field-layout-${layout.toLocaleLowerCase()}`, className, {
-        'inline-show-label': layout == 'Inline' && field.label && !field.hiddenLabel,
+        'inline-show-label': layout === 'Inline' && field.label && !field.hiddenLabel,
       })}
     >
       {field.label && !field.hiddenLabel && (
         <label className="smart-form-field-label">
           {field.label}
-          {layout == 'Inline' && ':'}
+          {layout === 'Inline' && ':'}
         </label>
       )}
       <div
         className={classnames('smart-form-field-value flex items-center', {
-          'justify-start': layout == 'Stacked',
+          'justify-start': layout === 'Stacked',
         })}
       >
         {React.cloneElement(React.Children.only(children), props)}

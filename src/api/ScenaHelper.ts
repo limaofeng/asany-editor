@@ -118,6 +118,9 @@ class ScenaHelperImpl implements ScenaHelper {
     const reset = this.editor.scena.state.reset;
     reset && reset();
   }
+  setSelectedTargets(targets: (HTMLElement | SVGElement)[]) {
+    this.editor.dispatch({ type: ActionType.MoveableSelectedTargets, payload: targets });
+  }
 }
 
 export default ScenaHelperImpl;

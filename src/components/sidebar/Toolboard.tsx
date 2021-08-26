@@ -69,11 +69,11 @@ function Toolboard(props: ToolboardProps, ref: React.ForwardedRef<IToolboard>) {
       const originalIndex = state.current.index;
       key = state.current.activeKey = key || state.current.activeKey!;
       const panels = state.current.panels[key] ? state.current.panels[key] : (state.current.panels[key] = []);
-      const currentIndex = index == -1 ? originalIndex + 1 : Math.min(index, originalIndex + 1);
+      const currentIndex = index === -1 ? originalIndex + 1 : Math.min(index, originalIndex + 1);
       if (originalIndex > currentIndex) {
         handleClose(currentIndex + 1);
       }
-      if (index == 0) {
+      if (index === 0) {
         panels.length = 0;
       }
       if (originalIndex >= currentIndex) {
@@ -98,7 +98,7 @@ function Toolboard(props: ToolboardProps, ref: React.ForwardedRef<IToolboard>) {
       }
       // 为了让动画更流畅, 延时 50ms 让元素先渲染到页面
       await sleep(50);
-      if (panels.length == 1) {
+      if (panels.length === 1) {
         setCollapsed(false);
       } else if (originalIndex < state.current.index) {
         panels[panels.length - 1].collapsed = false;
@@ -150,7 +150,7 @@ function Toolboard(props: ToolboardProps, ref: React.ForwardedRef<IToolboard>) {
       return;
     }
     state.current.index = index - 1;
-    if (index == 0) {
+    if (index === 0) {
       const panels = _panels.slice(index);
       panels.forEach((item) => (item.collapsed = true));
       forceRender();
@@ -172,19 +172,19 @@ function Toolboard(props: ToolboardProps, ref: React.ForwardedRef<IToolboard>) {
   }, []);
 
   const getCollapseLocation = (panels: Panel[], index: number) => {
-    if (index == 0 || panels.length === state.current.index + 1) {
+    if (index === 0 || panels.length === state.current.index + 1) {
       return 0;
     }
     const collapsedStartIndex = state.current.index + 1;
     return -panels.slice(collapsedStartIndex, index).reduce((location, item) => location + item.width, 0);
   };
   const getLeft = (panels: Panel[], index: number): number => {
-    if (index == 0) {
+    if (index === 0) {
       return 0;
     }
     return (
       getLeft(panels, index - 1) +
-      (index == 1 ? 0 : panels[index - 1].width) +
+      (index === 1 ? 0 : panels[index - 1].width) +
       panels[index - 1].width -
       panels[index].width
     );

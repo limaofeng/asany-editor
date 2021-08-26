@@ -54,7 +54,7 @@ const ScrubbableControl = (props: ScrubbableControlProps) => {
   }, []);
 
   useDeepCompareEffect(() => {
-    if (value == null || value == undefined) {
+    if (value === null || value === undefined) {
       return;
     }
     setInternalValue(handleInputFormat(value));
@@ -62,18 +62,18 @@ const ScrubbableControl = (props: ScrubbableControlProps) => {
 
   const handleBlur = useCallback(() => {
     if (isEqual(internalValue, handleInputFormat(value))) return;
-    if (trigger == 'change') {
+    if (trigger === 'change' || !onChange) {
       return;
     }
     const foramtValue = (format && format.output && format.output(internalValue)) || internalValue;
-    internalValue && onChange && onChange(foramtValue);
-  }, [internalValue]);
+    internalValue && onChange(foramtValue);
+  }, [internalValue, onChange]);
 
   const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = inputType == 'number' ? { value: event } : event.target;
+    const { value } = inputType === 'number' ? { value: event } : event.target;
     const internalValue = handleInputFormat(value);
     setInternalValue(internalValue);
-    if (trigger == 'change' && onChange) {
+    if (trigger === 'change' && onChange) {
       const foramtValue = (format && format.output && format.output(internalValue)) || internalValue;
       onChange(foramtValue);
     }
@@ -90,7 +90,7 @@ const ScrubbableControl = (props: ScrubbableControlProps) => {
         onClick={handleFocus}
         className={classnames('scrubbable-control left-col design-input design-rows-items', className, {
           disabled,
-          is_textarea: inputType == 'textarea',
+          is_textarea: inputType === 'textarea',
         })}
       >
         {renderIcon(icon)}
@@ -123,7 +123,7 @@ function renderInput(
   handleChange: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> & any) => void
 ) {
   const { inputType = 'input', placeholder, disabled, width, autoSize } = props;
-  if (inputType == 'textarea') {
+  if (inputType === 'textarea') {
     return (
       <TextArea
         ref={input}
@@ -137,7 +137,7 @@ function renderInput(
       />
     );
   }
-  if (inputType == 'number') {
+  if (inputType === 'number') {
     return (
       <InputNumber
         ref={input}
@@ -150,8 +150,8 @@ function renderInput(
       />
     );
   }
-  if (inputType == 'input') {
-    if (width == 'adaptive') {
+  if (inputType === 'input') {
+    if (width === 'adaptive') {
       return (
         <div
           ref={input}

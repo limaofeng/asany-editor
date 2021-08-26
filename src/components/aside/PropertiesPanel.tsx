@@ -1,4 +1,3 @@
-// import { CloseOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
 import Icon from '@asany/icons';
 import { Tabs } from 'antd';
 import classnames from 'classnames';
@@ -45,6 +44,7 @@ interface PropertiesPanelState {
 }
 
 export interface IPropertiesPanel {
+  container: HTMLDivElement;
   width: number;
   back: () => Promise<void>;
   switch: (activeKey: string) => void;
@@ -85,7 +85,7 @@ function PropertiesPanel(props: PropertiesPanelProps, ref: React.ForwardedRef<IP
   };
 
   const handleCloseNextPanel = async () => {
-    if (state.current.nextIndex == -1) {
+    if (state.current.nextIndex === -1) {
       return;
     }
     state.current.nextIndex--;
@@ -98,6 +98,7 @@ function PropertiesPanel(props: PropertiesPanelProps, ref: React.ForwardedRef<IP
   useImperativeHandle<IPropertiesPanel, any>(
     ref,
     () => ({
+      container: container.current,
       switch: (activeKey: string) => {
         setActiveKey(activeKey);
       },

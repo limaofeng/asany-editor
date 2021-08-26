@@ -2,18 +2,9 @@ import React, { useCallback, useEffect, useMemo, useReducer, useState } from 're
 
 import sketchReducer, { defaultValue } from './reducers';
 import { ActionType } from './reducers/actions';
-import { useDeepCompareEffect } from './utils';
 import { getReducers } from './utils/plugin';
 
-import type {
-  AsanyAction,
-  AsanyProject,
-  AsanyProviderMode,
-  EditorPlugin,
-  IAsanyState,
-  IBlockData,
-  IComponentData,
-} from './typings';
+import type { AsanyAction, AsanyProject, AsanyProviderMode, EditorPlugin, IAsanyState } from './typings';
 type UnsubscribeFunc = () => void;
 
 type SubscribeCallback = () => void;
@@ -84,7 +75,6 @@ function useStore(mode: AsanyProviderMode, plugins: EditorPlugin[] = []): IAsany
 export const AsanyProvider = (props: AsanyProviderProps) => {
   const { children, version, value, plugins } = props;
   const store = useStore(props.mode || 'CONFIG', plugins);
-  const { data } = value || {};
   const { dispatch } = store;
   useEffect(() => {
     dispatch({ type: ActionType.Init });
@@ -100,32 +90,9 @@ export const AsanyProvider = (props: AsanyProviderProps) => {
       payload: { reducers, project: value },
     });
   }, [value]);
-  useDeepCompareEffect(() => {
-    if (!value) {
-      return;
-    }
-    /*if (value.type == 'application') {
-      const data: IApplicationData = value.data as any;
-      dispatch({ type: ActionType.SetRoutes, payload: data.routes });
-    } else */
-    if (value.type == 'component') {
-      const data: IComponentData = value.data as any;
-      dispatch({ type: ActionType.UpdateBlockMoreProps, payload: data.props });
-    }
-  }, [data]);
-  // TODO 是否应该提供一个机制，用于检测 store 是否数据完成加载
   return useMemo(
     () => <AsanyContext.Provider value={store}>{store.getState().isReady && children}</AsanyContext.Provider>,
     [version, store.getState().isReady]
   );
 };
-
-export interface ICurrentBlockData<T = any> extends IBlockData<T> {
-  value: T;
-  element: React.RefObject<HTMLElement>;
-  onChange: (props: any) => void;
-}
-
-export interface IAsanyStateContext extends IAsanyState {
-  current?: ICurrentBlockData<any>;
-}
+export interface IAsanyStateContext extends IAsanyState {}

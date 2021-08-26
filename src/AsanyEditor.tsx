@@ -3,7 +3,7 @@ import './style/index.less';
 import './style/tailwind.css';
 
 import classnames from 'classnames';
-import React, { ComponentType, useCallback, useEffect, useReducer, useRef } from 'react';
+import React, { ComponentType, useCallback, useEffect, useReducer } from 'react';
 import { useState } from 'react';
 
 import { AsanyProvider } from './AsanyContext';
@@ -15,60 +15,8 @@ import Toolbar from './components/toolbar/Toolbar';
 import { useDispatch, useSelector } from './hooks';
 import { ActionType } from './reducers/actions';
 import RuntimeContainer from './RuntimeContainer';
-import { AsanyProject, EditorPlugin } from './typings';
-
-function NotFound() {
-  return <>404</>;
-}
-
-function useComponent(_RootContainer: React.ComponentType<any>, _children?: React.ReactNode): React.ComponentType<any> {
-  const project = useSelector((state) => state.project);
-  const ReactComponent = useRef<ComponentType<any>>(NotFound);
-  // const [, forceRender] = useReducer((s) => s + 1, 0);
-
-  if (!project || !project.type) {
-    console.warn('project is null !');
-  }
-  // const data = project.data as IComponentData;
-  // const Component: any = () => <></>;
-  // const Component = useReactComponent(data ? data.id : 'notFound', {
-  //   linkElement: LinkRender,
-  // });
-  // TODO: 需要修补
-  // console.log(Component, forceRender, RootContainer, children);
-  // useEffect(() => {
-  //   if (project.type !== 'component') {
-  //     ReactComponent.current = () => <>{children}</>;
-  //     forceRender();
-  //     return;
-  //   }
-  //   ReactComponent.current = () => {
-  //     // const [, forceRender] = useReducer((s) => s + 1, 0);
-  //     // useLayoutEffect(() => {
-  //     //   if (!document.getElementsByClassName('canvas').length) {
-  //     //     return;
-  //     //   }
-  //     //   console.log(document.getElementsByClassName('canvas')[0]);
-  //     //   ReactDOM.render(
-  //     //     <RootContainer children={<div id="canvas-portal" />} />,
-  //     //     document.getElementsByClassName('canvas')[0]
-  //     //   );
-  //     //   forceRender();
-  //     // }, []);
-
-  //     // const target = document.querySelector(`#canvas-portal`);
-  //     // if (!target) {
-  //     //   return <></>;
-  //     // }
-  //     // return createPortal(<Component />, target);
-  //     return <RootContainer children={<Component />} />;
-  //   };
-  //   (ReactComponent.current as any)['info'] = Component.info;
-  //   forceRender();
-  // }, [project.type, Component, RootContainer]);
-
-  return ReactComponent.current;
-}
+import { AsanyProject, EditorPlugin, WorkspaceProps } from './typings';
+import { isElement, isValidElementType } from 'react-is';
 
 interface AsanyProps {
   className?: string;
@@ -90,8 +38,21 @@ function Editor({
   const dispatch = useDispatch();
 
   const [offsetLeft, setOffsetLeft] = useState(0);
+  const workspace = useSelector((state) => state.ui.scena.workspace);
 
-  const WorkComponent = useComponent(container, children);
+  const WorkComponent = useCallback(
+    (props: WorkspaceProps) => {
+      if (isElement(workspace)) {
+        return React.cloneElement(workspace, props);
+      }
+      if (isValidElementType(workspace)) {
+        const { children, ...otherProps } = props;
+        return React.createElement(workspace, otherProps, children);
+      }
+      return <div>插件未配置 Workspace 组件</div>;
+    },
+    [workspace]
+  );
 
   const visible = useSelector((state) => state.ui.aside.visible);
   const scenaToolbarVisible = useSelector((state) => state.ui.scena.toolbar.visible);
