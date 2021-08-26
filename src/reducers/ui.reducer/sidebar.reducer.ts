@@ -88,7 +88,7 @@ export default function reducer(
       content,
       minimizable: !action.payload.visible || minimizable,
       tools: action.payload.tools,
-      visible: action.payload.visible != false,
+      visible: action.payload.visible !== false,
     };
   }
   if (action.type === GlobalAsanyAction.Init) {

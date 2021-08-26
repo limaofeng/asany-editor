@@ -30,7 +30,7 @@ export default class AsideHelperImpl implements AsideHelper {
     } else {
       tabs.push(...(title as any));
     }
-    if (arguments.length == 3) {
+    if (arguments.length === 3) {
       options = arguments[2];
     } else if (Array.isArray(title)) {
       options = arguments[1];

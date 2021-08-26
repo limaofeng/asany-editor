@@ -54,7 +54,7 @@ const ScrubbableControl = (props: ScrubbableControlProps) => {
   }, []);
 
   useDeepCompareEffect(() => {
-    if (value == null || value == undefined) {
+    if (value === null || value === undefined) {
       return;
     }
     setInternalValue(handleInputFormat(value));

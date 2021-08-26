@@ -38,7 +38,7 @@ function defaultRenderTitle(value?: SelectOption, placeholder?: string) {
 }
 
 function defaultCompare(value: string, option: SelectOption) {
-  return value == option.value;
+  return value === option.value;
 }
 
 type OptionCompare = (option: SelectOption) => boolean;
@@ -95,7 +95,7 @@ const SelectModal = React.memo((props: SelectPopoverProps) => {
 });
 
 const renderIcon = (icon: ElementType) => {
-  if (typeof icon == 'string') {
+  if (typeof icon === 'string') {
     return <Icon className="select-icon" name={icon} />;
   }
   return React.cloneElement(icon as any, {
@@ -117,7 +117,7 @@ const defaultGetOption = (
   for (const option of options) {
     if (option.hasOwnProperty('options')) {
       val = defaultGetOption((option as any).options, value);
-    } else if ((option as any).value == value) {
+    } else if ((option as any).value === value) {
       val = option as any;
     }
     if (val) {
@@ -148,7 +148,7 @@ const Select = (props: SelectProps) => {
   const [value, setValue] = useState<string | undefined>(initialValue);
 
   useEffect(() => {
-    if (initialValue == value) {
+    if (initialValue === value) {
       return;
     }
     setValue(initialValue);

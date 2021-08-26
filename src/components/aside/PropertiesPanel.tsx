@@ -1,4 +1,3 @@
-// import { CloseOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
 import Icon from '@asany/icons';
 import { Tabs } from 'antd';
 import classnames from 'classnames';
@@ -86,7 +85,7 @@ function PropertiesPanel(props: PropertiesPanelProps, ref: React.ForwardedRef<IP
   };
 
   const handleCloseNextPanel = async () => {
-    if (state.current.nextIndex == -1) {
+    if (state.current.nextIndex === -1) {
       return;
     }
     state.current.nextIndex--;
