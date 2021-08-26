@@ -5,3 +5,4 @@ export { buildAside, createDynaActionForm } from './utils/BlockAside';
 export * from './typings';
 export * from './reducers/actions';
 export * from './hooks';
+export * from './utils';
