@@ -1,3 +1,12 @@
+## [0.2.2](https://github.com/limaofeng/asany-editor/compare/v0.2.1...v0.2.2) (2021-08-26)
+
+
+### Bug Fixes
+
+* 简化 Block 配置时的变量名 ([7c2c54e](https://github.com/limaofeng/asany-editor/commit/7c2c54e20fea5ae7094b85411ea93aef690f9e02))
+
+
+
 ## [0.2.1](https://github.com/limaofeng/asany-editor/compare/v0.2.0...v0.2.1) (2021-08-26)
 
 
