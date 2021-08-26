@@ -53,7 +53,6 @@ const CurrentElementInformation = () => {
   // 用于状态的变更
   const state = useRef<any>({});
   const [, forceRender] = useReducer((s) => s + 1, 0);
-  // const current = useSelector((state) => state.current);
 
   const screen = useSelector((state) => state.ui.scena.screen);
 

@@ -1,19 +1,14 @@
 import classnames from 'classnames';
 import React, { useEffect, useRef } from 'react';
 import { useDragDropManager, useDrop } from 'react-dnd';
-// import { useBlock } from 'sunmao';
 
 import { useSelector } from '../../hooks';
 import MoveableManager from './viewport/MoveableManager';
-
-// import ThumbnailGenerator from '../../../thumbnail';
-// import { IThumbnailGenerator } from '../../../thumbnail/ThumbnailGenerator';
 interface ScreenProps {
   children?: React.ReactNode;
 }
 
 function Screen({ children }: ScreenProps) {
-  // const thumbnail = useRef<IThumbnailGenerator>(null);
   const artboard = useRef<HTMLDivElement>(null);
   const screenHeader = useRef<HTMLDivElement>(null);
   const moveableContainer = useRef<HTMLDivElement>(null);
@@ -50,7 +45,6 @@ function Screen({ children }: ScreenProps) {
   }, [width, height]);
 
   const style = (isZoom && { width, height }) || { height: '100%' };
-  // <ThumbnailGenerator ref={thumbnail}></ThumbnailGenerator>
   return (
     <>
       <div
@@ -85,21 +79,10 @@ function Screen({ children }: ScreenProps) {
         ref={moveableContainer}
         style={{ transform: `scale(${zoom})` }}
       >
-        <div /*ref={block(artboard)}*/ className="canvas" style={style}>
+        <div className="canvas" style={style}>
           {children}
-          {/* <Provider deps={[project?.data?.id, children?.type?.info?.id]}></Provider> */}
         </div>
         <MoveableManager container={moveableContainer.current} />
-        <>
-          {/* <MoveableManager
-              container={moveableContainer.current}
-              selectedTargets={moveable
-                .getHTMLElements([lastKey])
-                .filter((item) => !moveable.selectedTargets.includes(item))}
-              verticalGuidelines={verticalGuidelines}
-              horizontalGuidelines={horizontalGuidelines}
-            /> */}
-        </>
       </div>
     </>
   );
