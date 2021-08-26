@@ -1,3 +1,12 @@
+## [0.2.1](https://github.com/limaofeng/asany-editor/compare/v0.2.0...v0.2.1) (2021-08-26)
+
+
+### Features
+
+* 删除原组件配置逻辑，优化 Moveable 功能 ([#3](https://github.com/limaofeng/asany-editor/issues/3)) ([511aa3f](https://github.com/limaofeng/asany-editor/commit/511aa3f137f84672346ecd2299258e408aca43d2))
+
+
+
 # [0.2.0](https://github.com/limaofeng/asany-editor/compare/v0.1.3...v0.2.0) (2021-08-20)
 
 
