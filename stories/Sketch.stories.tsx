@@ -56,7 +56,7 @@ const Template: Story<any> = (_args) => {
                   template: 'cn.asany.ui.sunmao.test.Showme',
                   props: [
                     {
-                      key: 'root/xxx',
+                      key: 'xxx',
                       props: { title: '观自在菩萨' },
                     },
                   ],

@@ -1,12 +1,12 @@
 import React, { useRef, useCallback, useReducer, useEffect, CSSProperties } from 'react';
 import classnames from 'classnames';
-import { throttle } from 'lodash-es';
 import { drag, OnDrag, OnDragStart } from '@daybrush/drag';
 import { calculateScaling } from '../reducers/ui.reducer/scena.reducer';
 import { useDragDropManager, useDrop } from 'react-dnd';
 import useSelector from '../hooks/useSelector';
 
 interface Gesture {
+  animationFrame: number;
   type?: 'zoom' | 'mobile';
   xPoints: number[];
   yPoints: number[];
@@ -55,7 +55,7 @@ function InfiniteViewer(props: InfiniteViewerProps) {
     scrollY: 0,
     zoom: 1 * 100,
   });
-  const store = useRef<Gesture>({ xPoints: [], yPoints: [], zPoints: [] });
+  const store = useRef<Gesture>({ xPoints: [], yPoints: [], zPoints: [], animationFrame: 0 });
   const [, forceRender] = useReducer((s) => s + 1, 0);
 
   const { scrollX, scrollY } = state.current;
@@ -116,7 +116,7 @@ function InfiniteViewer(props: InfiniteViewerProps) {
     [onScroll]
   );
 
-  const handleGesture = throttle(() => {
+  const handleGesture = useCallback(() => {
     if (store.current.zPoints.reduce(sum, 0) != 0) {
       handleZoom(store.current.zPoints.reduce(sum, 0));
     } else {
@@ -125,7 +125,7 @@ function InfiniteViewer(props: InfiniteViewerProps) {
     store.current.xPoints = [];
     store.current.yPoints = [];
     store.current.zPoints = [];
-  }, 25);
+  }, []);
 
   const handleWheel = useCallback(function (event: WheelEvent) {
     event.preventDefault();
@@ -137,16 +137,18 @@ function InfiniteViewer(props: InfiniteViewerProps) {
     store.current.yPoints.push(event.deltaY);
     store.current.zPoints.push(deltaZ ? (zoom > 0 ? 1 : -1) : 0);
 
-    handleGesture();
+    store.current.animationFrame = requestAnimationFrame(handleGesture);
   }, []);
 
   useEffect(() => {
-    if (!isZoom) {
+    if (!isZoom || !ref.current) {
       return;
     }
-    ref.current?.addEventListener('wheel', handleWheel);
+    const ele = ref.current;
+    ele.addEventListener('wheel', handleWheel);
     return () => {
-      ref.current?.removeEventListener('wheel', handleWheel);
+      ele.removeEventListener('wheel', handleWheel);
+      cancelAnimationFrame(store.current.animationFrame);
     };
   }, [isZoom]);
 

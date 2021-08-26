@@ -1,14 +1,20 @@
-import type { AsanyAction } from '../../../typings';
+import type { AsanyAction, MoveableState } from '../../../typings';
+import Memory from '../../../utils/Memory';
+import MoveableData from '../../../utils/MoveableData';
 import { GlobalAsanyAction, ProjectActionType, UIScenaMoveableActionType } from '../../actions';
-import MoveableState from './MoveableState';
+
+const defaultMoveableState: MoveableState = {
+  data: new MoveableData(new Memory()),
+  selectedTargets: [],
+};
 
 export default function reducer(
   state: MoveableState,
   action: AsanyAction<UIScenaMoveableActionType | GlobalAsanyAction | ProjectActionType>
 ): MoveableState {
-  // if (action.type === UIScenaMoveableActionType.MoveableSelectedTargets) {
-  //   return state;
-  // }
+  if (action.type === UIScenaMoveableActionType.MoveableSelectedTargets) {
+    return { ...state, selectedTargets: action.payload };
+  }
   // if (action.type === BlockActionType.RegistrationBlock) {
   //   state.addElement(action.payload.key, {
   //     ...action.payload,
@@ -37,10 +43,10 @@ export default function reducer(
   //   return state;
   // }
   if (action.type === ProjectActionType.ChangeCase) {
-    return new MoveableState();
+    return { ...defaultMoveableState };
   }
   if (action.type === GlobalAsanyAction.Init) {
-    return new MoveableState();
+    return { ...defaultMoveableState };
   }
   return state;
 }

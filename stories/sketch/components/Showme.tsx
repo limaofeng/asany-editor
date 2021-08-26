@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { useBlock } from 'sunmao';
 import { ComponentPropertyType } from 'sunmao';
 
-function Second() {
+function Second({ className, id }: any) {
   const { key, props, update, Provider } = useBlock({
-    key: 'Second',
+    key: 'Second-' + id,
     icon: '',
     title: '',
     props: {
@@ -20,7 +20,7 @@ function Second() {
     },
   });
   return (
-    <Provider clickable={true}>
+    <Provider className={className} clickable={true}>
       Second: {props.title} <br /> key = {key}
     </Provider>
   );
@@ -50,7 +50,8 @@ function Showme() {
     <Provider style={{ flex: 1 }} clickable>
       Show me your code: {props.title} <br /> key = {key}
       <br />
-      <Second />
+      <Second id="1" className="moveable-x" />
+      <Second id="2" className="moveable-x" />
     </Provider>
   );
 }

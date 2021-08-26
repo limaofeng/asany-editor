@@ -1,34 +1,21 @@
 import MoveableHelper from 'moveable-helper';
 import { Frame } from 'scenejs';
 
-import { IUIScenaMoveableState } from '../typings';
 import Memory from './Memory';
 import { getId } from './utils';
 
-export default class MoveableData extends MoveableHelper implements IUIScenaMoveableState {
-  private _selectedTargets: Array<HTMLElement | SVGElement> = [];
+export default class MoveableData extends MoveableHelper {
+  private selectedTargets: Array<HTMLElement | SVGElement> = [];
   constructor(private memory: Memory) {
     super({
       createAuto: true,
     });
   }
-  get draggable(): boolean {
-    return true;
+  public setSelectedTargets(targets: Array<HTMLElement | SVGElement>) {
+    this.selectedTargets = targets;
   }
-  set draggable(draggable: boolean) {
-    console.log(draggable);
-  }
-  get resizable(): boolean {
-    return true;
-  }
-  set resizable(resizable: boolean) {
-    console.log(resizable);
-  }
-  get selectedTargets(): Array<HTMLElement | SVGElement> {
-    return this._selectedTargets;
-  }
-  set selectedTargets(targets: Array<HTMLElement | SVGElement>) {
-    this._selectedTargets = targets;
+  public getSelectedTargets() {
+    return this.selectedTargets;
   }
   public getSelectedFrames(): Frame[] {
     return this.selectedTargets.map((target) => this.getFrame(target));
@@ -80,5 +67,22 @@ export default class MoveableData extends MoveableHelper implements IUIScenaMove
 
       return frameValues.filter((color) => color)[0] || defaultValues[i];
     });
+  }
+  private setValue(callback: (frame: Frame, target: HTMLElement | SVGElement) => void) {
+    const targets = this.getSelectedTargets();
+
+    const infos = targets.map((target) => {
+      const frame = this.getFrame(target);
+      const prevOrders = frame.getOrderObject();
+      const prev = frame.get();
+
+      callback(frame, target);
+      const next = frame.get();
+      const nextOrders = frame.getOrderObject();
+
+      return { id: getId(target), prev, prevOrders, next, nextOrders };
+    });
+    this.renderFrames();
+    return infos;
   }
 }

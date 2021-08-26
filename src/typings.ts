@@ -2,7 +2,6 @@ import { ComponentType, CSSProperties, ReactElement } from 'react';
 
 import { DispatchWithoutAction, IAsanyStoreContext } from './AsanyContext';
 import { Selector } from './hooks/useSelector';
-import MoveableState from './reducers/ui.reducer/scena.reducer/MoveableState';
 import MoveableData from './utils/MoveableData';
 
 export interface AsanyAction<T> {
@@ -347,6 +346,10 @@ export interface ScenaHelper {
    * @param delay
    */
   unmask(delay?: number): Promise<void>;
+  /**
+   * 设置元素选中
+   */
+  setSelectedTargets: (targets: Array<HTMLElement | SVGElement>) => void;
 }
 
 export interface WorkspaceProps {
@@ -668,18 +671,6 @@ export interface IUISidebarState {
   api?: any;
 }
 
-export interface IUIScenaMoveableState {
-  draggable: boolean;
-  resizable: boolean;
-  visible?: boolean;
-  selectedTargets: Array<HTMLElement | SVGElement>;
-  targets?: {
-    id: string;
-    element: React.RefObject<HTMLElement>;
-  }[];
-  data?: MoveableData;
-}
-
 export interface ViewerState {
   dustbin: string[];
 }
@@ -715,6 +706,11 @@ export interface IAsanyState {
   workspace: IWorkspaceState;
   features: IFeatureState;
   plugins: IPluginState;
+}
+
+export interface MoveableState {
+  data: MoveableData;
+  selectedTargets: Array<HTMLElement | SVGElement>;
 }
 
 export { AsanyProject, AsanyProjectType };

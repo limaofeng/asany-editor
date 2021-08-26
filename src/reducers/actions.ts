@@ -69,10 +69,6 @@ export enum UIScenaMoveableActionType {
    * 启用 Moveable
    */
   MoveableEnable = 'UI/Scena/Moveable/Enable',
-  /**
-   * 忽略
-   */
-  MoveableIgnoreTargets = 'UI/Scena/Moveable/IgnoreTargets',
 }
 
 export enum UIScenaGlobalActionType {
@@ -157,6 +153,7 @@ export const UIActionType = {
 
 export enum GlobalAsanyAction {
   Init = 'Init',
+  BindSave = 'BindSave',
   ChangeMode = 'ChangeMode',
 }
 
@@ -164,9 +161,9 @@ export enum ProjectActionType {
   ChangeCase = 'ChangeCase',
 }
 
-export const WorkspaceActionType = {
-  ChangeStateByPlugin: 'ChangeStateByPlugin',
-};
+export enum WorkspaceActionType {
+  ChangeStateByPlugin = 'ChangeStateByPlugin',
+}
 
 export enum IFeatureActionType {
   /**
@@ -195,7 +192,6 @@ export enum IPluginActionType {
 }
 
 export const ActionType = {
-  BindSave: 'BindSave',
   ...GlobalAsanyAction,
   ...UIActionType,
   ...ProjectActionType,
@@ -203,3 +199,17 @@ export const ActionType = {
   ...IFeatureActionType,
   ...IPluginActionType,
 };
+
+export type IActionType =
+  | GlobalAsanyAction
+  | UISidebarActionType
+  | UIAsideActionType
+  | UIScenaGlobalActionType
+  | UIScenaMoveableActionType
+  | UIScenaViewerActionType
+  | UIScenaToolbarActionType
+  | UIToolbarActionType
+  | ProjectActionType
+  | WorkspaceActionType
+  | IFeatureActionType
+  | IPluginActionType;
