@@ -1,7 +1,7 @@
 import { Form } from 'antd';
 import { isEqual } from 'lodash-es';
 import React, { useEffect } from 'react';
-import { ComponentPropertyRendererSetting, ComponentPropertyType, IComponentProperty, useSunmao } from 'sunmao';
+import { ComponentPropertyRendererSetting, useSunmao, IField } from 'sunmao';
 
 import { FormItemWrapper, visibleFilter } from '../DynaActionForm';
 import { getRenderer } from '../renderers';
@@ -10,7 +10,7 @@ interface ObjectCombinerProps {
   value?: any;
   onChange?: (value: any) => void;
   className?: string;
-  fields: IComponentProperty[];
+  fields: IField[];
 }
 
 function ObjectCombiner(props: ObjectCombinerProps) {
@@ -38,7 +38,7 @@ function ObjectCombiner(props: ObjectCombinerProps) {
         const { component, props = {} } = item.renderer as ComponentPropertyRendererSetting;
         const ComponentForm = component as React.ComponentType<any>;
         const lable = item.hiddenLabel ? '' : !item.multiple && item.label;
-        const valuePropName = item.type === ComponentPropertyType.Boolean ? 'checked' : undefined;
+        const valuePropName = item.type === 'Boolean' ? 'checked' : undefined;
         return (
           <Form.Item
             className={`object-combiner-field-${item.name}`}

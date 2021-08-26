@@ -1,9 +1,9 @@
 import classnames from 'classnames';
 import React from 'react';
-import { IComponentProperty } from 'sunmao';
+import { IField } from 'sunmao';
 
 interface FormFieldProps {
-  field: IComponentProperty;
+  field: IField;
   layout: 'Inline' | 'Stacked';
   className?: string;
   children: React.ReactElement;

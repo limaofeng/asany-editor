@@ -38,39 +38,8 @@ export interface IComponent {
   props?: IComponentProperty[];
 }
 
-export interface IFieldGroup {
-  id: string;
-  name?: string;
-  visible?: boolean | VisibleFunc;
-  layout?: 'Inline' | 'Stacked';
-}
-
 export const DEFAULT_GROUP_ID = 'DEFAULT';
 export const DEFAULT_TABPANE_ID = 'DEFAULT';
-
-export interface ITabPane {
-  name: string;
-  visible?: boolean | VisibleFunc;
-  groups: string[] | IFieldGroup[];
-  customizer?: ICustomizer;
-}
-
-export interface ICustomizer {
-  /**
-   * 展示画框详情
-   */
-  frame?: boolean;
-  dynamic?: boolean;
-  tabs?: ITabPane[];
-  /**
-   * 字段分组设置
-   */
-  groups?: IFieldGroup[];
-  /**
-   * 配置字段
-   */
-  fields: IComponentProperty[];
-}
 
 /**
  * 工具位置: 头部左边, 头部右边, 左边头部, 左边底部

@@ -1,4 +1,3 @@
-import { CheckOutlined, DownOutlined } from '@ant-design/icons';
 import { InputNumber, Popover } from 'antd';
 import classnames from 'classnames';
 import { isEqual } from 'lodash-es';
@@ -45,7 +44,7 @@ export function DeviceList(props: DeviceListProps) {
       <ul>
         {item.children.map((device: DeviceScreen) => (
           <li key={device.id} onClick={handleClick(device)}>
-            {value.id === device.id && <CheckOutlined />}
+            {value.id === device.id && 'CheckOutlined'}
             <span className="device-name">{device.name}</span>
             <span className="device-size">{device.size.join('x')}</span>
           </li>
@@ -122,9 +121,7 @@ function DeviceScreenPicker() {
               </>
             )}
           </div>
-          <span className="screen-picker-more">
-            <DownOutlined />
-          </span>
+          <span className="screen-picker-more">DownOutlined</span>
         </div>
       </Popover>
       <div className="screen-size">

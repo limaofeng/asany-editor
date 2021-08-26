@@ -1,5 +1,4 @@
 import React, { memo, MutableRefObject } from 'react';
-import { CloseOutlined } from '@ant-design/icons';
 import { IMultipleWrapperData } from './MultipleWrapper';
 import { useReactComponent } from 'sunmao';
 import { SortableHandler } from './WrapperItem';
@@ -35,11 +34,7 @@ function WrapperItem(props: WrapperItemProps) {
           onChange({ ...data, componentId });
         }}
       /> */}
-      {canDelete && (
-        <a onClick={onDelete}>
-          <CloseOutlined />
-        </a>
-      )}
+      {canDelete && <a onClick={onDelete}>CloseOutlined</a>}
     </div>
   );
 }

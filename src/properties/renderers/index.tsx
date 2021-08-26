@@ -2,12 +2,7 @@ import { Radio, Select } from 'antd';
 import React, { ComponentType } from 'react';
 import Sunmao from 'sunmao';
 
-import {
-  ComponentPropertyRenderer,
-  ComponentPropertyRendererSetting,
-  ComponentPropertyType,
-  IComponentProperty,
-} from 'sunmao';
+import { ComponentPropertyRenderer, ComponentPropertyRendererSetting, IField } from 'sunmao';
 import MultipleWrapper from '../combine/MultipleWrapper';
 
 const EmptyRenderer = () => <></>;
@@ -32,21 +27,16 @@ function crbc(component: ComponentType<any>, props: any = {}, name?: string) {
   return { name, component: component || EmptyRenderer, props };
 }
 
-export function getDefaultRenderer(
-  sunmao: Sunmao,
-  library: string,
-  item: IComponentProperty
-): ComponentPropertyRendererSetting {
+export function getDefaultRenderer(sunmao: Sunmao, library: string, item: IField): ComponentPropertyRendererSetting {
   switch (item.type) {
-    case ComponentPropertyType.Integer:
+    case 'Integer':
       return cr(sunmao, `${library}.InputNumber`);
-    case ComponentPropertyType.Text:
-    case ComponentPropertyType.String:
+    case 'String':
       return cr(sunmao, `${library}.Input`);
-    case ComponentPropertyType.Boolean:
+    case 'Boolean':
       const comTemp = cr(sunmao, `${library}.Checkbox`);
       return crbc(comTemp.component, { children: item.label }, comTemp.name);
-    case ComponentPropertyType.Enum:
+    case 'Enum':
       const props: any = { style: { width: '100%' } };
       if (item.enumeration) {
         props.children = item.enumeration.values.map((v: any) => (
@@ -61,13 +51,13 @@ export function getDefaultRenderer(
   }
 }
 
-function getBasisRenderer(sunmao: Sunmao, library: string, item: IComponentProperty): ComponentPropertyRenderer {
+function getBasisRenderer(sunmao: Sunmao, library: string, item: IField): ComponentPropertyRenderer {
   if (!item.renderer) {
     return getDefaultRenderer(sunmao, library, item);
   }
   if (typeof item.renderer === 'string') {
     switch (item.type) {
-      case ComponentPropertyType.Enum: // 枚举类型
+      case 'Enum': // 枚举类型
         const props: any = { style: { width: '100%' } };
         if (item.enumeration) {
           props.children = item.enumeration.values.map((v: any) => (
@@ -95,7 +85,7 @@ function getBasisRenderer(sunmao: Sunmao, library: string, item: IComponentPrope
   return crbc(item.renderer['component'] as any, item.renderer['props']);
 }
 
-export function getRenderer(sunmao: Sunmao, library: string, item: IComponentProperty): ComponentPropertyRenderer {
+export function getRenderer(sunmao: Sunmao, library: string, item: IField): ComponentPropertyRenderer {
   const render = getBasisRenderer(sunmao, library, item);
   if (item.wrappers) {
     if ((item as any).wrapperRender) {

@@ -1,13 +1,11 @@
 import React, { memo, useEffect, useState } from 'react';
-import { CloseOutlined } from '@ant-design/icons';
 import './style/WrapperPopoverContent.less';
-import { IComponentProperty } from 'sunmao';
+import { IField, ICustomizer } from 'sunmao';
 import DynaActionForm from '../DynaActionForm';
-import { ICustomizer } from '../../typings';
 
 export interface PopoverFields<T> {
   /** 传递 fields 或者 根据当前的 value 某些值获得 fields 的函数 */
-  fields: ((value: T) => IComponentProperty[]) | IComponentProperty[];
+  fields: ((value: T) => IField[]) | IField[];
 }
 
 export interface WrapperPopoverContentProps<T> extends PopoverFields<T> {
@@ -31,7 +29,7 @@ WrapperPopoverContent.defaultProps = {
 function WrapperPopoverContent(props: WrapperPopoverContentProps<any>) {
   const { contentRef, fields: fieldsProp, value, maxHeight, width, onClose, onChange } = props;
 
-  const [fields, setFields] = useState<IComponentProperty[]>([] as IComponentProperty[]);
+  const [fields, setFields] = useState<IField[]>([] as IField[]);
 
   const [customizer, setCustomizer] = useState<ICustomizer>({
     groups: [
@@ -45,7 +43,7 @@ function WrapperPopoverContent(props: WrapperPopoverContentProps<any>) {
   });
 
   useEffect(() => {
-    const currentFields: IComponentProperty[] = Array.isArray(fieldsProp) ? fieldsProp : fieldsProp(value);
+    const currentFields: IField[] = Array.isArray(fieldsProp) ? fieldsProp : fieldsProp(value);
     setFields(currentFields);
     setCustomizer({
       groups: [
@@ -69,9 +67,7 @@ function WrapperPopoverContent(props: WrapperPopoverContentProps<any>) {
       ref={contentRef}
     >
       <div className="popover-content__title">
-        <a onClick={onClose}>
-          <CloseOutlined />
-        </a>
+        <a onClick={onClose}>CloseOutlined</a>
       </div>
       {/* 使用 contentRef 中的组件
        有弹出层的需要配置(如 select ) 基于 弹出层基于父组件而不是 body 上

@@ -1,4 +1,3 @@
-import { PlusOutlined } from '@ant-design/icons';
 import React, { memo, useRef, useState } from 'react';
 
 // import Sortable, { ISortableItem, SortableItemContentProps } from '../../sortable';
@@ -212,11 +211,7 @@ export function MultipleWrapper<T>(props: MultipleWrapperProps) {
     <div className="multiple-wrapper">
       <div className="multiple-wrapper-header">
         <span className="title">{name || '多值配置'}</span>
-        {canAddItem && (
-          <a onClick={handleInsertRow}>
-            <PlusOutlined />
-          </a>
-        )}
+        {canAddItem && <a onClick={handleInsertRow}>PlusOutlined</a>}
       </div>
       {canSortItem ? (
         {

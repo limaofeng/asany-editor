@@ -1,4 +1,3 @@
-import { CloseOutlined, EditOutlined } from '@ant-design/icons';
 import Icon from '@asany/icons';
 import { Checkbox, Input } from 'antd';
 import React, { memo, MutableRefObject } from 'react';
@@ -91,15 +90,13 @@ function WrapperItem(props: WrapperItemProps) {
 
         {canEdit && (
           <a ref={itemRef} onClick={handleEditClick}>
-            <EditOutlined />
+            EditOutlined
           </a>
         )}
         {canDelete && data.isPreset ? (
           <Checkbox style={{ marginLeft: '6px' }} checked={!data.isDelete} onClick={onDelete} />
         ) : (
-          <a onClick={onDelete}>
-            <CloseOutlined />
-          </a>
+          <a onClick={onDelete}>CloseOutlined</a>
         )}
       </div>
     </>

@@ -1,13 +1,10 @@
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import React, { useContext, useRef } from 'react';
+import { ICustomizer, IFieldGroup } from 'sunmao';
 
-// import DynaActionForm from '../../library-manager/DynaActionForm';
-// import { ComponentPropertyType } from '../../library-manager/typings';
-
-import FormPanel from '../properties/DynaActionForm';
-// import { useSelector } from '../hooks';
 import CurrentElementInformation from '../properties/CurrentElementInformation';
-import { AsideTabPane, ComponentPropertyType, DEFAULT_GROUP_ID, ICustomizer, IFieldGroup } from '../typings';
+import FormPanel from '../properties/DynaActionForm';
+import { AsideTabPane, DEFAULT_GROUP_ID } from '../typings';
 
 export const DynaActionFormContext = React.createContext<any>({});
 
@@ -43,7 +40,7 @@ export function buildAside(customizer: ICustomizer, namespace?: string) {
       name: 'rect',
       group: 'DEFAULT-rect',
       renderer: CurrentElementInformation,
-      type: ComponentPropertyType.JSON,
+      type: 'JSON',
     });
   }
 

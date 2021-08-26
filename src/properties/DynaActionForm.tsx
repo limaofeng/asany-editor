@@ -1,9 +1,9 @@
 import classnames from 'classnames';
 import isEqual from 'lodash/isEqual';
 import React, { useEffect, useState } from 'react';
-import { ComponentPropertyRendererSetting, ComponentPropertyType, IComponentProperty, IGroup, useSunmao } from 'sunmao';
+import { ComponentPropertyRendererSetting, ICustomizer, IField, IGroup, useSunmao } from 'sunmao';
 
-import { DEFAULT_GROUP_ID, ICustomizer } from '../typings';
+import { DEFAULT_GROUP_ID } from '../typings';
 import FormField from './FormField';
 import FormFieldset from './FormFieldset';
 import { useFormSelector, useFormState } from './FormStateContext';
@@ -19,7 +19,7 @@ interface DynaActionFormProps {
 
 interface FormItemWrapperProps {
   component: React.ComponentType<any>;
-  field: IComponentProperty;
+  field: IField;
   defaultValue?: any;
   size: string;
 }
@@ -57,7 +57,7 @@ export const visibleFilter = (props: any) => {
 interface PanelBodyProps {
   group: string;
   layout: 'Inline' | 'Stacked';
-  fields: IComponentProperty[];
+  fields: IField[];
   value: any;
   Form: any;
 }
@@ -70,7 +70,7 @@ const PanelBody = (props: PanelBodyProps) => {
         const { component, props = {} } = item.renderer as ComponentPropertyRendererSetting;
         const ComponentForm = component as React.ComponentType<any>;
         const lable = item.hiddenLabel ? '' : !item.multiple && item.label;
-        const valuePropName = item.type === ComponentPropertyType.Boolean ? 'checked' : undefined;
+        const valuePropName = item.type === 'Boolean' ? 'checked' : undefined;
         return (
           <Form.Item
             key={`${group}-${item.name}`}
@@ -93,7 +93,7 @@ const PanelBody = (props: PanelBodyProps) => {
   );
 };
 
-function getComponentClassName(item: IComponentProperty) {
+function getComponentClassName(item: IField) {
   if (typeof item.renderer.name === 'string') {
     return `form-component-${item.renderer.name.toLowerCase()}`;
   }

@@ -1,7 +1,7 @@
 import { Popover } from 'antd';
 import React, { useCallback, useRef } from 'react';
+import { ICustomizer } from 'sunmao';
 
-import { ComponentPropertyType } from 'sunmao';
 import { useDispatch, useSelector } from '../../hooks';
 import FormPanel from '../../properties/DynaActionForm';
 import { ActionType, UIActionType } from '../../reducers/actions';
@@ -47,12 +47,12 @@ function EditableZoom() {
 
 function Guides() {
   const ruler = useSelector((state) => state.features.ruler);
-  const customizer = useRef({
+  const customizer = useRef<ICustomizer>({
     fields: [
       {
         name: 'ruler',
         label: '标尺',
-        type: ComponentPropertyType.Boolean,
+        type: 'Boolean',
       },
     ],
   });
