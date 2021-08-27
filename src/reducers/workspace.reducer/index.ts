@@ -1,6 +1,6 @@
 import { combineReducers } from '../thunk';
-import type { AsanyAction } from '../../typings';
 import { GlobalAsanyAction, IPluginActionType, WorkspaceActionType } from '../actions';
+import type { AsanyAction } from '../../typings';
 
 export interface IWorkspaceState {
   [key: string]: any;

@@ -1,10 +1,11 @@
+import React, { ChangeEvent, memo, useCallback, useEffect, useState } from 'react';
+
 import Icon from '@asany/icons';
 import { Input } from 'antd';
 import { isEqual } from 'lodash-es';
-import React, { ChangeEvent, memo, useCallback, useEffect, useState } from 'react';
 
-import { RadiusAllSettingProps } from './typings';
 import { onlyNumber } from './utils';
+import { RadiusAllSettingProps } from './typings';
 
 const icons = ['TopLeftCornerRadius', 'TopRightCornerRadius', 'BottomRightCornerRadius', 'BottomLeftCornerRadius'];
 

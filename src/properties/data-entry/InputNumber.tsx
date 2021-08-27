@@ -1,7 +1,10 @@
 import React from 'react';
+
 import classnames from 'classnames';
-import ScrubbableControl from './ScrubbableControl';
+
 import { numberFormat } from '../utils';
+
+import ScrubbableControl from './ScrubbableControl';
 
 interface InputNumberProps {
   value?: number;

@@ -1,5 +1,6 @@
-import type { AsanyAction, AsanyProviderMode, EditorPlugin, IAsanyState } from '../typings';
 import { getFeatures, getScena, getSidebar, getToolbar } from '../utils/plugin';
+import type { AsanyAction, AsanyProviderMode, EditorPlugin, IAsanyState } from '../typings';
+
 import { ActionType, GlobalAsanyAction, ProjectActionType } from './actions';
 import featureReducer from './features.reducer';
 import pluginReducer from './plugin.reducer';

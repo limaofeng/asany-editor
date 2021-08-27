@@ -1,9 +1,11 @@
-import React, { useRef, useCallback, useReducer, useEffect, CSSProperties } from 'react';
+import React, { CSSProperties, useCallback, useEffect, useReducer, useRef } from 'react';
+
 import classnames from 'classnames';
-import { drag, OnDrag, OnDragStart } from '@daybrush/drag';
-import { calculateScaling } from '../reducers/ui.reducer/scena.reducer';
+import { OnDrag, OnDragStart, drag } from '@daybrush/drag';
 import { useDragDropManager, useDrop } from 'react-dnd';
+
 import useSelector from '../hooks/useSelector';
+import { calculateScaling } from '../reducers/ui.reducer/scena.reducer';
 
 interface Gesture {
   animationFrame: number;

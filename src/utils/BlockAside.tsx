@@ -1,5 +1,6 @@
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import React, { useContext, useRef } from 'react';
+
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import { ICustomizer, IFieldGroup } from 'sunmao';
 
 import CurrentElementInformation from '../properties/CurrentElementInformation';

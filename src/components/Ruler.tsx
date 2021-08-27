@@ -1,5 +1,6 @@
-import Guides, { OnChangeGuides } from '@scena/react-guides';
 import React, { useCallback, useEffect, useRef } from 'react';
+
+import Guides, { OnChangeGuides } from '@scena/react-guides';
 
 export interface RulerGuides {
   horizontal: number[];

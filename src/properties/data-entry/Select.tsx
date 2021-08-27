@@ -1,7 +1,8 @@
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
+
 import Icon from '@asany/icons';
 import { Popover } from 'antd';
 import classnames from 'classnames';
-import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { useClickAway } from 'react-use';
 
 export interface SelectOption {
@@ -152,6 +153,7 @@ const Select = (props: SelectProps) => {
       return;
     }
     setValue(initialValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialValue]);
 
   const handleClick = useCallback(() => {
@@ -161,6 +163,7 @@ const Select = (props: SelectProps) => {
     onChange && onChange(value);
     !initialValue && setValue(value);
     setVisible(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const optionCompare = useCallback(
@@ -170,7 +173,7 @@ const Select = (props: SelectProps) => {
       }
       return compare(value, option);
     },
-    [value]
+    [value, compare]
   );
 
   const handleClose = useCallback(() => {

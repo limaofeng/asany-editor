@@ -1,6 +1,7 @@
 import AsanyEditor from '../api';
-import useAsanyStore from './useAsanyStore';
 import { IAsanyEditor } from '../typings';
+
+import useAsanyStore from './useAsanyStore';
 
 export default function useEditor(): IAsanyEditor {
   const store = useAsanyStore();

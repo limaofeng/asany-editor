@@ -1,7 +1,8 @@
+import React, { useCallback, useEffect, useState } from 'react';
+
 import Icon from '@asany/icons';
 import classnames from 'classnames';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
-import React, { useCallback, useEffect, useState } from 'react';
 
 export interface ListTreeNode {
   id: string;
@@ -63,7 +64,8 @@ function ListTree(props: ListTreeProps) {
       }, treeData)
     );
     setParentNode(parentNode);
-  }, [openKeys.join(',')]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [treeData, openKeys.join(',')]);
 
   const handleClick = useCallback(
     (selectKeys: string[]) => () => {
@@ -89,7 +91,7 @@ function ListTree(props: ListTreeProps) {
       console.log('selectKeys', selectKeys, node);
       onChange && node && onChange(node as any);
     },
-    [treeData]
+    [treeData, onChange]
   );
 
   const handleBack = useCallback(() => {
@@ -141,7 +143,6 @@ function ListTree(props: ListTreeProps) {
             ))}
           </ul>
         )}
-        {/* {parentNode && ( */}
         <div className="tree-node-content">
           <ul className="tree-node-item-list flex flex-row flex-wrap content-start">
             {list
@@ -151,7 +152,6 @@ function ListTree(props: ListTreeProps) {
               ))}
           </ul>
         </div>
-        {/* )} */}
       </OverlayScrollbarsComponent>
     </div>
   );

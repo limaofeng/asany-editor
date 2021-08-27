@@ -1,8 +1,9 @@
 import screens from '../../../assets/devices';
-import type { AsanyAction, UIScenaGlobalState } from '../../../typings';
 import { dispatchWindowResize } from '../../../utils';
 import { GlobalAsanyAction, UIScenaGlobalActionType } from '../../actions';
 import { combineReducers } from '../../thunk';
+import type { AsanyAction, UIScenaGlobalState } from '../../../typings';
+
 import moveableReducer from './moveable.reducer';
 import toolbarReducer from './toolbar.reducer';
 import viewerReducer from './viewer.reducer';

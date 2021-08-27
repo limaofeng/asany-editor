@@ -1,8 +1,9 @@
-import { Radio, Select } from 'antd';
 import React, { ComponentType } from 'react';
-import Sunmao from 'sunmao';
 
+import { Radio, Select } from 'antd';
+import Sunmao from 'sunmao';
 import { ComponentPropertyRenderer, ComponentPropertyRendererSetting, IField } from 'sunmao';
+
 import MultipleWrapper from '../combine/MultipleWrapper';
 
 const EmptyRenderer = () => <></>;

@@ -1,5 +1,6 @@
 import { DependencyList, useCallback, useEffect, useMemo, useRef } from 'react';
-import { isEqual, debounce, throttle as lodashThrottle } from 'lodash-es';
+
+import { debounce, isEqual, throttle as lodashThrottle } from 'lodash-es';
 
 export function useDebounce<T extends (...args: any) => any>(fn: T, delay: number, deps?: DependencyList) {
   return useCallback(debounce(fn, delay), deps || []);

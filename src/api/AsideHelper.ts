@@ -1,5 +1,5 @@
-import React from 'react';
 import { ComponentType } from 'react';
+import React from 'react';
 
 import { TabPane } from '../components/aside/PropertiesPanel';
 import { ActionType } from '../reducers/actions';

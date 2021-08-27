@@ -1,9 +1,12 @@
 import React, { memo, useEffect, useRef, useState } from 'react';
+
 import { Popover } from 'antd';
 import { useClickAway } from 'react-use';
-import './style/WrapperPopover.less';
+
 import { IMultipleWrapperData } from './MultipleWrapper';
 import { PopoverFields } from './WrapperPopoverContent';
+
+import './style/WrapperPopover.less';
 
 interface WrapperPopoverProps<T> extends IMultipleWrapperData<T>, PopoverFields<T> {
   /**

@@ -1,9 +1,11 @@
-import classnames from 'classnames';
-import isEqual from 'lodash/isEqual';
 import React, { useEffect, useState } from 'react';
+
 import { ComponentPropertyRendererSetting, ICustomizer, IField, IGroup, useSunmao } from 'sunmao';
+import isEqual from 'lodash/isEqual';
+import classnames from 'classnames';
 
 import { DEFAULT_GROUP_ID } from '../typings';
+
 import FormField from './FormField';
 import FormFieldset from './FormFieldset';
 import { useFormSelector, useFormState } from './FormStateContext';
@@ -50,7 +52,7 @@ export const visibleFilter = (props: any) => {
     if (typeof visible === 'function') {
       return visible(props);
     }
-    return visible != false;
+    return visible !== false;
   };
 };
 
@@ -110,8 +112,8 @@ const DynaActionForm = ({ library = 'cn.asany.editor.form', ...props }: DynaActi
   const sunmao = useSunmao();
 
   const [groups, setGroups] = useState<IGroup[]>([]);
-  const [defaultValue, setDefaultValue] = useState({});
   const [form, Form] = useFormState();
+
   useEffect(() => {
     if (!customizer) {
       return;
@@ -150,11 +152,11 @@ const DynaActionForm = ({ library = 'cn.asany.editor.form', ...props }: DynaActi
           return group;
         })
     );
-    setDefaultValue(defaultValue);
     form.setFieldsValue({ ...defaultValue, ...value });
     return () => {
       form.resetFields();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [customizer]);
 
   const handleValuesChange = (_: any, allValues: any) => {
@@ -162,23 +164,12 @@ const DynaActionForm = ({ library = 'cn.asany.editor.form', ...props }: DynaActi
     onChange && onChange(allValues);
   };
 
-  // const [activeKey, setActiveKey] = useState<string[]>([]);
-
   // useEffect(() => {
-  //   setActiveKey(groups.map((g) => g.id));
-  // }, [groups]);
+  //   if (value && !isEqual(form.getFieldsValue(), value)) {
+  //     form.setFieldsValue({ ...defaultValue, ...value });
+  //   }
+  // }, [value]);
 
-  useEffect(() => {
-    if (value && !isEqual(form.getFieldsValue(), value)) {
-      form.setFieldsValue({ ...defaultValue, ...value });
-    }
-  }, [value]);
-
-  // const ExpandIcon = useCallback(({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />, []);
-  // const handleCollapse = useCallback((keys: string[]) => {
-  //   setActiveKey(keys);
-  // }, []);
-  // console.log('blockProps-------groups', groups, value);
   return (
     <Form form={form} component={false} name="control-hooks" onValuesChange={handleValuesChange}>
       {groups.filter(visibleFilter(value)).map(({ id, name, layout, fields }) => (

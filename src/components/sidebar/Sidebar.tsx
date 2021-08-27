@@ -1,9 +1,11 @@
-import classnames from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
+
+import classnames from 'classnames';
 
 import { useDispatch, useEditor, useSelector } from '../../hooks';
 import { ActionType } from '../../reducers/actions';
 import { IToolboard } from '../../typings';
+
 import Toolbar from './Toolbar';
 import Toolboard, { ToolPanel } from './Toolboard';
 

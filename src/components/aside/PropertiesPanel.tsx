@@ -1,6 +1,3 @@
-import Icon from '@asany/icons';
-import { Tabs } from 'antd';
-import classnames from 'classnames';
 import React, {
   CSSProperties,
   forwardRef,
@@ -10,6 +7,10 @@ import React, {
   useRef,
   useState,
 } from 'react';
+
+import Icon from '@asany/icons';
+import { Tabs } from 'antd';
+import classnames from 'classnames';
 
 import { sleep, useDeepCompareEffect } from '../../utils';
 

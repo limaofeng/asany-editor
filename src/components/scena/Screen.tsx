@@ -1,9 +1,12 @@
-import classnames from 'classnames';
 import React, { useEffect, useRef } from 'react';
+
+import classnames from 'classnames';
 import { useDragDropManager, useDrop } from 'react-dnd';
 
 import { useSelector } from '../../hooks';
+
 import MoveableManager from './viewport/MoveableManager';
+
 interface ScreenProps {
   children?: React.ReactNode;
 }

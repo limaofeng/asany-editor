@@ -1,11 +1,12 @@
+import React from 'react';
+
 import Icon from '@asany/icons';
 import classnames from 'classnames';
 import { isEqual } from 'lodash-es';
-import React from 'react';
 
-import { useSelector } from '../../hooks';
-import useTools from '../../hooks/useTools';
 import { AsanyTool } from '../../typings';
+import useTools from '../../hooks/useTools';
+import { useSelector } from '../../hooks';
 
 function iconRender(icon: any) {
   if (typeof icon === 'string') {

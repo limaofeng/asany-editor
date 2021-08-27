@@ -1,6 +1,9 @@
-import { isEqual } from 'lodash-es';
 import { useEffect, useReducer, useRef } from 'react';
+
+import { isEqual } from 'lodash-es';
+
 import { AsanyTool, IAsanyEditor, ToolClick } from '../typings';
+
 import useEditor from './useEditor';
 import useSelector, { Selector } from './useSelector';
 

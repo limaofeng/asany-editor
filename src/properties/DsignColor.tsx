@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
+
 import ScrubbableControl from './data-entry/ScrubbableControl';
 import DsignIcons from './OptionButton';
 import { inputFormat } from './utils';
 interface DsignColorProp {}
 
-const DsignColor = (props: DsignColorProp) => {
-  const {} = props;
+const DsignColor = (_: DsignColorProp) => {
   const [colorStyle] = useState({
     backgroundColor: 'rgb(0, 0, 0)',
     opacity: 0.7,

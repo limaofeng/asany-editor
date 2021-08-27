@@ -1,4 +1,4 @@
-import { ComponentType, CSSProperties, ReactElement } from 'react';
+import { CSSProperties, ComponentType, ReactElement } from 'react';
 
 import { DispatchWithoutAction, IAsanyStoreContext } from './AsanyContext';
 import { Selector } from './hooks/useSelector';

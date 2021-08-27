@@ -1,7 +1,8 @@
+import React, { CSSProperties, useEffect, useState } from 'react';
+
 import Icon from '@asany/icons';
 import { Tooltip } from 'antd';
 import classnames from 'classnames';
-import React, { CSSProperties, useEffect, useState } from 'react';
 
 export interface SegmentedControlOption {
   label: string;
@@ -18,11 +19,13 @@ interface SegmentedControlProps {
 const SegmentedControl = (props: SegmentedControlProps) => {
   const { style = {}, className, options = [], value: defaultValue, onChange } = props;
   const [value, setValue] = useState(defaultValue || (options.length && options[0].value));
+
   useEffect(() => {
     if (!defaultValue || defaultValue === value) {
       return;
     }
     setValue(defaultValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [defaultValue]);
 
   const handleClick = (value: string) => () => {

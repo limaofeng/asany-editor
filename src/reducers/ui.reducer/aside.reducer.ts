@@ -1,5 +1,5 @@
-import type { AsanyAction, IUIAsideState } from '../../typings';
 import { GlobalAsanyAction, UIAsideActionType } from '../actions';
+import type { AsanyAction, IUIAsideState } from '../../typings';
 
 const defaultState: IUIAsideState = {
   visible: false,

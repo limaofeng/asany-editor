@@ -1,10 +1,11 @@
 import { combineReducers } from '../thunk';
+import { GlobalAsanyAction } from '../actions';
 import type { AsanyAction } from '../../typings';
+
 import asideReducer from './aside.reducer';
 import scenaReducer from './scena.reducer';
 import sidebarReducer from './sidebar.reducer';
 import toolbarReducer from './toolbar.reducer';
-import { GlobalAsanyAction } from '../actions';
 
 export default combineReducers(
   {

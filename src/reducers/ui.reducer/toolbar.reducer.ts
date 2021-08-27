@@ -1,5 +1,5 @@
-import type { AsanyAction, IUIToolbarState } from '../../typings';
 import { GlobalAsanyAction, UIToolbarActionType } from '../actions';
+import type { AsanyAction, IUIToolbarState } from '../../typings';
 
 const defaultState: IUIToolbarState = {
   tools: [],

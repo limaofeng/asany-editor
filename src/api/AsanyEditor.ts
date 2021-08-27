@@ -8,6 +8,7 @@ import {
   SidebarHelper,
   ToolbarHelper,
 } from '../typings';
+
 import AsideHelperImpl from './AsideHelper';
 import FeaturesHelperImpl from './FeaturesHelper';
 import SidebarHelperImpl from './SidebarHelper';

@@ -1,4 +1,4 @@
-import { radiusArr, InputText, MIXED } from './typings';
+import { InputText, MIXED, radiusArr } from './typings';
 
 export const radiusSize = (arr: radiusArr) => new Set(arr).size === 1;
 

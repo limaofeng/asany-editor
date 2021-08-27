@@ -1,7 +1,6 @@
 import { merge } from 'lodash-es';
 
 import { combineReducers } from '../reducers/thunk';
-
 import type { AsanyProjectType, IAsanyState } from '../typings';
 
 export const getPlugins = (state: IAsanyState, projectType: AsanyProjectType) => {

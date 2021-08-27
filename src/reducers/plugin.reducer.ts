@@ -1,4 +1,5 @@
 import { AsanyAction, IPluginState } from '../typings';
+
 import { GlobalAsanyAction, IPluginActionType } from './actions';
 
 const defaultState: IPluginState = {};

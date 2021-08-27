@@ -1,9 +1,10 @@
+import React, { CSSProperties, ChangeEvent, memo, useCallback, useRef, useState } from 'react';
+
+import Icon from '@asany/icons';
 import { Input, InputNumber, Tooltip } from 'antd';
 import classnames from 'classnames';
 import { isEqual } from 'lodash-es';
-import React, { ChangeEvent, CSSProperties, memo, useCallback, useRef, useState } from 'react';
 
-import Icon from '@asany/icons';
 import { useDeepCompareEffect } from '../../utils';
 import { InputFormat, InputText } from '../typings';
 
@@ -51,6 +52,7 @@ const ScrubbableControl = (props: ScrubbableControlProps) => {
 
   const handleInputFormat = useCallback((value: InputText) => {
     return (format && format.input && format.input(value)) || String(value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useDeepCompareEffect(() => {
@@ -67,6 +69,7 @@ const ScrubbableControl = (props: ScrubbableControlProps) => {
     }
     const foramtValue = (format && format.output && format.output(internalValue)) || internalValue;
     internalValue && onChange(foramtValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [internalValue, onChange]);
 
   const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
@@ -77,10 +80,12 @@ const ScrubbableControl = (props: ScrubbableControlProps) => {
       const foramtValue = (format && format.output && format.output(internalValue)) || internalValue;
       onChange(foramtValue);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleFocus = useCallback(() => {
     autoSelect && input.current?.select();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

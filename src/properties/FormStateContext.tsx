@@ -1,8 +1,9 @@
+import React, { useCallback, useContext, useEffect, useReducer, useRef } from 'react';
+
+import { EventEmitter } from 'events';
+
 import { Form } from 'antd';
 import { FormInstance, FormProps, useForm } from 'antd/lib/form/Form';
-import React, { useCallback, useContext, useEffect, useReducer, useRef } from 'react';
-import { EventEmitter } from 'events';
-// import { useEnvSelector } from '../environment-manager';
 
 type SubscribeCallback = () => void;
 export type Selector<Selected> = (state: any) => Selected;
@@ -41,23 +42,26 @@ class FormEventManager {
 const FormStateContext = React.createContext<FormEventManager>(new FormEventManager());
 
 function FormProvider(props: FormProviderProps) {
-  const form = props.form;
+  const { form, onValuesChange } = props;
   const manager = useRef(new FormEventManager(form));
 
   const handleValuesChange = useCallback(
     (changedValues, allValues) => {
       manager.current.dispatch(changedValues);
-      props.onValuesChange && props.onValuesChange(changedValues, allValues);
+      onValuesChange && onValuesChange(changedValues, allValues);
     },
-    [props.onValuesChange]
+    [onValuesChange]
   );
 
   useEffect(() => {
-    form!.setFieldsValue = ((OldSetFieldsValue) => (value: any) => {
+    if (!form) {
+      return;
+    }
+    form.setFieldsValue = ((OldSetFieldsValue) => (value: any) => {
       OldSetFieldsValue(value);
       setTimeout(() => manager.current.dispatch(value), 250);
-    })(form!.setFieldsValue);
-  }, []);
+    })(form.setFieldsValue);
+  }, [form]);
 
   return (
     <FormStateContext.Provider value={manager.current}>
@@ -82,16 +86,18 @@ export function useFormSelector<Selected>(
   const [, forceRender] = useReducer((s) => s + 1, 0);
   const latestSelectedState = useRef<Selected>();
   const selectedState = selector(state);
-  function checkForUpdates() {
+  const checkForUpdates = useCallback(function checkForUpdates() {
     const newSelectedState = selector(state);
     if (equalityFn(newSelectedState, latestSelectedState.current!)) {
       return;
     }
     latestSelectedState.current = newSelectedState;
     forceRender();
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   useEffect(() => {
     return context.subscribe(checkForUpdates);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return selectedState;
 }

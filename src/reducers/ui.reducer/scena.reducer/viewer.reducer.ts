@@ -1,5 +1,5 @@
-import type { AsanyAction, ViewerState } from '../../../typings';
 import { GlobalAsanyAction, UIScenaViewerActionType } from '../../actions';
+import type { AsanyAction, ViewerState } from '../../../typings';
 
 const defaultState: ViewerState = {
   dustbin: [],

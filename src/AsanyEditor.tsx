@@ -1,10 +1,8 @@
-import './icons';
-import './style/index.less';
-import './style/tailwind.css';
-
-import classnames from 'classnames';
-import React, { ComponentType, useCallback, useEffect, useReducer } from 'react';
 import { useState } from 'react';
+import React, { ComponentType, useCallback, useEffect, useReducer } from 'react';
+
+import { isElement, isValidElementType } from 'react-is';
+import classnames from 'classnames';
 
 import { AsanyProvider } from './AsanyContext';
 import Aside from './components/aside';
@@ -16,7 +14,10 @@ import { useDispatch, useSelector } from './hooks';
 import { ActionType } from './reducers/actions';
 import RuntimeContainer from './RuntimeContainer';
 import { AsanyProject, EditorPlugin, WorkspaceProps } from './typings';
-import { isElement, isValidElementType } from 'react-is';
+import './icons';
+
+import './style/tailwind.css';
+import './style/index.less';
 
 interface AsanyProps {
   className?: string;

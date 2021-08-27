@@ -1,7 +1,8 @@
+// import Sortable, { ISortableItem, SortableItemContentProps } from '../../sortable';
 import React, { memo, useRef, useState } from 'react';
 
-// import Sortable, { ISortableItem, SortableItemContentProps } from '../../sortable';
 import { generateUUID } from '../../utils';
+
 import WrapperItem from './WrapperItem';
 
 export interface IMultipleWrapperData<T> {

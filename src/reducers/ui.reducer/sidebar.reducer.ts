@@ -1,5 +1,5 @@
-import type { AsanyAction, IUISidebarState } from '../../typings';
 import { GlobalAsanyAction, UISidebarActionType } from '../actions';
+import type { AsanyAction, IUISidebarState } from '../../typings';
 
 const defaultState: IUISidebarState = {
   tools: [],

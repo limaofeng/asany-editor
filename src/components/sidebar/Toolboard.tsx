@@ -1,5 +1,3 @@
-import Icon from '@asany/icons';
-import classnames from 'classnames';
 import React, {
   ComponentType,
   forwardRef,
@@ -10,6 +8,9 @@ import React, {
   useRef,
   useState,
 } from 'react';
+
+import Icon from '@asany/icons';
+import classnames from 'classnames';
 
 import { useDispatch, useSelector } from '../../hooks';
 import { ActionType, UISidebarActionType } from '../../reducers/actions';

@@ -1,4 +1,5 @@
 import type { AsanyAction, IFeatureState } from '../typings';
+
 import { GlobalAsanyAction, IFeatureActionType } from './actions';
 
 const defaultState: IFeatureState = {

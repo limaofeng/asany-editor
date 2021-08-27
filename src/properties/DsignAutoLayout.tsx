@@ -1,6 +1,7 @@
-import classnames from 'classnames';
 import React, { useRef, useState } from 'react';
+
 import { useClickAway } from 'react-use';
+import classnames from 'classnames';
 
 import IconButton from './IconButton';
 import ScrubbableControl from './data-entry/ScrubbableControl';

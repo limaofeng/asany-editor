@@ -1,7 +1,7 @@
-import type { AsanyAction, MoveableState } from '../../../typings';
 import Memory from '../../../utils/Memory';
 import MoveableData from '../../../utils/MoveableData';
 import { GlobalAsanyAction, ProjectActionType, UIScenaMoveableActionType } from '../../actions';
+import type { AsanyAction, MoveableState } from '../../../typings';
 
 const defaultMoveableState: MoveableState = {
   data: new MoveableData(new Memory()),

@@ -1,7 +1,8 @@
-import { InputNumber, Popover } from 'antd';
-import classnames from 'classnames';
-import { isEqual } from 'lodash-es';
 import React, { useCallback, useMemo, useState } from 'react';
+
+import { isEqual } from 'lodash-es';
+import classnames from 'classnames';
+import { InputNumber, Popover } from 'antd';
 
 import devices from '../../../assets/devices';
 import { useDispatch, useSelector } from '../../../hooks';

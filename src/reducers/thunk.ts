@@ -1,4 +1,4 @@
-import type { IReducer, AsanyAction, IAsanyState } from '../typings';
+import type { AsanyAction, IAsanyState, IReducer } from '../typings';
 
 export function combineReducers(
   reducers: { [key: string]: IReducer<any, any> },

@@ -1,10 +1,11 @@
+import React, { useEffect } from 'react';
+
 import { Form } from 'antd';
 import { isEqual } from 'lodash-es';
-import React, { useEffect } from 'react';
-import { ComponentPropertyRendererSetting, useSunmao, IField } from 'sunmao';
+import { ComponentPropertyRendererSetting, IField, useSunmao } from 'sunmao';
 
-import { FormItemWrapper, visibleFilter } from '../DynaActionForm';
 import { getRenderer } from '../renderers';
+import { FormItemWrapper, visibleFilter } from '../DynaActionForm';
 
 interface ObjectCombinerProps {
   value?: any;

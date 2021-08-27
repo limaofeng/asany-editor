@@ -1,10 +1,12 @@
-import { isEqual } from 'lodash-es';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+
+import { isEqual } from 'lodash-es';
 
 import { useDispatch, useSelector } from '../../hooks';
 import { UIActionType } from '../../reducers/actions';
 import { visibleFilter } from '../../utils';
 import { DynaActionFormContext } from '../../utils/BlockAside';
+
 import ConfigurationToolbar from './ConfigurationToolbar';
 import PropertiesPanel, { IPropertiesPanel } from './PropertiesPanel';
 

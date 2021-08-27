@@ -3,7 +3,6 @@ import React, { useCallback, useEffect, useMemo, useReducer, useState } from 're
 import sketchReducer, { defaultValue } from './reducers';
 import { ActionType } from './reducers/actions';
 import { getReducers } from './utils/plugin';
-
 import type { AsanyAction, AsanyProject, AsanyProviderMode, EditorPlugin, IAsanyState } from './typings';
 type UnsubscribeFunc = () => void;
 
@@ -78,6 +77,7 @@ export const AsanyProvider = (props: AsanyProviderProps) => {
   const { dispatch } = store;
   useEffect(() => {
     dispatch({ type: ActionType.Init });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
     if (!value) {
@@ -89,9 +89,11 @@ export const AsanyProvider = (props: AsanyProviderProps) => {
       type: ActionType.ChangeStateByPlugin,
       payload: { reducers, project: value },
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
   return useMemo(
     () => <AsanyContext.Provider value={store}>{store.getState().isReady && children}</AsanyContext.Provider>,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [version, store.getState().isReady]
   );
 };

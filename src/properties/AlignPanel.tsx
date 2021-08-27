@@ -1,5 +1,6 @@
-import Icon from '@asany/icons';
 import React from 'react';
+
+import Icon from '@asany/icons';
 import styled from 'styled-components';
 
 import IconButton from './IconButton';

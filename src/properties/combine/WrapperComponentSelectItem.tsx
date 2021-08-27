@@ -1,6 +1,8 @@
-import React, { memo, MutableRefObject } from 'react';
-import { IMultipleWrapperData } from './MultipleWrapper';
+import React, { MutableRefObject, memo } from 'react';
+
 import { useReactComponent } from 'sunmao';
+
+import { IMultipleWrapperData } from './MultipleWrapper';
 import { SortableHandler } from './WrapperItem';
 
 export interface WrapperItemProps {

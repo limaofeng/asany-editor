@@ -1,8 +1,10 @@
 import React, { memo, useEffect, useState } from 'react';
-import './style/WrapperPopoverContent.less';
-import { IField, ICustomizer } from 'sunmao';
+
+import { ICustomizer, IField } from 'sunmao';
+
 import DynaActionForm from '../DynaActionForm';
 
+import './style/WrapperPopoverContent.less';
 export interface PopoverFields<T> {
   /** 传递 fields 或者 根据当前的 value 某些值获得 fields 的函数 */
   fields: ((value: T) => IField[]) | IField[];

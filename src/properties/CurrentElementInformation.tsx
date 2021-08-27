@@ -1,10 +1,12 @@
-import { Checkbox } from 'antd';
 import React, { memo, useEffect, useReducer, useRef, useState } from 'react';
+
 import styled from 'styled-components';
+import { Checkbox } from 'antd';
 
 import devices from '../assets/devices';
 import useSelector from '../hooks/useSelector';
 import useHTMLElementResize from '../hooks/useHTMLElementResize';
+
 import ScrubbableControl from './data-entry/ScrubbableControl';
 import SegmentedControl from './data-entry/SegmentedControl';
 import Select, { SelectOptionGroup } from './data-entry/Select';

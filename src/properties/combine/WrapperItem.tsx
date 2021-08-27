@@ -1,6 +1,7 @@
+import React, { MutableRefObject, memo } from 'react';
+
 import Icon from '@asany/icons';
 import { Checkbox, Input } from 'antd';
-import React, { memo, MutableRefObject } from 'react';
 
 import { IMultipleWrapperData } from './MultipleWrapper';
 

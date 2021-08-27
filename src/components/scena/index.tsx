@@ -1,11 +1,12 @@
-import classnames from 'classnames';
 import React, { useCallback, useEffect, useReducer, useRef } from 'react';
 
-import { useDispatch, useEditor, useSelector } from '../../hooks';
+import classnames from 'classnames';
 
+import { useDispatch, useEditor, useSelector } from '../../hooks';
 import { ActionType, UIActionType } from '../../reducers/actions';
 import InfiniteViewer from '../InfiniteViewer';
 import Ruler, { RulerGuides } from '../Ruler';
+
 import SelectoMananger from './SelectoMananger';
 import Toolbar from './Toolbar';
 import ScreenViewport from './viewport/ScreenViewport';
