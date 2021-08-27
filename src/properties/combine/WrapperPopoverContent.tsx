@@ -57,6 +57,7 @@ function WrapperPopoverContent(props: WrapperPopoverContentProps<any>) {
       ],
       fields: currentFields,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fieldsProp]);
 
   return (

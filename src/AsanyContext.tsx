@@ -49,6 +49,7 @@ function useStore(mode: AsanyProviderMode, plugins: EditorPlugin[] = []): IAsany
       listeners.unshift(callback);
       return handleUnsubscribe(callback);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [listeners]
   );
   // TODO 后期需要优化，解决由于 hover 导致的频繁触发
@@ -67,6 +68,7 @@ function useStore(mode: AsanyProviderMode, plugins: EditorPlugin[] = []): IAsany
   useEffect(() => {
     store.getState = () => state;
     handleDispatchSubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
   return store;
 }
