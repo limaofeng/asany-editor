@@ -1,3 +1,12 @@
+## [0.2.5](https://github.com/limaofeng/asany-editor/compare/v0.2.4...v0.2.5) (2021-08-28)
+
+
+### Bug Fixes
+
+* :bug: 解决切换属性配置面板时，更新 value 导致的 Maximum call stack size exceeded ([070ff98](https://github.com/limaofeng/asany-editor/commit/070ff9895576e151f7cce6bd67940299f98647db))
+
+
+
 ## [0.2.4](https://github.com/limaofeng/asany-editor/compare/v0.2.3...v0.2.4) (2021-08-28)
 
 
