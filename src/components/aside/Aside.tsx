@@ -41,7 +41,7 @@ function Aside(_: AsideProps) {
       return;
     }
     return watchValue((value) => {
-      cache.current = value;
+      cache.current.value = value;
       forceRender();
     });
   }, [watchValue]);

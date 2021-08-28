@@ -4,7 +4,7 @@ import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import { ICustomizer, IFieldGroup } from 'sunmao';
 
 import CurrentElementInformation from '../properties/CurrentElementInformation';
-import FormPanel from '../properties/DynaActionForm';
+import DynaActionForm from '../properties/DynaActionForm';
 import { AsideTabPane, DEFAULT_GROUP_ID } from '../typings';
 
 export const DynaActionFormContext = React.createContext<any>({});
@@ -17,7 +17,7 @@ export function createDynaActionForm(customizer: ICustomizer, namespace: string 
     return (
       <div ref={container} className="sketch-configuration-body scrollbars-visible">
         <OverlayScrollbarsComponent options={{ scrollbars: { autoHide: 'scroll' } }}>
-          <FormPanel library={namespace} value={value} onChange={handleChange} customizer={customizer!} />
+          <DynaActionForm library={namespace} value={value} onChange={handleChange} customizer={customizer!} />
         </OverlayScrollbarsComponent>
       </div>
     );
