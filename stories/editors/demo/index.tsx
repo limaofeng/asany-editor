@@ -1,10 +1,7 @@
 import React from 'react';
 
-import { useSelector } from '../../../src/hooks';
 import { EditorPlugin } from '../../../src/typings';
-import reducer, { SketchActionType } from './reducer';
-
-// import BlockLayers from '../../../sketch/components/BlockLayers';
+import reducer from './reducer';
 
 export default {
   id: 'demo',
@@ -47,9 +44,7 @@ export default {
             }}
           >
             <span>侧边面板</span>
-            <span style={{ fontSize: 10, marginTop: 20 }}>
-              右侧边缘可以调整面板宽度
-            </span>
+            <span style={{ fontSize: 10, marginTop: 20 }}>右侧边缘可以调整面板宽度</span>
           </div>
         </div>
       );
@@ -112,9 +107,7 @@ export default {
         >
           <div style={{ textAlign: 'center' }}>
             工作区
-            <div style={{ fontSize: 12, paddingTop: 10 }}>
-              点击工作区，可以唤出属性配置面板
-            </div>
+            <div style={{ fontSize: 12, paddingTop: 10 }}>点击工作区，可以唤出属性配置面板</div>
           </div>
         </div>
       );
@@ -123,15 +116,13 @@ export default {
       tools: [
         {
           id: 'left',
-          name: (
-            <div style={{ color: '#727d83', fontSize: 16 }}>二级菜单栏</div>
-          ),
+          name: <div style={{ color: '#727d83', fontSize: 16 }}>二级菜单栏</div>,
           mutex: 'left',
           style: { flex: 1, display: 'flex', justifyContent: 'center' },
         },
       ],
     },
-    onClick: (editor) => {
+    /*     onClick: (editor) => {
       editor.aside.open(
         '属性面板',
         () => {
@@ -155,7 +146,7 @@ export default {
           width: 380,
         }
       );
-    },
+    }, */
   },
   features: [],
 } as EditorPlugin;

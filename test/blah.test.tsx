@@ -1,12 +1,13 @@
 import React from 'react';
 
 import * as ReactDOM from 'react-dom';
-// import { Default as Thing } from '../stories/Layout.stories';
+
+import { Default as Layout } from '../stories/Layout.stories';
 
 describe('Thing', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<div />, div);
+    ReactDOM.render(<Layout />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 });

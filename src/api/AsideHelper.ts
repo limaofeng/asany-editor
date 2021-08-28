@@ -3,7 +3,15 @@ import React from 'react';
 
 import { TabPane } from '../components/aside/PropertiesPanel';
 import { ActionType } from '../reducers/actions';
-import type { AsideHelper, AsideTabPane, IAsanyEditor, IUIAsideState, PanelOptions, UndoFunc } from '../typings';
+import type {
+  AsideHelper,
+  AsideTabPane,
+  IAsanyEditor,
+  IUIAsideState,
+  PanelOptions,
+  SunmaoCustomizer,
+  UndoFunc,
+} from '../typings';
 
 export default class AsideHelperImpl implements AsideHelper {
   private editor: IAsanyEditor;
@@ -20,9 +28,16 @@ export default class AsideHelperImpl implements AsideHelper {
     }
     aside.control.current.next(title, React.createElement(body));
   }
+  open(data: SunmaoCustomizer, options?: PanelOptions): void;
   open(tabs: AsideTabPane[], options?: PanelOptions): void | UndoFunc;
   open(title: string, body: ComponentType<any>, options?: PanelOptions): void | UndoFunc;
   open(title: any, body?: any) {
+    if (typeof title !== 'string' && !title.hasOwnProperty('length')) {
+      return this.editor.store.dispatch({
+        type: ActionType.OpenAside,
+        payload: { block: title, options: arguments[1] },
+      });
+    }
     let options;
     const tabs: TabPane[] = [];
     if (typeof title === 'string') {

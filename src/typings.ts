@@ -1,5 +1,7 @@
 import { CSSProperties, ComponentType, ReactElement } from 'react';
 
+import { ICustomizer } from 'sunmao';
+
 import { DispatchWithoutAction, IAsanyStoreContext } from './AsanyContext';
 import { Selector } from './hooks/useSelector';
 import MoveableData from './utils/MoveableData';
@@ -370,13 +372,19 @@ export interface SidebarHelper {
 export interface PanelOptions {
   top?: number | 'auto';
   width?: number;
-  value?: void;
-  watchValue?: (callback: (value: any) => void) => () => void;
-  update?: (value: any) => void;
 }
+
+export type SunmaoCustomizer = {
+  id?: string;
+  customizer: ICustomizer;
+  value?: any;
+  watchValue?: (callback: (value: any) => void) => () => void;
+  update: (value: any) => void;
+};
 
 export interface AsideHelper {
   state: IUIAsideState;
+  open(data: SunmaoCustomizer, options?: PanelOptions): void;
   open(tabs: AsideTabPane[], options?: PanelOptions): void;
   open(title: string, body: ComponentType<any>, options?: PanelOptions): void;
   next(title: string, body: ComponentType<any>): void;
@@ -426,7 +434,7 @@ export interface IAsanyEditor {
   dispatch: DispatchWithoutAction<any>;
 }
 
-type AsanyProjectType = 'component';
+type AsanyProjectType = string;
 
 interface AsanyProject<D = any, T = AsanyProjectType> {
   id: string;
@@ -594,7 +602,8 @@ export interface IUIState {
 
 export interface IUIAsideState {
   control?: React.RefObject<any>;
-  tabs: AsideTabPane[];
+  tabs?: AsideTabPane[];
+  block?: SunmaoCustomizer;
   options?: PanelOptions;
   visible: boolean;
 }

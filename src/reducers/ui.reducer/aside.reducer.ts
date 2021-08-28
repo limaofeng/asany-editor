@@ -3,7 +3,6 @@ import type { AsanyAction, IUIAsideState } from '../../typings';
 
 const defaultState: IUIAsideState = {
   visible: false,
-  tabs: [],
 };
 
 export default function reducer(

@@ -28,6 +28,7 @@ function MoveableManager(props: MoveableManagerProps) {
     return () => {
       window.removeEventListener('resize', handeWindowResize);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const elementGuidelines = Array.from(moveableData.getTargets()).filter((el) => {

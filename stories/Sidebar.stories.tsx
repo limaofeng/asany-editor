@@ -27,7 +27,7 @@ const Template: Story<any> = (_args) => {
         project={{
           id: 'test',
           name: (<div style={{ color: '#727d83', fontSize: 16 }}>项目名称展示区域</div>) as any,
-          type: 'demo',
+          type: 'component',
           data: {
             id: '111',
             props: [],

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import { ComponentPropertyRendererSetting, ICustomizer, IField, IGroup, useSunmao } from 'sunmao';
+import { ComponentPropertyRendererSetting, ICustomizer, IField, IGroup, useDebugger, useSunmao } from 'sunmao';
 import isEqual from 'lodash/isEqual';
 import classnames from 'classnames';
 
@@ -109,16 +109,18 @@ PanelBody.defaultProps = {
 const DynaActionForm = ({ library = 'cn.asany.editor.form', ...props }: DynaActionFormProps): JSX.Element => {
   const { value = {}, onChange, customizer } = props;
 
+  const console = useDebugger();
   const sunmao = useSunmao();
 
   const [groups, setGroups] = useState<IGroup[]>([]);
+  const defaultValue = useRef<any>({});
   const [form, Form] = useFormState();
 
   useEffect(() => {
     if (!customizer) {
       return;
     }
-    const defaultValue: { [key: string]: string } = {};
+    defaultValue.current = {};
     groups.length = 0;
     setGroups(
       customizer.fields
@@ -142,7 +144,7 @@ const DynaActionForm = ({ library = 'cn.asany.editor.form', ...props }: DynaActi
               renderer: getRenderer(sunmao, library, definition),
             });
           }
-          defaultValue[definition.name] = definition.defaultValue;
+          defaultValue.current[definition.name] = definition.defaultValue;
           return groups;
         }, [])
         .map((group) => {
@@ -152,23 +154,28 @@ const DynaActionForm = ({ library = 'cn.asany.editor.form', ...props }: DynaActi
           return group;
         })
     );
-    form.setFieldsValue({ ...defaultValue, ...value });
+    const fieldsValue = { ...defaultValue.current, ...value };
+    form.setFieldsValue(fieldsValue);
+    console.log('表单配置:', customizer);
+    console.log('表单初始数据:', 'DefaultValue = ', defaultValue.current, 'FieldsValue = ', fieldsValue);
     return () => {
       form.resetFields();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [customizer]);
 
-  const handleValuesChange = (_: any, allValues: any) => {
-    // console.log('blockProps????????表单回显', allValues);
+  const handleValuesChange = useCallback((_: any, allValues: any) => {
+    console.log('表单更新', allValues);
     onChange && onChange(allValues);
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  // useEffect(() => {
-  //   if (value && !isEqual(form.getFieldsValue(), value)) {
-  //     form.setFieldsValue({ ...defaultValue, ...value });
-  //   }
-  // }, [value]);
+  useEffect(() => {
+    if (value && !isEqual(form.getFieldsValue(), value)) {
+      form.setFieldsValue({ ...defaultValue.current, ...value });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
 
   return (
     <Form form={form} component={false} name="control-hooks" onValuesChange={handleValuesChange}>

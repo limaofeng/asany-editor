@@ -9,7 +9,6 @@ export default function reducer(
   action: AsanyAction<IPluginActionType | GlobalAsanyAction>
 ): IPluginState {
   if (GlobalAsanyAction.Init === action.type) {
-    console.log('GlobalAsanyAction', '--->', action);
     return { ...state, ...defaultState };
   }
   return state;

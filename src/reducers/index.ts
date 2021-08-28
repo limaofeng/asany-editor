@@ -45,7 +45,6 @@ export const defaultValue = (mode: AsanyProviderMode, plugins: EditorPlugin[]): 
 };
 
 export default (state: IAsanyState, action: AsanyAction<any>) => {
-  console.log('debug', action);
   if (action.type === ProjectActionType.ChangeCase) {
     const project = action.payload;
     let newState = reducers(state, action);

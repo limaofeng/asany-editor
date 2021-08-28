@@ -3,6 +3,7 @@ import React, { ComponentType, useCallback, useEffect, useReducer } from 'react'
 
 import { isElement, isValidElementType } from 'react-is';
 import classnames from 'classnames';
+import 'overlayscrollbars/css/OverlayScrollbars.css';
 
 import { AsanyProvider } from './AsanyContext';
 import Aside from './components/aside';
@@ -65,6 +66,7 @@ function Editor({
       return;
     }
     dispatch({ type: ActionType.BindSave, payload: onSave });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onSave]);
 
   const handleResize = useCallback((x) => {
