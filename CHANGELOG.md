@@ -1,3 +1,12 @@
+## [0.2.4](https://github.com/limaofeng/asany-editor/compare/v0.2.3...v0.2.4) (2021-08-28)
+
+
+### Bug Fixes
+
+* :bug: 解决切换属性面板，表单数据不同步的问题 ([3727497](https://github.com/limaofeng/asany-editor/commit/3727497193f34b0fdab97e9f2e3863aaf814843c))
+
+
+
 ## [0.2.3](https://github.com/limaofeng/asany-editor/compare/v0.2.2...v0.2.3) (2021-08-27)
 
 
