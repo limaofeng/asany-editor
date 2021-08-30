@@ -1,3 +1,12 @@
+## [0.2.6](https://github.com/limaofeng/asany-editor/compare/v0.2.5...v0.2.6) (2021-08-30)
+
+
+### Bug Fixes
+
+* lodash-es 转为 lodash ([6900718](https://github.com/limaofeng/asany-editor/commit/69007180ea9b1ac8b91d9c71d16c9b05349a884e))
+
+
+
 ## [0.2.5](https://github.com/limaofeng/asany-editor/compare/v0.2.4...v0.2.5) (2021-08-28)
 
 
