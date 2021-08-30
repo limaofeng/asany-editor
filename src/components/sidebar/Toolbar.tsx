@@ -2,7 +2,7 @@ import React from 'react';
 
 import Icon from '@asany/icons';
 import classnames from 'classnames';
-import { isEqual } from 'lodash-es';
+import isEqual from 'lodash/isEqual';
 
 import { AsanyTool } from '../../typings';
 import useTools from '../../hooks/useTools';

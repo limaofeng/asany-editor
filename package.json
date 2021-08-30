@@ -28,7 +28,10 @@
     "postversion": "git push --follow-tags"
   },
   "peerDependencies": {
-    "react": ">=16"
+    "react": ">=16",
+    "sunmao": ">=0.2.6",
+    "@asany/icons": ">=0.1.11",
+    "@asany/sortable": ">=0.1.22"
   },
   "prettier": {
     "printWidth": 120,
@@ -69,7 +72,7 @@
   },
   "devDependencies": {
     "@apollo/client": "^3.4.5",
-    "@asany/icons": "^0.1.10",
+    "@asany/icons": "^0.1.11",
     "@asany/sortable": "^0.1.22",
     "@babel/core": "^7.14.6",
     "@commitlint/cli": "^12.1.4",
@@ -111,7 +114,7 @@
     "react-router-dom": "^5.2.0",
     "rollup-plugin-postcss": "^4.0.0",
     "size-limit": "^5.0.1",
-    "sunmao": "^0.2.5",
+    "sunmao": "^0.2.6",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "tsdx": "^0.14.1",
     "tslib": "^2.3.0",
@@ -123,9 +126,7 @@
   },
   "jest": {
     "moduleNameMapper": {
-      "^lodash-es$": "lodash",
-      "^lodash-es/.*": "lodash",
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "./__mocks__/fileMock.js",
       "\\.(css|less)$": "identity-obj-proxy"
     },
     "setupFiles": [

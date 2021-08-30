@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { Form } from 'antd';
-import { isEqual } from 'lodash-es';
+import isEqual from 'lodash/isEqual';
 import { ComponentPropertyRendererSetting, IField, useSunmao } from 'sunmao';
 
 import { getRenderer } from '../renderers';

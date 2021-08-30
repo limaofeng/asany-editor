@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 
-import { isEqual } from 'lodash-es';
+import isEqual from 'lodash/isEqual';
 import classnames from 'classnames';
 import { InputNumber, Popover } from 'antd';
 

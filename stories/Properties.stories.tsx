@@ -9,7 +9,7 @@ import DemoPlugin from './editors/demo';
 
 import 'antd/dist/antd.css';
 import { useMemo } from '@storybook/addons';
-import { cloneDeepWith } from 'lodash-es';
+import cloneDeepWith from 'lodash/cloneDeepWith';
 
 const meta: Meta = {
   title: '编辑器/属性面板',

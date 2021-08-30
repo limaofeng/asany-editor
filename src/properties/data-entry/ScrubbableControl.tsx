@@ -3,7 +3,7 @@ import React, { CSSProperties, ChangeEvent, memo, useCallback, useRef, useState 
 import Icon from '@asany/icons';
 import { Input, InputNumber, Tooltip } from 'antd';
 import classnames from 'classnames';
-import { isEqual } from 'lodash-es';
+import isEqual from 'lodash/isEqual';
 
 import { useDeepCompareEffect } from '../../utils';
 import { InputFormat, InputText } from '../typings';

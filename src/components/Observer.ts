@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
 
-import { isEqual } from 'lodash-es';
+import isEqual from 'lodash/isEqual';
 
 type CallbackFunc = (value: any, prevValue: any) => void | boolean | Promise<void>;
 

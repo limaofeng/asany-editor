@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 
-import { isEqual } from 'lodash-es';
+import isEqual from 'lodash/isEqual';
 
 import { useDispatch, useSelector } from '../../hooks';
 import { UIActionType } from '../../reducers/actions';

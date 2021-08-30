@@ -1,4 +1,4 @@
-import { merge } from 'lodash-es';
+import merge from 'lodash/merge';
 
 import { combineReducers } from '../reducers/thunk';
 import type { AsanyProjectType, IAsanyState } from '../typings';

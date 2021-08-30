@@ -2,7 +2,7 @@ import React, { ChangeEvent, memo, useCallback, useEffect, useState } from 'reac
 
 import Icon from '@asany/icons';
 import { Input } from 'antd';
-import { isEqual } from 'lodash-es';
+import isEqual from 'lodash/isEqual';
 
 import { onlyNumber } from './utils';
 import { RadiusAllSettingProps } from './typings';
