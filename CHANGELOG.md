@@ -1,3 +1,12 @@
+## [0.2.7](https://github.com/limaofeng/asany-editor/compare/v0.2.6...v0.2.7) (2021-09-11)
+
+
+### Bug Fixes
+
+* 去掉 [@tailwind](https://github.com/tailwind) base; 中覆盖的基础样式 ([6af9576](https://github.com/limaofeng/asany-editor/commit/6af957659c6e839a60c524efcd9cc3d01ecb97c4))
+
+
+
 ## [0.2.6](https://github.com/limaofeng/asany-editor/compare/v0.2.5...v0.2.6) (2021-08-30)
 
 
