@@ -6,7 +6,8 @@
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
-    "src"
+    "src",
+    "types"
   ],
   "engines": {
     "node": ">=10"
@@ -28,10 +29,8 @@
     "postversion": "git push --follow-tags"
   },
   "peerDependencies": {
-    "react": ">=16",
-    "sunmao": ">=0.2.6",
     "@asany/icons": ">=0.1.11",
-    "@asany/sortable": ">=0.1.22"
+    "react": ">=16"
   },
   "prettier": {
     "printWidth": 120,
@@ -59,9 +58,12 @@
     }
   ],
   "dependencies": {
+    "@asany/icons": "^0.1.11",
+    "@asany/sortable": "^0.1.22",
     "@daybrush/drag": "^0.19.3",
     "@scena/react-guides": "^0.16.0",
     "moveable-helper": "^0.4.0",
+    "overlayscrollbars": "^1.13.1",
     "overlayscrollbars-react": "^0.2.3",
     "react-moveable": "^0.29.0",
     "react-selecto": "^1.12.0",
@@ -72,8 +74,6 @@
   },
   "devDependencies": {
     "@apollo/client": "^3.4.5",
-    "@asany/icons": "^0.1.11",
-    "@asany/sortable": "^0.1.22",
     "@babel/core": "^7.14.6",
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
