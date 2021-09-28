@@ -49,14 +49,15 @@
     tslib "^2.3.0"
     zen-observable-ts "^1.1.0"
 
-"@asany/icons@^0.1.11":
-  version "0.1.11"
-  resolved "https://registry.npmjs.org/@asany/icons/-/icons-0.1.11.tgz#32f1e712aea1db7933dba794a713d3fcfb883d3e"
-  integrity sha512-IP4RuXk3ThxA+1sgdWTFhTSIHA5IfjxvIRTMUVmJwa/e1djePvSMd+s/6Y/kX6dFOj9TCTQf+AoSArmagk39yQ==
+"@asany/icons@^0.1.15":
+  version "0.1.15"
+  resolved "https://registry.npmjs.org/@asany/icons/-/icons-0.1.15.tgz#77740211d541e0f883bb2d2b906c1e90227432bf"
+  integrity sha512-GUK7PRSoXBnympOdXI0/e5Nt7H5qpuOcbRlt3F3bvPEExGjuEQhNBOKinE8LdBlvTZnx713wVIZYcv1mh+zfHg==
   dependencies:
     classnames "^2.3.1"
     dexie "^3.0.3"
     fonteditor-core "^2.1.7"
+    lodash "^4.17.21"
 
 "@asany/sortable@^0.1.22":
   version "0.1.22"

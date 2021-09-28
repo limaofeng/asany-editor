@@ -127,7 +127,7 @@ function PropertiesPanel(props: PropertiesPanelProps, ref: React.ForwardedRef<IP
   const { nextIndex, panels } = state.current;
   const hasNextPanel = nextIndex !== -1;
   return (
-    <div ref={container} className={classnames('settings-menu-container', className)} style={style}>
+    <div ref={container} className={classnames('properties-panel-container', className)} style={style}>
       <div id="entry-controls">
         <div
           className={classnames('settings-menu settings-menu-pane', {
