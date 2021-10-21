@@ -1,3 +1,12 @@
+## [0.2.9](https://github.com/limaofeng/asany-editor/compare/v0.2.8...v0.2.9) (2021-10-21)
+
+
+### Features
+
+* 升级 Icon 组件 ([6fd4155](https://github.com/limaofeng/asany-editor/commit/6fd415544300f6b551b3a2bb1bf55dd1c2e6e9ac))
+
+
+
 ## [0.2.8](https://github.com/limaofeng/asany-editor/compare/v0.2.7...v0.2.8) (2021-09-28)
 
 
