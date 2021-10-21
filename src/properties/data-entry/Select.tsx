@@ -213,7 +213,7 @@ const Select = (props: SelectProps) => {
         {icon && renderIcon(icon)}
         <div className="select-title">{renderTitle(getOption(options, value!), placeholder)}</div>
         <div className="indicator">
-          <Icon name="DownArrow" />
+          <Icon name="AsanyEditor/DownArrow" />
         </div>
       </div>
     </Popover>

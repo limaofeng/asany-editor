@@ -23,8 +23,8 @@ const AlignPanel = () => {
         <IconButton tooltip={title} key={icon} icon={icon} />
       ))}
       <MoreOptions className="more-options">
-        <IconButton icon="VectorAlign" />
-        <Icon name="ArrowBottom" />
+        <IconButton icon="AsanyEditor/VectorAlign" />
+        <Icon name="AsanyEditor/ArrowBottom" />
       </MoreOptions>
       {/* TidyUp // DistributeVerticalSpacing // DistributeHorizontalSpacing 
       <div className="more-options icons-pane">

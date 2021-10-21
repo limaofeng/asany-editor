@@ -65,7 +65,7 @@ function Header(props: HeaderProps) {
       ) : (
         <>
           <div className="toolbar-left" onClick={handClickBack}>
-            <Icon name="ToolbarBack" className="back-icon toolbar-icon" />
+            <Icon name="AsanyEditor/ToolbarBack" className="back-icon toolbar-icon" />
             <span className="title">{name}</span>
           </div>
           <div className="toolbar-center">

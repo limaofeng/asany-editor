@@ -349,7 +349,7 @@ export function ToolPanel(props: ToolPanelProps) {
           <span className="panel-header-title">{title}</span>
           {closable && (
             <a className="panel-header-info" onClick={handleClose}>
-              <Icon name="Cross" />
+              <Icon name="AsanyEditor/Cross" />
             </a>
           )}
         </div>

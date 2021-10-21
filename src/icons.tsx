@@ -744,4 +744,4 @@ const icons = [
   },
 ];
 
-store.addIcons(icons);
+store.addIcons('AsanyEditor', '1.0', icons);

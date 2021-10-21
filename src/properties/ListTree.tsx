@@ -121,7 +121,7 @@ function ListTree(props: ListTreeProps) {
     <div className="list-tree-container">
       {parentNode && (
         <div onClick={handleBack} className="tree-current-node flex items-center">
-          <Icon name="Drillup" />
+          <Icon name="AsanyEditor/Drillup" />
           <span className="flex-1">{parentNode[labelName]}</span>
         </div>
       )}
@@ -136,9 +136,9 @@ function ListTree(props: ListTreeProps) {
                 })}
                 onClick={handleClick([...openKeys, item.id])}
               >
-                <Icon name="Folder" />
+                <Icon name="AsanyEditor/Folder" />
                 <span className="flex-1">{item[labelName]}</span>
-                <Icon name="Drilldown" />
+                <Icon name="AsanyEditor/Drilldown" />
               </li>
             ))}
           </ul>
