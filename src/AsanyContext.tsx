@@ -99,4 +99,5 @@ export const AsanyProvider = (props: AsanyProviderProps) => {
     [version, store.getState().isReady]
   );
 };
+
 export interface IAsanyStateContext extends IAsanyState {}

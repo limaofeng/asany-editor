@@ -191,7 +191,7 @@ export interface ISidebar {
   /**
    * 侧边栏组件
    */
-  content?: React.ComponentType;
+  content?: React.ComponentType<any>;
   /**
    * 侧边栏是否可见， 默认： true
    */

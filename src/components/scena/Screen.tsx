@@ -41,6 +41,7 @@ function Screen({ children }: ScreenProps) {
     }
     const registry: any = manager.getRegistry();
     registry.types.set(handlerId, dustbin);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handlerId, dustbin]);
 
   useEffect(() => {

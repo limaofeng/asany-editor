@@ -87,6 +87,7 @@ function InfiniteViewer(props: InfiniteViewerProps) {
     }
     const registry: any = manager.getRegistry();
     registry.types.set(handlerId, dustbin);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handlerId, dustbin.join(',')]);
 
   useEffect(() => {
@@ -119,7 +120,7 @@ function InfiniteViewer(props: InfiniteViewerProps) {
   );
 
   const handleGesture = useCallback(() => {
-    if (store.current.zPoints.reduce(sum, 0) != 0) {
+    if (store.current.zPoints.reduce(sum, 0) !== 0) {
       handleZoom(store.current.zPoints.reduce(sum, 0));
     } else {
       handleScroll(store.current.xPoints.reduce(sum, 0), store.current.yPoints.reduce(sum, 0));
@@ -127,19 +128,21 @@ function InfiniteViewer(props: InfiniteViewerProps) {
     store.current.xPoints = [];
     store.current.yPoints = [];
     store.current.zPoints = [];
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleWheel = useCallback(function (event: WheelEvent) {
     event.preventDefault();
     event.stopPropagation();
     const zoom = (event as any).wheelDeltaX + (event as any).wheelDeltaY;
-    const deltaZ = zoom != 0 && (event as any).wheelDeltaX == 0 && Math.abs((event as any).wheelDeltaY) % 120 == 0;
+    const deltaZ = zoom !== 0 && (event as any).wheelDeltaX === 0 && Math.abs((event as any).wheelDeltaY) % 120 === 0;
 
     store.current.xPoints.push(event.deltaX);
     store.current.yPoints.push(event.deltaY);
     store.current.zPoints.push(deltaZ ? (zoom > 0 ? 1 : -1) : 0);
 
     store.current.animationFrame = requestAnimationFrame(handleGesture);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -150,8 +153,10 @@ function InfiniteViewer(props: InfiniteViewerProps) {
     ele.addEventListener('wheel', handleWheel);
     return () => {
       ele.removeEventListener('wheel', handleWheel);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       cancelAnimationFrame(store.current.animationFrame);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isZoom]);
 
   useEffect(() => {
@@ -175,6 +180,7 @@ function InfiniteViewer(props: InfiniteViewerProps) {
     return () => {
       dragger.unset();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDrag]);
 
   return (

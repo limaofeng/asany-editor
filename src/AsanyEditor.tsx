@@ -5,15 +5,15 @@ import { isElement, isValidElementType } from 'react-is';
 import classnames from 'classnames';
 import 'overlayscrollbars/css/OverlayScrollbars.css';
 
-import { AsanyProvider } from './AsanyContext';
 import Aside from './components/aside';
 import Scena from './components/scena';
-import DefaultLoadingComponent, { LoadingComponentProps } from './components/scena/LoadingComponent';
 import Sidebar from './components/sidebar';
-import Toolbar from './components/toolbar/Toolbar';
-import { useDispatch, useSelector } from './hooks';
+import { AsanyProvider } from './AsanyContext';
 import { ActionType } from './reducers/actions';
 import RuntimeContainer from './RuntimeContainer';
+import Toolbar from './components/toolbar/Toolbar';
+import { useDispatch, useSelector } from './hooks';
+import DefaultLoadingComponent, { LoadingComponentProps } from './components/scena/LoadingComponent';
 import { AsanyProject, EditorPlugin, WorkspaceProps } from './typings';
 import './icons';
 

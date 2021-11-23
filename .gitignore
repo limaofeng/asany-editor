@@ -4,3 +4,7 @@ node_modules
 .cache
 dist
 coverage
+
+src/plugins
+stories/Showme.tsx
+stories/Sunmao.stories.tsx

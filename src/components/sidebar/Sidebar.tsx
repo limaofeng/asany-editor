@@ -17,8 +17,8 @@ function SiderBar(props: SiderBarProps) {
   const control = useRef<IToolboard>(null);
 
   const dispatch = useDispatch();
-  const visible = useSelector((state) => state.ui.sidebar.visible);
   const [collapsed, setCollapsed] = useState(true);
+  const visible = useSelector((state) => state.ui.sidebar.visible);
   const scenaToolbarVisible = useSelector((state) => state.ui.scena.toolbar.visible);
 
   const Content = useSelector((state) => state.ui.sidebar.content);
