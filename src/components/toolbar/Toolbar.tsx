@@ -22,11 +22,12 @@ function iconRender(icon: any) {
   return React.createElement(icon);
 }
 
-function render(item: AsanyTool, focus: any) {
+export function render(item: AsanyTool, focus: any) {
   const disabled = item.isDisabled!(focus[item.id]);
   return item.render ? (
     <item.render key={item.id} {...(item as any)} disabled={disabled} />
   ) : (
+    // eslint-disable-next-line jsx-a11y/anchor-is-valid
     <a
       key={item.id}
       className={classnames('toolbar-icon', item.className, { disabled })}
@@ -56,12 +57,12 @@ function Header(props: HeaderProps) {
     isEqual
   );
 
-  const handClickBack = useCallback(() => onBack && onBack(), []);
+  const handClickBack = useCallback(() => onBack && onBack(), [onBack]);
 
   return (
     <div className="sketch-toolbar">
       {content ? (
-        React.createElement(content)
+        React.createElement(content, { onBack })
       ) : (
         <>
           <div className="toolbar-left" onClick={handClickBack}>

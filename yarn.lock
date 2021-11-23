@@ -14466,10 +14466,10 @@ stylis@^4.0.6:
   resolved "https://registry.npmjs.org/stylis/-/stylis-4.0.10.tgz#446512d1097197ab3f02fb3c258358c3f7a14240"
   integrity sha512-m3k+dk7QeJw660eIKRRn3xPF6uuvHs/FFzjX3HQ5ove0qYsiygoAhwn5a3IYKaZPo5LrYD0rfVmtv1gNY1uYwg==
 
-sunmao@^0.2.25:
-  version "0.2.25"
-  resolved "https://registry.npmjs.org/sunmao/-/sunmao-0.2.25.tgz#81245d1f81283f675741fbac583ee49af54f87c9"
-  integrity sha512-bfkW4f7gWEd8oOPQdN3nJGuqs5WtR1dNK4JOWFa+hkvlSbpisZMrq352NGvM0Qua5p6fSnwY+E2cDum3l0Miyw==
+sunmao@^0.2.26:
+  version "0.2.26"
+  resolved "https://registry.npmjs.org/sunmao/-/sunmao-0.2.26.tgz#92db73ba5cd2fd98b77a48a4b77488b7029482f1"
+  integrity sha512-bBXkJu32/VSF9BpDQZngJY0VrKQXaAKKoLU0mgua8Vb/6NmAWd50qkk+boBlsMEc/s0R3Jvy42+AYCOyHmIQ/A==
   dependencies:
     classnames "^2.3.1"
     lodash-es "^4.17.21"

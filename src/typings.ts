@@ -199,7 +199,7 @@ export interface ISidebar {
 }
 
 export interface IToolbar {
-  content?: ComponentType;
+  content?: ComponentType<any>;
   tools?: AsanyTool[];
 }
 

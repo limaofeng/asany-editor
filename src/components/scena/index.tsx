@@ -79,9 +79,11 @@ function Scena(props: ScenaProps) {
 
   const changeHandToGrab = useCallback(() => {
     setCursorStyle('grab');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const changeHandToGrabbing = useCallback(() => {
     setCursorStyle('grabbing');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const handleClick = useCallback(
     (e) => {
@@ -95,6 +97,7 @@ function Scena(props: ScenaProps) {
       // TODO: 取消 Block 的选中效果
       console.warn('取消 Block 的选中效果');
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [disabled, onClick]
   );
   const handleScroll = (x: number, y: number) => {
@@ -108,6 +111,7 @@ function Scena(props: ScenaProps) {
       type: UIActionType.CanvasZoom,
       payload: zoom,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleGuides = useCallback((data: RulerGuides) => {
@@ -119,6 +123,7 @@ function Scena(props: ScenaProps) {
         vertical: [0, width, width / 2, ...data.vertical],
       },
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleResetScroll = useCallback(() => {
@@ -131,14 +136,17 @@ function Scena(props: ScenaProps) {
       Math.max((viewportWidth - width - 30) / 2 + lsw, 0),
       Math.max((clientHeight - height - 30) / 2, -(height * (1 - zoom)) / 2)
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keepOpen, leftSiderbarWidth, minimizable, options?.width]);
 
   useEffect(() => {
     dispatch({ type: ActionType.ScenaReset, payload: handleResetScroll });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handleResetScroll]);
 
   useEffect(() => {
     isZoom && setTimeout(handleResetScroll, 100);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isZoom]);
 
   const { cursorStyle: cursorstyle, scrollX, scrollY } = state.current;
