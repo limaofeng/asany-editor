@@ -1,3 +1,7 @@
+## [0.2.13](https://github.com/limaofeng/asany-editor/compare/v0.2.12...v0.2.13) (2021-11-23)
+
+
+
 ## [0.2.12](https://github.com/limaofeng/asany-editor/compare/v0.2.11...v0.2.12) (2021-11-23)
 
 
