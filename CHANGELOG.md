@@ -1,3 +1,12 @@
+## [0.2.10](https://github.com/limaofeng/asany-editor/compare/v0.2.9...v0.2.10) (2021-11-23)
+
+
+### Features
+
+* 导出 Toolbar 中的 render 方法 ([176a763](https://github.com/limaofeng/asany-editor/commit/176a7637f9a64b01b78c7c1a53ece2022224f07c))
+
+
+
 ## [0.2.9](https://github.com/limaofeng/asany-editor/compare/v0.2.8...v0.2.9) (2021-10-21)
 
 
