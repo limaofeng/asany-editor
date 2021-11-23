@@ -37,6 +37,7 @@ function Toolbar() {
             item.id === 'vertical-divider' ? (
               <span key={`${item.id}-${index}`} className="vertical-divider" />
             ) : (
+              // eslint-disable-next-line jsx-a11y/anchor-is-valid
               <a
                 key={`${item.id}-${index}`}
                 onClick={item.onClick as any}
@@ -59,6 +60,7 @@ function Toolbar() {
             item.id === 'vertical-divider' ? (
               <span key={`${item.id}-${index}`} className="vertical-divider" />
             ) : (
+              // eslint-disable-next-line jsx-a11y/anchor-is-valid
               <a
                 key={`${item.id}-${index}`}
                 onClick={item.onClick as any}

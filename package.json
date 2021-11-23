@@ -115,7 +115,7 @@
     "react-router-dom": "^6.0.2",
     "rollup-plugin-postcss": "^4.0.1",
     "size-limit": "^7.0.3",
-    "sunmao": "^0.2.26",
+    "sunmao": "^0.2.27",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "tsdx": "^0.14.1",
     "tslib": "^2.3.1",
