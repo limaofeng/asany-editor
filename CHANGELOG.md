@@ -1,3 +1,12 @@
+## [0.2.12](https://github.com/limaofeng/asany-editor/compare/v0.2.11...v0.2.12) (2021-11-23)
+
+
+### Bug Fixes
+
+* 导出 useTools ([a5c047b](https://github.com/limaofeng/asany-editor/commit/a5c047b0e7f206b886780979400169adde9e48ce))
+
+
+
 ## [0.2.11](https://github.com/limaofeng/asany-editor/compare/v0.2.10...v0.2.11) (2021-11-23)
 
 
