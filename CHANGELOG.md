@@ -1,3 +1,12 @@
+## [0.2.15](https://github.com/limaofeng/asany-editor/compare/v0.2.14...v0.2.15) (2021-11-24)
+
+
+### Features
+
+* 移除组件面板相关样式 ([6899063](https://github.com/limaofeng/asany-editor/commit/68990636f7a754c22069255615d9c8df4143b92a))
+
+
+
 ## [0.2.14](https://github.com/limaofeng/asany-editor/compare/v0.2.13...v0.2.14) (2021-11-24)
 
 
