@@ -1,3 +1,12 @@
+## [0.2.14](https://github.com/limaofeng/asany-editor/compare/v0.2.13...v0.2.14) (2021-11-24)
+
+
+### Features
+
+* css 调整 ([c559ef3](https://github.com/limaofeng/asany-editor/commit/c559ef36a1797a9a31bce4f25fe00ed2b0fe87b3))
+
+
+
 ## [0.2.13](https://github.com/limaofeng/asany-editor/compare/v0.2.12...v0.2.13) (2021-11-23)
 
 
