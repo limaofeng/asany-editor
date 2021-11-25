@@ -1,3 +1,12 @@
+## [0.2.16](https://github.com/limaofeng/asany-editor/compare/v0.2.15...v0.2.16) (2021-11-25)
+
+
+### Bug Fixes
+
+* 依赖调整 @asany/icons ([c1c6d5b](https://github.com/limaofeng/asany-editor/commit/c1c6d5b925363184503d5ebd48a3fc9bfc32df25))
+
+
+
 ## [0.2.15](https://github.com/limaofeng/asany-editor/compare/v0.2.14...v0.2.15) (2021-11-24)
 
 
