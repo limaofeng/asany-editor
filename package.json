@@ -58,7 +58,6 @@
     }
   ],
   "dependencies": {
-    "@asany/icons": "^0.2.2",
     "@asany/sortable": "^0.1.30",
     "@asany/tree": "^0.1.14",
     "@daybrush/drag": "^0.19.3",
@@ -74,6 +73,7 @@
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
+    "@asany/icons": "^0.2.2",
     "@apollo/client": "^3.4.17",
     "@babel/core": "^7.16.0",
     "@commitlint/cli": "^15.0.0",
