@@ -1,3 +1,12 @@
+## [0.2.17](https://github.com/limaofeng/asany-editor/compare/v0.2.16...v0.2.17) (2021-11-29)
+
+
+### Bug Fixes
+
+* 为 tailwind 添加前缀，避免与 bootstrap 冲突 ([e064786](https://github.com/limaofeng/asany-editor/commit/e06478694f26fc5f693e05d305a88cbb68c154df))
+
+
+
 ## [0.2.16](https://github.com/limaofeng/asany-editor/compare/v0.2.15...v0.2.16) (2021-11-25)
 
 
