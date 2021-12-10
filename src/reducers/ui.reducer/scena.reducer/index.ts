@@ -8,7 +8,7 @@ import moveableReducer from './moveable.reducer';
 import toolbarReducer from './toolbar.reducer';
 import viewerReducer from './viewer.reducer';
 
-export const defaultDeviceScreen = screens.find((i: any) => i.id === 'Desktop');
+export const defaultDeviceScreen = screens.find((i: any) => i.id === 'Desktop HD');
 
 const scales = [20, 25, 33, 50, 66, 100, 150, 200, 300, 400, 500, 800, 1000];
 const minScale = scales[0];
