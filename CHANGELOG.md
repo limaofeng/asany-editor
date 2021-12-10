@@ -1,3 +1,12 @@
+## [0.2.18](https://github.com/limaofeng/asany-editor/compare/v0.2.17...v0.2.18) (2021-12-10)
+
+
+### Features
+
+* 调整默认屏幕尺寸 ([9ed58e6](https://github.com/limaofeng/asany-editor/commit/9ed58e64e5cf183d1fb0e9ffd3fb82ab7ba7a185))
+
+
+
 ## [0.2.17](https://github.com/limaofeng/asany-editor/compare/v0.2.16...v0.2.17) (2021-11-29)
 
 
