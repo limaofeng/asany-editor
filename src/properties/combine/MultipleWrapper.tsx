@@ -1,7 +1,7 @@
 // import Sortable, { ISortableItem, SortableItemContentProps } from '../../sortable';
 import React, { memo, useRef, useState } from 'react';
 
-import Sortable from '@asany/sortable';
+import Sortable, { SortableItemProps } from '@asany/sortable';
 import { Icon } from '@asany/icons';
 
 import { generateUUID } from '../../utils';
@@ -52,23 +52,14 @@ export interface MultipleWrapperProps {
   immediatelyShowPopoverWhenCreated: boolean;
 
   value: any[];
-  initializer?: (data: IMultipleWrapperData<any>) => IMultipleWrapperData<any>;
+  initializer?: (data: IMultipleWrapperData<any>) => any;
   onChange: (value: IMultipleWrapperData<any>[]) => void;
   pipeline?: (value: IMultipleWrapperData<any>[], current: IMultipleWrapperData<any>) => IMultipleWrapperData<any>[];
 }
 
-interface ItemRenderProps {
-  drag: any;
-  data: any;
-  onDelete: any;
-  onChange: any;
-  showPopoverImmediatelyAtCreated: boolean;
-}
-
-type ItemRender = (props: ItemRenderProps) => React.ReactElement;
+type ItemRender = (props: any) => React.ReactElement;
 
 type BuildItemRenderOptions = {
-  buildDelete: (data: IMultipleWrapperData<any>) => () => void;
   buildChange: (data: IMultipleWrapperData<any>) => (newData: any) => void;
   className?: string;
   showPopoverImmediatelyAtCreated: boolean;
@@ -76,25 +67,29 @@ type BuildItemRenderOptions = {
 };
 
 const buildItemRender = (XItemRender: ItemRender | undefined, options: BuildItemRenderOptions) => {
-  const { children, className, buildChange, buildDelete, showPopoverImmediatelyAtCreated } = options;
+  const { children, className, buildChange, showPopoverImmediatelyAtCreated } = options;
   const InnerItemRender = React.forwardRef((props: any, ref: any) => {
     if (!children && !XItemRender) {
       return <WrapperItem {...props} ref={ref} />;
     }
     return XItemRender ? <XItemRender {...props} ref={ref} /> : React.cloneElement(children, { ...props, ref });
   });
-  return ({ data, drag, ...props }: any /*SortableItemContentProps*/, ref: any) => {
-    console.log('popoverContentVisible', showPopoverImmediatelyAtCreated);
-    const itemRenderProps: ItemRenderProps = {
+  return (
+    { data, drag, remove, update, dragging, indicator, animated, level, index, ...props }: SortableItemProps<any>,
+    ref: any
+  ) => {
+    const itemRenderProps = {
+      level,
+      index,
       drag,
       data,
-      onDelete: buildDelete(data as any),
+      onDelete: remove,
       onChange: buildChange(data as any),
       showPopoverImmediatelyAtCreated,
     };
 
     return (
-      <li {...props} className={className} ref={ref}>
+      <li {...animated} {...props} className={className} ref={ref}>
         <InnerItemRender {...itemRenderProps} />
       </li>
     );
@@ -190,7 +185,7 @@ export function MultipleWrapper<T>(props: MultipleWrapperProps) {
       return;
     }
     const item = getAddItem(sortableType.current, itemName, canSortItem, getAddData);
-    setValue([...value, { ...(initializer ? initializer(item) : item), state: 'isNew' }]);
+    setValue([...value, { ...item, data: initializer ? initializer(item) : item.data, state: 'isNew' }]);
   };
 
   const handleSortChange = (items: any[]) => {
@@ -198,17 +193,12 @@ export function MultipleWrapper<T>(props: MultipleWrapperProps) {
     setValue(items);
   };
 
-  // TODO buildItemRender
-
   const itemRender = buildItemRender(defaultItemRender, {
-    buildDelete: handleDelete,
     buildChange: handleItemChange,
     className: itemClassName,
     showPopoverImmediatelyAtCreated: immediatelyShow,
     children,
   });
-
-  console.log('xxxx', value);
 
   return (
     <div className="multiple-wrapper">

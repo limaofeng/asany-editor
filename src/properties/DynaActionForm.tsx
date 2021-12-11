@@ -177,8 +177,6 @@ const DynaActionForm = ({ library = 'cn.asany.ui.editor.properties', ...props }:
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
-  console.log('groups', groups);
-
   return (
     <Form form={form} component={false} name="control-hooks" onValuesChange={handleValuesChange}>
       {groups.filter(visibleFilter(value)).map(({ id, name, layout, fields }) => (
