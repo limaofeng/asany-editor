@@ -574,26 +574,28 @@
         .multiple-wrapper {
           flex: 1;
           &-header {
+            position: relative;
             display: flex;
             width: 100%;
-            height: 28px;
-            line-height: 28px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-            span.title {
-              flex: 1;
-              font-size: 12px;
-            }
             a {
-              width: 22px;
-              line-height: 28px;
-              text-align: center;
+              position: absolute;
+              width: 32px;
+              height: 32px;
+              right: 0;
+              top: -32px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
               span.svg-icon {
-                font-size: 14px;
+                font-size: 12px;
+                color: var(--gray-light);
               }
             }
           }
           &-list {
             padding-top: 3px;
+            margin-left: -5px;
             border: 0;
             .sortable-handler {
               display: flex;
@@ -606,9 +608,28 @@
             &-item-body {
               display: flex;
               flex: 1;
-              .svg-icon {
-                padding: 7px;
-                font-size: 12px;
+              & > :first-child {
+                flex: 1;
+              }
+              a {
+                text-align: center;
+                width: 28px;
+                height: 28px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &.delete {
+                  width: 32px;
+                  span.svg-icon {
+                    font-size: 14px;
+                  }
+                }
+
+                span.svg-icon {
+                  font-size: 12px;
+                  color: var(--gray-light);
+                }
               }
               .ant-input-rimless {
                 padding-left: 5px;
@@ -624,8 +645,14 @@
               height: 28px;
               a {
                 text-align: center;
+                height: 32px;
+                width: 32px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 span.svg-icon {
                   font-size: 12px;
+                  color: var(--gray-light);
                 }
               }
             }

@@ -4,7 +4,7 @@ import { Popover } from 'antd';
 import { useClickAway } from 'react-use';
 
 import { IMultipleWrapperData } from './MultipleWrapper';
-import { PopoverFields } from './WrapperPopoverContent';
+import WrapperPopoverContent, { PopoverFields } from './WrapperPopoverContent';
 
 import './style/WrapperPopover.less';
 
@@ -36,7 +36,7 @@ function WrapperPopover(props: WrapperPopoverProps<any>) {
     data,
     children,
     popoverContentVisible,
-    ContentRenderer,
+    ContentRenderer = WrapperPopoverContent,
     width: popoverContentWidth,
     maxHeight: popoverContentMaxHeight,
     fields,
@@ -86,7 +86,7 @@ function WrapperPopover(props: WrapperPopoverProps<any>) {
           contentRef={contentRef}
           fields={fields}
           width={popoverContentWidth}
-          popoverContentMaxHeight={popoverContentMaxHeight}
+          maxHeight={popoverContentMaxHeight}
           value={data.data}
           onChange={handleContentChange}
           onClose={handlePopoverContentClose}

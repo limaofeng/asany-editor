@@ -21,7 +21,7 @@ function ObjectCombiner(props: ObjectCombinerProps) {
 
   const fields = props.fields.map((item) => ({
     ...item,
-    renderer: getRenderer(sunmao, 'cn.asany.editor.form', item),
+    renderer: getRenderer(sunmao, 'cn.asany.ui.editor.properties', item),
   }));
   const [form] = Form.useForm();
   const handleValuesChange = (_: any, allValues: any) => {

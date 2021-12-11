@@ -1,5 +1,6 @@
 import React, { memo, useEffect, useState } from 'react';
 
+import Icon from '@asany/icons';
 import { ICustomizer, IField } from 'sunmao';
 
 import DynaActionForm from '../DynaActionForm';
@@ -70,11 +71,10 @@ function WrapperPopoverContent(props: WrapperPopoverContentProps<any>) {
       ref={contentRef}
     >
       <div className="popover-content__title">
-        <a onClick={onClose}>CloseOutlined</a>
+        <a href="#close" onClick={onClose}>
+          <Icon name="AsanyEditor/Cross" />
+        </a>
       </div>
-      {/* 使用 contentRef 中的组件
-       有弹出层的需要配置(如 select ) 基于 弹出层基于父组件而不是 body 上
-     */}
       <div className="popover-content__form">
         <DynaActionForm customizer={customizer} onChange={onChange} value={value} />
       </div>

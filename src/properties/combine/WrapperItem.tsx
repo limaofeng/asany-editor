@@ -36,7 +36,7 @@ export interface WrapperItemProps {
   nameLink?: string;
   displayField?: string;
   /** 可以编辑(显示编辑图标) */
-  canEdit: boolean;
+  editable: boolean;
   /** 可以删除(显示删除图标) */
   canDelete: boolean;
   /** 拖拽 ref, 直接发布到想要拖拽的 dom 元素或者组件上 */
@@ -61,8 +61,8 @@ function WrapperItem(props: WrapperItemProps) {
     onEdit,
     itemRef,
     canDelete,
-    canEdit,
-    nameLink,
+    editable = true,
+    nameLink = 'title',
   } = props;
 
   const handleChange = (key: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,15 +89,17 @@ function WrapperItem(props: WrapperItemProps) {
           onChange={handleChange(displayField!)}
         />
 
-        {canEdit && (
+        {editable && (
           <a ref={itemRef} onClick={handleEditClick}>
-            EditOutlined
+            <Icon name="AsanyEditor/Edit" />
           </a>
         )}
         {canDelete && data.isPreset ? (
           <Checkbox style={{ marginLeft: '6px' }} checked={!data.isDelete} onClick={onDelete} />
         ) : (
-          <a onClick={onDelete}>CloseOutlined</a>
+          <a className="delete" onClick={onDelete}>
+            <Icon name="AsanyEditor/Cross" />
+          </a>
         )}
       </div>
     </>

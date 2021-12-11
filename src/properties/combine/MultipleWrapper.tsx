@@ -1,6 +1,9 @@
 // import Sortable, { ISortableItem, SortableItemContentProps } from '../../sortable';
 import React, { memo, useRef, useState } from 'react';
 
+import Sortable from '@asany/sortable';
+import { Icon } from '@asany/icons';
+
 import { generateUUID } from '../../utils';
 
 import WrapperItem from './WrapperItem';
@@ -13,7 +16,7 @@ export interface IMultipleWrapperData<T> {
   /** 展示名称 */
   name?: string;
   /** 可以编辑名称 */
-  canEditName: boolean;
+  canEditName?: boolean;
   /** 当前项可以排序 */
   sortable?: boolean;
   /** 是否为预设项 */
@@ -48,7 +51,7 @@ export interface MultipleWrapperProps {
   /** 当创建完成立即展示 popover */
   immediatelyShowPopoverWhenCreated: boolean;
 
-  value: IMultipleWrapperData<any>[];
+  value: any[];
   initializer?: (data: IMultipleWrapperData<any>) => IMultipleWrapperData<any>;
   onChange: (value: IMultipleWrapperData<any>[]) => void;
   pipeline?: (value: IMultipleWrapperData<any>[], current: IMultipleWrapperData<any>) => IMultipleWrapperData<any>[];
@@ -88,6 +91,7 @@ const buildItemRender = (XItemRender: ItemRender | undefined, options: BuildItem
       onChange: buildChange(data as any),
       popoverContentVisible,
     };
+
     return (
       <li {...props} className={className} ref={ref}>
         <InnerItemRender {...itemRenderProps} />
@@ -124,7 +128,6 @@ export function MultipleWrapper<T>(props: MultipleWrapperProps) {
     onChange,
     children,
     canAddItem,
-    name,
     canSortItem = true,
     immediatelyShowPopoverWhenCreated: immediatelyShow = true,
     itemName,
@@ -143,15 +146,17 @@ export function MultipleWrapper<T>(props: MultipleWrapperProps) {
 
   const [value, setOldValue] = useState<IMultipleWrapperData<T>[]>(
     (props.value || presetValue || []).map((item) => ({
-      ...item,
+      id: item.id || generateUUID(),
+      data: item,
+      sortable: canSortItem,
       type: sortableType.current,
     }))
   );
 
   const setValue = (value: IMultipleWrapperData<any>[]) => {
     setOldValue(value);
-    console.log('Items Change', value);
-    onChange && onChange(value);
+    // console.log('Items Change', value);
+    onChange && onChange(value.map((item) => item.data));
   };
 
   const temp = useRef<any>({});
@@ -173,7 +178,7 @@ export function MultipleWrapper<T>(props: MultipleWrapperProps) {
 
   const handleItemChange = (data: any) => (newData: any) => {
     const { value } = temp.current;
-    console.log('Items Change', data, newData);
+    // console.log('Items Change', data, newData);
     const newValue = value.map((item: any) => (item.id === data.id ? { ...data, ...newData } : item));
     setValue(pipeline ? pipeline(newValue, newData) : newValue);
   };
@@ -190,9 +195,8 @@ export function MultipleWrapper<T>(props: MultipleWrapperProps) {
     setValue([...value, initializer ? initializer(item) : item]);
   };
 
-  const handleSortChange = (items: IMultipleWrapperData<any>[]) => {
-    console.log('handleSortChange', items);
-    // items.map((item) => value.find((v) => v.id === item.id)!).filter((data) => !!data)
+  const handleSortChange = (items: any[]) => {
+    // console.log('handleSortChange', items);
     setValue(items);
   };
 
@@ -206,17 +210,19 @@ export function MultipleWrapper<T>(props: MultipleWrapperProps) {
     children,
   });
 
-  console.log('handleSortChange', handleSortChange, itemRender);
+  console.log('xxxx', value);
 
   return (
     <div className="multiple-wrapper">
       <div className="multiple-wrapper-header">
-        <span className="title">{name || '多值配置'}</span>
-        {canAddItem && <a onClick={handleInsertRow}>PlusOutlined</a>}
+        {canAddItem && (
+          <a onClick={handleInsertRow}>
+            <Icon name="AsanyEditor/Plus" />
+          </a>
+        )}
       </div>
       {canSortItem ? (
-        {
-          /*<Sortable
+        <Sortable
           accept={[sortableType.current]}
           className="multiple-wrapper-list"
           empty={<div>没有数据</div>}
@@ -224,8 +230,7 @@ export function MultipleWrapper<T>(props: MultipleWrapperProps) {
           items={value}
           itemRender={itemRender}
           onChange={handleSortChange}
-        />*/
-        }
+        />
       ) : (
         <ul className="multiple-wrapper-list">
           {value.map((item: any) => (

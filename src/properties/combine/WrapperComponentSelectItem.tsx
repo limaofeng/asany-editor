@@ -1,5 +1,6 @@
 import React, { MutableRefObject, memo } from 'react';
 
+import Icon from '@asany/icons';
 import { useReactComponent } from 'sunmao';
 
 import { IMultipleWrapperData } from './MultipleWrapper';
@@ -36,7 +37,11 @@ function WrapperItem(props: WrapperItemProps) {
           onChange({ ...data, componentId });
         }}
       /> */}
-      {canDelete && <a onClick={onDelete}>CloseOutlined</a>}
+      {canDelete && (
+        <a onClick={onDelete}>
+          <Icon name="AsanyEditor/Cross" />
+        </a>
+      )}
     </div>
   );
 }

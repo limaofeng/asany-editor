@@ -106,7 +106,7 @@ PanelBody.defaultProps = {
   layout: 'Stacked',
 };
 
-const DynaActionForm = ({ library = 'cn.asany.editor.form', ...props }: DynaActionFormProps): JSX.Element => {
+const DynaActionForm = ({ library = 'cn.asany.ui.editor.properties', ...props }: DynaActionFormProps): JSX.Element => {
   const { value = {}, onChange, customizer } = props;
 
   const console = useDebugger();
@@ -176,6 +176,8 @@ const DynaActionForm = ({ library = 'cn.asany.editor.form', ...props }: DynaActi
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
+
+  console.log('groups', groups);
 
   return (
     <Form form={form} component={false} name="control-hooks" onValuesChange={handleValuesChange}>
