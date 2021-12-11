@@ -61,30 +61,19 @@
 
 
 
-## [0.2.14](https://github.com/limaofeng/asany-editor/compare/v0.2.13...v0.2.14) (2021-11-24)
+## [0.2.14](https://github.com/limaofeng/asany-editor/compare/v0.2.12...v0.2.14) (2021-11-24)
 
 
 ### Features
 
 * css 调整 ([c559ef3](https://github.com/limaofeng/asany-editor/commit/c559ef36a1797a9a31bce4f25fe00ed2b0fe87b3))
 
-
-
-## [0.2.13](https://github.com/limaofeng/asany-editor/compare/v0.2.12...v0.2.13) (2021-11-23)
-
-
-
-## [0.2.12](https://github.com/limaofeng/asany-editor/compare/v0.2.11...v0.2.12) (2021-11-23)
+## [0.2.12](https://github.com/limaofeng/asany-editor/compare/v0.2.10...v0.2.12) (2021-11-23)
 
 
 ### Bug Fixes
 
 * 导出 useTools ([a5c047b](https://github.com/limaofeng/asany-editor/commit/a5c047b0e7f206b886780979400169adde9e48ce))
-
-
-
-## [0.2.11](https://github.com/limaofeng/asany-editor/compare/v0.2.10...v0.2.11) (2021-11-23)
-
 
 
 ## [0.2.10](https://github.com/limaofeng/asany-editor/compare/v0.2.9...v0.2.10) (2021-11-23)
@@ -141,18 +130,12 @@
 
 
 
-## [0.2.4](https://github.com/limaofeng/asany-editor/compare/v0.2.3...v0.2.4) (2021-08-28)
+## [0.2.4](https://github.com/limaofeng/asany-editor/compare/v0.2.2...v0.2.4) (2021-08-28)
 
 
 ### Bug Fixes
 
 * :bug: 解决切换属性面板，表单数据不同步的问题 ([3727497](https://github.com/limaofeng/asany-editor/commit/3727497193f34b0fdab97e9f2e3863aaf814843c))
-
-
-
-## [0.2.3](https://github.com/limaofeng/asany-editor/compare/v0.2.2...v0.2.3) (2021-08-27)
-
-
 
 ## [0.2.2](https://github.com/limaofeng/asany-editor/compare/v0.2.1...v0.2.2) (2021-08-26)
 
@@ -172,15 +155,7 @@
 
 
 
-# [0.2.0](https://github.com/limaofeng/asany-editor/compare/v0.1.3...v0.2.0) (2021-08-20)
-
-
-
-## [0.1.3](https://github.com/limaofeng/asany-editor/compare/v0.1.2...v0.1.3) (2021-08-03)
-
-
-
-## [0.1.2](https://github.com/limaofeng/asany-editor/compare/v0.1.1...v0.1.2) (2021-08-02)
+# [0.2.0](https://github.com/limaofeng/asany-editor/compare/v0.1.1...v0.2.0) (2021-08-20)
 
 
 ### Bug Fixes
