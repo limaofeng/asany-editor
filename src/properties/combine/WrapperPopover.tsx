@@ -15,7 +15,7 @@ interface WrapperPopoverProps<T> extends IMultipleWrapperData<T>, PopoverFields<
    */
   closeOnClickAway: boolean;
   /** 初始化是否显示 (老数据 为 false, 新数据 为 true) */
-  popoverContentVisible: boolean;
+  showPopoverImmediatelyAtCreated: boolean;
   /** wrapper 包裹的子元素 */
   children: React.ReactElement;
   /** 组件 */
@@ -35,7 +35,7 @@ function WrapperPopover(props: WrapperPopoverProps<any>) {
   const {
     data,
     children,
-    popoverContentVisible,
+    showPopoverImmediatelyAtCreated,
     ContentRenderer = WrapperPopoverContent,
     width: popoverContentWidth,
     maxHeight: popoverContentMaxHeight,
@@ -66,10 +66,11 @@ function WrapperPopover(props: WrapperPopoverProps<any>) {
   };
 
   useEffect(() => {
-    if (popoverContentVisible) {
+    if (showPopoverImmediatelyAtCreated && data.state === 'isNew') {
       handlePopoverContentShow();
     }
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data.state]);
 
   useClickAway(contentRef, () => {
     // 如果该属性为 true, 则关闭 popoverContent

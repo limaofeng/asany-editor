@@ -62,7 +62,7 @@ interface ItemRenderProps {
   data: any;
   onDelete: any;
   onChange: any;
-  popoverContentVisible: boolean;
+  showPopoverImmediatelyAtCreated: boolean;
 }
 
 type ItemRender = (props: ItemRenderProps) => React.ReactElement;
@@ -71,12 +71,12 @@ type BuildItemRenderOptions = {
   buildDelete: (data: IMultipleWrapperData<any>) => () => void;
   buildChange: (data: IMultipleWrapperData<any>) => (newData: any) => void;
   className?: string;
-  popoverContentVisible: boolean;
+  showPopoverImmediatelyAtCreated: boolean;
   children: any;
 };
 
 const buildItemRender = (XItemRender: ItemRender | undefined, options: BuildItemRenderOptions) => {
-  const { children, className, buildChange, buildDelete, popoverContentVisible } = options;
+  const { children, className, buildChange, buildDelete, showPopoverImmediatelyAtCreated } = options;
   const InnerItemRender = React.forwardRef((props: any, ref: any) => {
     if (!children && !XItemRender) {
       return <WrapperItem {...props} ref={ref} />;
@@ -84,12 +84,13 @@ const buildItemRender = (XItemRender: ItemRender | undefined, options: BuildItem
     return XItemRender ? <XItemRender {...props} ref={ref} /> : React.cloneElement(children, { ...props, ref });
   });
   return ({ data, drag, ...props }: any /*SortableItemContentProps*/, ref: any) => {
+    console.log('popoverContentVisible', showPopoverImmediatelyAtCreated);
     const itemRenderProps: ItemRenderProps = {
       drag,
       data,
       onDelete: buildDelete(data as any),
       onChange: buildChange(data as any),
-      popoverContentVisible,
+      showPopoverImmediatelyAtCreated,
     };
 
     return (
@@ -141,7 +142,6 @@ export function MultipleWrapper<T>(props: MultipleWrapperProps) {
 
   // 当创建完成立即展示 popover 在第一次点击新增后变为 true,然后新增F的行会展示
   // 初始为 false 意义是无法辨别当前行是否新增
-  const immediatelyShowPopoverWhenCreated = useRef<boolean>(false);
   const sortableType = useRef(generateUUID());
 
   const [value, setOldValue] = useState<IMultipleWrapperData<T>[]>(
@@ -150,6 +150,7 @@ export function MultipleWrapper<T>(props: MultipleWrapperProps) {
       data: item,
       sortable: canSortItem,
       type: sortableType.current,
+      state: 'isOld',
     }))
   );
 
@@ -188,11 +189,8 @@ export function MultipleWrapper<T>(props: MultipleWrapperProps) {
     if (!canAddItem) {
       return;
     }
-    if (immediatelyShow) {
-      immediatelyShowPopoverWhenCreated.current = true;
-    }
     const item = getAddItem(sortableType.current, itemName, canSortItem, getAddData);
-    setValue([...value, initializer ? initializer(item) : item]);
+    setValue([...value, { ...(initializer ? initializer(item) : item), state: 'isNew' }]);
   };
 
   const handleSortChange = (items: any[]) => {
@@ -206,7 +204,7 @@ export function MultipleWrapper<T>(props: MultipleWrapperProps) {
     buildDelete: handleDelete,
     buildChange: handleItemChange,
     className: itemClassName,
-    popoverContentVisible: immediatelyShowPopoverWhenCreated.current,
+    showPopoverImmediatelyAtCreated: immediatelyShow,
     children,
   });
 
@@ -216,6 +214,7 @@ export function MultipleWrapper<T>(props: MultipleWrapperProps) {
     <div className="multiple-wrapper">
       <div className="multiple-wrapper-header">
         {canAddItem && (
+          // eslint-disable-next-line jsx-a11y/anchor-is-valid
           <a onClick={handleInsertRow}>
             <Icon name="AsanyEditor/Plus" />
           </a>
@@ -238,7 +237,7 @@ export function MultipleWrapper<T>(props: MultipleWrapperProps) {
               {React.cloneElement(children, {
                 id: item.id,
                 data: item,
-                popoverContentVisible: immediatelyShowPopoverWhenCreated.current,
+                popoverContentVisible: immediatelyShow,
                 onDelete: handleDelete(item),
                 onChange: handleItemChange(item),
               })}
