@@ -14,12 +14,12 @@ function EditableZoom() {
     dispatch({
       type: UIActionType.CanvasZoomOut,
     });
-  }, []);
+  }, [dispatch]);
   const handleIn = useCallback(() => {
     dispatch({
       type: UIActionType.CanvasZoomIn,
     });
-  }, []);
+  }, [dispatch]);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log((e.target as any).value.replace(/[%]^/i, ''));
   };
