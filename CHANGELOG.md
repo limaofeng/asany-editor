@@ -1,3 +1,12 @@
+## [0.2.20](https://github.com/limaofeng/asany-editor/compare/v0.2.19...v0.2.20) (2021-12-11)
+
+
+### Bug Fixes
+
+* **属性面板:** 修复 sMultipleWrapper 组件 howPopoverImmediatelyAtCreated 属性无效的问题 ([111069f](https://github.com/limaofeng/asany-editor/commit/111069fe950fe38ff2783df286b7d42f961ec941))
+
+
+
 ## [0.2.19](https://github.com/limaofeng/asany-editor/compare/v0.2.18...v0.2.19) (2021-12-11)
 
 
