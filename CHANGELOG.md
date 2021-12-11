@@ -1,3 +1,12 @@
+## [0.2.21](https://github.com/limaofeng/asany-editor/compare/v0.2.20...v0.2.21) (2021-12-11)
+
+
+### Bug Fixes
+
+* **属性面板:** 优化 MultipleWrapper 组件 ([a92f992](https://github.com/limaofeng/asany-editor/commit/a92f992a48f0ce6ce3f2dcf0a581fae0580763d0))
+
+
+
 ## [0.2.20](https://github.com/limaofeng/asany-editor/compare/v0.2.19...v0.2.20) (2021-12-11)
 
 
