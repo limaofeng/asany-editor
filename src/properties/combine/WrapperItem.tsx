@@ -90,6 +90,7 @@ function WrapperItem(props: WrapperItemProps) {
         />
 
         {editable && (
+          // eslint-disable-next-line jsx-a11y/anchor-is-valid
           <a ref={itemRef} onClick={handleEditClick}>
             <Icon name="AsanyEditor/Edit" />
           </a>
@@ -97,6 +98,7 @@ function WrapperItem(props: WrapperItemProps) {
         {canDelete && data.isPreset ? (
           <Checkbox style={{ marginLeft: '6px' }} checked={!data.isDelete} onClick={onDelete} />
         ) : (
+          // eslint-disable-next-line jsx-a11y/anchor-is-valid
           <a className="delete" onClick={onDelete}>
             <Icon name="AsanyEditor/Cross" />
           </a>
