@@ -3,7 +3,7 @@
 
 ### Bug Fixes
 
-* **属性面板:** 修复 sMultipleWrapper 组件 howPopoverImmediatelyAtCreated 属性无效的问题 ([111069f](https://github.com/limaofeng/asany-editor/commit/111069fe950fe38ff2783df286b7d42f961ec941))
+* **属性面板:** 修复 MultipleWrapper 组件 howPopoverImmediatelyAtCreated 属性无效的问题 ([111069f](https://github.com/limaofeng/asany-editor/commit/111069fe950fe38ff2783df286b7d42f961ec941))
 
 
 
