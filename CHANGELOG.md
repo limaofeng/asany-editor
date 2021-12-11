@@ -1,3 +1,12 @@
+## [0.2.19](https://github.com/limaofeng/asany-editor/compare/v0.2.18...v0.2.19) (2021-12-11)
+
+
+### Features
+
+* **属性面板:** 列表配置组件 ([88e0144](https://github.com/limaofeng/asany-editor/commit/88e01445be4d40b3191f19f8e1b512d1493e112f))
+
+
+
 ## [0.2.18](https://github.com/limaofeng/asany-editor/compare/v0.2.17...v0.2.18) (2021-12-10)
 
 
