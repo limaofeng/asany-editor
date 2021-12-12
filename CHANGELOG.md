@@ -1,3 +1,12 @@
+## [0.2.23](https://github.com/limaofeng/asany-editor/compare/v0.2.22...v0.2.23) (2021-12-12)
+
+
+### Features
+
+* **属性面板:** 支持 PopoverWrapper 中嵌套 MultipleWrapper 结构 ([a484131](https://github.com/limaofeng/asany-editor/commit/a4841315019ed224928275c8fca2e5ed86675aba))
+
+
+
 ## [0.2.22](https://github.com/limaofeng/asany-editor/compare/v0.2.21...v0.2.22) (2021-12-12)
 
 
