@@ -38,8 +38,6 @@ export interface MultipleWrapperProps {
   children: React.ReactElement;
   /** 可以添加项目,显示按钮且可以使用 */
   canAddItem: boolean;
-  /** 在可以添加项目的同时给予内部数据的初始化 */
-  getAddData: () => IMultipleWrapperData<any>;
   /** 可以对项目排序 */
   canSortItem: boolean;
   /** 选项显示名 */
@@ -50,8 +48,8 @@ export interface MultipleWrapperProps {
   presetValue: IMultipleWrapperData<any>[];
   /** 当创建完成立即展示 popover */
   immediatelyShowPopoverWhenCreated: boolean;
-
   value: any[];
+  isObject?: boolean;
   initializer?: (data: IMultipleWrapperData<any>) => any;
   onChange: (value: IMultipleWrapperData<any>[]) => void;
   pipeline?: (value: IMultipleWrapperData<any>[], current: IMultipleWrapperData<any>) => IMultipleWrapperData<any>[];
@@ -62,15 +60,23 @@ type ItemRender = (props: any) => React.ReactElement;
 type BuildItemRenderOptions = {
   buildChange: (data: IMultipleWrapperData<any>) => (newData: any) => void;
   className?: string;
+  isObject: boolean;
   showPopoverImmediatelyAtCreated: boolean;
   children: any;
 };
 
 const buildItemRender = (XItemRender: ItemRender | undefined, options: BuildItemRenderOptions) => {
-  const { children, className, buildChange, showPopoverImmediatelyAtCreated } = options;
+  const { children, className, isObject, buildChange, showPopoverImmediatelyAtCreated } = options;
   const InnerItemRender = React.forwardRef((props: any, ref: any) => {
     if (!children && !XItemRender) {
-      return <WrapperItem {...props} ref={ref} />;
+      return (
+        <WrapperItem
+          {...props}
+          editable={!isObject ? false : undefined}
+          nameLink={!isObject ? false : undefined}
+          ref={ref}
+        />
+      );
     }
     return XItemRender ? <XItemRender {...props} ref={ref} /> : React.cloneElement(children, { ...props, ref });
   });
@@ -99,7 +105,7 @@ function getAddItem(
   type: string,
   defaultName: string = '',
   canSortItem: boolean,
-  getAddData = () => ({})
+  isObject: boolean
 ): IMultipleWrapperData<any> {
   return {
     id: generateUUID(),
@@ -113,7 +119,7 @@ function getAddItem(
     isPreset: false,
     // 是否可以被删除，如果为用户添加项，该值一定为 false
     isDelete: false,
-    data: getAddData(),
+    data: isObject ? {} : '',
     canEditName: true,
     component: 'notFound',
   };
@@ -131,8 +137,8 @@ export function MultipleWrapper<T>(props: MultipleWrapperProps) {
     itemClassName,
     itemRender: defaultItemRender,
     presetValue,
+    isObject = true,
     initializer,
-    getAddData,
   } = props;
 
   // 当创建完成立即展示 popover 在第一次点击新增后变为 true,然后新增F的行会展示
@@ -184,7 +190,7 @@ export function MultipleWrapper<T>(props: MultipleWrapperProps) {
     if (!canAddItem) {
       return;
     }
-    const item = getAddItem(sortableType.current, itemName, canSortItem, getAddData);
+    const item = getAddItem(sortableType.current, itemName, canSortItem, isObject);
     setValue([...value, { ...item, data: initializer ? initializer(item) : item.data, state: 'isNew' }]);
   };
 
@@ -196,6 +202,7 @@ export function MultipleWrapper<T>(props: MultipleWrapperProps) {
   const itemRender = buildItemRender(defaultItemRender, {
     buildChange: handleItemChange,
     className: itemClassName,
+    isObject,
     showPopoverImmediatelyAtCreated: immediatelyShow,
     children,
   });

@@ -112,6 +112,7 @@ export function getRenderer(sunmao: Sunmao, library: string, item: IField): Comp
       component: MultipleWrapper,
       props: {
         title: item.label,
+        isObject: item.type === 'JSON',
       },
     };
   }

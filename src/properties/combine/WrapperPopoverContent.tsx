@@ -71,7 +71,8 @@ function WrapperPopoverContent(props: WrapperPopoverContentProps<any>) {
       ref={contentRef}
     >
       <div className="popover-content__title">
-        <a href="#close" onClick={onClose}>
+        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+        <a onClick={onClose}>
           <Icon name="AsanyEditor/Cross" />
         </a>
       </div>

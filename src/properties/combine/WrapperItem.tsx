@@ -66,7 +66,12 @@ function WrapperItem(props: WrapperItemProps) {
   } = props;
 
   const handleChange = (key: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange({ ...data, [key]: event.target.value || ' ' });
+    if (typeof data.data === 'object') {
+      onChange({ ...data, [key]: event.target.value || ' ' });
+    } else {
+      data.data = event.target.value;
+      onChange(data);
+    }
   };
 
   const handleEditClick = () => {
@@ -85,7 +90,7 @@ function WrapperItem(props: WrapperItemProps) {
         <Input
           className="ant-input-rimless"
           readOnly={nameReadonly || !!nameLink}
-          value={!!nameLink ? data.data[nameLink] : data[displayField!]}
+          value={!!nameLink ? data.data[nameLink] : data.data}
           onChange={handleChange(displayField!)}
         />
 
