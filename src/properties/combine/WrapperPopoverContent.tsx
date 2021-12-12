@@ -61,6 +61,8 @@ function WrapperPopoverContent(props: WrapperPopoverContentProps<any>) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fieldsProp]);
 
+  console.log('....WrapperPopoverContent');
+
   return (
     <div
       style={{

@@ -1,5 +1,80 @@
 .wrapper-popover {
+  a {
+    color: var(--gray-light);
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+  .popover-content__title {
+    position: relative;
+    height: 32px;
+    a {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 32px;
+      height: 32px;
+      right: 4px;
+      span {
+        line-height: 0;
+      }
+    }
+  }
   .ant-popover-inner-content {
     padding: 0 !important;
+  }
+  .multiple-wrapper {
+    padding-right: 40px;
+    position: relative;
+    .multiple-wrapper-header {
+      position: absolute;
+      top: 0;
+      right: 8px;
+      a {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 32px;
+        height: 32px;
+
+        span {
+          line-height: normal;
+        }
+      }
+    }
+    .multiple-wrapper-list {
+      margin-bottom: 0;
+      li {
+        background-color: #fff;
+        display: flex;
+        .sortable-handler {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: rgba(0, 0, 0, 0.3);
+          cursor: move;
+          opacity: 0.6;
+        }
+        .multiple-wrapper-list-item-body {
+          align-items: center;
+          display: flex;
+          flex: 1;
+          .delete {
+            text-align: center;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: 0;
+
+            span {
+              line-height: 0;
+            }
+          }
+        }
+      }
+    }
   }
 }

@@ -1,5 +1,5 @@
 // import Sortable, { ISortableItem, SortableItemContentProps } from '../../sortable';
-import React, { memo, useRef, useState } from 'react';
+import React, { memo, useCallback, useMemo, useRef, useState } from 'react';
 
 import Sortable, { SortableItemProps } from '@asany/sortable';
 import { Icon } from '@asany/icons';
@@ -155,11 +155,12 @@ export function MultipleWrapper<T>(props: MultipleWrapperProps) {
     }))
   );
 
-  const setValue = (value: IMultipleWrapperData<any>[]) => {
+  const setValue = useCallback((value: IMultipleWrapperData<any>[]) => {
     setOldValue(value);
     // console.log('Items Change', value);
     onChange && onChange(value.map((item) => item.data));
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const temp = useRef<any>({});
   temp.current.value = value;
@@ -194,18 +195,27 @@ export function MultipleWrapper<T>(props: MultipleWrapperProps) {
     setValue([...value, { ...item, data: initializer ? initializer(item) : item.data, state: 'isNew' }]);
   };
 
-  const handleSortChange = (items: any[]) => {
-    // console.log('handleSortChange', items);
-    setValue(items);
-  };
+  const handleSortChange = useCallback(
+    (items: any[]) => {
+      setValue(items);
+    },
+    [setValue]
+  );
 
-  const itemRender = buildItemRender(defaultItemRender, {
-    buildChange: handleItemChange,
-    className: itemClassName,
-    isObject,
-    showPopoverImmediatelyAtCreated: immediatelyShow,
-    children,
-  });
+  const itemRender = useMemo(
+    () =>
+      buildItemRender(defaultItemRender, {
+        buildChange: handleItemChange,
+        className: itemClassName,
+        isObject,
+        showPopoverImmediatelyAtCreated: immediatelyShow,
+        children,
+      }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+
+  console.log('........', value);
 
   return (
     <div className="multiple-wrapper">

@@ -1,7 +1,8 @@
-import React, { memo, useEffect, useRef, useState } from 'react';
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
 
 import { Popover } from 'antd';
 import { useClickAway } from 'react-use';
+import isEqual from 'lodash/isEqual';
 
 import { IMultipleWrapperData } from './MultipleWrapper';
 import WrapperPopoverContent, { PopoverFields } from './WrapperPopoverContent';
@@ -52,18 +53,21 @@ function WrapperPopover(props: WrapperPopoverProps<any>) {
 
   const contentRef = useRef<HTMLSpanElement>(null);
 
-  const handlePopoverContentClose = () => {
+  const handlePopoverContentClose = useCallback(() => {
     contentComponentRef.current = null;
     setVisible(false);
-  };
+  }, []);
 
-  const handleContentChange = (value: any) => {
-    onChange({ ...data, data: { ...value } });
-  };
+  const handleContentChange = useCallback(
+    (value: any) => {
+      onChange({ ...data, data: { ...value } });
+    },
+    [data, onChange]
+  );
 
-  const handlePopoverContentShow = () => {
+  const handlePopoverContentShow = useCallback(() => {
     setVisible(true);
-  };
+  }, [setVisible]);
 
   useEffect(() => {
     if (showPopoverImmediatelyAtCreated && data.state === 'isNew') {
@@ -105,4 +109,6 @@ function WrapperPopover(props: WrapperPopoverProps<any>) {
   );
 }
 
-export default memo(WrapperPopover);
+export default memo(WrapperPopover, (prev, next) => {
+  return isEqual(prev.data, next.data);
+});
