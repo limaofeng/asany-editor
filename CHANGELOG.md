@@ -1,3 +1,12 @@
+## [0.2.22](https://github.com/limaofeng/asany-editor/compare/v0.2.21...v0.2.22) (2021-12-12)
+
+
+### Features
+
+* **属性面板:** 通过 multiple 设置可以，快速添加  MultipleWrapper 组件 ([1c8c505](https://github.com/limaofeng/asany-editor/commit/1c8c505f6d8889ded70483b34101ea81e1706b78))
+
+
+
 ## [0.2.21](https://github.com/limaofeng/asany-editor/compare/v0.2.20...v0.2.21) (2021-12-11)
 
 
