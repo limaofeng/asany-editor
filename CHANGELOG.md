@@ -1,3 +1,12 @@
+## [0.2.24](https://github.com/limaofeng/asany-editor/compare/v0.2.23...v0.2.24) (2022-06-20)
+
+
+### Features
+
+* 升级依赖 ([2f18057](https://github.com/limaofeng/asany-editor/commit/2f18057d5f5073b88d6f97a95e70306d1df883ac))
+
+
+
 ## [0.2.23](https://github.com/limaofeng/asany-editor/compare/v0.2.22...v0.2.23) (2021-12-12)
 
 
