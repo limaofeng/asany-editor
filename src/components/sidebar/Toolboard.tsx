@@ -194,7 +194,7 @@ function Toolboard(props: ToolboardProps, ref: React.ForwardedRef<IToolboard>) {
   state.current.width = width;
   state.current.minimizable = minimizable;
 
-  const handleResize = useCallback((x) => {
+  const handleResize = useCallback((x: number) => {
     state.current.offset += x;
     forceRender();
     onResize(calculateOffsetLeft(state.current.offset));
@@ -213,7 +213,7 @@ function Toolboard(props: ToolboardProps, ref: React.ForwardedRef<IToolboard>) {
   }, []);
 
   const calculateOffsetLeft = useCallback(
-    (offsetLeft) => {
+    (offsetLeft: number) => {
       const width = state.current.width;
       if (width + offsetLeft < minWidth) {
         return minWidth - width;
@@ -224,7 +224,7 @@ function Toolboard(props: ToolboardProps, ref: React.ForwardedRef<IToolboard>) {
   );
 
   const calculateWidth = useCallback(
-    (width, offsetLeft) => {
+    (width: number, offsetLeft: number) => {
       return Math.max(minWidth, width + offsetLeft);
     },
     [minWidth, minimizable]

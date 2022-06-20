@@ -46,7 +46,7 @@ function FormProvider(props: FormProviderProps) {
   const manager = useRef(new FormEventManager(form));
 
   const handleValuesChange = useCallback(
-    (changedValues, allValues) => {
+    (changedValues: any, allValues: any) => {
       manager.current.dispatch(changedValues);
       onValuesChange && onValuesChange(changedValues, allValues);
     },
@@ -65,7 +65,7 @@ function FormProvider(props: FormProviderProps) {
 
   return (
     <FormStateContext.Provider value={manager.current}>
-      <Form {...props} onValuesChange={handleValuesChange} />
+      <Form {...(props as any)} onValuesChange={handleValuesChange} />
     </FormStateContext.Provider>
   );
 }
@@ -83,7 +83,7 @@ export function useFormSelector<Selected>(
 ) {
   const context = useContext(FormStateContext);
   const state = context.getState();
-  const [, forceRender] = useReducer((s) => s + 1, 0);
+  const [, forceRender] = useReducer((s: number) => s + 1, 0);
   const latestSelectedState = useRef<Selected>();
   const selectedState = selector(state);
   const checkForUpdates = useCallback(function checkForUpdates() {

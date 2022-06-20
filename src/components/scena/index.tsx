@@ -86,7 +86,7 @@ function Scena(props: ScenaProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const handleClick = useCallback(
-    (e) => {
+    (e: any) => {
       if (e.target.classList.contains('moveable-control')) {
         return e.stopPropagation();
       }

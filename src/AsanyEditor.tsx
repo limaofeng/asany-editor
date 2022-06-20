@@ -45,11 +45,11 @@ function Editor({
   const WorkComponent = useCallback(
     (props: WorkspaceProps) => {
       if (isElement(workspace)) {
-        return React.cloneElement(workspace, props);
+        return React.cloneElement(workspace as any, props);
       }
       if (isValidElementType(workspace)) {
         const { children, ...otherProps } = props;
-        return React.createElement(workspace, otherProps, children);
+        return React.createElement(workspace as any, otherProps, children);
       }
       return <div>插件未配置 Workspace 组件</div>;
     },
@@ -69,7 +69,7 @@ function Editor({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onSave]);
 
-  const handleResize = useCallback((x) => {
+  const handleResize = useCallback((x: React.SetStateAction<number>) => {
     setOffsetLeft(x);
   }, []);
 

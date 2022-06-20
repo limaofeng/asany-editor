@@ -53,30 +53,29 @@ export interface SelectPopoverProps {
   compare: OptionCompare;
 }
 
-const renderSelectOption = (compare: OptionCompare, onChange: (option: SelectOption) => void) => (
-  option: SelectOption | SelectOptionGroup
-) => {
-  const { label } = option;
-  if (option.hasOwnProperty('value')) {
-    const item = option as SelectOption;
-    const handleClick = () => {
-      onChange(item.value as any);
-    };
-    return (
-      <li className="asayneditor-select-option" key={item.value} onClick={handleClick}>
-        <span className="left-icon">{compare(item) && <Icon name="VectorCorrect" />}</span>
-        <span className="center-text">{item.label}</span>
-      </li>
-    );
-  } else {
-    const { options } = option as SelectOptionGroup;
-    return (
-      <li className="asayneditor-select-option-group" key={label.toString()}>
-        <ul>{(options || []).map(renderSelectOption(compare, onChange))}</ul>
-      </li>
-    );
-  }
-};
+const renderSelectOption =
+  (compare: OptionCompare, onChange: (option: SelectOption) => void) => (option: SelectOption | SelectOptionGroup) => {
+    const { label } = option;
+    if (option.hasOwnProperty('value')) {
+      const item = option as SelectOption;
+      const handleClick = () => {
+        onChange(item.value as any);
+      };
+      return (
+        <li className="asayneditor-select-option" key={item.value} onClick={handleClick}>
+          <span className="left-icon">{compare(item) && <Icon name="VectorCorrect" />}</span>
+          <span className="center-text">{item.label}</span>
+        </li>
+      );
+    } else {
+      const { options } = option as SelectOptionGroup;
+      return (
+        <li className="asayneditor-select-option-group" key={label.toString()}>
+          <ul>{(options || []).map(renderSelectOption(compare, onChange))}</ul>
+        </li>
+      );
+    }
+  };
 
 // 列表组件
 const SelectModal = React.memo((props: SelectPopoverProps) => {

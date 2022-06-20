@@ -47,7 +47,7 @@ const ScrubbableControl = (props: ScrubbableControlProps) => {
     style = {},
   } = props;
 
-  const input = useRef<Input>(null);
+  const input = useRef<any>(null);
   const [internalValue, setInternalValue] = useState<string>('');
 
   const handleInputFormat = useCallback((value: InputText) => {
