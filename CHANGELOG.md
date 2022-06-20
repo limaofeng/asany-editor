@@ -1,3 +1,12 @@
+## [0.2.25](https://github.com/limaofeng/asany-editor/compare/v0.2.24...v0.2.25) (2022-06-20)
+
+
+### Bug Fixes
+
+* 忽略测试问题，暂时停用 ([ea80635](https://github.com/limaofeng/asany-editor/commit/ea806357224710eaafb800de27b5bf22e7597de9))
+
+
+
 ## [0.2.24](https://github.com/limaofeng/asany-editor/compare/v0.2.23...v0.2.24) (2022-06-20)
 
 
