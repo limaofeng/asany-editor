@@ -5,11 +5,13 @@ import Memory from './Memory';
 import { getId } from './utils';
 
 export default class MoveableData extends MoveableHelper {
+  private memory: Memory;
   private selectedTargets: Array<HTMLElement | SVGElement> = [];
-  constructor(private memory: Memory) {
+  constructor(memory: Memory) {
     super({
       createAuto: true,
     });
+    this.memory = memory;
   }
   public setSelectedTargets(targets: Array<HTMLElement | SVGElement>) {
     this.selectedTargets = targets;
