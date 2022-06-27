@@ -39,10 +39,13 @@ export const AsanyContext = React.createContext<IAsanyStoreContext<any>>({
       },
       plugins: {},
       ui: {
-        screen: {
+        sidebar: {} as any,
+        aside: {} as any,
+        toolbar: {} as any,
+        scena: {
           zoom: 1,
-        },
-      } as any,
+        } as any,
+      },
     };
   },
   subscribe() {
