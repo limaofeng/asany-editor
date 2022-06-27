@@ -1,3 +1,12 @@
+## [0.2.27](https://github.com/limaofeng/asany-editor/compare/v0.2.26...v0.2.27) (2022-06-27)
+
+
+### Features
+
+* 优化 MultipleWrapperData 组件排序逻辑 ([aa5c0e0](https://github.com/limaofeng/asany-editor/commit/aa5c0e069ce9cbd55db33a73d1b38b900508efee))
+
+
+
 ## [0.2.26](https://github.com/limaofeng/asany-editor/compare/v0.2.25...v0.2.26) (2022-06-23)
 
 
