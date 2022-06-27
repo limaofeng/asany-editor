@@ -16,7 +16,7 @@ export enum UISidebarActionType {
    */
   ToolboardKey = 'UISidebar/ToolboardKey',
   /**
-   * 选择的API
+   * 选择的API
    */
   API = 'API',
   /**

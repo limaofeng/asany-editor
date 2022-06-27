@@ -58,8 +58,7 @@
     }
   ],
   "dependencies": {
-    "@asany/sortable": "^0.1.32",
-    "@asany/tree": "^0.1.22",
+    "@asany/sortable": "^0.1.36",
     "@daybrush/drag": "^0.19.3",
     "@scena/react-guides": "^0.17.1",
     "moveable-helper": "^0.4.0",

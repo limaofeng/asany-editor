@@ -72,23 +72,15 @@
     fonteditor-core "^2.1.8"
     lodash "^4.17.21"
 
-"@asany/sortable@^0.1.32":
-  version "0.1.32"
-  resolved "https://registry.yarnpkg.com/@asany/sortable/-/sortable-0.1.32.tgz#48dedf726c11d50bb1f46f304cb722997f0733f7"
-  integrity sha512-DR7gT1jTHnzRNNv67o+qW4d14U7WMIpq/fbBCqUl1NYyezeDJSF1dOgA1/vu0QsZIQbocvEPL9w93hKvit+tNw==
+"@asany/sortable@^0.1.36":
+  version "0.1.36"
+  resolved "https://registry.npmjs.org/@asany/sortable/-/sortable-0.1.36.tgz#98d865d7f109aa8ae5ec296e99dbd9a06b42c372"
+  integrity sha512-BaY8SpIVHVE5sQOGly4cY1pYhj7+2YPYrtYtdlT5vIszz8HzW44Epxepjwt+olhTVZmu2Y8n+RAiUT+u/e+RNA==
   dependencies:
     classnames "^2.3.1"
     immutability-helper "^3.1.1"
     lodash-es "^4.17.21"
     react-flip-toolkit "^7.0.14"
-
-"@asany/tree@^0.1.22":
-  version "0.1.22"
-  resolved "https://registry.yarnpkg.com/@asany/tree/-/tree-0.1.22.tgz#5303f04b59bfe7424fe18665d71bc2c409b70db9"
-  integrity sha512-ap2kMi1az/QObbzAbE3QzORYrTBkVXSr2ax34vHRcWlqn0ypiLafYYqzOkoWObtVoi6m3epXwomrR/AUQXG8Mg==
-  dependencies:
-    "@asany/sortable" "^0.1.32"
-    classnames "^2.3.1"
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.16.7", "@babel/code-frame@^7.5.5", "@babel/code-frame@^7.8.3":
   version "7.16.7"
