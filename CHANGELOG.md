@@ -1,3 +1,12 @@
+## [0.2.29](https://github.com/limaofeng/asany-editor/compare/v0.2.28...v0.2.29) (2022-06-27)
+
+
+### Bug Fixes
+
+*  修复错误的默认 editor state ([85f66f7](https://github.com/limaofeng/asany-editor/commit/85f66f717a36bef955ef3b98c9c69b7a0adf4813))
+
+
+
 ## [0.2.28](https://github.com/limaofeng/asany-editor/compare/v0.2.27...v0.2.28) (2022-06-27)
 
 
