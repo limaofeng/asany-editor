@@ -1,3 +1,12 @@
+## [0.2.28](https://github.com/limaofeng/asany-editor/compare/v0.2.27...v0.2.28) (2022-06-27)
+
+
+### Features
+
+* 编辑器默认状态 ([2427b11](https://github.com/limaofeng/asany-editor/commit/2427b11f02e9274a5cff929ccba0238476493aa0))
+
+
+
 ## [0.2.27](https://github.com/limaofeng/asany-editor/compare/v0.2.26...v0.2.27) (2022-06-27)
 
 
