@@ -21,7 +21,37 @@ export type IAsanyStoreContext<D> = {
 /**
  * 创建Content状态
  */
-export const AsanyContext = React.createContext<IAsanyStoreContext<any>>([] as any);
+export const AsanyContext = React.createContext<IAsanyStoreContext<any>>({
+  getState() {
+    return {
+      save: (project: AsanyProject) => {
+        console.warn('project', project);
+      },
+      isReady: true,
+      project: {} as any,
+      mode: 'VIEW',
+      workspace: {},
+      features: {
+        zoom: false,
+        ruler: false,
+        drag: false,
+        selecto: false,
+      },
+      plugins: {},
+      ui: {
+        screen: {
+          zoom: 1,
+        },
+      } as any,
+    };
+  },
+  subscribe() {
+    return () => {};
+  },
+  dispatch(action: any) {
+    console.warn('action', action);
+  },
+});
 
 export interface AsanyProviderProps {
   children: JSX.Element;

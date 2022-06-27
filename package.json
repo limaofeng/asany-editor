@@ -74,6 +74,7 @@
   "devDependencies": {
     "@apollo/client": "^3.6.9",
     "@asany/icons": "^0.2.12",
+    "@asany/tree": "^0.1.23",
     "@babel/core": "^7.16.0",
     "@commitlint/cli": "^17.0.2",
     "@commitlint/config-conventional": "^17.0.2",

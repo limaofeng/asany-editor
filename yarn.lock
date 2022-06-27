@@ -82,6 +82,14 @@
     lodash-es "^4.17.21"
     react-flip-toolkit "^7.0.14"
 
+"@asany/tree@^0.1.23":
+  version "0.1.23"
+  resolved "https://registry.npmjs.org/@asany/tree/-/tree-0.1.23.tgz#0c0f5bddaf1999b714442c55424c6f0d20e58216"
+  integrity sha512-+IGtJkrnTMbLhl1uyn57MVvZsdlgOk1jVK91EktjzNlDAZx7lg4LtCYZmCjemIPTsvXFIaPdOSWCLUUN2OHsbA==
+  dependencies:
+    "@asany/sortable" "^0.1.36"
+    classnames "^2.3.1"
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.16.7", "@babel/code-frame@^7.5.5", "@babel/code-frame@^7.8.3":
   version "7.16.7"
   resolved "https://registry.npmjs.org/@babel/code-frame/-/code-frame-7.16.7.tgz#44416b6bd7624b998f5b1af5d470856c40138789"

@@ -1,7 +1,7 @@
 // import Sortable, { ISortableItem, SortableItemContentProps } from '../../sortable';
 import React, { memo, useCallback, useMemo, useRef, useState } from 'react';
 
-import Sortable, { SortableItemProps, dragPreview } from '@asany/sortable';
+import Sortable, { SortableItemProps } from '@asany/sortable';
 import { Icon } from '@asany/icons';
 
 import { generateUUID } from '../../utils';
@@ -235,10 +235,10 @@ export function MultipleWrapper<T>(props: MultipleWrapperProps) {
           tag="ul"
           items={value}
           itemRender={itemRender}
-          preview={{
-            render: dragPreview(itemRender),
-            axisLocked: true,
-          }}
+          // preview={{
+          //   render: dragPreview(itemRender),
+          //   axisLocked: true,
+          // }}
           onChange={handleSortChange}
         />
       ) : (
