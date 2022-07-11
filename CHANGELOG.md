@@ -1,3 +1,12 @@
+## [0.2.30](https://github.com/limaofeng/asany-editor/compare/v0.2.29...v0.2.30) (2022-07-11)
+
+
+### Features
+
+* 导出 properties 中的组件 ([55b860f](https://github.com/limaofeng/asany-editor/commit/55b860fa0557d523abb46e9a58305e8678880e51))
+
+
+
 ## [0.2.29](https://github.com/limaofeng/asany-editor/compare/v0.2.28...v0.2.29) (2022-06-27)
 
 
