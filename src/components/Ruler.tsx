@@ -48,7 +48,7 @@ function Ruler(props: RulerProps) {
       guides.current[key] = e.guides;
       onGuides && onGuides(guides.current);
     },
-    []
+    [onGuides]
   );
 
   const handleRulerReset = useCallback(
@@ -64,7 +64,7 @@ function Ruler(props: RulerProps) {
     return () => {
       window.removeEventListener('resize', handleWindowResize);
     };
-  }, []);
+  }, [handleWindowResize]);
 
   const handleClick = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();

@@ -32,7 +32,7 @@ function ObjectCombiner(props: ObjectCombinerProps) {
     if (value && !isEqual(form.getFieldsValue(), value)) {
       form.setFieldsValue({ ...value });
     }
-  }, [value]);
+  }, [form, value]);
   return (
     <Form form={form} className={className} layout="inline" component={'div'} onValuesChange={handleValuesChange}>
       {fields.filter(visibleFilter(props.value)).map((item) => {

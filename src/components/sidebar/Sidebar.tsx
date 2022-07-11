@@ -27,7 +27,7 @@ function SiderBar(props: SiderBarProps) {
 
   useEffect(() => {
     dispatch({ type: ActionType.ToolboardRef, payload: control });
-  }, []);
+  }, [dispatch]);
 
   return (
     <div

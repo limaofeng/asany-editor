@@ -74,7 +74,7 @@ const CurrentElementInformation = () => {
       [IconsConst.Radius]: radius,
     };
     forceRender();
-  }, [[width, height, x, y, rotate, radius].join('-')]);
+  }, [height, radius, rotate, width, x, y]);
 
   const iconsHandleChange = (type: IconsConst) => (state: boolean) => {
     switch (type) {

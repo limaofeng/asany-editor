@@ -150,11 +150,12 @@ export default function useHTMLElementResize(
       value.current.setElement((prev.current = getElement(ele, self)));
       ref.current.observe(prev.current!);
     });
+    const resizeObserver = ref.current;
     return () => {
-      if (prev.current) {
-        ref.current.unobserve(prev.current!);
+      if (resizeObserver && prev.current) {
+        resizeObserver.unobserve(prev.current);
       }
     };
-  }, [baseline?.current]);
+  }, [baseline, self]);
   return value.current;
 }
