@@ -1,3 +1,12 @@
+## [0.2.32](https://github.com/limaofeng/asany-editor/compare/v0.2.31...v0.2.32) (2022-07-11)
+
+
+### Features
+
+* 导出 typings.ts ([552dc3a](https://github.com/limaofeng/asany-editor/commit/552dc3acad099ad09d8250324a44ac2820ff4721))
+
+
+
 ## [0.2.31](https://github.com/limaofeng/asany-editor/compare/v0.2.30...v0.2.31) (2022-07-11)
 
 
