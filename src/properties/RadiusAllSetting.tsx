@@ -21,6 +21,7 @@ const RadiusAllSetting = (props: RadiusAllSettingProps) => {
   useEffect(() => {
     const [tl = 0, tr = 0, br = 0, bl = 0] = value;
     setValue([tl, tr, br, bl]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tl, tr, br, bl]);
 
   // 输入框失去焦点时的操作
@@ -32,6 +33,7 @@ const RadiusAllSetting = (props: RadiusAllSettingProps) => {
       return;
     }
     onChange(value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.value, value]);
 
   // 更新内部数据

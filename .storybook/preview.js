@@ -1,5 +1,7 @@
 import { configure } from '@storybook/react';
 
+import "../stories/styles/index.less";
+
 const loaderFn = () => {
   const allExports = [
     require('../stories/docs/Welcome.stories.mdx'),

@@ -93,13 +93,16 @@ function DeviceScreenPicker() {
   const handleClick = useCallback(() => {
     setVisible(!visible);
   }, [visible]);
-  const handleChangeValue = useCallback((value: DeviceScreen) => {
-    dispatch({
-      type: UIActionType.ChangeScreenSize,
-      payload: value,
-    });
-    setVisible(false);
-  }, []);
+  const handleChangeValue = useCallback(
+    (value: DeviceScreen) => {
+      dispatch({
+        type: UIActionType.ChangeScreenSize,
+        payload: value,
+      });
+      setVisible(false);
+    },
+    [dispatch]
+  );
 
   return (
     <div className="screen-picker">
@@ -152,7 +155,7 @@ function ScreenViewport(props: ScreenViewportProps) {
   const { children, scrollX = 0, scrollY = 0, width, height } = props;
 
   const isZoom = useSelector((state) => state.features.zoom);
-  let sidebarWidth = useSelector((state) => state.ui.sidebar.width);
+  const sidebarWidth = useSelector((state) => state.ui.sidebar.width);
   const sidebarMinWidth = useSelector((state) => state.ui.sidebar.minWidth);
   const sidebarMinimizable = useSelector((state) => state.ui.sidebar.minimizable);
 
@@ -164,12 +167,13 @@ function ScreenViewport(props: ScreenViewportProps) {
         transform: `matrix(1, 0, 0, 1, ${scrollX}, ${scrollY})`,
       };
     }
+    let _sidebarWidth = sidebarWidth;
     if (sidebarMinimizable) {
-      sidebarWidth = 0;
+      _sidebarWidth = 0;
     } else {
-      sidebarWidth = Math.max(sidebarMinWidth, sidebarWidth);
+      _sidebarWidth = Math.max(sidebarMinWidth, _sidebarWidth);
     }
-    return { marginLeft: sidebarWidth, display: 'flex', width: `calc(100% - ${sidebarWidth}px)`, minHeight: `100%` };
+    return { marginLeft: _sidebarWidth, display: 'flex', width: `calc(100% - ${_sidebarWidth}px)`, minHeight: `100%` };
   }, [isZoom, width, height, scrollX, scrollY, sidebarWidth, sidebarMinimizable, sidebarMinWidth]);
 
   return (

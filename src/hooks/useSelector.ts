@@ -47,6 +47,7 @@ export default function useSelector<Selected>(
     const unsubscribe = store.subscribe(checkForUpdates);
     // 组件被销毁后 需要调用unsubscribe停止订阅
     return unsubscribe;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return selectedState;

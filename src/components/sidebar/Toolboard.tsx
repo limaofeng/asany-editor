@@ -61,9 +61,54 @@ function Toolboard(props: ToolboardProps, ref: React.ForwardedRef<IToolboard>) {
   const width = useSelector((state) => state.ui.sidebar.width);
   const minWidth = useSelector((state) => state.ui.sidebar.minWidth);
 
-  const handleCloseNext = async () => {
-    await handleClose(state.current.index);
-  };
+  const handleReopen = useCallback(
+    (key: string) => {
+      const { panels: allPanels, activeKey } = state.current;
+      if (!allPanels[key]) {
+        return;
+      }
+      const _panels = activeKey ? allPanels[activeKey] : [];
+      if (!_panels || !_panels.length) {
+        return;
+      }
+      state.current.activeKey = key;
+      editor.sidebar.select(key!, true);
+      forceRender();
+      return;
+    },
+    [editor.sidebar]
+  );
+
+  const { panels: all, activeKey } = state.current;
+
+  const handleClose = useCallback(async (index: number = 0) => {
+    const { panels: allPanels, activeKey } = state.current;
+    const _panels = activeKey ? allPanels[activeKey] : [];
+    if (!_panels.length) {
+      return;
+    }
+    state.current.index = index - 1;
+    if (index === 0) {
+      const panels = _panels.slice(index);
+      panels.forEach((item) => (item.collapsed = true));
+      forceRender();
+      setCollapsed(true);
+      const toolboardKey = editor.state.ui.sidebar.toolboardKey;
+      dispatch({ type: ActionType.SidebarUnSelect, payload: toolboardKey });
+      await sleep(400);
+      _panels.length = 1;
+      state.current.activeKey = undefined;
+      forceRender();
+    } else {
+      const panels = _panels.slice(index);
+      panels.forEach((item) => (item.collapsed = true));
+      forceRender();
+      await sleep(400);
+      _panels.splice(index);
+      forceRender();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleOpen = useCallback(
     async (index: number, title: string, content: ComponentType, width: number, key?: string) => {
@@ -106,23 +151,12 @@ function Toolboard(props: ToolboardProps, ref: React.ForwardedRef<IToolboard>) {
       }
       forceRender();
     },
-    []
+    [handleClose, setCollapsed]
   );
 
-  const handleReopen = useCallback((key: string) => {
-    const { panels: allPanels, activeKey } = state.current;
-    if (!allPanels[key]) {
-      return;
-    }
-    const _panels = activeKey ? allPanels[activeKey] : [];
-    if (!_panels || !_panels.length) {
-      return;
-    }
-    state.current.activeKey = key;
-    editor.sidebar.select(key!, true);
-    forceRender();
-    return;
-  }, []);
+  const handleCloseNext = useCallback(async () => {
+    await handleClose(state.current.index);
+  }, [handleClose]);
 
   useImperativeHandle(
     ref,
@@ -139,38 +173,8 @@ function Toolboard(props: ToolboardProps, ref: React.ForwardedRef<IToolboard>) {
       back: handleCloseNext,
       close: handleClose,
     }),
-    []
+    [handleClose, handleCloseNext, handleOpen, handleReopen]
   );
-
-  const { panels: all, activeKey } = state.current;
-
-  const handleClose = useCallback(async (index: number = 0) => {
-    const { panels: allPanels, activeKey } = state.current;
-    const _panels = activeKey ? allPanels[activeKey] : [];
-    if (!_panels.length) {
-      return;
-    }
-    state.current.index = index - 1;
-    if (index === 0) {
-      const panels = _panels.slice(index);
-      panels.forEach((item) => (item.collapsed = true));
-      forceRender();
-      setCollapsed(true);
-      const toolboardKey = editor.state.ui.sidebar.toolboardKey;
-      dispatch({ type: ActionType.SidebarUnSelect, payload: toolboardKey });
-      await sleep(400);
-      _panels.length = 1;
-      state.current.activeKey = undefined;
-      forceRender();
-    } else {
-      const panels = _panels.slice(index);
-      panels.forEach((item) => (item.collapsed = true));
-      forceRender();
-      await sleep(400);
-      _panels.splice(index);
-      forceRender();
-    }
-  }, []);
 
   const getCollapseLocation = (panels: Panel[], index: number) => {
     if (index === 0 || panels.length === state.current.index + 1) {
@@ -198,6 +202,7 @@ function Toolboard(props: ToolboardProps, ref: React.ForwardedRef<IToolboard>) {
     state.current.offset += x;
     forceRender();
     onResize(calculateOffsetLeft(state.current.offset));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleResizeEnd = useCallback(() => {
@@ -210,6 +215,7 @@ function Toolboard(props: ToolboardProps, ref: React.ForwardedRef<IToolboard>) {
     });
     onResize(calculateOffsetLeft(state.current.offset));
     console.log('resizing', state.current.offset);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const calculateOffsetLeft = useCallback(
@@ -227,6 +233,7 @@ function Toolboard(props: ToolboardProps, ref: React.ForwardedRef<IToolboard>) {
     (width: number, offsetLeft: number) => {
       return Math.max(minWidth, width + offsetLeft);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [minWidth, minimizable]
   );
 
@@ -241,13 +248,13 @@ function Toolboard(props: ToolboardProps, ref: React.ForwardedRef<IToolboard>) {
     if (minWidth - newWidth > minWidth / 2 || newWidth <= 30) {
       newMinimizable = true;
     }
-    if (state.current.minimizable != newMinimizable) {
+    if (state.current.minimizable !== newMinimizable) {
       dispatch({
         type: UISidebarActionType.SidebarContentMinimize,
         payload: newMinimizable,
       });
     }
-  }, [visible, minWidth, state.current.offset]);
+  }, [visible, minWidth, state.current.offset, dispatch]);
 
   return (
     <Resizer
@@ -314,7 +321,7 @@ export function ToolPanel(props: ToolPanelProps) {
 
   const handleClose = useCallback(() => {
     onClose && onClose(index);
-  }, [index]);
+  }, [index, onClose]);
 
   useEffect(() => {
     if (!index) {
@@ -335,6 +342,7 @@ export function ToolPanel(props: ToolPanelProps) {
       width,
       transform: `translate3d(${width}px, 0, 0)`,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [collapsed, width, left, collapseLocation]);
 
   return (
@@ -348,7 +356,7 @@ export function ToolPanel(props: ToolPanelProps) {
         <div className="panel-header">
           <span className="panel-header-title">{title}</span>
           {closable && (
-            <a className="panel-header-info" onClick={handleClose}>
+            <a href="#close" className="panel-header-info" onClick={handleClose}>
               <Icon name="AsanyEditor/Cross" />
             </a>
           )}

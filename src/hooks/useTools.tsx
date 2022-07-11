@@ -57,6 +57,7 @@ export default function useTools(selector: Selector<AsanyTool[]>) {
       return item;
     });
     forceRender();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allTools.map((item) => item.id).join(',')]);
   return toolsRef.current;
 }

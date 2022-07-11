@@ -1,4 +1,4 @@
-import { AsanyTool, DeviceScreen, IAsanyEditor, IUIScenaState, ScenaHelper } from '../typings';
+import type { AsanyTool, DeviceScreen, IAsanyEditor, IUIScenaState, ScenaHelper, Toolbar } from '../typings';
 import { sleep } from '../utils';
 import { getScena } from '../utils/plugin';
 import devices from '../assets/devices';
@@ -6,79 +6,83 @@ import { ActionType } from '../reducers/actions';
 
 class ScenaHelperImpl implements ScenaHelper {
   private editor: IAsanyEditor;
+  private _toolbar: Toolbar;
   constructor(editor: IAsanyEditor) {
     this.editor = editor;
+    this._toolbar = {
+      has: (key: ':visible') => {
+        if (key === ':visible') {
+          return this.editor.scena.state.toolbar.visible;
+        }
+        return false;
+      },
+      /**
+       *
+       * @param key
+       */
+      select: (key: string) => {
+        const tools = this.editor.state.ui.scena.toolbar.tools;
+        const item = tools.find((item) => item.id === key);
+        const mutexs = item!.mutex ? tools.filter((t) => t.mutex === item!.mutex) : [];
+
+        if (mutexs.length) {
+          this._toolbar.unselect(...mutexs.map((item) => item.id));
+        }
+        this.editor.dispatch({
+          type: ActionType.ScenaToolbarSelect,
+          payload: key,
+        });
+      },
+
+      unselect: (...keys: string[]) => {
+        this.editor.store.dispatch({
+          type: ActionType.ScenaToolbarUnSelect,
+          payload: keys,
+        });
+      },
+
+      /**
+       * 设置工具栏是否可见
+       * @param enable
+       */
+      visible: (enable: boolean) => {
+        this.editor.dispatch({
+          type: ActionType.ScenaToggleVisible,
+          payload: enable,
+        });
+      },
+
+      /**
+       * 重设工具栏
+       * @param tools
+       */
+      tools: (tools: AsanyTool[]) => {
+        this.editor.dispatch({
+          type: ActionType.ScenaSetToolbar,
+          payload: tools,
+        });
+      },
+
+      /**
+       * 重设工具栏
+       * @param tools
+       */
+      reset: () => {
+        const scena = getScena(this.editor.state, this.editor.state.project.type);
+        this.editor.dispatch({
+          type: ActionType.ScenaSetToolbar,
+          payload: scena.toolbar.tools,
+        });
+        this.editor.dispatch({
+          type: ActionType.ScenaToggleVisible,
+          payload: scena.toolbar.visible,
+        });
+      },
+    };
   }
-  toolbar = {
-    has: (key: ':visible') => {
-      if (key === ':visible') {
-        return this.editor.scena.state.toolbar.visible;
-      }
-      return false;
-    },
-    /**
-     *
-     * @param key
-     */
-    select: (key: string) => {
-      const tools = this.editor.state.ui.scena.toolbar.tools;
-      const item = tools.find((item) => item.id === key);
-      const mutexs = item!.mutex ? tools.filter((t) => t.mutex === item!.mutex) : [];
-
-      if (mutexs.length) {
-        this.toolbar.unselect(...mutexs.map((item) => item.id));
-      }
-      this.editor.dispatch({
-        type: ActionType.ScenaToolbarSelect,
-        payload: key,
-      });
-    },
-
-    unselect: (...keys: string[]) => {
-      this.editor.store.dispatch({
-        type: ActionType.ScenaToolbarUnSelect,
-        payload: keys,
-      });
-    },
-
-    /**
-     * 设置工具栏是否可见
-     * @param enable
-     */
-    visible: (enable: boolean) => {
-      this.editor.dispatch({
-        type: ActionType.ScenaToggleVisible,
-        payload: enable,
-      });
-    },
-
-    /**
-     * 重设工具栏
-     * @param tools
-     */
-    tools: (tools: AsanyTool[]) => {
-      this.editor.dispatch({
-        type: ActionType.ScenaSetToolbar,
-        payload: tools,
-      });
-    },
-
-    /**
-     * 重设工具栏
-     * @param tools
-     */
-    reset: () => {
-      const scena = getScena(this.editor.state, this.editor.state.project.type);
-      this.editor.dispatch({
-        type: ActionType.ScenaSetToolbar,
-        payload: scena.toolbar.tools,
-      });
-      this.editor.dispatch({
-        type: ActionType.ScenaToggleVisible,
-        payload: scena.toolbar.visible,
-      });
-    },
-  };
+  get toolbar(): Toolbar {
+    return this._toolbar;
+  }
   get state(): IUIScenaState {
     return this.editor.state.ui.scena;
   }

@@ -25,15 +25,91 @@ const plugin = cloneDeepWith(DemoPlugin);
 const customizer: ICustomizer = {
   fields: [
     {
-      name: 'title',
+      name: 'input',
+      label: 'Input',
       type: 'String',
+    },
+    {
+      name: 'select',
+      type: 'String',
+      label: 'Select',
+      renderer: {
+        component: 'Select',
+        props: {
+          options: [
+            {
+              label: '1',
+              value: '1',
+            },
+            {
+              label: '2',
+              value: '2',
+            },
+            {
+              label: '3',
+              value: '3',
+            },
+          ],
+        },
+      },
+    },
+    {
+      name: 'select_group',
+      label: 'Select Group',
+      type: 'String',
+      renderer: {
+        component: 'Select',
+        props: {
+          options: [
+            {
+              label: '1',
+              options: [
+                {
+                  label: '1/1',
+                  value: '1/1',
+                },
+                {
+                  label: '1/2',
+                  value: '1/2',
+                },
+              ],
+            },
+            {
+              label: '2',
+              options: [
+                {
+                  label: '2/1',
+                  value: '2/1',
+                },
+                {
+                  label: '2/2',
+                  value: '2/2',
+                },
+              ],
+            },
+            {
+              label: '3',
+              options: [
+                {
+                  label: '3/1',
+                  value: '3/1',
+                },
+                {
+                  label: '3/2',
+                  value: '3/2',
+                },
+              ],
+            },
+          ],
+        },
+      },
     },
   ],
 };
 const custom1 = { ...customizer };
 const custom2 = { ...customizer };
 
-plugin.scena.workspace = function () {
+plugin.scena!.workspace = function () {
   const editor = useEditor();
   const sunmao = useSunmao();
 

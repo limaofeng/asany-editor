@@ -272,35 +272,36 @@ export interface IUIScenaState extends UIScenaGlobalState {
   toolbar: IUIScenaToolbarState;
 }
 
+export type Toolbar = {
+  has(key: ':visible'): boolean;
+  /**
+   * 设置工具栏是否可见
+   * @param enable
+   */
+  visible(enable: boolean): void;
+  /**
+   * 选中菜单
+   * @param key
+   */
+  select(key: string): void;
+  /**
+   * 取消选中
+   * @param keys
+   */
+  unselect(...keys: string[]): void;
+  /**
+   * 设置工具栏
+   * @param tools
+   */
+  tools(tools: AsanyTool[]): void;
+  /**
+   * 重设工具栏
+   */
+  reset(): void;
+};
+
 export interface ScenaHelper {
   state: IUIScenaState;
-  toolbar: {
-    has(key: ':visible'): boolean;
-    /**
-     * 设置工具栏是否可见
-     * @param enable
-     */
-    visible(enable: boolean): void;
-    /**
-     * 选中菜单
-     * @param key
-     */
-    select(key: string): void;
-    /**
-     * 取消选中
-     * @param keys
-     */
-    unselect(...keys: string[]): void;
-    /**
-     * 设置工具栏
-     * @param tools
-     */
-    tools(tools: AsanyTool[]): void;
-    /**
-     * 重设工具栏
-     */
-    reset(): void;
-  };
   /**
    * 修改视窗大小
    */

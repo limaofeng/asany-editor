@@ -32,7 +32,7 @@ const renderSelectOption =
       };
       return (
         <li className="asayneditor-select-option" key={item.value} onClick={handleClick}>
-          <span className="left-icon">{compare(item) && <Icon name="VectorCorrect" />}</span>
+          <span className="left-icon">{compare(item) && <Icon name="AsanyEditor/VectorCorrect" />}</span>
           <span className="center-text">{item.label}</span>
         </li>
       );
@@ -40,6 +40,7 @@ const renderSelectOption =
       const { options } = option as SelectOptionGroup;
       return (
         <li className="asayneditor-select-option-group" key={label.toString()}>
+          <span className="group-name">{option.label}</span>
           <ul>{(options || []).map(renderSelectOption(compare, onChange))}</ul>
         </li>
       );
@@ -106,7 +107,7 @@ const Select = (props: SelectProps) => {
     value: initialValue,
     compare = defaultCompare,
     getOption = defaultGetOption,
-    placeholder,
+    placeholder = '请选择',
     popover: SelectPopover = SelectModal,
     popoverClassName,
     className,

@@ -38,7 +38,7 @@ function WrapperItem(props: WrapperItemProps) {
         }}
       /> */}
       {canDelete && (
-        <a onClick={onDelete}>
+        <a href="#delete" onClick={onDelete}>
           <Icon name="AsanyEditor/Cross" />
         </a>
       )}
