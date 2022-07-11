@@ -6,6 +6,8 @@ import { DispatchWithoutAction, IAsanyStoreContext } from './AsanyContext';
 import { Selector } from './hooks/useSelector';
 import MoveableData from './utils/MoveableData';
 
+export * from './properties/typings';
+
 export interface AsanyAction<T> {
   type: T;
   payload?: any;
