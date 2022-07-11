@@ -5,34 +5,14 @@ import { Popover } from 'antd';
 import classnames from 'classnames';
 import { useClickAway } from 'react-use';
 
-export interface SelectOption {
-  label: string | React.ReactElement;
-  value: string;
-}
-
-export interface SelectOptionGroup {
-  label: string | React.ReactElement;
-  options?: SelectOption[];
-}
-
-type ElementType = string | React.ReactElement<any>;
-
-type Compare = (value: string, option: SelectOption) => boolean;
-
-interface SelectProps {
-  popover?: React.ForwardRefExoticComponent<SelectPopoverProps & React.RefAttributes<unknown>>;
-  popoverClassName?: string;
-  className?: string;
-  getOption?: (options: (SelectOption | SelectOptionGroup)[], value: string) => SelectOption;
-  placeholder?: string;
-  resultType?: 'object' | 'string';
-  options?: (SelectOption | SelectOptionGroup)[];
-  compare?: Compare;
-  onChange?: (value: string) => void;
-  renderTitle?: (value?: SelectOption) => ElementType;
-  icon?: ElementType;
-  value?: string;
-}
+import {
+  ElementType,
+  OptionCompare,
+  SelectOption,
+  SelectOptionGroup,
+  SelectPopoverProps,
+  SelectProps,
+} from '../typings';
 
 function defaultRenderTitle(value?: SelectOption, placeholder?: string) {
   return value?.label || placeholder;
@@ -40,17 +20,6 @@ function defaultRenderTitle(value?: SelectOption, placeholder?: string) {
 
 function defaultCompare(value: string, option: SelectOption) {
   return value === option.value;
-}
-
-type OptionCompare = (option: SelectOption) => boolean;
-
-export interface SelectPopoverProps {
-  close: () => void;
-  value?: string;
-  visible: boolean;
-  onChange: (value: any) => void;
-  options: (SelectOption | SelectOptionGroup)[];
-  compare: OptionCompare;
 }
 
 const renderSelectOption =

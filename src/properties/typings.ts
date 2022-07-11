@@ -52,3 +52,67 @@ export interface DsignSelectProps {
   overlayClassName?: string;
   selectConditions?: any;
 }
+
+export interface ListTreeNode {
+  id: string;
+  name?: string;
+  label?: string;
+  children?: ListTreeNode[];
+  [key: string]: any;
+}
+
+export interface ListTreeNodeRenderProps {
+  id: string;
+  selected: boolean;
+  onChange: (id: string) => void;
+}
+
+export interface ListTreeProps {
+  value?: string;
+  reload?: boolean;
+  labelName?: string;
+  onChange?: (node: ListTreeNode) => void;
+  treeData: ListTreeNode[];
+  itemRender: React.ComponentType<ListTreeNodeRenderProps>;
+  children?: React.ReactNode;
+}
+
+export interface SelectOption {
+  label: string | React.ReactElement;
+  value: string;
+}
+
+export interface SelectOptionGroup {
+  label: string | React.ReactElement;
+  options?: SelectOption[];
+}
+
+export type ElementType = string | React.ReactElement<any>;
+
+export type Compare = (value: string, option: SelectOption) => boolean;
+
+export interface SelectProps {
+  popover?: React.ForwardRefExoticComponent<SelectPopoverProps & React.RefAttributes<unknown>>;
+  popoverClassName?: string;
+  className?: string;
+  getOption?: (options: (SelectOption | SelectOptionGroup)[], value: string) => SelectOption;
+  placeholder?: string;
+  resultType?: 'object' | 'string';
+  options?: (SelectOption | SelectOptionGroup)[];
+  compare?: Compare;
+  onChange?: (value: string) => void;
+  renderTitle?: (value?: SelectOption) => ElementType;
+  icon?: ElementType;
+  value?: string;
+}
+
+export type OptionCompare = (option: SelectOption) => boolean;
+
+export interface SelectPopoverProps {
+  close: () => void;
+  value?: string;
+  visible: boolean;
+  onChange: (value: any) => void;
+  options: (SelectOption | SelectOptionGroup)[];
+  compare: OptionCompare;
+}

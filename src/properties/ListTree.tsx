@@ -4,29 +4,7 @@ import Icon from '@asany/icons';
 import classnames from 'classnames';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 
-export interface ListTreeNode {
-  id: string;
-  name?: string;
-  label?: string;
-  children?: ListTreeNode[];
-  [key: string]: any;
-}
-
-export interface ListTreeNodeRenderProps {
-  id: string;
-  selected: boolean;
-  onChange: (id: string) => void;
-}
-
-interface ListTreeProps {
-  value?: string;
-  reload?: boolean;
-  labelName?: string;
-  onChange?: (node: ListTreeNode) => void;
-  treeData: ListTreeNode[];
-  itemRender: React.ComponentType<ListTreeNodeRenderProps>;
-  children?: React.ReactNode;
-}
+import { ListTreeNode, ListTreeProps } from './typings';
 
 function getSelectKeys(treeData: ListTreeNode[], key: string): string[] {
   for (const node of treeData) {
