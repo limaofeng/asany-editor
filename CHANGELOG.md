@@ -1,3 +1,12 @@
+## [0.2.31](https://github.com/limaofeng/asany-editor/compare/v0.2.30...v0.2.31) (2022-07-11)
+
+
+### Features
+
+* 导出 ScrubbableControl 与 SegmentedControl ([7c92b14](https://github.com/limaofeng/asany-editor/commit/7c92b14ca45df5e4426f634b422671d5b864b889))
+
+
+
 ## [0.2.30](https://github.com/limaofeng/asany-editor/compare/v0.2.29...v0.2.30) (2022-07-11)
 
 
