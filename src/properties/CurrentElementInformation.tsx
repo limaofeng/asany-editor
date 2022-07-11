@@ -9,11 +9,11 @@ import useHTMLElementResize from '../hooks/useHTMLElementResize';
 
 import ScrubbableControl from './data-entry/ScrubbableControl';
 import SegmentedControl from './data-entry/SegmentedControl';
-import Select, { SelectOptionGroup } from './data-entry/Select';
+import Select from './data-entry/Select';
 import IconButton from './IconButton';
 import OptionButton from './OptionButton';
 import RadiusAllSetting from './RadiusAllSetting';
-import { IconsConst, InputText } from './typings';
+import { IconsConst, InputText, SelectOptionGroup } from './typings';
 import { inputFormat, radiusFormat, rotateFormat } from './utils';
 
 const deviceTypes = devices.reduce((l: SelectOptionGroup[], r: any) => {
