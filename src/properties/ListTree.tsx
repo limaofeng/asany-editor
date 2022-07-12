@@ -22,7 +22,7 @@ function getSelectKeys(treeData: ListTreeNode[], key: string): string[] {
 }
 
 function ListTree(props: ListTreeProps) {
-  const { reload, treeData, labelName = 'label', itemRender: ItemRender, onChange, value } = props;
+  const { reload, treeData, labelName = 'label', keyName = 'id', itemRender: ItemRender, onChange, value } = props;
 
   const [selectKeys, setSelectKeys] = useState<string[]>([]);
   const [openKeys, setOpenKeys] = useState<string[]>([]);
@@ -125,7 +125,13 @@ function ListTree(props: ListTreeProps) {
             {list
               .filter((item) => !(item.children || []).length)
               .map((item) => (
-                <ItemRender {...item} key={item.id} selected={selectKeys.includes(item.id)} onChange={handleChange} />
+                <ItemRender
+                  {...item}
+                  key={item[keyName]}
+                  keyName={keyName}
+                  selected={selectKeys.includes(item[keyName])}
+                  onChange={handleChange}
+                />
               ))}
           </ul>
         </div>

@@ -64,6 +64,7 @@ export interface ListTreeNode {
 export interface ListTreeNodeRenderProps {
   id: string;
   selected: boolean;
+  keyName: string;
   onChange: (id: string) => void;
 }
 
@@ -71,6 +72,7 @@ export interface ListTreeProps {
   value?: string;
   reload?: boolean;
   labelName?: string;
+  keyName?: string;
   onChange?: (node: ListTreeNode) => void;
   treeData: ListTreeNode[];
   itemRender: React.ComponentType<ListTreeNodeRenderProps>;
