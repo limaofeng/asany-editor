@@ -1,3 +1,12 @@
+## [0.2.39](https://github.com/limaofeng/asany-editor/compare/v0.2.38...v0.2.39) (2022-07-12)
+
+
+### Bug Fixes
+
+* 组件 ListTree Key 匹配问题 ([c379045](https://github.com/limaofeng/asany-editor/commit/c379045e1b6e578fad54919c8f3f38bd5775ddb2))
+
+
+
 ## [0.2.38](https://github.com/limaofeng/asany-editor/compare/v0.2.37...v0.2.38) (2022-07-12)
 
 
