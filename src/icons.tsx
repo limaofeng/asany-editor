@@ -788,6 +788,17 @@ const icons = [
             ></path>
             </svg>`,
   },
+  {
+    name: 'Drillup',
+    svg: ` <svg width="1em" height="1em" fill="currentColor" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M7.914 3.708L7.206 3 2 7.999l5.206 5 .708-.708-4.5-4.292 4.5-4.291z"
+          fillRule="nonzero"
+          fillOpacity=".8"
+          stroke="none"
+        ></path>
+      </svg>`,
+  },
 ];
 
 store.addIcons('AsanyEditor', '1.0', icons);

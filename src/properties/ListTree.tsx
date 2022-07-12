@@ -88,7 +88,6 @@ function ListTree(props: ListTreeProps) {
     const openKeys = [...selectKeys];
     openKeys.pop();
     setOpenKeys(openKeys);
-    console.log('useEffect', selectKeys, openKeys);
   }, [treeData, value, reload]);
 
   const dirs = list.filter((item) => !!(item.children || []).length);
@@ -100,7 +99,7 @@ function ListTree(props: ListTreeProps) {
       {parentNode && (
         <div onClick={handleBack} className="tree-current-node tw-flex tw-items-center">
           <Icon name="AsanyEditor/Drillup" />
-          <span className="flex-1">{parentNode[labelName]}</span>
+          <span className="tw-flex-1">{parentNode[labelName]}</span>
         </div>
       )}
       <OverlayScrollbarsComponent className="list-tree-scrollbar" options={{ scrollbars: { autoHide: 'scroll' } }}>
