@@ -6,15 +6,15 @@ import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 
 import { ListTreeNode, ListTreeProps } from './typings';
 
-function getSelectKeys(treeData: ListTreeNode[], key: string): string[] {
+function getSelectKeys(treeData: ListTreeNode[], key: string, keyName: string): string[] {
   for (const node of treeData) {
-    if (node.id === key) {
-      return [node.id];
+    if (node[keyName] === key) {
+      return [node[keyName]];
     }
     if (node.children?.length) {
-      const childKeys = getSelectKeys(node.children, key);
+      const childKeys = getSelectKeys(node.children, key, keyName);
       if (childKeys.length) {
-        return [node.id, ...childKeys];
+        return [node[keyName], ...childKeys];
       }
     }
   }
@@ -33,7 +33,7 @@ function ListTree(props: ListTreeProps) {
     let parentNode;
     setList(
       openKeys.reduce((list, key) => {
-        const node = list.find((item) => item.id === key);
+        const node = list.find((item) => item[keyName] === key);
         if (node) {
           parentNode = node;
           return node.children || [];
@@ -54,13 +54,13 @@ function ListTree(props: ListTreeProps) {
 
   const handleChange = useCallback(
     (key: string) => {
-      const selectKeys = getSelectKeys(treeData, key);
+      const selectKeys = getSelectKeys(treeData, key, keyName);
       setSelectKeys(selectKeys);
       const node = selectKeys.reduce((list: any, key: any) => {
         if (!list.length) {
           return list;
         }
-        const node = list.find((item: any) => item.id === key);
+        const node = list.find((item: any) => item[keyName] === key);
         if (node && node.children?.length) {
           return node.children;
         }
@@ -69,7 +69,7 @@ function ListTree(props: ListTreeProps) {
       console.log('selectKeys', selectKeys, node);
       onChange && node && onChange(node as any);
     },
-    [treeData, onChange]
+    [treeData, keyName, onChange]
   );
 
   const handleBack = useCallback(() => {
@@ -83,12 +83,12 @@ function ListTree(props: ListTreeProps) {
       setSelectKeys([]);
       return;
     }
-    const selectKeys = getSelectKeys(treeData, value);
+    const selectKeys = getSelectKeys(treeData, value, keyName);
     setSelectKeys(selectKeys);
     const openKeys = [...selectKeys];
     openKeys.pop();
     setOpenKeys(openKeys);
-  }, [treeData, value, reload]);
+  }, [treeData, value, reload, keyName]);
 
   const dirs = list.filter((item) => !!(item.children || []).length);
 
@@ -107,11 +107,11 @@ function ListTree(props: ListTreeProps) {
           <ul className="ae-tree">
             {dirs.map((item) => (
               <li
-                key={item.id}
+                key={item[keyName]}
                 className={classnames('tw-flex tw-items-center', {
-                  active: selectKeys.includes(item.id),
+                  active: selectKeys.includes(item[keyName]),
                 })}
-                onClick={handleClick([...openKeys, item.id])}
+                onClick={handleClick([...openKeys, item[keyName]])}
               >
                 <Icon name="AsanyEditor/Folder" />
                 <span className="flex-1">{item[labelName]}</span>
