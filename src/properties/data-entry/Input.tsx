@@ -13,7 +13,7 @@ interface InputProps {
 }
 
 function Input(props: InputProps) {
-  const { value, placeholder, onChange, width, className } = props;
+  const { value, placeholder = '请输入字符', onChange, width, className } = props;
   return (
     <ScrubbableControl
       placeholder={placeholder}

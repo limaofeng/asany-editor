@@ -23,7 +23,7 @@ interface FormItemWrapperProps {
   component: React.ComponentType<any>;
   field: IField;
   defaultValue?: any;
-  size: string;
+  size?: string;
 }
 
 export function FormItemWrapper({ component: Item, field, defaultValue, ...props }: FormItemWrapperProps) {
@@ -86,7 +86,7 @@ const PanelBody = (props: PanelBodyProps) => {
               layout={item.layout || layout}
               className={classnames(`form-item-${group}-${item.name}`, getComponentClassName(item))}
             >
-              <FormItemWrapper {...props} field={item} component={ComponentForm} size="small" />
+              <FormItemWrapper {...props} field={item} component={ComponentForm} />
             </FormField>
           </Form.Item>
         );
@@ -98,6 +98,10 @@ const PanelBody = (props: PanelBodyProps) => {
 function getComponentClassName(item: IField) {
   if (typeof item.renderer.name === 'string') {
     return `form-component-${item.renderer.name.toLowerCase()}`;
+  }
+  const name = item.renderer.component.name || item.renderer.component?.type?.name;
+  if (name) {
+    return `form-component-${name.toLowerCase()}`;
   }
   return null;
 }

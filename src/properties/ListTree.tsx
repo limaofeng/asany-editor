@@ -98,7 +98,7 @@ function ListTree(props: ListTreeProps) {
   return (
     <div className="list-tree-container">
       {parentNode && (
-        <div onClick={handleBack} className="tree-current-node flex items-center">
+        <div onClick={handleBack} className="tree-current-node tw-flex tw-items-center">
           <Icon name="AsanyEditor/Drillup" />
           <span className="flex-1">{parentNode[labelName]}</span>
         </div>
@@ -109,7 +109,7 @@ function ListTree(props: ListTreeProps) {
             {dirs.map((item) => (
               <li
                 key={item.id}
-                className={classnames('flex items-center', {
+                className={classnames('tw-flex tw-items-center', {
                   active: selectKeys.includes(item.id),
                 })}
                 onClick={handleClick([...openKeys, item.id])}
@@ -122,7 +122,7 @@ function ListTree(props: ListTreeProps) {
           </ul>
         )}
         <div className="tree-node-content">
-          <ul className="tree-node-item-list flex flex-row flex-wrap content-start">
+          <ul className="tree-node-item-list tw-flex tw-flex-row tw-flex-wrap tw-content-start">
             {list
               .filter((item) => !(item.children || []).length)
               .map((item) => (

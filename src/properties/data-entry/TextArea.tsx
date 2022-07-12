@@ -13,7 +13,7 @@ interface TextAreaProps {
 }
 
 function TextArea(props: TextAreaProps) {
-  const { value, placeholder, onChange, className, autoSize } = props;
+  const { value, placeholder = '请输入字符串', onChange, className, autoSize } = props;
   return (
     <ScrubbableControl
       placeholder={placeholder}

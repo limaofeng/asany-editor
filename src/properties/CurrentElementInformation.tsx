@@ -110,17 +110,18 @@ const CurrentElementInformation = () => {
           className="header-font design-rows-items frame-preset-dropdown"
           popoverClassName="asanyeditor-frame-preset-popover"
           renderTitle={() => '画框'}
+          dropdownMatchSelectWidth={224}
           value={{ label: screen.name, value: screen.size.join('x') } as any}
           options={[...deviceTypes]}
           onChange={handleFrameSizeChange}
         />
         <SegmentedControl
           options={[
-            { value: 'Portrait', label: '竖屏' },
-            { value: 'Landscape', label: '横屏' },
+            { value: 'Portrait', icon: 'AsanyEditor/Portrait', label: '竖屏' },
+            { value: 'Landscape', icon: 'AsanyEditor/Landscape', label: '横屏' },
           ]}
         />
-        <IconButton className="resize-to-fit" icon="ResizeToFit" />
+        <IconButton className="resize-to-fit" icon="AsanyEditor/ResizeToFit" />
       </div>
       <div className="current-box-content">
         <div className="design-rows design-colums content-col">
@@ -152,7 +153,7 @@ const CurrentElementInformation = () => {
           />
           <OptionButton
             onChange={iconsHandleChange(IconsConst.Notch)}
-            icon={notchActive ? 'ConstrainProportionsOn' : 'ConstrainProportionsOff'}
+            icon={notchActive ? 'AsanyEditor/ConstrainProportionsOn' : 'AsanyEditor/ConstrainProportionsOff'}
           />
         </div>
         <div className="design-rows design-colums content-col">
@@ -160,16 +161,16 @@ const CurrentElementInformation = () => {
             format={rotateFormat}
             onChange={handleChange(IconsConst.Rotate)}
             value={state.current[IconsConst.Rotate]}
-            icon="VectorRotate"
+            icon="AsanyEditor/VectorRotate"
           />
           <ScrubbableControl
             value={state.current[IconsConst.Radius]}
             format={radiusFormat}
             onChange={handleChange(IconsConst.Radius)}
             disabled={radiusDisabled}
-            icon="TopLeftCornerRadius"
+            icon="AsanyEditor/TopLeftCornerRadius"
           />
-          <OptionButton onChange={iconsHandleChange(IconsConst.Semicircle)} icon="VectorSemicircle" />
+          <OptionButton onChange={iconsHandleChange(IconsConst.Semicircle)} icon="AsanyEditor/VectorSemicircle" />
         </div>
         {radiusDisabled && (
           <RadiusAllSetting value={state.current[IconsConst.Radius]} onChange={handleChange(IconsConst.Radius)} />

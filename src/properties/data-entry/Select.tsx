@@ -110,12 +110,14 @@ const Select = (props: SelectProps) => {
     placeholder = '请选择',
     popover: SelectPopover = SelectModal,
     popoverClassName,
+    dropdownMatchSelectWidth,
     className,
   } = props;
   const ref = useRef<HTMLDivElement>(null);
 
   const [visible, setVisible] = useState(false);
   const [value, setValue] = useState<string | undefined>(initialValue);
+  const [width, setWidth] = useState<number | undefined>();
 
   useEffect(() => {
     if (initialValue === value) {
@@ -149,6 +151,15 @@ const Select = (props: SelectProps) => {
     setVisible(false);
   }, []);
 
+  useEffect(() => {
+    if (dropdownMatchSelectWidth === true) {
+      const _width = ref.current?.getBoundingClientRect().width;
+      _width && setWidth(_width);
+    } else if (typeof dropdownMatchSelectWidth == 'number') {
+      setWidth(dropdownMatchSelectWidth);
+    }
+  }, [dropdownMatchSelectWidth]);
+
   const popoverContent = (
     <SelectPopover
       visible={visible}
@@ -167,6 +178,7 @@ const Select = (props: SelectProps) => {
         targetOffset: [0, 0],
         offset: [0, -32],
       }}
+      overlayInnerStyle={{ width }}
       arrowPointAtCenter={false}
       overlayClassName={classnames('asanyeditor-dsign-popover', popoverClassName)}
       content={popoverContent}

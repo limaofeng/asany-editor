@@ -14,7 +14,7 @@ interface InputNumberProps {
 }
 
 function InputNumber(props: InputNumberProps) {
-  const { value, placeholder, onChange, className } = props;
+  const { value, placeholder = '请输入数字', onChange, className } = props;
   return (
     <ScrubbableControl
       placeholder={placeholder}

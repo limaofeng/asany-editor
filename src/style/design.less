@@ -16,7 +16,7 @@
   padding: 0 0 0 7px;
   color: var(--primary-color);
   font-size: 12px;
-  line-height: 16px;
+  // line-height: 16px;
   background-color: transparent;
   background-clip: padding-box;
   border: 1px solid transparent;
@@ -36,17 +36,35 @@
   width: 100%;
   min-height: 160px;
 
+  .dsign-popover-select {
+    height: 28px;
+    line-height: 28px;
+    min-height: 28px;
+  }
+
+  .design-rows {
+    .design-rows-items {
+      height: 28px;
+      line-height: 28px;
+      min-height: 28px;
+    }
+
+    .scrubbable-control {
+      grid-column-end: span 11;
+    }
+  }
+
   .current-box-header {
-    grid-column-start: 29;
+    grid-column-start: 25;
     grid-column-end: span 4;
 
     .segmented-control-container {
-      grid-column-start: 21;
+      grid-column-start: 18;
       grid-column-end: span 7;
     }
 
     .resize-to-fit {
-      grid-column: 29 / span 4;
+      grid-column: 25 / span 4;
     }
   }
 
@@ -54,7 +72,7 @@
     display: flex;
     align-items: center;
     height: 32px;
-    padding-left: 4px;
+    padding-left: 10px;
 
     .ant-checkbox-wrapper {
       font-weight: 400;
@@ -116,13 +134,13 @@
 
 .raidus-change-box {
   height: 32px;
-  padding-left: 0 !important;
+  padding-left: 8px;
 
   .change-input {
     display: grid;
     grid-auto-columns: 7px;
     grid-auto-flow: column;
-    grid-column-end: span 18;
+    grid-column-end: span 17;
     grid-template-rows: 30px;
     align-content: center;
     align-items: center;
@@ -181,15 +199,18 @@
   padding-right: 1px;
 
   &:nth-child(2) {
-    grid-column-start: 15;
+    grid-column-start: 13;
   }
 
   &.design-input .ant-input,
   &.design-input .ant-input-number {
-    height: auto;
+    padding-left: 0;
     border: none;
 
     .ant-input-number-handler-wrap {
+      height: 26px;
+      margin-top: 1px;
+
       .ant-input-number-handler .svg-icon {
         display: flex;
         align-items: center;
@@ -198,7 +219,7 @@
     }
 
     .ant-input-number-input {
-      height: auto;
+      padding: 0;
     }
 
     &.ant-input-number-focused {
@@ -257,7 +278,7 @@
 .design-color {
   .color-input {
     display: flex;
-    grid-column-end: span 20;
+    grid-column-end: span 18;
     align-items: center;
     box-sizing: border-box;
     height: 28px;
@@ -270,8 +291,8 @@
 
       .color-percentage::before {
         position: absolute;
-        top: 0;
-        bottom: 0;
+        top: 2px;
+        bottom: 2px;
         left: -1px;
         width: 1px;
         background-color: rgba(0, 0, 0, 0.1);
@@ -332,10 +353,12 @@
 
     .color-value {
       flex: 1 0 56px;
+      padding-left: 8px;
     }
 
     .color-percentage {
       position: relative;
+      padding-left: 8px;
       flex: 0 0 48px;
     }
   }
@@ -347,7 +370,7 @@
   grid-template-rows: 32px;
 
   .option-button {
-    grid-column-start: 29;
+    grid-column-start: 24;
     grid-column-end: span 4;
   }
 }
@@ -355,6 +378,7 @@
 .design-rows-items {
   box-sizing: border-box;
   min-height: 30px;
+  height: 32px;
 
   .ant-input {
 
@@ -369,7 +393,7 @@
 .design-colums {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(33, 8px);
+  grid-template-columns: repeat(240 / 8 - 2, 8px);
   align-items: center;
 }
 
@@ -513,6 +537,8 @@
   align-items: center;
   padding: 0 4px 0 7px;
   border: 1px solid transparent;
+  height: 32px;
+  line-height: 32px;
 
   &.exist-icon {
     padding: 0 7px 0 0;
@@ -616,11 +642,13 @@
         border-bottom: 1px solid hsla(0, 0%, 100%, 0.2);
 
         &:not(:first-child) {
-          padding-top: 8px;
+          padding-top: 4px;
         }
 
         .group-name {
           font-size: 12px;
+          height: 24px;
+          line-height: 24px;
           padding-left: 8px;
           color: var(--primary-third-color);
         }
@@ -679,17 +707,13 @@
 .frame-preset-dropdown {
   position: relative;
   flex-grow: 1;
-  grid-column-end: span 18;
+  grid-column-end: span 17;
   font-size: 12px;
   border: 1px solid transparent;
 }
 
 .align-panel {
   display: flex;
-
-  &>.icon-button {
-    margin-right: 6px;
-  }
 
   .more-options {
     position: relative;
@@ -700,13 +724,15 @@
       }
     }
 
-    &>.svg-icon {
+    .more-arrow {
+      font-size: 8px;
       position: absolute;
       top: 50%;
       right: 4px;
       transform: translateY(-50%) !important;
       pointer-events: none;
     }
+
   }
 }
 
@@ -790,20 +816,22 @@
 }
 
 .asanyeditor-auto-layout {
+  padding-left: 8px;
+
   .segmented-control-container {
     grid-column: 1 / span 6;
   }
 
   .spacing-between-items {
-    grid-column: 9 / span 9;
+    grid-column: 8 / span 8;
   }
 
   .padding-around-items {
-    grid-column: 19 / span 9;
+    grid-column: 16 / span 8;
   }
 
   .alignment-and-padding {
-    grid-column-start: 29;
+    grid-column-start: 24;
     grid-column-end: span 4;
 
     &.active,

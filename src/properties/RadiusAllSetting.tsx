@@ -7,7 +7,12 @@ import isEqual from 'lodash/isEqual';
 import { onlyNumber } from './utils';
 import { RadiusAllSettingProps } from './typings';
 
-const icons = ['TopLeftCornerRadius', 'TopRightCornerRadius', 'BottomRightCornerRadius', 'BottomLeftCornerRadius'];
+const icons = [
+  'AsanyEditor/TopLeftCornerRadius',
+  'AsanyEditor/TopRightCornerRadius',
+  'AsanyEditor/BottomRightCornerRadius',
+  'AsanyEditor/BottomLeftCornerRadius',
+];
 
 const RadiusAllSetting = (props: RadiusAllSettingProps) => {
   const { onChange, value: [tl = 0, tr = 0, br = 0, bl = 0] = [0, 0, 0, 0] } = props;

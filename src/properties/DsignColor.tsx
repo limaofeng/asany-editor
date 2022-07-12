@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import ScrubbableControl from './data-entry/ScrubbableControl';
+import IconButton from './IconButton';
 import DsignIcons from './OptionButton';
 import { inputFormat } from './utils';
 interface DsignColorProp {}
@@ -33,18 +34,19 @@ const DsignColor = (_: DsignColorProp) => {
         </div>
       </div>
       <DsignIcons
+        style={{ gridColumn: '20/span 4' }}
+        className="element-retract design-rows-items"
+        onChange={iconHandleChange}
+        icon="AsanyEditor/VectorEyes"
+      />
+      <IconButton
         style={{ gridColumn: '25/span 4' }}
         className="element-retract design-rows-items"
-        onChange={iconHandleChange}
-        icon="VectorEyes"
-      />
-      <DsignIcons
-        style={{ gridColumn: '29/span 4' }}
-        className="element-retract design-rows-items"
-        onChange={iconHandleChange}
-        icon="VectorSubtraction"
+        // onChange={iconHandleChange}
+        icon="AsanyEditor/VectorSubtraction"
       />
     </div>
   );
 };
+
 export default DsignColor;

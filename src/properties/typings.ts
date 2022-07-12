@@ -6,10 +6,10 @@ export interface RadiusAllSettingProps {
   value: InputText[];
 }
 export enum radiusType {
-  LeftTop = 'LeftTop',
-  RightTop = 'RightTop',
-  LeftBottom = 'LeftBottom',
-  RightBottom = 'RightBottom',
+  LeftTop = 'AsanyEditor/LeftTop',
+  RightTop = 'AsanyEditor/RightTop',
+  LeftBottom = 'AsanyEditor/LeftBottom',
+  RightBottom = 'AsanyEditor/RightBottom',
 }
 export enum IconsConst {
   X = 'x',
@@ -98,6 +98,7 @@ export interface SelectProps {
   getOption?: (options: (SelectOption | SelectOptionGroup)[], value: string) => SelectOption;
   placeholder?: string;
   resultType?: 'object' | 'string';
+  dropdownMatchSelectWidth?: boolean | number;
   options?: (SelectOption | SelectOptionGroup)[];
   compare?: Compare;
   onChange?: (value: string) => void;

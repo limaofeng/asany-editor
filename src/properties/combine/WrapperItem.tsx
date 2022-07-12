@@ -32,6 +32,7 @@ export const SortableHandler = () => {
 export interface WrapperItemProps {
   /** 名称只读 */
   nameReadonly: boolean;
+  placeholder?: string;
   /** 名称链接 对应 数据的某个key */
   nameLink?: string;
   displayField?: string;
@@ -63,6 +64,7 @@ function WrapperItem(props: WrapperItemProps) {
     canDelete,
     editable = true,
     nameLink = 'title',
+    placeholder = '请输入内容',
   } = props;
 
   const handleChange = (key: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,6 +91,7 @@ function WrapperItem(props: WrapperItemProps) {
         {data.icon && <Icon name={data.icon} />}
         <Input
           className="ant-input-rimless"
+          placeholder={placeholder}
           readOnly={nameReadonly || !!nameLink}
           value={!!nameLink ? data.data[nameLink] : data.data}
           onChange={handleChange(displayField!)}

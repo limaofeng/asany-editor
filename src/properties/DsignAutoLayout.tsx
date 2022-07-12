@@ -23,22 +23,32 @@ const DsignAutoLayout = () => {
         options={[
           {
             value: 'VerticalDirection',
-            icon: 'VectorArrowButtom',
+            icon: 'AsanyEditor/VectorArrowButtom',
             label: '垂直方向',
           },
           {
             value: 'HorizontalDirection',
-            icon: 'VectorArrowRight',
+            icon: 'AsanyEditor/VectorArrowRight',
             label: '水平方向',
           },
         ]}
       />
-      <ScrubbableControl className="spacing-between-items" format={inputFormat} value={0} icon="VectorSpacing" />
-      <ScrubbableControl className="padding-around-items" format={inputFormat} value={0} icon="VectorPadding" />
+      <ScrubbableControl
+        className="spacing-between-items"
+        format={inputFormat}
+        value={0}
+        icon="AsanyEditor/VectorSpacing"
+      />
+      <ScrubbableControl
+        className="padding-around-items"
+        format={inputFormat}
+        value={0}
+        icon="AsanyEditor/VectorPadding"
+      />
       <IconButton
         ref={ref}
         className={classnames('alignment-and-padding', { active: visible })}
-        icon="AlignmentAndPadding"
+        icon="AsanyEditor/AlignmentAndPadding"
         onClick={handleAlignmentAndPaddingClick}
       />
     </div>

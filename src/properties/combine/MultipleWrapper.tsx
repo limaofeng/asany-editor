@@ -34,6 +34,7 @@ export interface IMultipleWrapperData<T> {
 export interface MultipleWrapperProps {
   /** 配置标题 */
   name?: string;
+  placeholder?: string;
   /** 孩子组件 */
   children: React.ReactElement;
   /** 可以添加项目,显示按钮且可以使用 */
@@ -60,18 +61,20 @@ type ItemRender = (props: any) => React.ReactElement;
 type BuildItemRenderOptions = {
   buildChange: (data: IMultipleWrapperData<any>) => (newData: any) => void;
   className?: string;
+  placeholder?: string;
   isObject: boolean;
   showPopoverImmediatelyAtCreated: boolean;
   children: any;
 };
 
 const buildItemRender = (XItemRender: ItemRender | undefined, options: BuildItemRenderOptions) => {
-  const { children, className, isObject, buildChange, showPopoverImmediatelyAtCreated } = options;
+  const { children, placeholder, className, isObject, buildChange, showPopoverImmediatelyAtCreated } = options;
   const InnerItemRender = React.forwardRef((props: any, ref: any) => {
     if (!children && !XItemRender) {
       return (
         <WrapperItem
           {...props}
+          placeholder={placeholder}
           editable={!isObject ? false : undefined}
           nameLink={!isObject ? false : undefined}
           ref={ref}
@@ -133,6 +136,7 @@ export function MultipleWrapper<T>(props: MultipleWrapperProps) {
     canSortItem = true,
     immediatelyShowPopoverWhenCreated: immediatelyShow = true,
     itemName,
+    placeholder,
     pipeline,
     itemClassName,
     itemRender: defaultItemRender,
@@ -208,6 +212,7 @@ export function MultipleWrapper<T>(props: MultipleWrapperProps) {
         buildChange: handleItemChange,
         className: itemClassName,
         isObject,
+        placeholder,
         showPopoverImmediatelyAtCreated: immediatelyShow,
         children,
       }),
@@ -231,7 +236,6 @@ export function MultipleWrapper<T>(props: MultipleWrapperProps) {
         <Sortable
           accept={[sortableType.current]}
           className="multiple-wrapper-list"
-          empty={<div>没有数据</div>}
           tag="ul"
           items={value}
           itemRender={itemRender}

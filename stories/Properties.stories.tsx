@@ -2,7 +2,18 @@ import React, { useCallback, useEffect } from 'react';
 import { Meta, Story } from '@storybook/react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import AsanyEditor, { useEditor, buildAside, libraries } from '../src';
+import AsanyEditor, {
+  useEditor,
+  buildAside,
+  libraries,
+  AlignPanel,
+  CurrentElementInformation,
+  SegmentedControl,
+  ScrubbableControl,
+  OptionButton,
+  DsignAutoLayout,
+  ObjectCombiner,
+} from '../src';
 import Sunmao, { ICustomizer, SunmaoProvider, useSunmao } from 'sunmao';
 
 import DemoPlugin from './editors/demo';
@@ -10,6 +21,8 @@ import DemoPlugin from './editors/demo';
 import 'antd/dist/antd.css';
 import { useMemo } from '@storybook/addons';
 import cloneDeepWith from 'lodash/cloneDeepWith';
+import WrapperPopover from '../src/properties/combine/WrapperPopover';
+import MultipleWrapper from '../src/properties/combine/MultipleWrapper';
 
 const meta: Meta = {
   title: '编辑器/属性面板',
@@ -24,6 +37,33 @@ const plugin = cloneDeepWith(DemoPlugin);
 
 const customizer: ICustomizer = {
   fields: [
+    {
+      name: 'align_panel',
+      label: 'AlignPanel',
+      type: 'String',
+      renderer: {
+        component: AlignPanel,
+        props: {},
+      },
+    },
+    // {
+    //   name: 'current_element_information',
+    //   label: 'CurrentElementInformation',
+    //   type: 'String',
+    //   renderer: {
+    //     component: CurrentElementInformation,
+    //     props: {},
+    //   },
+    // },
+    {
+      name: 'dsign_auto_layout',
+      label: 'DsignAutoLayout',
+      type: 'String',
+      renderer: {
+        component: DsignAutoLayout,
+        props: {},
+      },
+    },
     {
       name: 'input',
       label: 'Input',
@@ -104,8 +144,223 @@ const customizer: ICustomizer = {
         },
       },
     },
+    {
+      name: 'input_number',
+      label: 'InputNumber',
+      type: 'String',
+      renderer: {
+        component: 'InputNumber',
+        props: {},
+      },
+    },
+    {
+      name: 'checkbox',
+      label: 'Checkbox',
+      type: 'String',
+      renderer: {
+        component: 'Checkbox',
+        props: {
+          children: 'Checkbox',
+        },
+      },
+    },
+    {
+      name: 'checkbox_group',
+      label: 'CheckboxGroup',
+      type: 'String',
+      renderer: {
+        component: 'CheckboxGroup',
+        props: {
+          options: [
+            { label: 'Apple', value: 'Apple' },
+            { label: 'Pear', value: 'Pear' },
+            { label: 'Orange', value: 'Orange', disabled: false },
+          ],
+        },
+      },
+    },
+    {
+      name: 'radio_group',
+      label: 'RadioGroup',
+      type: 'String',
+      renderer: {
+        component: 'RadioGroup',
+        props: {
+          options: [
+            { label: 'Apple', value: 'Apple' },
+            { label: 'Pear', value: 'Pear' },
+            { label: 'Orange', value: 'Orange', disabled: false },
+          ],
+        },
+      },
+    },
+    {
+      name: 'switch',
+      label: 'Switch',
+      type: 'String',
+      renderer: {
+        component: 'Switch',
+        props: {
+          checkedChildren: '开启',
+          unCheckedChildren: '关闭',
+        },
+      },
+    },
+    {
+      name: 'textarea',
+      label: 'TextArea',
+      type: 'String',
+      renderer: {
+        component: 'TextArea',
+        props: {
+          autoSize: {
+            maxRows: 3,
+          },
+        },
+      },
+    },
+    {
+      name: 'dsign_color',
+      label: 'DsignColor',
+      type: 'String',
+      renderer: {
+        component: 'DsignColor',
+        props: {},
+      },
+    },
+    {
+      name: 'segmented_control',
+      label: 'SegmentedControl',
+      type: 'String',
+      renderer: {
+        component: SegmentedControl,
+        props: {
+          options: [
+            {
+              label: '111',
+              value: '111',
+              icon: 'AsanyEditor/SketchFrame',
+            },
+            {
+              label: '222',
+              value: '222',
+              icon: 'AsanyEditor/SketchImage',
+            },
+          ],
+        },
+      },
+    },
+    {
+      name: 'scrubbable_control',
+      label: 'ScrubbableControl',
+      type: 'String',
+      renderer: {
+        component: ScrubbableControl,
+        props: {
+          icon: 'AsanyEditor/VectorRadiusRB',
+        },
+      },
+    },
+    {
+      name: 'option_button',
+      label: 'OptionButton',
+      type: 'String',
+      renderer: {
+        component: OptionButton,
+        props: {
+          icon: 'AsanyEditor/VectorSpacing',
+        },
+      },
+    },
+    {
+      name: 'wrapper_popover',
+      label: 'WrapperPopover',
+      type: 'String',
+      multiple: true,
+    },
+    {
+      name: 'object_combiner',
+      label: 'ObjectCombiner',
+      type: 'String',
+      renderer: {
+        component: ObjectCombiner,
+        props: {
+          fields: [
+            {
+              name: 'input',
+              label: 'Input',
+              type: 'String',
+            },
+            {
+              name: 'select',
+              type: 'String',
+              label: 'Select',
+              renderer: {
+                component: 'Select',
+                props: {
+                  options: [
+                    {
+                      label: '1',
+                      value: '1',
+                    },
+                    {
+                      label: '2',
+                      value: '2',
+                    },
+                    {
+                      label: '3',
+                      value: '3',
+                    },
+                  ],
+                },
+              },
+            },
+          ],
+        },
+      },
+    },
+    {
+      name: 'object_combiner2',
+      label: 'ObjectCombiner2',
+      type: 'String',
+      renderer: {
+        component: ObjectCombiner,
+        props: {
+          fields: [
+            {
+              name: 'input',
+              type: 'String',
+            },
+            {
+              name: 'select',
+              type: 'String',
+              renderer: {
+                component: 'Select',
+                props: {
+                  options: [
+                    {
+                      label: '1',
+                      value: '1',
+                    },
+                    {
+                      label: '2',
+                      value: '2',
+                    },
+                    {
+                      label: '3',
+                      value: '3',
+                    },
+                  ],
+                },
+              },
+            },
+          ],
+        },
+      },
+    },
   ],
 };
+
 const custom1 = { ...customizer };
 const custom2 = { ...customizer };
 

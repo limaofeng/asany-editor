@@ -3,12 +3,14 @@ import React, { useEffect } from 'react';
 import { Form } from 'antd';
 import isEqual from 'lodash/isEqual';
 import { ComponentPropertyRendererSetting, IField, useSunmao } from 'sunmao';
+import { FormLayout } from 'antd/lib/form/Form';
 
 import { getRenderer } from '../renderers';
 import { FormItemWrapper, visibleFilter } from '../DynaActionForm';
 
 interface ObjectCombinerProps {
   value?: any;
+  layout?: FormLayout;
   onChange?: (value: any) => void;
   className?: string;
   fields: IField[];
@@ -34,7 +36,13 @@ function ObjectCombiner(props: ObjectCombinerProps) {
     }
   }, [form, value]);
   return (
-    <Form form={form} className={className} layout="inline" component={'div'} onValuesChange={handleValuesChange}>
+    <Form
+      form={form}
+      className={className}
+      layout={props.layout || 'inline'}
+      component={'div'}
+      onValuesChange={handleValuesChange}
+    >
       {fields.filter(visibleFilter(props.value)).map((item) => {
         const { component, props = {} } = item.renderer as ComponentPropertyRendererSetting;
         const ComponentForm = component as React.ComponentType<any>;
@@ -43,12 +51,12 @@ function ObjectCombiner(props: ObjectCombinerProps) {
         return (
           <Form.Item
             className={`object-combiner-field-${item.name}`}
-            key={`${item.name}`}
+            key={item.name}
             label={lable}
             name={item.name}
             valuePropName={valuePropName}
           >
-            <FormItemWrapper {...props} field={item} component={ComponentForm} size="small" />
+            <FormItemWrapper {...props} field={item} component={ComponentForm} />
           </Form.Item>
         );
       })}

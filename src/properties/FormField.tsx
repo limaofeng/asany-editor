@@ -24,8 +24,8 @@ function FormField({ field, className, children, layout = 'Inline', ...props }: 
         </label>
       )}
       <div
-        className={classnames('smart-form-field-value flex items-center', {
-          'justify-start': layout === 'Stacked',
+        className={classnames('smart-form-field-value tw-flex tw-items-center', {
+          'tw-justify-start': layout === 'Stacked',
         })}
       >
         {React.cloneElement(React.Children.only(children), props)}

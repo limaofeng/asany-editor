@@ -76,7 +76,7 @@ function ScreenSize(props: ScreenSizeProps) {
   return (
     <label className={classnames({ 'is-active': focused })}>
       <span className="title">{label}</span>
-      <InputNumber value={value} onFocus={handleFocus} onBlur={handleBlur} size="small" />
+      <InputNumber value={value} onFocus={handleFocus} onBlur={handleBlur} />
     </label>
   );
 }

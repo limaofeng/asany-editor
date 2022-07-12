@@ -1,4 +1,4 @@
-import React, { MutableRefObject, forwardRef, useRef } from 'react';
+import React, { CSSProperties, MutableRefObject, forwardRef, useRef } from 'react';
 
 import Icon from '@asany/icons';
 import { Tooltip } from 'antd';
@@ -9,11 +9,12 @@ interface IconButtonProps {
   className?: string;
   icon: string;
   checked?: boolean;
+  style?: CSSProperties;
   onClick?: () => void;
 }
 
 const IconButton = (props: IconButtonProps, externalRef: React.ForwardedRef<HTMLSpanElement>) => {
-  const { tooltip, onClick, icon, className, checked } = props;
+  const { tooltip, onClick, style, icon, className, checked } = props;
   const ref = useRef<HTMLSpanElement>(null);
   const handleClick = () => {
     onClick && onClick();
@@ -29,6 +30,7 @@ const IconButton = (props: IconButtonProps, externalRef: React.ForwardedRef<HTML
       <span
         ref={externalRef || ref}
         tabIndex={0}
+        style={style}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
         className={classnames('icon-button', className, { checked })}

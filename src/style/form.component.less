@@ -10,6 +10,7 @@
   border-bottom: 1px solid var(--shallow-color);
 
   .ant-checkbox-wrapper,
+  .ant-radio-wrapper,
   .ant-btn {
     font-size: 12px;
   }
@@ -56,24 +57,88 @@
       &-layout-stacked,
       &-layout-inline {
         .basic-input {
-          padding-left: 4px;
+          padding-left: 7px;
+          height: 32px;
+          line-height: 32px;
         }
+
         &.form-component-input:not(.inline-show-label) {
           .smart-form-field-value {
-            padding-left: 10px;
+            padding-left: 8px;
           }
         }
+
         &.form-component-select:not(.inline-show-label) {
           .smart-form-field-value {
             padding-left: 8px;
           }
         }
+
+        &.form-component-checkboxgroup:not(.inline-show-label),
+        &.form-component-checkbox:not(.inline-show-label) {
+          .smart-form-field-value {
+            .ant-checkbox-wrapper {
+              height: 32px;
+              line-height: 32px;
+
+              &:first-child {
+                padding-left: 8px;
+              }
+            }
+
+          }
+        }
+
+        &.form-component-switch:not(.inline-show-label) {
+          .smart-form-field-value {
+            padding-left: 16px;
+          }
+        }
+
+        &.form-component-radiogroup:not(.inline-show-label) {
+          .smart-form-field-value {
+            .ant-radio-group {
+              padding-left: 8px;
+
+              .ant-radio-wrapper {
+                height: 32px;
+                line-height: 32px;
+              }
+            }
+          }
+        }
+
+        &.form-component-textarea:not(.inline-show-label) {
+          .smart-form-field-value {
+            height: auto;
+
+            .is_textarea {
+              height: auto;
+              textarea {
+                min-height: 30px;
+                line-height: 22px;
+              }
+              line-height: 30px;
+            }
+          }
+        }
+
+        &.form-component-multiplewrapper:not(.inline-show-label) { 
+          .smart-form-field-value {
+            padding-left: 0;
+            min-height: 0;
+          }
+        }
+
+
         &.inline-show-label {
           .smart-form-field-label {
             padding-left: 16px;
           }
+
           .smart-form-field-value {
             padding-left: 0;
+
             // TODO: 后续需要删除的样式
             .ant-btn {
               height: 24px;
@@ -98,6 +163,11 @@
         flex-direction: column;
         align-items: start;
         padding-top: 8px;
+        padding-bottom: 8px;
+
+        &:not(:last-child) {
+          border-bottom: 1px solid var(--shallow-color);
+        }
 
         &:first-child {
           padding-top: 0;
@@ -119,8 +189,8 @@
         }
 
         .smart-form-field-value {
-          padding: 0 8px 8px 16px;
-          border-bottom: 1px solid var(--shallow-color);
+          padding: 0 8px 0 8px;
+
           .design-input {
             margin: 0;
           }
@@ -135,25 +205,30 @@
     }
   }
 }
+
 .ant-input.ant-input-rimless {
   border: none;
   border-bottom: 1px solid transparent;
   outline: none;
+
   &:hover {
     border: none;
     border-bottom: 1px solid transparent;
   }
+
   &:focus {
     border: none;
     border-bottom: 1px solid #d9d9d9;
     outline: none;
     box-shadow: none;
   }
+
   background-color: transparent;
 }
 
 .list-tree-container {
   font-size: 12px;
+
   &:hover {
     .tree-current-node {
       background-color: transparent;
@@ -173,6 +248,7 @@
       font-weight: 500;
     }
   }
+
   .ae-tree {
     li {
       min-height: 32px;
@@ -186,18 +262,23 @@
         width: 16px;
         font-size: 10px;
       }
+
       &:hover:not(.active) {
         background-color: var(--gray-darkest);
       }
     }
   }
+
   .tree-node-content {
     padding: 8px;
   }
+
   .list-tree-scrollbar {
     max-height: 360px;
   }
+
   .svg-icon {
+
     &.drillup,
     &.folder {
       width: 24px;
