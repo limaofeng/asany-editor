@@ -1,3 +1,12 @@
+## [0.2.38](https://github.com/limaofeng/asany-editor/compare/v0.2.37...v0.2.38) (2022-07-12)
+
+
+### Features
+
+* list tree 支持自定义 key Name ([730ad22](https://github.com/limaofeng/asany-editor/commit/730ad224c53b45079383fababd8cb15b61a8a68f))
+
+
+
 ## [0.2.37](https://github.com/limaofeng/asany-editor/compare/v0.2.36...v0.2.37) (2022-07-12)
 
 
