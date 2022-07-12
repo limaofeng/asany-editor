@@ -1,3 +1,12 @@
+## [0.2.37](https://github.com/limaofeng/asany-editor/compare/v0.2.36...v0.2.37) (2022-07-12)
+
+
+### Features
+
+* 优化 ListTree ([53e0114](https://github.com/limaofeng/asany-editor/commit/53e01145ee1b0c53ff7ecde82fed87222bd5cbd0))
+
+
+
 ## [0.2.36](https://github.com/limaofeng/asany-editor/compare/v0.2.35...v0.2.36) (2022-07-12)
 
 
