@@ -1,3 +1,12 @@
+## [0.2.36](https://github.com/limaofeng/asany-editor/compare/v0.2.35...v0.2.36) (2022-07-12)
+
+
+### Features
+
+* 添加属性面板演示 ([55f5894](https://github.com/limaofeng/asany-editor/commit/55f5894a3cb4b648eab21c69874ba200472bf790))
+
+
+
 ## [0.2.35](https://github.com/limaofeng/asany-editor/compare/v0.2.34...v0.2.35) (2022-07-11)
 
 
