@@ -14,8 +14,8 @@ import {
   SelectProps,
 } from '../typings';
 
-function defaultRenderTitle(value?: SelectOption, placeholder?: string) {
-  return value?.label || placeholder;
+function defaultRenderTitle(value?: SelectOption) {
+  return value?.label;
 }
 
 function defaultCompare(value: string, option: SelectOption) {
@@ -110,7 +110,7 @@ const Select = (props: SelectProps) => {
     placeholder = '请选择',
     popover: SelectPopover = SelectModal,
     popoverClassName,
-    dropdownMatchSelectWidth,
+    dropdownMatchSelectWidth = true,
     className,
   } = props;
   const ref = useRef<HTMLDivElement>(null);
@@ -192,7 +192,9 @@ const Select = (props: SelectProps) => {
         onClick={handleClick}
       >
         {icon && renderIcon(icon)}
-        <div className="select-title">{renderTitle(getOption(options, value!), placeholder)}</div>
+        <div className="select-title" placeholder={placeholder}>
+          {renderTitle(getOption(options, value!))}
+        </div>
         <div className="indicator">
           <Icon name="AsanyEditor/DownArrow" />
         </div>

@@ -552,6 +552,12 @@
     height: 28px;
   }
 
+  .select-title[placeholder]:empty:before {
+    color: #bfbfbf;
+    background-color: transparent;
+    content: attr(placeholder);
+  }
+
   &:not(:disabled):hover {
     border: 1px solid var(--selected-background-color);
     border-radius: 2px;
