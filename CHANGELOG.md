@@ -1,3 +1,12 @@
+## [0.2.41](https://github.com/limaofeng/asany-editor/compare/v0.2.40...v0.2.41) (2022-07-13)
+
+
+### Features
+
+* 优化 Select 的 placeholder 实现 ([ae19f97](https://github.com/limaofeng/asany-editor/commit/ae19f97e663f766fb2f9ed3506758194c5a67c44))
+
+
+
 ## [0.2.40](https://github.com/limaofeng/asany-editor/compare/v0.2.39...v0.2.40) (2022-07-12)
 
 
