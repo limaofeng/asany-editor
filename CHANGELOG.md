@@ -1,3 +1,12 @@
+## [0.2.42](https://github.com/limaofeng/asany-editor/compare/v0.2.41...v0.2.42) (2022-07-18)
+
+
+### Features
+
+* 导出 numberFormat 函数 ([1ea4147](https://github.com/limaofeng/asany-editor/commit/1ea4147faf3aa1ecf08a0fa9febeeed7ff6cdb1c))
+
+
+
 ## [0.2.41](https://github.com/limaofeng/asany-editor/compare/v0.2.40...v0.2.41) (2022-07-13)
 
 
