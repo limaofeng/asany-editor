@@ -7,7 +7,6 @@ import { UIActionType } from '../../reducers/actions';
 import { visibleFilter } from '../../utils';
 import { DynaActionFormContext, buildAside } from '../../utils/BlockAside';
 
-import ConfigurationToolbar from './ConfigurationToolbar';
 import PropertiesPanel, { IPropertiesPanel } from './PropertiesPanel';
 
 interface AsideProps {}
@@ -95,7 +94,6 @@ function Aside(_: AsideProps) {
           ...(visible ? {} : { transform: `translate3d(${width}px, 0, 0)` }),
         }}
         tabs={tabs.filter(visibleFilter(cache.current.value))}
-        footer={<ConfigurationToolbar />}
         onClose={handleClose}
       />
     </DynaActionFormContext.Provider>
