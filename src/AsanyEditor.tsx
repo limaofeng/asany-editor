@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useImperativeHandle, useState } from 'react';
 import React, { ComponentType, useCallback, useEffect, useReducer } from 'react';
 
 import { isElement, isValidElementType } from 'react-is';
@@ -12,9 +12,9 @@ import { AsanyProvider } from './AsanyContext';
 import { ActionType } from './reducers/actions';
 import RuntimeContainer from './RuntimeContainer';
 import Toolbar from './components/toolbar/Toolbar';
-import { useDispatch, useSelector } from './hooks';
+import { useDispatch, useEditor, useSelector } from './hooks';
 import DefaultLoadingComponent, { LoadingComponentProps } from './components/scena/LoadingComponent';
-import { AsanyProject, EditorPlugin, WorkspaceProps } from './typings';
+import { AsanyProject, EditorPlugin, IAsanyEditor, WorkspaceProps } from './typings';
 import './icons';
 
 import './style/tailwind.css';
@@ -29,14 +29,10 @@ interface AsanyProps {
   children?: React.ReactNode;
 }
 
-function Editor({
-  className,
-  onSave,
-  container,
-  loading: LoadingComponent = DefaultLoadingComponent,
-  children,
-  ...props
-}: AsanyProps) {
+const Editor = React.forwardRef(function Editor(
+  { className, onSave, container, loading: LoadingComponent = DefaultLoadingComponent, children, ...props }: AsanyProps,
+  ref?: React.ForwardedRef<IAsanyEditor>
+) {
   const dispatch = useDispatch();
 
   const [offsetLeft, setOffsetLeft] = useState(0);
@@ -73,6 +69,10 @@ function Editor({
     setOffsetLeft(x);
   }, []);
 
+  const api = useEditor();
+
+  useImperativeHandle(ref, () => api);
+
   return (
     <div className={classnames('asany-editor sketch-container', className)}>
       <Toolbar {...props} />
@@ -100,7 +100,7 @@ function Editor({
       </div>
     </div>
   );
-}
+});
 
 interface AsanyWarpperProps {
   className?: string;
@@ -114,7 +114,7 @@ interface AsanyWarpperProps {
   children?: React.ReactNode;
 }
 
-export default function AsanyEditor(props: AsanyWarpperProps) {
+function AsanyEditor(props: AsanyWarpperProps, ref?: React.ForwardedRef<IAsanyEditor>) {
   const { children, project, onSave, onBack, container = RuntimeContainer, plugins = [], loading, className } = props;
   const [version, forceRender] = useReducer((s) => s + 1, 0);
   useEffect(() => {
@@ -123,11 +123,14 @@ export default function AsanyEditor(props: AsanyWarpperProps) {
     }
     forceRender();
   }, [project]);
+
   return (
     <AsanyProvider version={version} plugins={[...plugins]} value={project}>
-      <Editor className={className} onSave={onSave} loading={loading} container={container} onBack={onBack}>
+      <Editor ref={ref} className={className} onSave={onSave} loading={loading} container={container} onBack={onBack}>
         {children}
       </Editor>
     </AsanyProvider>
   );
 }
+
+export default React.forwardRef(AsanyEditor);

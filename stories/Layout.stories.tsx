@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Meta, Story } from '@storybook/react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import AsanyEditor from '../src';
+import AsanyEditor, { IAsanyEditor } from '../src';
 
 import DemoPlugin from './editors/demo';
 
@@ -18,18 +18,23 @@ const meta: Meta = {
 export default meta;
 
 const Template: Story<any> = (_args) => {
+  const api = useRef<IAsanyEditor>(null);
+
+  useEffect(() => {
+    setTimeout(() => {
+      api.current?.features.ruler(false);
+    }, 5000);
+  }, []);
+
   return (
     <DndProvider backend={HTML5Backend}>
       <AsanyEditor
+        ref={api}
         plugins={[DemoPlugin]}
         onSave={(data) => console.log(data)}
         project={{
           id: 'test',
-          name: (
-            <div style={{ color: '#727d83', fontSize: 16 }}>
-              项目名称展示区域
-            </div>
-          ) as any,
+          name: (<div style={{ color: '#727d83', fontSize: 16 }}>项目名称展示区域</div>) as any,
           type: 'demo',
           data: {
             id: '111',
