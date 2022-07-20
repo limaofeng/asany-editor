@@ -1,3 +1,12 @@
+## [0.2.45](https://github.com/limaofeng/asany-editor/compare/v0.2.44...v0.2.45) (2022-07-20)
+
+
+### Features
+
+* 通过 ref 获取 Editor 的 api 对象 ([7fbb406](https://github.com/limaofeng/asany-editor/commit/7fbb406b98d1e24c6f7f7ebc875e8cfb605ddbbd))
+
+
+
 ## [0.2.44](https://github.com/limaofeng/asany-editor/compare/v0.2.43...v0.2.44) (2022-07-20)
 
 
