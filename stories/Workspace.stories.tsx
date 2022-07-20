@@ -29,19 +29,7 @@ const client = new ApolloClient({
 export default meta;
 
 const Template: Story<any> = (_args) => {
-  DemoPlugin.scena.workspace = () => {
-    const store = useStore();
-    const [lib, setLib] = useState<IconLibraryDefinition | undefined>();
-    useEffect(() => {
-      store.local('AsanyEditor').then((lib) => {
-        setLib(lib);
-      });
-    }, []);
-
-    if (!lib) {
-      return <></>;
-    }
-
+  DemoPlugin.scena!.workspace = () => {
     return (
       <div
         style={{
@@ -49,13 +37,9 @@ const Template: Story<any> = (_args) => {
           padding: 20,
         }}
       >
-        <h3>{lib.description}</h3>
+        <h3>xxxxx</h3>
         <hr />
-        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-          {lib.icons.map((item) => (
-            <Icon key={item.id} style={{ padding: 16 }} name={`AsanyEditor/${item.name}`} />
-          ))}
-        </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap' }}>sdfsdfsdfsdfsfd</div>
       </div>
     );
   };

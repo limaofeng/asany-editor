@@ -148,5 +148,5 @@ export default {
       );
     }, */
   },
-  features: [],
+  features: ['ruler'],
 } as EditorPlugin;

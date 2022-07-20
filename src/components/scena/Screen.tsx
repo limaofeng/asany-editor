@@ -16,7 +16,6 @@ function Screen({ children }: ScreenProps) {
   const screenHeader = useRef<HTMLDivElement>(null);
   const moveableContainer = useRef<HTMLDivElement>(null);
 
-  const isZoom = useSelector((state) => state.features.zoom);
   const zoom = useSelector((state) => state.ui.scena.zoom);
   const [width, height] = useSelector((state) => state.ui.scena.screen.size);
   const dustbin = useSelector((state) => state.ui.scena.viewer.dustbin);
@@ -48,7 +47,7 @@ function Screen({ children }: ScreenProps) {
     window.dispatchEvent(new Event('resize'));
   }, [width, height]);
 
-  const style = (isZoom && { width, height }) || { height: '100%' };
+  const style = { width, height };
   return (
     <>
       <div
@@ -78,11 +77,7 @@ function Screen({ children }: ScreenProps) {
         </div>
         <div className="canvas-bg-area" />
       </div>
-      <div
-        className={classnames('zoom-area', { 'no-zoom': !isZoom })}
-        ref={moveableContainer}
-        style={{ transform: `scale(${zoom})` }}
-      >
+      <div className={classnames('zoom-area')} ref={moveableContainer} style={{ transform: `scale(${zoom})` }}>
         <div className="canvas" style={style}>
           {children}
         </div>

@@ -47,7 +47,7 @@ interface DustbinDropResult {
 }
 
 function InfiniteViewer(props: InfiniteViewerProps) {
-  const { className, onZoom, onScroll, style, drag: isDrag, isZoom, children } = props;
+  const { className, onZoom, onScroll, style, drag: isDrag, children } = props;
 
   const dustbin = useSelector((state) => state.ui.scena.viewer.dustbin);
 
@@ -146,7 +146,7 @@ function InfiniteViewer(props: InfiniteViewerProps) {
   }, []);
 
   useEffect(() => {
-    if (!isZoom || !ref.current) {
+    if (!ref.current) {
       return;
     }
     const ele = ref.current;
@@ -156,8 +156,7 @@ function InfiniteViewer(props: InfiniteViewerProps) {
       // eslint-disable-next-line react-hooks/exhaustive-deps
       cancelAnimationFrame(store.current.animationFrame);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isZoom]);
+  }, [handleWheel]);
 
   useEffect(() => {
     if (!isDrag) {

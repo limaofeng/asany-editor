@@ -59,4 +59,10 @@ export default [
     size: [794, 1123],
     device: ['Responsive Web', 'Desktop'],
   },
+  {
+    id: 'fullscreen',
+    name: '全屏',
+    size: [0, 0],
+    device: ['Responsive Web', 'Desktop'],
+  },
 ];

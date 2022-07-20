@@ -154,13 +154,13 @@ interface ScreenViewportProps {
 function ScreenViewport(props: ScreenViewportProps) {
   const { children, scrollX = 0, scrollY = 0, width, height } = props;
 
-  const isZoom = useSelector((state) => state.features.zoom);
   const sidebarWidth = useSelector((state) => state.ui.sidebar.width);
   const sidebarMinWidth = useSelector((state) => state.ui.sidebar.minWidth);
   const sidebarMinimizable = useSelector((state) => state.ui.sidebar.minimizable);
+  const screenId = useSelector((state) => state.ui.scena.screen.id);
 
   const style = useMemo(() => {
-    if (isZoom) {
+    if (screenId !== 'fullscreen') {
       return {
         width,
         height,
@@ -174,7 +174,7 @@ function ScreenViewport(props: ScreenViewportProps) {
       _sidebarWidth = Math.max(sidebarMinWidth, _sidebarWidth);
     }
     return { marginLeft: _sidebarWidth, display: 'flex', width: `calc(100% - ${_sidebarWidth}px)`, minHeight: `100%` };
-  }, [isZoom, width, height, scrollX, scrollY, sidebarWidth, sidebarMinimizable, sidebarMinWidth]);
+  }, [screenId, width, height, scrollX, scrollY, sidebarWidth, sidebarMinimizable, sidebarMinWidth]);
 
   return (
     <div className="screen-viewport" style={style}>
