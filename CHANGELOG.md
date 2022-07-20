@@ -1,3 +1,12 @@
+## [0.2.43](https://github.com/limaofeng/asany-editor/compare/v0.2.42...v0.2.43) (2022-07-20)
+
+
+### Features
+
+* 默认支持移动编辑区 ([1809706](https://github.com/limaofeng/asany-editor/commit/180970683b0d8fbf821ffcfe8652d33ba459d1d9))
+
+
+
 ## [0.2.42](https://github.com/limaofeng/asany-editor/compare/v0.2.41...v0.2.42) (2022-07-18)
 
 
