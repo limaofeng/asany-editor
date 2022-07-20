@@ -1,3 +1,12 @@
+## [0.2.44](https://github.com/limaofeng/asany-editor/compare/v0.2.43...v0.2.44) (2022-07-20)
+
+
+### Features
+
+* 去掉属性配置栏的底部 ([a49b6c9](https://github.com/limaofeng/asany-editor/commit/a49b6c90f776f70cabb190534e20bd3046de9a27))
+
+
+
 ## [0.2.43](https://github.com/limaofeng/asany-editor/compare/v0.2.42...v0.2.43) (2022-07-20)
 
 
