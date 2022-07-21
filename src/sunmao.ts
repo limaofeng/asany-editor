@@ -1,4 +1,5 @@
 import { Checkbox, Radio, Switch } from 'antd';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { component, library } from 'sunmao';
 
 import MultipleWrapper from './properties/combine/MultipleWrapper';

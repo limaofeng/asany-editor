@@ -1,6 +1,6 @@
 import { CSSProperties, ComponentType, ReactElement } from 'react';
 
-import { ICustomizer } from 'sunmao';
+import { ComponentSelector, IComponentDefinition, ICustomizer } from 'sunmao';
 
 import { DispatchWithoutAction, IAsanyStoreContext } from './AsanyContext';
 import { Selector } from './hooks/useSelector';
@@ -11,35 +11,6 @@ export * from './properties/typings';
 export interface AsanyAction<T> {
   type: T;
   payload?: any;
-}
-
-export interface IComponent {
-  // 组件名称
-  id: string;
-  name: string;
-  group?: string;
-  icon?: string;
-  component: any;
-  // 组件标签
-  tags?: string[];
-  drag?: {
-    size: {
-      w: number;
-      h: number;
-    };
-  };
-  /**
-   * 权重
-   */
-  boost?: number;
-  /**
-   * 可以使用的子组件
-   */
-  symbols?: string[];
-  /**
-   * 配置属性定义
-   */
-  props?: IComponentProperty[];
 }
 
 export const DEFAULT_GROUP_ID = 'DEFAULT';
@@ -453,7 +424,7 @@ export interface ComponentDragObject {
   [key: string]: any;
 }
 
-export type CreateDragObjectFunc = (component: IComponent) => ComponentDragObject;
+export type CreateDragObjectFunc = (component: IComponentDefinition) => ComponentDragObject;
 
 export type IComponentLibrary = {
   tags: string[];
@@ -487,15 +458,7 @@ export interface AsideTabPane {
   content: ComponentType<any>;
 }
 
-type DepType = ((state: any) => any | Promise<any>) | string[];
-
-interface PluginOptions {
-  merge: boolean;
-}
-
-export type ComponentSelector = (component: IComponent) => boolean;
-
-export type ComponentSorter = (a: IComponent, b: IComponent) => number;
+export type ComponentSorter = (a: IComponentDefinition, b: IComponentDefinition) => number;
 
 export type ComponentPropertyRendererSetting = {
   component: ComponentPropertyRenderer | ComponentType<any> | string;
@@ -504,93 +467,7 @@ export type ComponentPropertyRendererSetting = {
 
 export type ComponentPropertyRenderer = string | ComponentType<any> | ComponentPropertyRendererSetting | any;
 
-export enum ComponentPropertyType {
-  JSON = 'JSON',
-  Text = 'Text',
-  Image = 'Image',
-  Integer = 'Integer',
-  Boolean = 'Boolean',
-  Float = 'Float',
-  String = 'String',
-  Date = 'Date',
-  Enum = 'Enum',
-  File = 'File',
-}
-
 export type VisibleFunc = (props: any) => boolean;
-
-export type IComponentProperty = {
-  // 字段名
-  name: string;
-  /**
-   *  显示名称
-   * 为空时，不在配置面板中显示
-   */
-  label?: string;
-  /**
-   * 布局
-   */
-  layout?: 'Inline' | 'Stacked';
-  /**
-   * 隐藏 Lable
-   */
-  hiddenLabel?: boolean;
-  /**
-   * 占位符
-   */
-  placeholder?: string;
-  /**
-   * 数据类型
-   */
-  type: ComponentPropertyType;
-  /**
-   * 渲染器
-   */
-  renderer?: ComponentPropertyRenderer;
-  /**
-   * 包装器， 用于实现数组类数据
-   */
-  wrappers?: ComponentPropertyRenderer[];
-  // 是否为多项
-  multiple?: boolean;
-  // 引用枚举
-  enumeration?: any;
-  // 默认值
-  defaultValue?: any;
-  // 分组
-  group?: string | boolean;
-  // 必填
-  required?: boolean;
-  // 设置值
-  value?: any;
-  // value 对应的 props
-  valuePropName?: string;
-  // 依赖
-  deps?: DepType;
-  /**
-   * 是否可见
-   */
-  visible?: boolean | VisibleFunc;
-  /**
-   * 钩子函数
-   */
-  hooks?: {
-    options?: PluginOptions;
-    init?: any;
-    /**
-     * 前置拦截
-     */
-    before?: any;
-    /**
-     * 转换器
-     */
-    convert?: any;
-    /**
-     * 后置拦截
-     */
-    after?: any;
-  };
-};
 
 export type IReducer<T, D> = (state: T, action: AsanyAction<D>) => T;
 
