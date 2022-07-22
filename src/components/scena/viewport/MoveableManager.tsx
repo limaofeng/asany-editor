@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 
-import Moveable from 'react-moveable';
+import Moveable, { OnResize, OnResizeEnd, OnResizeStart } from 'react-moveable';
 
 import { useSelector } from '../../../hooks';
 
@@ -35,6 +35,37 @@ function MoveableManager(props: MoveableManagerProps) {
     return selectedTargets.indexOf(el) === -1;
   });
 
+  const draggable = useMemo(() => {
+    return selectedTargets.length === 1 && !!selectedTargets[0].dataset['draggable'];
+  }, [selectedTargets]);
+
+  const resizable = useMemo(() => {
+    return selectedTargets.length === 1 && !!selectedTargets[0].dataset['resizable'];
+  }, [selectedTargets]);
+
+  const handleResizeStart = useCallback(
+    (e: OnResizeStart) => {
+      moveableData.onResizeStart(e);
+      const event = new CustomEvent<OnResizeStart>('moveable.resizeStart', { detail: e });
+      e.target.dispatchEvent(event);
+    },
+    [moveableData]
+  );
+
+  const handleResize = useCallback(
+    (e: OnResize) => {
+      moveableData.onResize(e);
+      const event = new CustomEvent<OnResize>('moveable.resize', { detail: e });
+      e.target.dispatchEvent(event);
+    },
+    [moveableData]
+  );
+
+  const handleResizeStop = useCallback((e: OnResizeEnd) => {
+    const event = new CustomEvent<OnResizeEnd>('moveable.resizeStop', { detail: e });
+    e.target.dispatchEvent(event);
+  }, []);
+
   return (
     <Moveable
       ref={ref}
@@ -44,6 +75,13 @@ function MoveableManager(props: MoveableManagerProps) {
       verticalGuidelines={verticalGuidelines}
       horizontalGuidelines={horizontalGuidelines}
       origin={false}
+      draggable={draggable}
+      resizable={resizable}
+      onResizeStart={handleResizeStart}
+      onResize={handleResize}
+      onResizeEnd={handleResizeStop}
+      onDragStart={moveableData.onDragStart}
+      onDrag={moveableData.onDrag}
     />
   );
 }

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Meta, Story } from '@storybook/react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import AsanyEditor from '../src';
+import AsanyEditor, { useEditor } from '../src';
 
 import DemoPlugin from './editors/demo';
 
@@ -15,9 +15,54 @@ const meta: Meta = {
   },
 };
 
+function MoveableTest() {
+  const editor = useEditor();
+
+  useEffect(() => {
+    editor.scena.setSelectedTargets([document.getElementById('moveable_test')!]);
+
+    document.getElementById('moveable_test')?.addEventListener('moveable.resizeStart', (e) => {
+      console.log('moveable.resizeStart', e);
+    });
+    document.getElementById('moveable_test')?.addEventListener('moveable.resize', (e) => {
+      console.log('moveable.resize', e);
+    });
+    document.getElementById('moveable_test')?.addEventListener('moveable.resizeStop', (e) => {
+      console.log('moveable.resizeStop', e);
+    });
+  }, []);
+
+  return (
+    <div data-resizable style={{ background: 'red', color: '#fff' }} id="moveable_test">
+      MoveableTest
+    </div>
+  );
+}
+
 export default meta;
 
 const Template: Story<any> = (_args) => {
+  DemoPlugin.scena!.workspace = () => {
+    return (
+      <div
+        style={{
+          height: '100%',
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          color: '#727d83',
+          fontSize: 18,
+          paddingTop: 20,
+        }}
+      >
+        <div style={{ textAlign: 'center' }}>
+          工作区
+          <div style={{ fontSize: 12, paddingTop: 10 }}>点击工作区，可以唤出属性配置面板</div>
+          <MoveableTest />
+        </div>
+      </div>
+    );
+  };
   return (
     <DndProvider backend={HTML5Backend}>
       <AsanyEditor
@@ -25,11 +70,7 @@ const Template: Story<any> = (_args) => {
         onSave={(data) => console.log(data)}
         project={{
           id: 'test',
-          name: (
-            <div style={{ color: '#727d83', fontSize: 16 }}>
-              项目名称展示区域
-            </div>
-          ) as any,
+          name: (<div style={{ color: '#727d83', fontSize: 16 }}>项目名称展示区域</div>) as any,
           type: 'demo',
           data: {
             id: '111',
