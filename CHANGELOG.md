@@ -1,3 +1,12 @@
+## [0.2.47](https://github.com/limaofeng/asany-editor/compare/v0.2.46...v0.2.47) (2022-07-22)
+
+
+### Features
+
+* resize 实现方案 ([65ab32d](https://github.com/limaofeng/asany-editor/commit/65ab32d2f3b5f42506e7c3c679bce9c65d0dba1b))
+
+
+
 ## [0.2.46](https://github.com/limaofeng/asany-editor/compare/v0.2.45...v0.2.46) (2022-07-21)
 
 
