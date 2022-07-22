@@ -42,6 +42,12 @@ export default function reducer(
   //   // };
   //   return state;
   // }
+  if (action.type === UIScenaMoveableActionType.MoveableRef) {
+    return {
+      ...state,
+      ref: action.payload,
+    };
+  }
   if (action.type === ProjectActionType.ChangeCase) {
     return { ...defaultMoveableState };
   }

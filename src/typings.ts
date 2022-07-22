@@ -1,5 +1,6 @@
 import { CSSProperties, ComponentType, ReactElement } from 'react';
 
+import Moveable from 'react-moveable';
 import { ComponentSelector, IComponentDefinition, ICustomizer } from 'sunmao';
 
 import { DispatchWithoutAction, IAsanyStoreContext } from './AsanyContext';
@@ -295,6 +296,10 @@ export interface ScenaHelper {
    * 设置元素选中
    */
   setSelectedTargets: (targets: Array<HTMLElement | SVGElement>) => void;
+  /**
+   * 获取 Moveable 对象
+   */
+  moveable(): Moveable | undefined | null;
 }
 
 export interface WorkspaceProps {
@@ -568,6 +573,7 @@ export interface IAsanyState {
 
 export interface MoveableState {
   data: MoveableData;
+  ref?: React.RefObject<Moveable>;
   selectedTargets: Array<HTMLElement | SVGElement>;
 }
 

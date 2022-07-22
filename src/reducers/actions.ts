@@ -69,6 +69,8 @@ export enum UIScenaMoveableActionType {
    * 启用 Moveable
    */
   MoveableEnable = 'UI/Scena/Moveable/Enable',
+
+  MoveableRef = 'UI/Scena/Moveable/Ref',
 }
 
 export enum UIScenaGlobalActionType {

@@ -125,6 +125,9 @@ class ScenaHelperImpl implements ScenaHelper {
   setSelectedTargets(targets: (HTMLElement | SVGElement)[]) {
     this.editor.dispatch({ type: ActionType.MoveableSelectedTargets, payload: targets });
   }
+  moveable() {
+    return this.editor.state.ui.scena.moveable.ref?.current;
+  }
 }
 
 export default ScenaHelperImpl;

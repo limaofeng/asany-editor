@@ -2,7 +2,8 @@ import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 
 import Moveable, { OnResize, OnResizeEnd, OnResizeStart } from 'react-moveable';
 
-import { useSelector } from '../../../hooks';
+import { useDispatch, useSelector } from '../../../hooks';
+import { ActionType } from '../../../reducers/actions';
 
 interface MoveableManagerProps {
   container?: HTMLElement | null;
@@ -13,6 +14,7 @@ function MoveableManager(props: MoveableManagerProps) {
 
   const { container } = props;
 
+  const dispatch = useDispatch();
   const snaps = useSelector((state) => state.ui.scena.snaps);
   const moveableData = useSelector((state) => state.ui.scena.moveable.data);
   const selectedTargets = useSelector((state) => state.ui.scena.moveable.selectedTargets);
@@ -22,6 +24,10 @@ function MoveableManager(props: MoveableManagerProps) {
   const handeWindowResize = useCallback(() => {
     ref.current && ref.current!.updateRect();
   }, [ref]);
+
+  useEffect(() => {
+    dispatch({ type: ActionType.MoveableRef, payload: ref.current });
+  }, [dispatch]);
 
   useEffect(() => {
     window.addEventListener('resize', handeWindowResize);
