@@ -1,3 +1,12 @@
+## [0.2.48](https://github.com/limaofeng/asany-editor/compare/v0.2.47...v0.2.48) (2022-07-22)
+
+
+### Features
+
+* 支持暴露 moveable 对象 ([fb7a7bc](https://github.com/limaofeng/asany-editor/commit/fb7a7bc604a85df18210f3aa1aca7df965347cd5))
+
+
+
 ## [0.2.47](https://github.com/limaofeng/asany-editor/compare/v0.2.46...v0.2.47) (2022-07-22)
 
 
