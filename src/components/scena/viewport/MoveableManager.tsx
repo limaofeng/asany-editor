@@ -26,7 +26,7 @@ function MoveableManager(props: MoveableManagerProps) {
   }, [ref]);
 
   useEffect(() => {
-    dispatch({ type: ActionType.MoveableRef, payload: ref.current });
+    dispatch({ type: ActionType.MoveableRef, payload: ref });
   }, [dispatch]);
 
   useEffect(() => {

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Meta, Story } from '@storybook/react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import AsanyEditor, { useEditor } from '../src';
+import AsanyEditor, { useEditor, useSelector } from '../src';
 
 import DemoPlugin from './editors/demo';
 
@@ -18,6 +18,8 @@ const meta: Meta = {
 function MoveableTest() {
   const editor = useEditor();
 
+  const moveable = useSelector((state) => state.ui.scena.moveable.ref);
+
   useEffect(() => {
     editor.scena.setSelectedTargets([document.getElementById('moveable_test')!]);
 
@@ -29,6 +31,7 @@ function MoveableTest() {
     });
     document.getElementById('moveable_test')?.addEventListener('moveable.resizeStop', (e) => {
       console.log('moveable.resizeStop', e);
+      console.log('moveable', moveable);
     });
   }, []);
 
