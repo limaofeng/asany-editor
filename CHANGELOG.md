@@ -1,3 +1,12 @@
+## [0.2.49](https://github.com/limaofeng/asany-editor/compare/v0.2.48...v0.2.49) (2022-07-23)
+
+
+### Bug Fixes
+
+* moveable ref 修复 ([9c14b0d](https://github.com/limaofeng/asany-editor/commit/9c14b0dca01c96f205afefbb181b566bd9238558))
+
+
+
 ## [0.2.48](https://github.com/limaofeng/asany-editor/compare/v0.2.47...v0.2.48) (2022-07-22)
 
 
